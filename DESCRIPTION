@@ -1,0 +1,33 @@
+Package: discretewq
+Title: What the Package Does (One Line, Title Case)
+Version: 0.0.0.9000
+Authors@R: 
+   person(given = "Sam",
+           family = "Bashevkin",
+           role = c("aut", "cre"),
+           email = "sam.bashevkin@deltacouncil.ca.gov",
+           comment = c(ORCID = "0000-0001-7406-7089"))
+Description: What the package does (one paragraph).
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Suggests: 
+    readr,
+    tidyr,
+    stringr,
+    purrr
+Depends: 
+    R (>= 2.10)
+Imports: 
+    magrittr,
+    sf,
+    tibble,
+    dplyr,
+    deltamapr (>= 0.0.0.9000),
+    lubridate,
+    rlang,
+    wql
+Remotes: 
+    InteragencyEcologicalProgram/deltamapr
