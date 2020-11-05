@@ -1,29 +1,15 @@
-#' Station locations
-#'
-#' Locations of all sampling stations.
-#'
-#' @format a tibble with 1,101 rows and 5 variables
-#' \describe{
-#'   \item{Source}{Name of the source dataset..}
-#'   \item{Station}{Station where sample was collected.}
-#'   \item{Latitude}{Latitude in decimal degrees.}
-#'   \item{Longitude}{Longitude in decimal degrees.}
-#'   \item{StationID}{Combined source and station for a unique station ID.}
-#'   }
-#' @seealso \code{\link{wq}}
-"stations"
-
 #' 20mm water quality data
 #'
 #' Water quality data from the California Department of Fish and Wildlife 20mm survey.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 9,712 rows and 12 variables
+#' @format a tibble with 9,712 rows and 13 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
 #'   \item{Latitude}{Latitude in decimal degrees.}
 #'   \item{Longitude}{Longitude in decimal degrees.}
+#'   \item{Field_coords}{Were lat/long coordinates collected in the field (TRUE), or do they represent the location of a fixed station (FALSE)?}
 #'   \item{Date}{Date sample was collected.}
 #'   \item{Datetime}{Date and time of sample collection.}
 #'   \item{Depth}{Bottom depth (m).}
@@ -42,10 +28,12 @@
 #' Water quality data from the California Department of Fish and Wildlife Bay Study.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 20,193 rows and 10 variables
+#' @format a tibble with 20,193 rows and 12 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
+#'   \item{Latitude}{Latitude in decimal degrees.}
+#'   \item{Longitude}{Longitude in decimal degrees.}
 #'   \item{Date}{Date sample was collected.}
 #'   \item{Datetime}{Date and time of sample collection.}
 #'   \item{Depth}{Bottom depth (m).}
@@ -64,12 +52,13 @@
 #' Water quality data from the United States Fish and Wildlife Service Enhanced Delta Smelt Monitoring Program.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 21,565 rows and 12 variables
+#' @format a tibble with 21,565 rows and 13 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
 #'   \item{Latitude}{Latitude in decimal degrees.}
 #'   \item{Longitude}{Longitude in decimal degrees.}
+#'   \item{Field_coords}{Were lat/long coordinates collected in the field (TRUE), or do they represent the location of a fixed station (FALSE)?}
 #'   \item{Date}{Date sample was collected.}
 #'   \item{Datetime}{Date and time of sample collection.}
 #'   \item{Depth}{Bottom depth (m).}
@@ -88,10 +77,13 @@
 #' Water quality data from the California Department of Water Resources Environmental Monitoring Program.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 16,508 rows and 12 variables
+#' @format a tibble with 16,508 rows and 15 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
+#'   \item{Latitude}{Latitude in decimal degrees.}
+#'   \item{Longitude}{Longitude in decimal degrees.}
+#'   \item{Field_coords}{Were lat/long coordinates collected in the field (TRUE), or do they represent the location of a fixed station (FALSE)?}
 #'   \item{Date}{Date sample was collected.}
 #'   \item{Datetime}{Date and time sample was collected.}
 #'   \item{Depth}{Bottom depth (m).}
@@ -114,10 +106,12 @@
 #' Water quality data from the United States Fish and Wildlife Service Delta Juvenile Fish Monitoring Program.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 23,998 rows and 6 variables
+#' @format a tibble with 23,998 rows and 8 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
+#'   \item{Latitude}{Latitude in decimal degrees.}
+#'   \item{Longitude}{Longitude in decimal degrees.}
 #'   \item{Date}{Date sample was collected.}
 #'   \item{Datetime}{Date and time of sample collection.}
 #'   \item{Secchi}{Secchi depth (cm).}
@@ -132,10 +126,12 @@
 #' Water quality data from the California Department of Fish and Wildlife Fall Midwater Trawl.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 27,803 rows and 11 variables
+#' @format a tibble with 27,803 rows and 13 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
+#'   \item{Latitude}{Latitude in decimal degrees.}
+#'   \item{Longitude}{Longitude in decimal degrees.}
 #'   \item{Date}{Date sample was collected.}
 #'   \item{Datetime}{Date and time of sample collection.}
 #'   \item{Depth}{Bottom depth (m).}
@@ -155,12 +151,13 @@
 #' Water quality data from the California Department of Fish and Wildlife Spring Kodiak Trawl.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 4,114 rows and 12 variables
+#' @format a tibble with 4,114 rows and 13 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
 #'   \item{Latitude}{Latitude in decimal degrees.}
 #'   \item{Longitude}{Longitude in decimal degrees.}
+#'   \item{Field_coords}{Were lat/long coordinates collected in the field (TRUE), or do they represent the location of a fixed station (FALSE)?}
 #'   \item{Date}{Date sample was collected.}
 #'   \item{Datetime}{Date and time of sample collection.}
 #'   \item{Depth}{Bottom depth (m).}
@@ -179,10 +176,12 @@
 #' Water quality data from the California Department of Fish and Wildlife Summer Townet Survey.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 8,506 rows and 12 variables
+#' @format a tibble with 8,506 rows and 14 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
+#'   \item{Latitude}{Latitude in decimal degrees.}
+#'   \item{Longitude}{Longitude in decimal degrees.}
 #'   \item{Date}{Date sample was collected.}
 #'   \item{Datetime}{Date and time of sample collection.}
 #'   \item{Depth}{Bottom depth (m).}
@@ -203,10 +202,12 @@
 #' Water quality data from the UC Davis Suisun Marsh Fish Study.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 14,252 rows and 9 variables
+#' @format a tibble with 14,252 rows and 11 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
+#'   \item{Latitude}{Latitude in decimal degrees.}
+#'   \item{Longitude}{Longitude in decimal degrees.}
 #'   \item{Date}{Date sample was collected.}
 #'   \item{Datetime}{Date and time of sample collection.}
 #'   \item{Depth}{Bottom depth (m).}
@@ -224,10 +225,12 @@
 #' Water quality data from the United States Bureau of Reclamation Sacramento Deepwater Ship Channel cruises.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 904 rows and 11 variables
+#' @format a tibble with 904 rows and 13 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
+#'   \item{Latitude}{Latitude in decimal degrees.}
+#'   \item{Longitude}{Longitude in decimal degrees.}
 #'   \item{Date}{Date sample was collected.}
 #'   \item{Datetime}{Date and time of sample collection.}
 #'   \item{Depth}{Bottom depth (m). Only 1 value per station, probably an average?}
@@ -246,10 +249,12 @@
 #' Water quality data from the United States Geological Survey San Francisco Bay Water Quality Survey.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 22,149 rows and 10 variables
+#' @format a tibble with 22,149 rows and 12 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
+#'   \item{Latitude}{Latitude in decimal degrees.}
+#'   \item{Longitude}{Longitude in decimal degrees.}
 #'   \item{Date}{Date sample was collected.}
 #'   \item{Datetime}{Date and time of sample collection.}
 #'   \item{Sample_depth_surface}{Depth (m) of surface sample.}

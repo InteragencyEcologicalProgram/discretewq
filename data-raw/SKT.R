@@ -6,6 +6,14 @@ require(lubridate)
 require(stringr)
 require(tidyr)
 
+SKT_stations<-read_csv(file.path("data-raw", "SKT", "lktblStationsSKT.csv"),
+                       col_types=cols_only(Station="c", LatDeg="d", LatMin="d", LatSec="d",
+                                           LongDec="d", LongMin="d", LongSec="d"))%>%
+  mutate(Latitude=LatDeg+LatMin/60+LatSec/3600,
+         Longitude=(LongDec+LongMin/60+LongSec/3600)*-1)%>%
+  select(Station, Latitude, Longitude)%>%
+  drop_na()
+
 SKT <- read_csv(file.path("data-raw", "SKT", "tblSample.csv"),
                 col_types = cols_only(SampleDate="c", StationCode="c", SampleTimeStart="c", Secchi="d", ConductivityTop="d",
                                       WaterTemperature="d", DepthBottom="d", TideCode="i",
@@ -35,7 +43,14 @@ SKT <- read_csv(file.path("data-raw", "SKT", "tblSample.csv"),
   select(-Time, -LatD, -LatM, -LatS, -LonD, -LonM, -LonS)%>%
   mutate(Tide=recode(as.character(Tide), `4`="Flood", `3`="Low Slack", `2`="Ebb", `1`="High Slack"),
          Depth = Depth*0.3048)%>% # Convert feet to meters
-  select(Source, Station, Latitude, Longitude, Date, Datetime, Depth, Tide, Secchi, Temperature, Conductivity, Notes)
+  left_join(SKT_stations, by="Station", suffix=c("_field", ""))%>%
+  mutate(Field_coords=case_when(
+    is.na(Latitude) & !is.na(Latitude_field) ~ TRUE,
+    is.na(Longitude) & !is.na(Longitude_field) ~ TRUE,
+    TRUE ~ FALSE),
+    Latitude=if_else(is.na(Latitude), Latitude_field, Latitude),
+    Longitude=if_else(is.na(Longitude), Longitude_field, Longitude))%>%
+  select(Source, Station, Latitude, Longitude, Field_coords, Date, Datetime, Depth, Tide, Secchi, Temperature, Conductivity, Notes)
 
 
 usethis::use_data(SKT, overwrite = TRUE)

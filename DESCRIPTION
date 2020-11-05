@@ -20,17 +20,15 @@ Suggests:
     purrr,
     spelling,
     testthat,
-    covr
+    covr,
+    tibble,
+    readxl
 Depends: 
     R (>= 2.10)
 Imports: 
     magrittr,
-    sf,
-    tibble,
     dplyr,
-    deltamapr (>= 0.0.0.9000),
     lubridate,
-    rlang,
     wql
 Remotes: 
     InteragencyEcologicalProgram/deltamapr

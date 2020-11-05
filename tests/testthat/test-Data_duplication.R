@@ -4,8 +4,7 @@ require(dplyr)
 
 All_rows<-sum(map_dbl(list(baystudy, DJFMP, EDSM, EMP, FMWT, SKT, STN, suisun, twentymm, USBR, USGS), nrow))
 Data<-wq(Sources = c("EMP", "STN", "FMWT", "EDSM", "DJFMP", "SKT",
-                     "20mm", "Suisun", "Baystudy", "USBR", "USGS"),
-         Regions = NULL)%>%
+                     "20mm", "Suisun", "Baystudy", "USBR", "USGS"))%>%
   mutate(ID=paste(Source, Station, Date, Datetime))
 
 

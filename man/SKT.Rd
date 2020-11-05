@@ -6,12 +6,13 @@
 \alias{SKT}
 \title{SKT water quality data}
 \format{
-a tibble with 4,114 rows and 12 variables
+a tibble with 4,114 rows and 13 variables
 \describe{
 \item{Source}{Name of the source dataset.}
 \item{Station}{Station where sample was collected.}
 \item{Latitude}{Latitude in decimal degrees.}
 \item{Longitude}{Longitude in decimal degrees.}
+\item{Field_coords}{Were lat/long coordinates collected in the field (TRUE), or do they represent the location of a fixed station (FALSE)?}
 \item{Date}{Date sample was collected.}
 \item{Datetime}{Date and time of sample collection.}
 \item{Depth}{Bottom depth (m).}

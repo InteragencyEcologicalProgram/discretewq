@@ -4,11 +4,19 @@ require(readr)
 require(dplyr)
 require(lubridate)
 
+twentymm_stations<-read_csv(file.path("data-raw", "20mm", "20mmStations.csv"),
+                            col_types=cols_only(Station="c", LatD="d", LatM="d", LatS="d",
+                                                LonD="d", LonM="d", LonS="d"))%>%
+  mutate(Latitude=LatD+LatM/60+LatS/3600,
+         Longitude=(LonD+LonM/60+LonS/3600)*-1)%>%
+  select(Station, Latitude, Longitude)%>%
+  drop_na()
+
 twentymm <- read_csv(file.path("data-raw", "20mm", "Station.csv"),
-                    col_types = cols_only(StationID="c", SurveyID="c", Station="c",
-                                          LatDeg="d", LatMin="d", LatSec="d", LonDeg="d",
-                                          LonMin="d", LonSec="d", Temp="d", TopEC="d",
-                                          Secchi="d", Comments="c"))%>%
+                     col_types = cols_only(StationID="c", SurveyID="c", Station="c",
+                                           LatDeg="d", LatMin="d", LatSec="d", LonDeg="d",
+                                           LonMin="d", LonSec="d", Temp="d", TopEC="d",
+                                           Secchi="d", Comments="c"))%>%
   mutate(Latitude=LatDeg+LatMin/60+LatSec/3600,
          Longitude=(LonDeg+LonMin/60+LonSec/3600)*-1)%>%
   left_join(read_csv(file.path("data-raw", "20mm", "Survey.csv"),
@@ -38,7 +46,14 @@ twentymm <- read_csv(file.path("data-raw", "20mm", "Station.csv"),
   mutate(Tide=recode(as.character(Tide), `4`="Flood", `3`="Low Slack", `2`="Ebb", `1`="High Slack"),
          Source = "20mm",
          Depth = Depth*0.3048)%>% # Convert feet to meters
-  select(Source, Station, Latitude, Longitude, Date, Datetime, Depth, Tide, Secchi, Temperature, Conductivity, Notes)
+  left_join(twentymm_stations, by="Station", suffix=c("_field", ""))%>%
+  mutate(Field_coords=case_when(
+    is.na(Latitude) & !is.na(Latitude_field) ~ TRUE,
+    is.na(Longitude) & !is.na(Longitude_field) ~ TRUE,
+    TRUE ~ FALSE),
+    Latitude=if_else(is.na(Latitude), Latitude_field, Latitude),
+    Longitude=if_else(is.na(Longitude), Longitude_field, Longitude))%>%
+  select(Source, Station, Latitude, Longitude, Field_coords, Date, Datetime, Depth, Tide, Secchi, Temperature, Conductivity, Notes)
 
 
 usethis::use_data(twentymm, overwrite = TRUE)

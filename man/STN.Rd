@@ -6,10 +6,12 @@
 \alias{STN}
 \title{STN water quality data}
 \format{
-a tibble with 8,506 rows and 12 variables
+a tibble with 8,506 rows and 14 variables
 \describe{
 \item{Source}{Name of the source dataset.}
 \item{Station}{Station where sample was collected.}
+\item{Latitude}{Latitude in decimal degrees.}
+\item{Longitude}{Longitude in decimal degrees.}
 \item{Date}{Date sample was collected.}
 \item{Datetime}{Date and time of sample collection.}
 \item{Depth}{Bottom depth (m).}

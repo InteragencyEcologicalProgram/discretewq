@@ -6,10 +6,12 @@
 \alias{DJFMP}
 \title{DJFMP water quality data}
 \format{
-a tibble with 23,998 rows and 6 variables
+a tibble with 23,998 rows and 8 variables
 \describe{
 \item{Source}{Name of the source dataset.}
 \item{Station}{Station where sample was collected.}
+\item{Latitude}{Latitude in decimal degrees.}
+\item{Longitude}{Longitude in decimal degrees.}
 \item{Date}{Date sample was collected.}
 \item{Datetime}{Date and time of sample collection.}
 \item{Secchi}{Secchi depth (cm).}

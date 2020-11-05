@@ -6,6 +6,9 @@ require(tidyr)
 require(lubridate)
 require(purrr)
 
+USGS_stations <- read_excel(file.path("data-raw", "USGS", "USGSSFBayStations.xlsx"))%>%
+  select(Station, Latitude="Latitude degree", Longitude="Longitude degree")%>%
+  mutate(Station=as.character(Station))
 
 USGSfiles <- list.files(path = file.path("data-raw", "USGS"), full.names = T, pattern="SanFranciscoBayWaterQualityData.csv")
 
@@ -36,7 +39,8 @@ USGS <- map_dfr(USGSfiles, ~read_csv(., col_types = cols_only(Date="c", Time="c"
   filter(Depth_bin%in%c("surface", "bottom"))%>%
   pivot_wider(names_from=Depth_bin, values_from=c(Sample_depth, Salinity, Chlorophyll, Temperature),
               values_fn=list(Sample_depth=mean, Salinity=mean, Chlorophyll=mean, Temperature=mean))%>% # This will just average out multiple measurements at same depth
-  select(Source, Station, Date, Datetime, Sample_depth_surface, Sample_depth_bottom, Chlorophyll=Chlorophyll_surface,
+  left_join(USGS_stations, by="Station")%>%
+  select(Source, Station, Latitude, Longitude, Date, Datetime, Sample_depth_surface, Sample_depth_bottom, Chlorophyll=Chlorophyll_surface,
          Temperature=Temperature_surface, Temperature_bottom, Salinity=Salinity_surface)
 
 

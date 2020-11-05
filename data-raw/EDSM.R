@@ -29,13 +29,14 @@ EDSM <- read_csv(file.path("data-raw", "EDSM", "EDSM_20mm.csv"),
          Tide=na_if(Tide, "n/p"))%>% #Standardize tide codes
   mutate(Station=paste(Latitude, Longitude),
          Source="EDSM",
+         Field_coords=TRUE,
          Date=parse_date_time(Date, "%Y-%m-%d", tz="America/Los_Angeles"),
          Time=parse_date_time(Time, "%H:%M:%S", tz="America/Los_Angeles"))%>%
   mutate(Datetime = parse_date_time(if_else(is.na(Time), NA_character_, paste0(Date, " ", hour(Time), ":", minute(Time))), "%Y-%m-%d %H:%M", tz="America/Los_Angeles"))%>%
   select(-Time)%>%
   distinct(Source, Station, Latitude, Longitude, Date, Datetime, .keep_all=T)%>%
   mutate(Depth = Depth*0.3048)%>% # Convert feet to meters
-  select(Source, Station, Latitude, Longitude, Date, Datetime, Depth, Tide, Secchi, Temperature, Temperature_bottom, Notes)
+  select(Source, Station, Latitude, Longitude, Field_coords, Date, Datetime, Depth, Tide, Secchi, Temperature, Temperature_bottom, Notes)
 
 
 usethis::use_data(EDSM, overwrite = TRUE)

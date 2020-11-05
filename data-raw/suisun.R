@@ -4,6 +4,11 @@ require(readr)
 require(dplyr)
 require(lubridate)
 
+Suisun_stations<-read_csv(file.path("data-raw", "Suisun", "Suisun_StationsLookUp.csv"),
+                 col_types=cols_only(StationCode="c", x_WGS84="d", y_WGS84="d"))%>%
+  rename(Longitude=x_WGS84, Latitude=y_WGS84, Station=StationCode)%>%
+  drop_na()
+
 #Removing salinity because data do not correspond well with conductivity
 suisun<-read_csv(file.path("data-raw", "Suisun", "Suisun_Sample.csv"),
                     col_types = cols_only(SampleRowID="c", StationCode="c", SampleDate="c", SampleTime="c",
@@ -22,7 +27,8 @@ suisun<-read_csv(file.path("data-raw", "Suisun", "Suisun_Sample.csv"),
               group_by(SampleRowID)%>%
               summarise(Depth=mean(Depth, na.rm=T), .groups="drop"),
             by="SampleRowID")%>%
-  select(Source, Station, Date, Datetime, Depth, Tide, Secchi, Temperature, Conductivity)%>%
+  left_join(Suisun_stations, by="Station")%>%
+  select(Source, Station, Latitude, Longitude, Date, Datetime, Depth, Tide, Secchi, Temperature, Conductivity)%>%
   distinct(Source, Station, Date, Datetime, .keep_all=T)
 
 usethis::use_data(suisun, overwrite = TRUE)

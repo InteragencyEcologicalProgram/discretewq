@@ -7,12 +7,8 @@
 wq(
   Start_year = 1950,
   End_year = 2020,
-  Sources = c("EMP", "STN", "FMWT", "EDSM"),
-  Shapefile = deltamapr::R_EDSM_Strata_1819P1,
-  Region_column = "Stratum",
-  Regions = c("Suisun Bay", "Suisun Marsh", "Lower Sacramento River",
-    "Sac Deep Water Shipping Channel", "Cache Slough/Liberty Island",
-    "Lower Joaquin River", "Southern Delta")
+  Sources = c("EMP", "STN", "FMWT", "EDSM", "DJFMP", "SKT", "20mm", "Suisun",
+    "Baystudy", "USBR", "USGS")
 )
 }
 \arguments{
@@ -20,7 +16,7 @@ wq(
 
 \item{End_year}{Latest year you would like included in the dataset. Must be an integer. Defaults to \code{2020}.}
 
-\item{Sources}{Character vector of data sources for the water quality variables.
+\item{Sources}{Character vector of data sources for the water quality variables. Defaults to including all sources.
 Choices include "EMP" (Environmental Monitoring Program, \code{\link{EMP}}),
 "STN" (Summer Townet Survey, \code{\link{STN}}),
 "FMWT" (Fall Midwater Trawl, \code{\link{FMWT}}),
@@ -32,12 +28,6 @@ Choices include "EMP" (Environmental Monitoring Program, \code{\link{EMP}}),
 "USGS" (USGS San Francisco Bay Surveys, \code{\link{USGS}}),
 "USBR" (United States Bureau of Reclamation Sacramento Deepwater Ship Channel data, \code{\link{USBR}}), and
 "Suisun" (Suisun Marsh Fish Study, \code{\link{suisun}}).}
-
-\item{Shapefile}{Shapefile you would like used to define regions in the dataset. Must be in \code{\link[sf]{sf}} format, e.g., imported with \code{\link[sf]{st_read}}. Defaults to \code{\link[deltamapr]{R_EDSM_Strata_1819P1}}.}
-
-\item{Region_column}{Quoted name of the column in the Shapefile with the region designations.}
-
-\item{Regions}{Character vector of regions to be included in the dataset. Must correspond with levels of the \code{Region_column}. To include all data points regardless of whether they correspond to a region in the \code{Shapefile} set \code{Regions = NULL}.}
 }
 \value{
 An integrated dataset
@@ -47,6 +37,5 @@ Imports, filters, and processes water quality datasets and outputs an integrated
 }
 \examples{
 Data <- wq(Sources = c("EMP", "STN", "FMWT", "EDSM", "DJFMP", "SKT",
-"20mm", "Suisun", "Baystudy", "USBR", "USGS"),
-Regions = NULL)
+"20mm", "Suisun", "Baystudy", "USBR", "USGS"))
 }

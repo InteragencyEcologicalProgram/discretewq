@@ -4,6 +4,13 @@ require(readr)
 require(dplyr)
 require(lubridate)
 require(tidyr)
+require(stringr)
+
+USBR_stations <- read_csv(file.path("data-raw", "USBR", "USBRSiteLocations.csv"),
+                 col_types=cols_only(Station="c", Lat="d", Long="d"))%>%
+  rename(Latitude=Lat, Longitude=Long)%>%
+  mutate(Station=str_remove(Station, "NL "),
+         Station=recode(Station, PS="Pro"))
 
 USBR <- read_csv(file.path("data-raw", "USBR", "YSILongTermSites_AllDepths.csv"),
                     col_types=cols_only(Station="c", DateTime.PT="c", Depth.feet="d",
@@ -31,7 +38,8 @@ USBR <- read_csv(file.path("data-raw", "USBR", "YSILongTermSites_AllDepths.csv")
   mutate(Source="USBR",
          Sample_depth_surface = Sample_depth_surface*0.3048,
          Sample_depth_bottom = Sample_depth_bottom*0.3048)%>% # Convert to meters
-  select(Source, Station, Date, Datetime, Depth, Sample_depth_surface, Sample_depth_bottom, Chlorophyll=Chlorophyll_surface,
+  left_join(USBR_stations, by="Station")%>%
+  select(Source, Station, Latitude, Longitude, Date, Datetime, Depth, Sample_depth_surface, Sample_depth_bottom, Chlorophyll=Chlorophyll_surface,
          Temperature=Temperature_surface, Temperature_bottom, Conductivity=Conductivity_surface)
 
 

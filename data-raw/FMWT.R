@@ -3,6 +3,12 @@
 library(readr)
 library(dplyr)
 library(lubridate)
+require(tidyr)
+
+FMWT_stations<-read_csv(file.path("data-raw", "FMWT", "StationsLookUp.csv"),
+               col_types = cols_only(StationCode="c", DD_Latitude="d", DD_Longitude="d"))%>%
+  rename(Station=StationCode, Latitude=DD_Latitude, Longitude=DD_Longitude)%>%
+  drop_na()
 
 
 FMWT <- read_csv(file.path("data-raw", "FMWT", "Sample.csv"),
@@ -23,7 +29,8 @@ FMWT <- read_csv(file.path("data-raw", "FMWT", "Sample.csv"),
          Source="FMWT",
          Secchi=Secchi*100, #convert to cm
          Depth = Depth*0.3048)%>% # Convert to meters
-  select(Source, Station, Date, Datetime, Depth, Tide, Microcystis, Secchi, Temperature, Temperature_bottom, Conductivity)%>%
+  left_join(FMWT_stations, by="Station")%>%
+  select(Source, Station, Latitude, Longitude, Date, Datetime, Depth, Tide, Microcystis, Secchi, Temperature, Temperature_bottom, Conductivity)%>%
   distinct(Source, Station, Date, Datetime, .keep_all=T)
 
 usethis::use_data(FMWT, overwrite = TRUE)
