@@ -8,7 +8,7 @@
 [![R build
 status](https://github.com/sbashevkin/discretewq/workflows/R-CMD-check/badge.svg)](https://github.com/sbashevkin/discretewq/actions)
 [![Codecov test
-coverage](https://codecov.io/gh/sbashevkin/discretewq/branch/master/graph/badge.svg)](https://codecov.io/gh/sbashevkin/discretewq?branch=master)
+coverage](https://codecov.io/gh/sbashevkin/discretewq/branch/main/graph/badge.svg)](https://codecov.io/gh/sbashevkin/discretewq?branch=main)
 <!-- badges: end -->
 
 The goal of discretewq is to integrate discrete water quality data from
