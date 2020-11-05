@@ -33,7 +33,7 @@ EDSM <- read_csv(file.path("data-raw", "EDSM", "EDSM_20mm.csv"),
          Time=parse_date_time(Time, "%H:%M:%S", tz="America/Los_Angeles"))%>%
   mutate(Datetime = parse_date_time(if_else(is.na(Time), NA_character_, paste0(Date, " ", hour(Time), ":", minute(Time))), "%Y-%m-%d %H:%M", tz="America/Los_Angeles"))%>%
   select(-Time)%>%
-  distinct()%>%
+  distinct(Source, Station, Latitude, Longitude, Date, Datetime, .keep_all=T)%>%
   mutate(Depth = Depth*0.3048)%>% # Convert feet to meters
   select(Source, Station, Latitude, Longitude, Date, Datetime, Depth, Tide, Secchi, Temperature, Temperature_bottom, Notes)
 

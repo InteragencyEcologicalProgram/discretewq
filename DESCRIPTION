@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "sam.bashevkin@deltacouncil.ca.gov",
            comment = c(ORCID = "0000-0001-7406-7089"))
-Description: Produce an integrated dataeset of discrete water quality measurements using any combination of the 10 source datasets included. 
+Description: Produce an integrated dataset of discrete water quality measurements using any combination of the 10 source datasets included. 
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
@@ -17,7 +17,9 @@ Suggests:
     readr,
     tidyr,
     stringr,
-    purrr
+    purrr,
+    spelling,
+    testthat
 Depends: 
     R (>= 2.10)
 Imports: 
@@ -31,3 +33,4 @@ Imports:
     wql
 Remotes: 
     InteragencyEcologicalProgram/deltamapr
+Language: en-US

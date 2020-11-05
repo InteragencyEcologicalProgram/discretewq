@@ -34,7 +34,8 @@ baystudy <- left_join(boattow_baystudy, boatstation_baystudy, by=c("Year", "Surv
   mutate(Tide=if_else(is.na(Tidetow), Tidestation, Tidetow),
          Datetime=parse_date_time(if_else(is.na(Time), NA_character_, paste0(Date, " ", hour(Time), ":", minute(Time))), "%Y-%m-%d %H:%M", tz="America/Los_Angeles"),
          Source="Baystudy")%>%
-  select(Source, Station, Date, Datetime, Depth, Tide, Secchi, Temperature=TempSurf, Temperature_bottom=TempBott, Conductivity=ECSurf)
+  select(Source, Station, Date, Datetime, Depth, Tide, Secchi, Temperature=TempSurf, Temperature_bottom=TempBott, Conductivity=ECSurf)%>%
+  distinct(Source, Station, Date, Datetime, .keep_all=T)
 
 
 usethis::use_data(baystudy, overwrite = TRUE)

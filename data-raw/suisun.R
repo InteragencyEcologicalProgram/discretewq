@@ -22,6 +22,7 @@ suisun<-read_csv(file.path("data-raw", "Suisun", "Suisun_Sample.csv"),
               group_by(SampleRowID)%>%
               summarise(Depth=mean(Depth, na.rm=T), .groups="drop"),
             by="SampleRowID")%>%
-  select(Source, Station, Date, Datetime, Depth, Tide, Secchi, Temperature, Conductivity)
+  select(Source, Station, Date, Datetime, Depth, Tide, Secchi, Temperature, Conductivity)%>%
+  distinct(Source, Station, Date, Datetime, .keep_all=T)
 
 usethis::use_data(suisun, overwrite = TRUE)

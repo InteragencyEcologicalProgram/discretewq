@@ -5,7 +5,7 @@
 \title{Process and combine water quality data}
 \usage{
 wq(
-  Start_year = 1960,
+  Start_year = 1950,
   End_year = 2020,
   Sources = c("EMP", "STN", "FMWT", "EDSM"),
   Shapefile = deltamapr::R_EDSM_Strata_1819P1,
@@ -16,7 +16,7 @@ wq(
 )
 }
 \arguments{
-\item{Start_year}{Earliest year you would like included in the dataset. Must be an integer. Defaults to \code{1960}.}
+\item{Start_year}{Earliest year you would like included in the dataset. Must be an integer. Defaults to \code{1950}.}
 
 \item{End_year}{Latest year you would like included in the dataset. Must be an integer. Defaults to \code{2020}.}
 
@@ -40,7 +40,7 @@ Choices include "EMP" (Environmental Monitoring Program, \code{\link{EMP}}),
 \item{Regions}{Character vector of regions to be included in the dataset. Must correspond with levels of the \code{Region_column}. To include all data points regardless of whether they correspond to a region in the \code{Shapefile} set \code{Regions = NULL}.}
 }
 \value{
-An integraeted dataset
+An integrated dataset
 }
 \description{
 Imports, filters, and processes water quality datasets and outputs an integrated dataset

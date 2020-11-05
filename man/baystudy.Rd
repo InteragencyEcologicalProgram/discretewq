@@ -6,7 +6,7 @@
 \alias{baystudy}
 \title{Bay Study water quality data}
 \format{
-a tibble with 20,195 rows and 10 variables
+a tibble with 20,193 rows and 10 variables
 \describe{
 \item{Source}{Name of the source dataset.}
 \item{Station}{Station where sample was collected.}

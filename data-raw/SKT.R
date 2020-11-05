@@ -7,13 +7,15 @@ require(stringr)
 require(tidyr)
 
 SKT <- read_csv(file.path("data-raw", "SKT", "tblSample.csv"),
-                   col_types = cols_only(SampleDate="c", StationCode="c", SampleTimeStart="c", Secchi="d", ConductivityTop="d",
-                                         WaterTemperature="d", DepthBottom="d", TideCode="i",
-                                         SampleComments="c", Latitude="c", Longitude="c"))%>%
+                col_types = cols_only(SampleDate="c", StationCode="c", SampleTimeStart="c", Secchi="d", ConductivityTop="d",
+                                      WaterTemperature="d", DepthBottom="d", TideCode="i",
+                                      SampleComments="c", Latitude="c", Longitude="c"))%>%
   select(Date=SampleDate, Station=StationCode, Time=SampleTimeStart, Secchi,
          Conductivity=ConductivityTop, Temperature=WaterTemperature, Depth=DepthBottom, Tide=TideCode,
          Notes=SampleComments, Latitude, Longitude)%>%
-  mutate(Latitude=na_if(Latitude, "0"),
+  mutate(Temperature=if_else(str_detect(Notes, "from CDEC") & !is.na(Notes), NA_real_, Temperature),
+         Conductivity=if_else(str_detect(Notes, "from CDEC") & !is.na(Notes), NA_real_, Conductivity),
+         Latitude=na_if(Latitude, "0"),
          Longitude=na_if(Longitude, "0"),
          Date = parse_date_time(Date, "%m/%d/%Y %H:%M:%S", tz="America/Los_Angeles"),
          Source="SKT",

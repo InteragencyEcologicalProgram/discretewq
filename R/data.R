@@ -42,7 +42,7 @@
 #' Water quality data from the California Department of Fish and Wildlife Bay Study.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 20,195 rows and 10 variables
+#' @format a tibble with 20,193 rows and 10 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
@@ -132,7 +132,7 @@
 #' Water quality data from the California Department of Fish and Wildlife Fall Midwater Trawl.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 27,804 rows and 11 variables
+#' @format a tibble with 27,803 rows and 11 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
@@ -203,7 +203,7 @@
 #' Water quality data from the UC Davis Suisun Marsh Fish Study.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 14,253 rows and 9 variables
+#' @format a tibble with 14,252 rows and 9 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}

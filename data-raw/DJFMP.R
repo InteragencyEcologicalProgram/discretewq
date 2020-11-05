@@ -21,7 +21,7 @@ DJFMP <- read_csv(file.path(tempdir(), "DJFMP_1976-2001.csv"),
   mutate(Datetime = parse_date_time(if_else(is.na(Time), NA_character_, paste0(Date, " ", hour(Time), ":", minute(Time))), "%Y-%m-%d %H:%M", tz="America/Los_Angeles"))%>%
   select(-Time)%>%
   distinct()%>%
-  group_by(Date, Station, Source)%>%
+  group_by(Date, Station, Source)%>% # Retaining just 1 sample per day due to evidence of water quality data copied for multiple tows in one day
   summarise(Temperature=mean(Temperature), Secchi=mean(Secchi), Datetime=min(Datetime, na.rm=T)+(max(Datetime, na.rm=T)-min(Datetime, na.rm=T))/2, .groups="drop")%>%
   select(Source, Station, Date, Datetime, Secchi, Temperature)
 

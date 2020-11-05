@@ -23,7 +23,7 @@ FMWT <- read_csv(file.path("data-raw", "FMWT", "Sample.csv"),
          Source="FMWT",
          Secchi=Secchi*100, #convert to cm
          Depth = Depth*0.3048)%>% # Convert to meters
-  select(Source, Station, Date, Datetime, Depth, Tide, Microcystis, Secchi, Temperature, Temperature_bottom, Conductivity)
-
+  select(Source, Station, Date, Datetime, Depth, Tide, Microcystis, Secchi, Temperature, Temperature_bottom, Conductivity)%>%
+  distinct(Source, Station, Date, Datetime, .keep_all=T)
 
 usethis::use_data(FMWT, overwrite = TRUE)
