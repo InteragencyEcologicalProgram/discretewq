@@ -35,7 +35,7 @@ EDSM <- read_csv(file.path("data-raw", "EDSM", "EDSM_20mm.csv"),
          Datetime = parse_date_time(if_else(is.na(Time), NA_character_, paste0(Date, " ", hour(Time), ":", minute(Time))), "%Y-%m-%d %H:%M", tz="America/Los_Angeles"),
          Conductivity=if_else(Date<parse_date_time("2019-06-01", "%Y-%m-%d", tz="America/Los_Angeles"), NA_real_, Conductivity))%>% # Removing conductivity data from dates before it was standardized
   select(-Time)%>%
-  distinct(Source, Station, Latitude, Longitude, Date, Datetime, .keep_all=T)%>% #Remove replicate samples with the same datetime and location. This keeps the first row
+  distinct(Source, Station, Latitude, Longitude, Date, Datetime, .keep_all=T)%>% #Remove replicate samples with the same datetime and location. This keeps the first row. This results in no more NA values in water quality variables than if we had used summarise(mean(.x, na.rm=T))
   mutate(Depth = Depth*0.3048)%>% # Convert feet to meters
   select(Source, Station, Latitude, Longitude, Field_coords, Date, Datetime, Depth, Tide, Secchi, Temperature, Temperature_bottom, Conductivity, Notes)
 

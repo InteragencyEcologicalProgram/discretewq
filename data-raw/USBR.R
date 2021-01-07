@@ -7,24 +7,24 @@ require(tidyr)
 require(stringr)
 
 USBR_stations <- read_csv(file.path("data-raw", "USBR", "USBRSiteLocations.csv"),
-                 col_types=cols_only(Station="c", Lat="d", Long="d"))%>%
+                          col_types=cols_only(Station="c", Lat="d", Long="d"))%>%
   rename(Latitude=Lat, Longitude=Long)%>%
   mutate(Station=str_remove(Station, "NL "),
          Station=recode(Station, PS="Pro"))
 
 USBR <- read_csv(file.path("data-raw", "USBR", "YSILongTermSites_AllDepths.csv"),
-                    col_types=cols_only(Station="c", DateTime.PT="c", Depth.feet="d",
-                                        Temp.C="d", SpCond.uS="d", Chl.ug.L="d", Date="c"))%>%
+                 col_types=cols_only(Station="c", DateTime.PT="c", Depth.feet="d",
+                                     Temp.C="d", SpCond.uS="d", Chl.ug.L="d", Date="c"))%>%
   rename(Datetime=DateTime.PT, Sample_depth=Depth.feet, Temperature=Temp.C, Conductivity=SpCond.uS, Chlorophyll=Chl.ug.L)%>%
   mutate(Datetime=parse_date_time(Datetime, orders="%Y-%m-%d %H:%M:%S", tz="America/Los_Angeles"),
          Date=parse_date_time(Date, orders="%Y-%m-%d", tz="America/Los_Angeles"))%>%
   group_by(Station, Date)%>%
-  mutate(Depth_bin=case_when(
-    Sample_depth==min(Sample_depth) & Sample_depth<3 ~ "surface",
-    Sample_depth==max(Sample_depth) & Sample_depth>3 ~ "bottom",
-    TRUE ~ "Middle"
-  ),
-  Datetime=min(Datetime))%>%
+  mutate(
+    Depth_bin=case_when(
+      Sample_depth==min(Sample_depth) & Sample_depth<3 ~ "surface",
+      Sample_depth==max(Sample_depth) & Sample_depth>3 ~ "bottom",
+      TRUE ~ "Middle"),
+    Datetime=min(Datetime)+(max(Datetime)-min(Datetime))/2)%>% # Keep average sample time across all depths
   ungroup()%>%
   filter(Depth_bin%in%c("surface", "bottom"))%>%
   pivot_wider(names_from=Depth_bin, values_from=c(Sample_depth, Conductivity, Chlorophyll, Temperature),

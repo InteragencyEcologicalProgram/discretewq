@@ -25,7 +25,7 @@ suisun<-read_csv(file.path("data-raw", "Suisun", "Suisun_Sample.csv"),
   left_join(read_csv(file.path("data-raw", "Suisun", "Suisun_Depth.csv"),
                      col_types=cols_only(SampleRowID="c", Depth="d"))%>%
               group_by(SampleRowID)%>%
-              summarise(Depth=mean(Depth, na.rm=T), .groups="drop"),
+              summarise(Depth=mean(Depth, na.rm=T), .groups="drop"), # Use the average depth for each sample
             by="SampleRowID")%>%
   left_join(Suisun_stations, by="Station")%>%
   select(Source, Station, Latitude, Longitude, Date, Datetime, Depth, Tide, Secchi, Temperature, Conductivity)%>%

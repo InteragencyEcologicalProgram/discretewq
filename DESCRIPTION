@@ -22,7 +22,8 @@ Suggests:
     testthat,
     covr,
     tibble,
-    readxl
+    readxl,
+    hms
 Depends: 
     R (>= 2.10)
 Imports: 

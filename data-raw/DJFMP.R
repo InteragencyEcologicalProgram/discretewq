@@ -3,6 +3,7 @@
 require(readr)
 require(dplyr)
 require(lubridate)
+require(hms)
 
 download.file("https://portal.edirepository.org/nis/dataviewer?packageid=edi.244.4&entityid=71c16ead9b8ffa4da7a52da180f601f4", file.path(tempdir(), "DJFMP_1976-2001.csv"), mode="wb",method="libcurl")
 download.file("https://portal.edirepository.org/nis/dataviewer?packageid=edi.244.4&entityid=c4726f68b76c93a7e8a1e13e343ebae2", file.path(tempdir(), "DJFMP_2002-2019.csv"), mode="wb",method="libcurl")
@@ -31,11 +32,15 @@ DJFMP <- read_csv(file.path(tempdir(), "DJFMP_1976-2001.csv"),
          Date=parse_date_time(Date, "%Y-%m-%d", tz="America/Los_Angeles"),
          Time=parse_date_time(Time, "%H:%M:%S", tz="America/Los_Angeles"),
          Datetime = parse_date_time(if_else(is.na(Time), NA_character_, paste0(Date, " ", hour(Time), ":", minute(Time))), "%Y-%m-%d %H:%M", tz="America/Los_Angeles"),
-         Conductivity=if_else(Date<parse_date_time("2019-06-01", "%Y-%m-%d", tz="America/Los_Angeles"), NA_real_, Conductivity))%>% # Removing conductivity data from dates before it was standardized
+         Conductivity=if_else(Date<parse_date_time("2019-06-01", "%Y-%m-%d", tz="America/Los_Angeles"), NA_real_, Conductivity), # Removing conductivity data from dates before it was standardized
+         Noon_diff=abs(hms(hours=12)-as_hms(Datetime)))%>% # Create variable for time distance of each measurement from noon
   select(-Time)%>%
   distinct()%>%
-  group_by(Date, Station, Source)%>% # Retaining just 1 sample per day due to evidence of water quality data copied for multiple tows in one day
-  summarise(Temperature=mean(Temperature), Conductivity=mean(Conductivity), Secchi=mean(Secchi), Datetime=min(Datetime, na.rm=T)+(max(Datetime, na.rm=T)-min(Datetime, na.rm=T))/2, .groups="drop")%>%
+  group_by(Date, Station)%>% # Retaining just 1 sample per day due to huge number of overall samples resulting from multiple samples per day, many with exact same temp values
+  filter(Noon_diff==min(Noon_diff))%>% # Select time points closest to noon for each date and station
+  filter(Datetime==min(Datetime))%>% # Dealing with cases where 2 points are equidistant from noon
+  ungroup()%>%
+  distinct(Date, Station, .keep_all=T)%>%
   left_join(DJFMP_stations, by="Station")%>%
   select(Source, Station, Latitude, Longitude, Date, Datetime, Secchi, Temperature, Conductivity)
 

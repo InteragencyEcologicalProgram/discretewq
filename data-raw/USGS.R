@@ -14,7 +14,7 @@ USGS_stations <- read_excel(file.path("data-raw", "USGS", "USGSSFBayStations.xls
 USGSfiles <- list.files(path = file.path("data-raw", "USGS"), full.names = T, pattern="SanFranciscoBayWaterQualityData.csv")
 
 USGS <- map_dfr(USGSfiles, ~read_csv(., col_types = cols_only(Date="c", Time="c", Station_Number="d", Depth="d",
-                                                                 Calculated_Chlorophyll="d", Salinity="d", Temperature="d")))%>%
+                                                              Calculated_Chlorophyll="d", Salinity="d", Temperature="d")))%>%
   rename(Station=Station_Number, Chlorophyll=Calculated_Chlorophyll)%>%
   mutate(Time=paste0(str_sub(Time, end=-3), ":", str_sub(Time, start=-2)))%>%
   bind_rows(read_csv(file.path("data-raw", "USGS", "1969_2015USGS_SFBAY_22APR20.csv"),
@@ -30,12 +30,12 @@ USGS <- map_dfr(USGSfiles, ~read_csv(., col_types = cols_only(Date="c", Time="c"
   select(-Time)%>%
   rename(Sample_depth=Depth)%>%
   group_by(Station, Date)%>%
-  mutate(Depth_bin=case_when(
-    Sample_depth==min(Sample_depth) & Sample_depth<2~ "surface",
-    Sample_depth==max(Sample_depth) & Sample_depth>2~ "bottom",
-    TRUE ~ "Middle"
-  ),
-  Datetime=min(Datetime)+(max(Datetime)-min(Datetime))/2)%>%
+  mutate(
+    Depth_bin=case_when(
+      Sample_depth==min(Sample_depth) & Sample_depth<2~ "surface",
+      Sample_depth==max(Sample_depth) & Sample_depth>2~ "bottom",
+      TRUE ~ "Middle"),
+    Datetime=min(Datetime)+(max(Datetime)-min(Datetime))/2)%>% # Keep average sample time across all depths
   ungroup()%>%
   filter(Depth_bin%in%c("surface", "bottom"))%>%
   pivot_wider(names_from=Depth_bin, values_from=c(Sample_depth, Salinity, Chlorophyll, Temperature),

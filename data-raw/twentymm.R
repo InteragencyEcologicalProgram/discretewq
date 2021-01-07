@@ -28,8 +28,8 @@ twentymm <- read_csv(file.path("data-raw", "20mm", "Station.csv"),
                      col_types = cols_only(StationID="c", TowTime="c", Tide="d", BottomDepth="d", TowNum="d"))%>%
               rename(Time=TowTime)%>%
               mutate(Time = parse_date_time(Time, "%m/%d/%Y %H:%M:%S", tz="America/Los_Angeles"))%>%
-              group_by(StationID)%>%
-              mutate(Retain=if_else(Time==min(Time), TRUE, FALSE))%>%
+              group_by(StationID)%>% # StationID really is sampleID
+              mutate(Retain=if_else(Time==min(Time), TRUE, FALSE))%>% # Only keep bottom depth, tide, and time info for the first tow of each day (defined by time or tow number below)
               ungroup()%>%
               filter(Retain)%>%
               select(-Retain)%>%

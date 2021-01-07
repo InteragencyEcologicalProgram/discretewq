@@ -32,7 +32,7 @@ STN<-read_csv(file.path("data-raw", "STN", "Sample.csv"),
               mutate(Time=parse_date_time(Time, "%m/%d/%Y %H:%M:%S", tz="America/Los_Angeles"))%>%
               drop_na()%>%
               group_by(SampleRowID)%>%
-              summarise(Time=min(Time), .groups="drop"),
+              summarise(Time=min(Time), .groups="drop"), # Use the time of the first tow
             by="SampleRowID")%>%
   mutate(Datetime = parse_date_time(if_else(is.na(Time), NA_character_, paste0(Date, " ", hour(Time), ":", minute(Time))), "%Y-%m-%d %H:%M", tz="America/Los_Angeles"))%>%
   mutate(Tide=recode(as.character(Tide), `4`="Flood", `3`="Low Slack", `2`="Ebb", `1`="High Slack"),
