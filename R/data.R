@@ -66,6 +66,7 @@
 #'   \item{Secchi}{Secchi depth (cm).}
 #'   \item{Temperature}{Temperature in °C.}
 #'   \item{Temperature_bottom}{Temperature (°C) at bottom.}
+#'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
 #'   \item{Notes}{Comments.}
 #'   }
 #' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.415.1}{here}.
@@ -116,6 +117,7 @@
 #'   \item{Datetime}{Date and time of sample collection.}
 #'   \item{Secchi}{Secchi depth (cm).}
 #'   \item{Temperature}{Temperature in °C.}
+#'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
 #'   }
 #' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.244.3}{here}.
 #' @seealso \code{\link{wq}}

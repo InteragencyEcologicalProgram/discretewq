@@ -16,6 +16,7 @@ a tibble with 23,998 rows and 8 variables
 \item{Datetime}{Date and time of sample collection.}
 \item{Secchi}{Secchi depth (cm).}
 \item{Temperature}{Temperature in °C.}
+\item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
 }
 }
 \usage{

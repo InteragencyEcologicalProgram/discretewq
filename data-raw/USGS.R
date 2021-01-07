@@ -5,6 +5,7 @@ require(dplyr)
 require(tidyr)
 require(lubridate)
 require(purrr)
+require(readxl)
 
 USGS_stations <- read_excel(file.path("data-raw", "USGS", "USGSSFBayStations.xlsx"))%>%
   select(Station, Latitude="Latitude degree", Longitude="Longitude degree")%>%
