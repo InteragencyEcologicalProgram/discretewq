@@ -4,7 +4,7 @@ require(dplyr)
 
 All_rows<-sum(map_dbl(list(baystudy, DJFMP, EDSM, EMP, FMWT, SKT, STN, suisun, twentymm, USBR, USGS), nrow))
 Data<-wq()%>%
-  mutate(ID=paste(Source, Station, Date, Datetime))
+  mutate(ID=paste(Source, Station, Date, Datetime, Latitude, Longitude))
 
 
 test_that("All rows of data make it to the final dataset", {

@@ -15,19 +15,19 @@ if(Download){
 
 #Methods in  metadata say they do not know if their data were corrected for temperature before May 3 or 17 2019 so I will not use conductivity data before June 2019
 EDSM <- read_csv(file.path("data-raw", "EDSM", "EDSM_20mm.csv"),
-                 col_types=cols_only(Date="c", StartLat="d", StartLong="d", TopEC="d",
+                 col_types=cols_only(Date="c", StartLat="d", StartLong="d", Station="c", TopEC="d",
                                      TopTemp="d", BottomTemp="d", Scchi="d", Time="c",
                                      Tide="c", Depth="d", SampleComments="c"))%>%
   rename(Latitude=StartLat, Longitude=StartLong, Conductivity = TopEC, Temperature=TopTemp, Secchi=Scchi, Notes = SampleComments, Temperature_bottom=BottomTemp)%>%
   bind_rows(read_csv(file.path("data-raw", "EDSM", "EDSM_KDTR.csv"),
-                     col_types=cols_only(Date="c", StartLat="d", StartLong="d", EC="d",
+                     col_types=cols_only(Date="c", StartLat="d", StartLong="d", Station="c", EC="d",
                                          Temp="d", Scchi="d", Time="c",
                                          Tide="c", StartDepth="d", Comments="c"))%>%
               rename(Latitude=StartLat, Longitude=StartLong, Conductivity = EC, Temperature=Temp, Secchi=Scchi, Depth=StartDepth, Notes=Comments))%>%
   mutate(Secchi=Secchi*100, # convert Secchi to cm
          Tide=recode(Tide, HS="High Slack", LS = "Low Slack"),
          Tide=na_if(Tide, "n/p"), #Standardize tide codes
-         Station=paste(Latitude, Longitude),
+         Station=paste(Station, Date),
          Source="EDSM",
          Field_coords=TRUE,
          Date=parse_date_time(Date, "%Y-%m-%d", tz="America/Los_Angeles"),

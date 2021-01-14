@@ -32,15 +32,9 @@ DJFMP <- read_csv(file.path(tempdir(), "DJFMP_1976-2001.csv"),
          Date=parse_date_time(Date, "%Y-%m-%d", tz="America/Los_Angeles"),
          Time=parse_date_time(Time, "%H:%M:%S", tz="America/Los_Angeles"),
          Datetime = parse_date_time(if_else(is.na(Time), NA_character_, paste0(Date, " ", hour(Time), ":", minute(Time))), "%Y-%m-%d %H:%M", tz="America/Los_Angeles"),
-         Conductivity=if_else(Date<parse_date_time("2019-06-01", "%Y-%m-%d", tz="America/Los_Angeles"), NA_real_, Conductivity), # Removing conductivity data from dates before it was standardized
-         Noon_diff=abs(hms(hours=12)-as_hms(Datetime)))%>% # Create variable for time distance of each measurement from noon
+         Conductivity=if_else(Date<parse_date_time("2019-06-01", "%Y-%m-%d", tz="America/Los_Angeles"), NA_real_, Conductivity))%>% # Removing conductivity data from dates before it was standardized
   select(-Time)%>%
-  distinct()%>%
-  group_by(Date, Station)%>% # Retaining just 1 sample per day due to huge number of overall samples resulting from multiple samples per day, many with exact same temp values
-  filter(Noon_diff==min(Noon_diff))%>% # Select time points closest to noon for each date and station
-  filter(Datetime==min(Datetime))%>% # Dealing with cases where 2 points are equidistant from noon
-  ungroup()%>%
-  distinct(Date, Station, .keep_all=T)%>%
+  distinct(Station, Datetime, .keep_all = TRUE)%>%
   left_join(DJFMP_stations, by="Station")%>%
   select(Source, Station, Latitude, Longitude, Date, Datetime, Secchi, Temperature, Conductivity)
 
