@@ -9,9 +9,9 @@
 a tibble with 21,565 rows and 14 variables
 \describe{
 \item{Source}{Name of the source dataset.}
-\item{Station}{Station where sample was collected.}
-\item{Latitude}{Latitude in decimal degrees.}
-\item{Longitude}{Longitude in decimal degrees.}
+\item{Station}{Station where sample was collected. This represents an identifier for the unique EDSM target location. Multiple tows (and water quality samples) were often collected at each target location on a day.}
+\item{Latitude}{Latitude in decimal degrees. This is the actual latitude of the sample collection, not the latitude of the target location.}
+\item{Longitude}{Longitude in decimal degrees. This is the actual longitude of the sample collection, not the longitude of the target location.}
 \item{Field_coords}{Were lat/long coordinates collected in the field (TRUE), or do they represent the location of a fixed station (FALSE)?}
 \item{Date}{Date sample was collected.}
 \item{Datetime}{Date and time of sample collection.}
