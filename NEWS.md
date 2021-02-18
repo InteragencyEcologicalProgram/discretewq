@@ -1,5 +1,7 @@
 # discretewq 0.2.0
 
+* Fixing one tide value of 0 from SKT by converting it to NA. 
+
 # discretewq 0.1.0
 
 * Undoing previous DJFMP change and now retaining all DJFMP data (except duplicates at the same date and time)

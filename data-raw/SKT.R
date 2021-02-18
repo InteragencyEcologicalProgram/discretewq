@@ -41,7 +41,7 @@ SKT <- read_csv(file.path("data-raw", "SKT", "tblSample.csv"),
          Longitude=(LonD+LonM/60+LonS/3600)*-1)%>%
   mutate(Datetime = parse_date_time(paste0(Date, " ", hour(Time), ":", minute(Time)), "%Y-%m-%d %H:%M", tz="America/Los_Angeles"))%>%
   select(-Time, -LatD, -LatM, -LatS, -LonD, -LonM, -LonS)%>%
-  mutate(Tide=recode(as.character(Tide), `4`="Flood", `3`="Low Slack", `2`="Ebb", `1`="High Slack"),
+  mutate(Tide=recode(as.character(Tide), `4`="Flood", `3`="Low Slack", `2`="Ebb", `1`="High Slack", `0`=NA_character_),
          Depth = Depth*0.3048)%>% # Convert feet to meters
   left_join(SKT_stations, by="Station", suffix=c("_field", ""))%>%
   mutate(Field_coords=case_when(
