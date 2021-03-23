@@ -1,3 +1,7 @@
+# discretewq 1.0.0
+
+* Publishing to link with data publication.
+
 # discretewq 0.2.0
 
 * Fixing one tide value of 0 from SKT by converting it to NA. 
