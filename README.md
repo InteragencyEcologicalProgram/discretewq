@@ -38,6 +38,14 @@ Data <- wq(Sources = c("EMP", "STN", "FMWT", "EDSM", "DJFMP", "SKT",
            Regions = NULL)
 ```
 
+## Data publication
+
+The dataset is also [published on the Environmental Data
+Initiative](https://portal.edirepository.org/nis/mapbrowse?scope=edi&identifier=731),
+where you can find detailed metadata. This static version of the dataset
+corresponds to version 1.0.0 of the R package ([archived on
+zenodo](https://zenodo.org/record/4631924)).
+
 ## Data sources
 
 CDFW. 2020a. Bay Study data. <ftp://ftp.wildlife.ca.gov/BayStudy/>.
