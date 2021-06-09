@@ -1,3 +1,5 @@
+# discretewq 1.1.0
+
 * Fixed timezones for EMP data. EMP times are reported in PST but had incorrectly been imported as local time (PST/PDT). Now, they are imported as Etc/GMT+8 and then converted to America/Los_Angeles to correspond to the other surveys.
 
 # discretewq 1.0.1
