@@ -1,8 +1,10 @@
 library(discretewq)
 require(purrr)
 require(dplyr)
+require(lubridate)
 
 All_rows<-sum(map_dbl(list(baystudy, DJFMP, EDSM, EMP, FMWT, SKT, STN, suisun, twentymm, USBR, USGS), nrow))
+tzs<-map_chr(list(baystudy, DJFMP, EDSM, EMP, FMWT, SKT, STN, suisun, twentymm, USBR, USGS), ~tz(.x$Datetime))
 Data<-wq()%>%
   mutate(ID=paste(Source, Station, Date, Datetime, Latitude, Longitude))
 
@@ -18,4 +20,8 @@ test_that("No sampes are duplicated", {
 test_that("All Lats are between 37 ad 39 and all Longs are between -123 and -121", {
   expect_true(all((Data$Latitude<39 & Data$Latitude>37) | is.na(Data$Latitude)))
   expect_true(all((Data$Longitude<(-121) & Data$Longitude>(-123)) | is.na(Data$Longitude)))
+})
+
+test_that("All timezones are in local California time", {
+  expect_true(all(tzs%in%"America/Los_Angeles"))
 })

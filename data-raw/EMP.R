@@ -2,6 +2,7 @@
 
 require(readr)
 require(dplyr)
+require(tidyr)
 require(lubridate)
 
 Download <- FALSE
@@ -21,11 +22,13 @@ EMP<-read_csv(file.path("data-raw", "EMP", "SACSJ_delta_water_quality_1975_2019.
                                     WTSurface="d", WTBottom='d', NorthLat='d', WestLong='d'))%>%
   rename(Chlorophyll=Chla, Conductivity=SpCndSurface, Temperature=WTSurface,
          Temperature_bottom=WTBottom, Latitude=NorthLat, Longitude=WestLong)%>%
-  mutate(Datetime=parse_date_time(if_else(is.na(Time), NA_character_, paste(Date, Time)), "%m/%d/%Y %H:%M", tz="America/Los_Angeles"),
-         Date=parse_date_time(Date, "%m/%d/%Y", tz="America/Los_Angeles"),
+  mutate(Datetime=parse_date_time(if_else(is.na(Time), NA_character_, paste(Date, Time)), "%m/%d/%Y %H:%M", tz="Etc/GMT+8"), # EMP only reports time in PST, which corresponds to Etc/GMT+8 see https://stackoverflow.com/questions/53076575/time-zones-etc-gmt-why-it-is-other-way-round
+         Date=parse_date_time(Date, "%m/%d/%Y", tz="Etc/GMT+8"),
          Microcystis=round(Microcystis))%>% #EMP has some 2.5 and 3.5 values
   select(-Time)%>%
-  mutate(Datetime=if_else(hour(Datetime)==0, parse_date_time(NA_character_, tz="America/Los_Angeles"), Datetime))%>%
+  mutate(Datetime=if_else(hour(Datetime)==0, parse_date_time(NA_character_, tz="Etc/GMT+8"), Datetime))%>%
+  mutate(Datetime=with_tz(Datetime, tz="America/Los_Angeles"),
+         Date=with_tz(Date, tz="America/Los_Angeles"))%>% # Since EMP records only in PST, convert to local time to correspond with the other surveys
   mutate(Source="EMP",
          Tide = "High Slack",
          Depth=Depth*0.3048)%>% # Convert feet to meters
