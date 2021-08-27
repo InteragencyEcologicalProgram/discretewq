@@ -6,7 +6,7 @@
 \alias{EDSM}
 \title{EDSM water quality data}
 \format{
-a tibble with 21,565 rows and 14 variables
+a tibble with 28,439 rows and 14 variables
 \describe{
 \item{Source}{Name of the source dataset.}
 \item{Station}{Station where sample was collected. This represents an identifier for the unique EDSM target location. Multiple tows (and water quality samples) were often collected at each target location on a day.}

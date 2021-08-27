@@ -52,7 +52,7 @@
 #' Water quality data from the United States Fish and Wildlife Service Enhanced Delta Smelt Monitoring Program.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 21,565 rows and 14 variables
+#' @format a tibble with 28,439 rows and 14 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected. This represents an identifier for the unique EDSM target location. Multiple tows (and water quality samples) were often collected at each target location on a day.}
@@ -78,7 +78,7 @@
 #' Water quality data from the California Department of Water Resources Environmental Monitoring Program.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 16,508 rows and 15 variables
+#' @format a tibble with 16,760 rows and 15 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
@@ -107,7 +107,7 @@
 #' Water quality data from the United States Fish and Wildlife Service Delta Juvenile Fish Monitoring Program.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 142,459 rows and 9 variables
+#' @format a tibble with 146,231 rows and 9 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
@@ -128,7 +128,7 @@
 #' Water quality data from the California Department of Fish and Wildlife Fall Midwater Trawl.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 27,803 rows and 13 variables
+#' @format a tibble with 28,479 rows and 13 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
@@ -153,7 +153,7 @@
 #' Water quality data from the California Department of Fish and Wildlife Spring Kodiak Trawl.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 4,114 rows and 13 variables
+#' @format a tibble with 4,309 rows and 13 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
@@ -178,7 +178,7 @@
 #' Water quality data from the California Department of Fish and Wildlife Summer Townet Survey.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 8,506 rows and 14 variables
+#' @format a tibble with 8,738 rows and 14 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}

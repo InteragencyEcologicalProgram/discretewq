@@ -1,5 +1,8 @@
 ## code to prepare `suisun` dataset goes here
 
+# Issues
+# 1) Some conductivity, Secchi, Temperature, Salinity have0 values. Maybe these should be NA?
+
 require(readr)
 require(dplyr)
 require(lubridate)
