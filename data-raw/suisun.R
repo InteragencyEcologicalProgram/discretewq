@@ -6,6 +6,7 @@
 require(readr)
 require(dplyr)
 require(lubridate)
+require(tidyr)
 
 Suisun_stations<-read_csv(file.path("data-raw", "Suisun", "StationsLookUp.csv"),
                           col_types=cols_only(StationCode="c", x_WGS84="d", y_WGS84="d"))%>%
@@ -26,9 +27,7 @@ suisun<-read_csv(file.path("data-raw", "Suisun", "Sample.csv"),
          # and alpha constant from https://www.mt.com/dam/MT-NA/pHCareCenter/Conductivity_Linear_Temp_Comensation_APN.pdf
          Datetime=parse_date_time(if_else(is.na(Time), NA_character_, paste0(Date, " ", hour(Time), ":", minute(Time))), "%Y-%m-%d %H:%M", tz="America/Los_Angeles"),
          Tide=recode(Tide, flood="Flood", ebb="Ebb", low="Low Slack", high="High Slack", outgoing="Ebb", incoming="Flood"),
-         Source="Suisun",
-         across(c(Secchi, Temperature, Conductivity), ~if_else(Conductivity==0 & Temperature==0 & Secchi==0, NA_real_, .x)), # 8 rows where all 3 are 0, set to NAs
-         Temperature=na_if(Temperature, 0))%>% # 1 row where just Temp is 0, set to NA
+         Source="Suisun")%>%
   select(-Time, -SpecificConductance, -ElecCond)%>%
   left_join(read_csv(file.path("data-raw", "Suisun", "Depth.csv"),
                      col_types=cols_only(SampleRowID="c", Depth="d"))%>%

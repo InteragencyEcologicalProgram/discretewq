@@ -6,7 +6,7 @@
 \alias{suisun}
 \title{Suisun water quality data}
 \format{
-a tibble with 16,216 rows and 11 variables
+a tibble with 16,219 rows and 11 variables
 \describe{
 \item{Source}{Name of the source dataset.}
 \item{Station}{Station where sample was collected.}
