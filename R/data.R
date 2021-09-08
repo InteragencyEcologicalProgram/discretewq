@@ -3,7 +3,7 @@
 #' Water quality data from the California Department of Fish and Wildlife 20mm survey.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 9,712 rows and 13 variables
+#' @format a tibble with 10,098 rows and 13 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
@@ -204,7 +204,7 @@
 #' Water quality data from the UC Davis Suisun Marsh Fish Study.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 14,252 rows and 11 variables
+#' @format a tibble with 16,216 rows and 11 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}

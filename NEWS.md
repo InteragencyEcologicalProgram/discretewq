@@ -1,4 +1,4 @@
-* Updated the DJFMP, EDSM, EMP, FMWT, SKT, STN, USGS datasets to their latest version
+* Updated the DJFMP, EDSM, EMP, FMWT, SKT, STN, USGS, 20mm, Suisun datasets to their latest version
 
 # discretewq 1.1.0
 

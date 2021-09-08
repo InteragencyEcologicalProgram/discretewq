@@ -1,53 +1,51 @@
 ## code to prepare `twentymm` dataset goes here
 
-#Issue
-# 1) Now tide data anymore in EDI dataset
-
 require(readr)
 require(dplyr)
 require(lubridate)
 require(tidyr)
 
-
-download.file("https://portal.edirepository.org/nis/dataviewer?packageid=edi.535.2&entityid=d0172df5cb8e9e7b43d017765c9a815b",
-              file.path(tempdir(), "qry_EDI_20mm-catch_10122020.csv"), mode="wb")
-download.file("https://portal.edirepository.org/nis/dataviewer?packageid=edi.535.2&entityid=1c8ab3bcd3aec0ed06bf86e696cdfa6a",
-              file.path(tempdir(), "20mm_Station_file.csv"), mode="wb")
-
-
-
-
-twentymm_stations<-read_csv(file.path(tempdir(), "20mm_Station_file.csv"),
-                            col_types=cols_only(Station="c", Lat="c", Long="c"))%>%
-  separate(Lat, into=c("LatD", "LatM", "LatS"), sep=" ", convert=T)%>%
-  separate(Long, into=c("LonD", "LonM", "LonS"), sep=" ", convert=T)%>%
+twentymm_stations<-read_csv(file.path("data-raw", "20mm", "20mmStations.csv"),
+                            col_types=cols_only(Station="c", LatD="d", LatM="d", LatS="d",
+                                                LonD="d", LonM="d", LonS="d"))%>%
   mutate(Latitude=LatD+LatM/60+LatS/3600,
          Longitude=(LonD+LonM/60+LonS/3600)*-1)%>%
   select(Station, Latitude, Longitude)%>%
   drop_na()
 
-twentymm <- read_csv(file.path(tempdir(), "qry_EDI_20mm-catch_10122020.csv"),
-                     col_types = cols_only(SampleDate="c", TowTime="c", Station="c",
-                                           Latitude="c", Longitude="c", TowNum="i", BottomDepth="d",
-                                           Temp="d", TopEC="d", Secchi="d"))%>%
-  separate(Latitude, into=c("LatD", "LatM", "LatS"), sep=" ", convert=T)%>%
-  separate(Longitude, into=c("LonD", "LonM", "LonS"), sep=" ", convert=T)%>%
-  mutate(Latitude=LatD+LatM/60+LatS/3600,
-         Longitude=(LonD+LonM/60+LonS/3600)*-1)%>%
-  rename(Date=SampleDate)%>%
-  mutate(Datetime=parse_date_time(if_else(is.na(TowTime), NA_character_, paste(Date, TowTime)), "%Y-%m-%d %H:%M:%S", tz="America/Los_Angeles"),
-         Date = parse_date_time(Date, "%Y-%m-%d", tz="America/Los_Angeles"))%>%
-  group_by(Date, Station)%>% # StationID really is sampleID
-  mutate(Retain=if_else(Datetime==min(Datetime), TRUE, FALSE))%>% # Only keep bottom depth, tide, and time info for the first tow of each day (defined by time or tow number below)
-  filter(Retain)%>%
-  select(-Retain)%>%
-  mutate(Retain=if_else(TowNum==min(TowNum), TRUE, FALSE))%>%
-  ungroup()%>%
-  filter(Retain)%>%
-  select(Date, Datetime, Station, Depth=BottomDepth,
-         Temperature=Temp, Conductivity=TopEC, Secchi,
-         Latitude, Longitude)%>%
-  mutate(Source = "20mm",
+twentymm <- read_csv(file.path("data-raw", "20mm", "Station.csv"),
+                     col_types = cols_only(StationID="c", SurveyID="c", Station="c",
+                                           LatDeg="d", LatMin="d", LatSec="d", LonDeg="d",
+                                           LonMin="d", LonSec="d", Temp="d", TopEC="d",
+                                           Secchi="d", Comments="c"))%>%
+  mutate(Latitude=LatDeg+LatMin/60+LatSec/3600,
+         Longitude=(LonDeg+LonMin/60+LonSec/3600)*-1)%>%
+  left_join(read_csv(file.path("data-raw", "20mm", "Survey.csv"),
+                     col_types = cols_only(SurveyID="c", SampleDate = "c"))%>%
+              rename(Date=SampleDate)%>%
+              mutate(Date = parse_date_time(Date, "%m/%d/%Y %H:%M:%S", tz="America/Los_Angeles")),
+            by="SurveyID")%>%
+  left_join(read_csv(file.path("data-raw", "20mm", "Tow.csv"),
+                     col_types = cols_only(StationID="c", TowTime="c", Tide="d", BottomDepth="d", TowNum="d"))%>%
+              rename(Time=TowTime)%>%
+              mutate(Time = parse_date_time(Time, "%m/%d/%Y %H:%M:%S", tz="America/Los_Angeles"))%>%
+              group_by(StationID)%>% # StationID really is sampleID
+              mutate(Retain=if_else(Time==min(Time), TRUE, FALSE))%>% # Only keep bottom depth, tide, and time info for the first tow of each day (defined by time or tow number below)
+              ungroup()%>%
+              filter(Retain)%>%
+              select(-Retain)%>%
+              group_by(StationID)%>%
+              mutate(Retain=if_else(TowNum==min(TowNum), TRUE, FALSE))%>%
+              ungroup()%>%
+              filter(Retain)%>%
+              select(-Retain, -TowNum),
+            by="StationID")%>%
+  select(Station, Temperature=Temp, Conductivity=TopEC, Secchi,
+         Notes=Comments, Latitude, Longitude, Date,
+         Time, Depth=BottomDepth, Tide)%>%
+  mutate(Datetime = parse_date_time(if_else(is.na(Time), NA_character_, paste0(Date, " ", hour(Time), ":", minute(Time))), "%Y-%m-%d %H:%M", tz="America/Los_Angeles"))%>%
+  mutate(Tide=recode(as.character(Tide), `4`="Flood", `3`="Low Slack", `2`="Ebb", `1`="High Slack"),
+         Source = "20mm",
          Depth = Depth*0.3048)%>% # Convert feet to meters
   left_join(twentymm_stations, by="Station", suffix=c("_field", ""))%>%
   mutate(Field_coords=case_when(
@@ -56,7 +54,7 @@ twentymm <- read_csv(file.path(tempdir(), "qry_EDI_20mm-catch_10122020.csv"),
     TRUE ~ FALSE),
     Latitude=if_else(is.na(Latitude), Latitude_field, Latitude),
     Longitude=if_else(is.na(Longitude), Longitude_field, Longitude))%>%
-  select(Source, Station, Latitude, Longitude, Field_coords, Date, Datetime, Depth, Secchi, Temperature, Conductivity)
+  select(Source, Station, Latitude, Longitude, Field_coords, Date, Datetime, Depth, Tide, Secchi, Temperature, Conductivity, Notes)
 
 
 usethis::use_data(twentymm, overwrite = TRUE)
