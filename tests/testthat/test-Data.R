@@ -26,7 +26,7 @@ test_that("All timezones are in local California time", {
   expect_true(all(tzs%in%"America/Los_Angeles"))
 })
 
-#test_that("No zeros in environmental variables that shouldn't have them", {
-#  expect_true(!any(Data$Temperature==0))
-#  expect_true(!any(Data$Conductivity==0))
-#})
+test_that("No zeros in environmental variables that shouldn't have them", {
+  expect_true(!any(na.omit(Data$Temperature)==0))
+  expect_true(!any(na.omit(Data$Conductivity)==0))
+})
