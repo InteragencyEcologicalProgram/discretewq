@@ -6,7 +6,7 @@
 \alias{FMWT}
 \title{FMWT water quality data}
 \format{
-a tibble with 28,479 rows and 13 variables
+a tibble with 28,477 rows and 13 variables
 \describe{
 \item{Source}{Name of the source dataset.}
 \item{Station}{Station where sample was collected.}

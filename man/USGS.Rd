@@ -6,7 +6,7 @@
 \alias{USGS}
 \title{USGS water quality data}
 \format{
-a tibble with 22,149 rows and 12 variables
+a tibble with 22,557 rows and 12 variables
 \describe{
 \item{Source}{Name of the source dataset.}
 \item{Station}{Station where sample was collected.}
