@@ -33,8 +33,9 @@ To obtain the full integrated water quality dataset
 
 ``` r
 require(discretewq)
-Data <- wq(Sources = c("EMP", "STN", "FMWT", "EDSM", "DJFMP", "SKT", "SLS",
- "20mm", "Suisun", "Baystudy", "USBR", "USGS"))
+Data <- wq(Sources = c("EMP", "STN", "FMWT", "EDSM", "DJFMP",
+                       "SDO", "SKT", "SLS", "20mm", "Suisun", 
+                       "Baystudy", "USBR", "USGS"))
 ```
 
 ## Data publication
@@ -77,6 +78,12 @@ Interagency Ecological Program (IEP), L. Damon, T. Tempel, and A.
 Chorazyczewski. 2021c. Interagency Ecological Program San Francisco
 Estuary Smelt Larva Survey 2009 – 2021. Environmental Data Initiative.
 [doi:10.6073/PASTA/696749029898FEF9AD268435BEE54D3D](https://portal.edirepository.org/nis/mapbrowse?scope=edi&identifier=534&revision=3)
+
+Interagency Ecological Program (IEP), S. Lesmeister, and J. Rinde. 2020.
+Interagency Ecological Program: Discrete dissolved oxygen monitoring in
+the Stockton Deep Water Ship Channel, collected by the Environmental
+Monitoring Program, 1997-2018. Environmental Data Initiative.
+[doi:10.6073/PASTA/3268530C683726CD430C81894FFAD768](https://portal.edirepository.org/nis/mapbrowse?packageid=edi.276.2)
 
 Interagency Ecological Program (IEP), M. Martinez, and S. Perry. 2021.
 Interagency Ecological Program: Discrete water quality monitoring in the

@@ -148,6 +148,28 @@
 #' @seealso \code{\link{wq}}
 "FMWT"
 
+#' SDO water quality data
+#'
+#' Water quality data from the California Department of Water Resources Stockton Dissolved Oxygen monitoring.
+#'
+#' @encoding UTF-8
+#' @format a tibble with 3,108 rows and 11 variables
+#' \describe{
+#'   \item{Source}{Name of the source dataset.}
+#'   \item{Station}{Station where sample was collected.}
+#'   \item{Latitude}{Latitude in decimal degrees.}
+#'   \item{Longitude}{Longitude in decimal degrees.}
+#'   \item{Date}{Date sample was collected.}
+#'   \item{Datetime}{Date and time of sample collection.}
+#'   \item{Secchi}{Secchi depth (cm).}
+#'   \item{Temperature}{Temperature (°C) at surface.}
+#'   \item{Temperature_bottom}{Temperature (°C) at bottom.}
+#'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
+#'   }
+#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.276.2}{here}.
+#' @seealso \code{\link{wq}}
+"SDO"
+
 #' SKT water quality data
 #'
 #' Water quality data from the California Department of Fish and Wildlife Spring Kodiak Trawl.

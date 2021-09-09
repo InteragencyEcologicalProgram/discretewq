@@ -2,11 +2,11 @@
 % Please edit documentation in R/data.R
 \docType{data}
 \encoding{UTF-8}
-\name{suisun}
-\alias{suisun}
-\title{Suisun water quality data}
+\name{SDO}
+\alias{SDO}
+\title{SDO water quality data}
 \format{
-a tibble with 13,616 rows and 11 variables
+a tibble with 3,108 rows and 11 variables
 \describe{
 \item{Source}{Name of the source dataset.}
 \item{Station}{Station where sample was collected.}
@@ -14,21 +14,20 @@ a tibble with 13,616 rows and 11 variables
 \item{Longitude}{Longitude in decimal degrees.}
 \item{Date}{Date sample was collected.}
 \item{Datetime}{Date and time of sample collection.}
-\item{Depth}{Bottom depth (m).}
-\item{Tide}{Tidal stage.}
 \item{Secchi}{Secchi depth (cm).}
 \item{Temperature}{Temperature (°C) at surface.}
+\item{Temperature_bottom}{Temperature (°C) at bottom.}
 \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
 }
 }
 \usage{
-suisun
+SDO
 }
 \description{
-Water quality data from the UC Davis Suisun Marsh Fish Study.
+Water quality data from the California Department of Water Resources Stockton Dissolved Oxygen monitoring.
 }
 \details{
-More metadata and information on methods are available \href{https://watershed.ucdavis.edu/project/suisun-marsh-fish-study}{here}.
+More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.276.2}{here}.
 }
 \seealso{
 \code{\link{wq}}

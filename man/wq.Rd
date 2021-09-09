@@ -14,6 +14,7 @@ Choices include "EMP" (Environmental Monitoring Program, \code{\link{EMP}}),
 "EDSM" (Enhanced Delta Smelt Monitoring, \code{\link{EDSM}}),
 "DJFMP" (Delta Juvenile Fish Monitoring Program, \code{\link{DJFMP}}),
 "20mm" (20mm Survey, \code{\link{twentymm}}),
+"SDO" (Stockton Dissolved Oxygen Survey, \code{\link{SDO}}),
 "SKT" (Spring Kodiak Trawl, \code{\link{SKT}}),
 "SLS" (Smelt Larva Survey, \code{\link{SLS}}),
 "Baystudy" (Bay Study, \code{\link{baystudy}}),
@@ -32,6 +33,7 @@ An integrated dataset
 Imports, filters, and processes water quality datasets and outputs an integrated dataset
 }
 \examples{
-Data <- wq(Sources = c("EMP", "STN", "FMWT", "EDSM", "DJFMP", "SKT", "SLS",
+Data <- wq(Sources = c("EMP", "STN", "FMWT", "EDSM",
+"DJFMP", "SDO", "SKT", "SLS",
 "20mm", "Suisun", "Baystudy", "USBR", "USGS"))
 }
