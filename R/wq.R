@@ -9,6 +9,7 @@
 #'   "DJFMP" (Delta Juvenile Fish Monitoring Program, \code{\link{DJFMP}}),
 #'   "20mm" (20mm Survey, \code{\link{twentymm}}),
 #'   "SKT" (Spring Kodiak Trawl, \code{\link{SKT}}),
+#'   "SLS" (Smelt Larva Survey, \code{\link{SLS}}),
 #'   "Baystudy" (Bay Study, \code{\link{baystudy}}),
 #'   "USGS" (USGS San Francisco Bay Surveys, \code{\link{USGS}}),
 #'   "USBR" (United States Bureau of Reclamation Sacramento Deepwater Ship Channel data, \code{\link{USBR}}), and
@@ -19,7 +20,7 @@
 #' @importFrom dplyr .data
 #' @return An integrated dataset
 #' @examples
-#' Data <- wq(Sources = c("EMP", "STN", "FMWT", "EDSM", "DJFMP", "SKT",
+#' Data <- wq(Sources = c("EMP", "STN", "FMWT", "EDSM", "DJFMP", "SKT", "SLS",
 #' "20mm", "Suisun", "Baystudy", "USBR", "USGS"))
 #' @export
 
@@ -30,10 +31,10 @@ wq <- function(Sources=NULL,
 
 # Check arguments ---------------------------------------------------------
 
-if(is.null(Sources) | !all(Sources%in%c("EMP", "STN", "FMWT", "EDSM", "DJFMP", "SKT",
+if(is.null(Sources) | !all(Sources%in%c("EMP", "STN", "FMWT", "EDSM", "DJFMP", "SKT", "SLS",
                                         "20mm", "Suisun", "Baystudy", "USBR", "USGS"))){
   stop('You must specify the data sources you wish to include. Choices include
-  c("EMP", "STN", "FMWT", "EDSM", "DJFMP", "SKT", "20mm", "Suisun", "Baystudy", "USBR", "USGS")')
+  c("EMP", "STN", "FMWT", "EDSM", "DJFMP", "SKT", "SLS", "20mm", "Suisun", "Baystudy", "USBR", "USGS")')
 }
 
   # Set end year to current year if blank
@@ -67,6 +68,10 @@ if(is.null(Sources) | !all(Sources%in%c("EMP", "STN", "FMWT", "EDSM", "DJFMP", "
 
   if("SKT"%in%Sources){
     WQ_list[["SKT"]]<-discretewq::SKT
+  }
+
+  if("SLS"%in%Sources){
+    WQ_list[["SLS"]]<-discretewq::SLS
   }
 
   if("20mm"%in%Sources){

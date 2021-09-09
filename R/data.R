@@ -173,6 +173,30 @@
 #' @seealso \code{\link{wq}}
 "SKT"
 
+#' SLS water quality data
+#'
+#' Water quality data from the California Department of Fish and Wildlife Smelt Larva Survey.
+#'
+#' @encoding UTF-8
+#' @format a tibble with 2,891 rows and 12 variables
+#' \describe{
+#'   \item{Source}{Name of the source dataset.}
+#'   \item{Station}{Station where sample was collected.}
+#'   \item{Latitude}{Latitude in decimal degrees.}
+#'   \item{Longitude}{Longitude in decimal degrees.}
+#'   \item{Date}{Date sample was collected.}
+#'   \item{Datetime}{Date and time of sample collection.}
+#'   \item{Depth}{Bottom depth (m).}
+#'   \item{Tide}{Tidal stage.}
+#'   \item{Secchi}{Secchi depth (cm).}
+#'   \item{Temperature}{Temperature (°C) at surface.}
+#'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
+#'   \item{Notes}{Comments.}
+#'   }
+#' @details More metadata and information on methods are available \href{https://wildlife.ca.gov/Conservation/Delta/Smelt-Larva-Survey}{here}.
+#' @seealso \code{\link{wq}}
+"SLS"
+
 #' STN water quality data
 #'
 #' Water quality data from the California Department of Fish and Wildlife Summer Townet Survey.
