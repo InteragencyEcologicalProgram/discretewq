@@ -33,9 +33,8 @@ To obtain the full integrated water quality dataset
 
 ``` r
 require(discretewq)
-Data <- wq(Sources = c("EMP", "STN", "FMWT", "EDSM", "DJFMP", "SKT",
-                       "20mm", "Suisun", "Baystudy", "USBR", "USGS"),
-           Regions = NULL)
+Data <- wq(Sources = c("EMP", "STN", "FMWT", "EDSM", "DJFMP", "SKT", "SLS",
+ "20mm", "Suisun", "Baystudy", "USBR", "USGS"))
 ```
 
 ## Data publication
@@ -73,6 +72,11 @@ Chorazyczewski. 2020b. Interagency Ecological Program San Francisco
 Estuary Spring Kodiak Trawl Survey 2002 - 2020. Environmental Data
 Initiative.
 [doi:10.6073/PASTA/2EDAAA415ABE672008E0AF7542AA5D31](https://portal.edirepository.org/nis/mapbrowse?scope=edi&identifier=527&revision=2)
+
+Interagency Ecological Program (IEP), L. Damon, T. Tempel, and A.
+Chorazyczewski. 2021c. Interagency Ecological Program San Francisco
+Estuary Smelt Larva Survey 2009 – 2021. Environmental Data Initiative.
+[doi:10.6073/PASTA/696749029898FEF9AD268435BEE54D3D](https://portal.edirepository.org/nis/mapbrowse?scope=edi&identifier=534&revision=3)
 
 Interagency Ecological Program (IEP), M. Martinez, and S. Perry. 2021.
 Interagency Ecological Program: Discrete water quality monitoring in the
