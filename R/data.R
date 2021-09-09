@@ -161,6 +161,7 @@
 #'   \item{Longitude}{Longitude in decimal degrees.}
 #'   \item{Date}{Date sample was collected.}
 #'   \item{Datetime}{Date and time of sample collection.}
+#'   \item{Microcystis}{Microcystis bloom intensity on a qualitative scale from 1 to 5 where 1 = absent, 2 = low, 3 = medium, 4 = high, and 5 = very high.}
 #'   \item{Secchi}{Secchi depth (cm).}
 #'   \item{Temperature}{Temperature (°C) at surface.}
 #'   \item{Temperature_bottom}{Temperature (°C) at bottom.}
@@ -315,3 +316,28 @@
 #' @details More metadata and information on methods are available \href{https://www.sciencebase.gov/catalog/item/5841f97ee4b04fc80e518d9f}{here for data from 1969-2015} and \href{https://www.sciencebase.gov/catalog/item/5966abe6e4b0d1f9f05cf551}{here for data from 2016-present}.
 #' @seealso \code{\link{wq}}
 "USGS"
+
+#' YBFMP water quality data
+#'
+#' Water quality data from the California Department of Water Resources Yolo Bypass Fish Monitoring Program.
+#'
+#' @encoding UTF-8
+#' @format a tibble with 7,478 rows and 12 variables
+#' \describe{
+#'   \item{Source}{Name of the source dataset.}
+#'   \item{Station}{Station where sample was collected.}
+#'   \item{Latitude}{Latitude in decimal degrees.}
+#'   \item{Longitude}{Longitude in decimal degrees.}
+#'   \item{Date}{Date sample was collected.}
+#'   \item{Datetime}{Date and time sample was collected.}
+#'   \item{Tide}{Tidal stage ('overtopping' refers to periods of floodplain inundation that drown out tidal effects).}
+#'   \item{Microcystis}{Microcystis bloom intensity on a qualitative scale from 1 to 5 where 1 = absent, 2 = low, 3 = medium, 4 = high, and 5 = very high.}
+#'   \item{Secchi}{Secchi depth (cm).}
+#'   \item{Temperature}{Temperature (°C) at surface.}
+#'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
+#'   \item{Notes}{Notes or comments.}
+#'   }
+#'
+#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.494.1}{here} and \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.233.2}{here}.
+#' @seealso \code{\link{wq}}
+"YBFMP"

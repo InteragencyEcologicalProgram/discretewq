@@ -35,7 +35,7 @@ To obtain the full integrated water quality dataset
 require(discretewq)
 Data <- wq(Sources = c("EMP", "STN", "FMWT", "EDSM", "DJFMP",
                        "SDO", "SKT", "SLS", "20mm", "Suisun", 
-                       "Baystudy", "USBR", "USGS"))
+                       "Baystudy", "USBR", "USGS", "YBFMP"))
 ```
 
 ## Data publication
@@ -97,6 +97,20 @@ Ecological Program: Over four decades of juvenile fish monitoring data
 from the San Francisco Estuary, collected by the Delta Juvenile Fish
 Monitoring Program, 1976-2019. Environmental Data Initiative.
 [doi:10.6073/PASTA/41B9EEBED270C0463B41C5795537CA7C](https://portal.edirepository.org/nis/mapbrowse?packageid=edi.244.4)
+
+Interagency Ecological Program (IEP), B. Schreier, B. Davis, and N.
+Ikemiyagi. 2019. Interagency Ecological Program: Fish catch and water
+quality data from the Sacramento River floodplain and tidal slough,
+collected by the Yolo Bypass Fish Monitoring Program, 1998-2018.
+Environmental Data Initiative.
+[doi:10.6073/PASTA/B0B15AEF7F3B52D2C5ADC10004C05A6F](https://portal.edirepository.org/nis/mapbrowse?packageid=edi.233.2)
+
+Interagency Ecological Program (IEP), B. M. Schreier, C. L. Pien, and J.
+B. Adams. 2020. Interagency Ecological Program: Zooplankton catch and
+water quality data from the Sacramento River floodplain and tidal
+slough, collected by the Yolo Bypass Fish Monitoring Program, 1998-2018.
+Environmental Data Initiative.
+[doi:10.6073/PASTA/EA437DB178D6F7B93213CC0E4A915885](https://portal.edirepository.org/nis/mapbrowse?packageid=edi.494.1)
 
 O’Rear, T., J. Durand, and P. Moyle. 2020. Suisun Marsh Fish Study.
 <https://watershed.ucdavis.edu/project/suisun-marsh-fish-study>.

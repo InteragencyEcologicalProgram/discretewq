@@ -2,33 +2,34 @@
 % Please edit documentation in R/data.R
 \docType{data}
 \encoding{UTF-8}
-\name{SDO}
-\alias{SDO}
-\title{SDO water quality data}
+\name{YBFMP}
+\alias{YBFMP}
+\title{YBFMP water quality data}
 \format{
-a tibble with 3,108 rows and 11 variables
+a tibble with 7,478 rows and 12 variables
 \describe{
 \item{Source}{Name of the source dataset.}
 \item{Station}{Station where sample was collected.}
 \item{Latitude}{Latitude in decimal degrees.}
 \item{Longitude}{Longitude in decimal degrees.}
 \item{Date}{Date sample was collected.}
-\item{Datetime}{Date and time of sample collection.}
+\item{Datetime}{Date and time sample was collected.}
+\item{Tide}{Tidal stage ('overtopping' refers to periods of floodplain inundation that drown out tidal effects).}
 \item{Microcystis}{Microcystis bloom intensity on a qualitative scale from 1 to 5 where 1 = absent, 2 = low, 3 = medium, 4 = high, and 5 = very high.}
 \item{Secchi}{Secchi depth (cm).}
 \item{Temperature}{Temperature (°C) at surface.}
-\item{Temperature_bottom}{Temperature (°C) at bottom.}
 \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
+\item{Notes}{Notes or comments.}
 }
 }
 \usage{
-SDO
+YBFMP
 }
 \description{
-Water quality data from the California Department of Water Resources Stockton Dissolved Oxygen monitoring.
+Water quality data from the California Department of Water Resources Yolo Bypass Fish Monitoring Program.
 }
 \details{
-More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.276.2}{here}.
+More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.494.1}{here} and \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.233.2}{here}.
 }
 \seealso{
 \code{\link{wq}}
