@@ -1,9 +1,7 @@
 #' Process and combine water quality data
 #'
 #' Imports, filters, and processes water quality datasets and outputs an integrated dataset
-#' @param Start_year Earliest year you would like included in the dataset. Must be an integer. Defaults to \code{1950}.
-#' @param End_year Latest year you would like included in the dataset. Must be an integer. Defaults to \code{2020}.
-#' @param Sources Character vector of data sources for the water quality variables. Defaults to including all sources.
+#' @param Sources Character vector of data sources for the water quality variables. No default, this must be specified.
 #'   Choices include "EMP" (Environmental Monitoring Program, \code{\link{EMP}}),
 #'   "STN" (Summer Townet Survey, \code{\link{STN}}),
 #'   "FMWT" (Fall Midwater Trawl, \code{\link{FMWT}}),
@@ -15,6 +13,8 @@
 #'   "USGS" (USGS San Francisco Bay Surveys, \code{\link{USGS}}),
 #'   "USBR" (United States Bureau of Reclamation Sacramento Deepwater Ship Channel data, \code{\link{USBR}}), and
 #'   "Suisun" (Suisun Marsh Fish Study, \code{\link{suisun}}).
+#' @param Start_year Earliest year you would like included in the dataset. Must be an integer. Defaults to year \code{0}.
+#' @param End_year Latest year you would like included in the dataset. Must be an integer. Defaults to the current year.
 #' @importFrom magrittr %>%
 #' @importFrom dplyr .data
 #' @return An integrated dataset
@@ -23,10 +23,28 @@
 #' "20mm", "Suisun", "Baystudy", "USBR", "USGS"))
 #' @export
 
-wq <- function(Start_year=1950,
-               End_year=2020,
-               Sources = c("EMP", "STN", "FMWT", "EDSM", "DJFMP", "SKT",
-                           "20mm", "Suisun", "Baystudy", "USBR", "USGS")){
+wq <- function(Sources=NULL,
+               Start_year=NULL,
+               End_year=NULL){
+
+
+# Check arguments ---------------------------------------------------------
+
+if(is.null(Sources) | !all(Sources%in%c("EMP", "STN", "FMWT", "EDSM", "DJFMP", "SKT",
+                                        "20mm", "Suisun", "Baystudy", "USBR", "USGS"))){
+  stop('You must specify the data sources you wish to include. Choices include
+  c("EMP", "STN", "FMWT", "EDSM", "DJFMP", "SKT", "20mm", "Suisun", "Baystudy", "USBR", "USGS")')
+}
+
+  # Set end year to current year if blank
+  if(is.null(End_year)){
+    End_year<-as.numeric(format(Sys.Date(), "%Y"))
+  }
+
+  # Set start year to 0 if blank
+  if(is.null(Start_year)){
+    Start_year<-0
+  }
 
   # Load and combine data ---------------------------------------------------
   WQ_list<-list()

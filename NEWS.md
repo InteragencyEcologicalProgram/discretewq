@@ -1,3 +1,4 @@
+* Tweaked the wq function interface to force users to specify data sources, in preparation for adding more sources.
 * Updated the DJFMP, EDSM, EMP, FMWT, SKT, STN, USGS, 20mm, Suisun datasets to their latest version
 
 # discretewq 1.1.0
