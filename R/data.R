@@ -28,7 +28,7 @@
 #' Water quality data from the California Department of Fish and Wildlife Bay Study.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 20,193 rows and 12 variables
+#' @format a tibble with 21,264 rows and 12 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
