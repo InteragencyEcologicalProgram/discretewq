@@ -1,3 +1,5 @@
+# discretewq 2.0.0
+
 * Added the Yolo Bypass Fish Monitoring Program data
 * Added Stockton Dissolved Oxygen survey as an additional data source
 * Removed duplicated water quality data from suisun data
