@@ -31,7 +31,7 @@ EMP<-read_csv(file.path(tempdir(), "SACSJ_delta_water_quality_1975_2020.csv"), n
   mutate(Source="EMP",
          Tide = "High Slack",
          Depth=Depth*0.3048)%>% # Convert feet to meters
-  left_join(EMP_stations, by="Station", suffix=c("_field", ""))%>%
+  left_join(EMP_stations, by="Station", suffix=c("_field", ''))%>%
   mutate(Field_coords=case_when(
     is.na(Latitude) & !is.na(Latitude_field) ~ TRUE,
     is.na(Longitude) & !is.na(Longitude_field) ~ TRUE,
