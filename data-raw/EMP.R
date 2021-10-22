@@ -17,7 +17,7 @@ EMP_stations<-read_csv(file.path(tempdir(), "EMP_Discrete_Water_Quality_Stations
   drop_na()
 
 EMP<-read_csv(file.path(tempdir(), "SACSJ_delta_water_quality_1975_2020.csv"), na=c("NA", "ND"),
-              col_types = cols_only(Station="c", Date="c", Time="c", Chla="d",
+              col_types = c(Station="c", Date="c", Time="c", Chla="d",
                                     Depth="d", Secchi="d", Microcystis="d", SpCndSurface="d",
                                     WTSurface="d", WTBottom='d', NorthLat='d', WestLong='d'))%>%
   rename(Chlorophyll=Chla, Conductivity=SpCndSurface, Temperature=WTSurface,
@@ -38,6 +38,8 @@ EMP<-read_csv(file.path(tempdir(), "SACSJ_delta_water_quality_1975_2020.csv"), n
     TRUE ~ FALSE),
     Latitude=if_else(is.na(Latitude), Latitude_field, Latitude),
     Longitude=if_else(is.na(Longitude), Longitude_field, Longitude))%>%
-  select(Source, Station, Latitude, Longitude, Field_coords, Date, Datetime, Depth, Tide, Microcystis, Chlorophyll, Secchi, Temperature, Temperature_bottom, Conductivity)
+  select(Source, Station, Latitude, Longitude, Field_coords, Date, Datetime, Depth, Tide, Microcystis, Chlorophyll, Secchi, Temperature, Temperature_bottom, Conductivity,
+         TotAmmonia, DissAmmonia, DissCalcium, DissNitrateNitrite, DOC, TOC, DON, TON, DissOrthophos, TotPhos,
+         DissSilica, TDS, TSS, VSS, TKN)
 
 usethis::use_data(EMP, overwrite = TRUE)
