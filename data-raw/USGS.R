@@ -52,11 +52,11 @@ USGS <- map_dfr(USGSfiles_pub, ~read_csv(., col_types = cols_only(Date="c", Time
     Datetime=min(Datetime)+(max(Datetime)-min(Datetime))/2)%>% # Keep average sample time across all depths
   ungroup()%>%
   filter(Depth_bin%in%c("surface", "bottom"))%>%
-  pivot_wider(names_from=Depth_bin, values_from=c(Sample_depth, Salinity, Chlorophyll, Temperature),
-              values_fn=list(Sample_depth=mean, Salinity=mean, Chlorophyll=mean, Temperature=mean))%>% # This will just average out multiple measurements at same depth
+  pivot_wider(names_from=Depth_bin, values_from=c(Sample_depth, Salinity, Chlorophyll, Temperature, DissNitrateNitrite, DissAmmonia, DissOrthophos, DissSilica),
+              values_fn=list(Sample_depth=mean, Salinity=mean, Chlorophyll=mean, Temperature=mean, DissNitrateNitrite=mean, DissAmmonia=mean, DissOrthophos=mean, DissSilica=mean))%>% # This will just average out multiple measurements at same depth
   left_join(USGS_stations, by="Station")%>%
   select(Source, Station, Latitude, Longitude, Date, Datetime, Sample_depth_surface, Sample_depth_bottom, Chlorophyll=Chlorophyll_surface,
-         Temperature=Temperature_surface, Temperature_bottom, Salinity=Salinity_surface, DissNitrateNitrite, DissAmmonia, DissOrthophos, DissSilica)
+         Temperature=Temperature_surface, Temperature_bottom, Salinity=Salinity_surface, DissNitrateNitrite=DissNitrateNitrite_surface, DissAmmonia=DissAmmonia_surface, DissOrthophos=DissOrthophos_surface, DissSilica=DissSilica_surface)
 
 
 # convert units
@@ -67,5 +67,5 @@ USGS$DissSilica <- sapply(USGS$DissSilica, function(x) x*(60.08/(10^3))) # molar
 
 usethis::use_data(USGS, overwrite = TRUE)
 
-# COMMENT (Sarah): didn't average measurements for nutrients
+# COMMENT (Sarah): averaged using surface measurements for nutrients
 # COMMENT (Sarah): didn't include NO2 or DissOxygen b/c need to confirm some things about the data first
