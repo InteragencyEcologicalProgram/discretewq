@@ -78,7 +78,7 @@
 #' Water quality data from the California Department of Water Resources Environmental Monitoring Program.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 16,760 rows and 15 variables
+#' @format a tibble with 16,760 rows and 30 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
@@ -96,6 +96,20 @@
 #'   \item{Temperature_bottom}{Temperature (°C) at bottom.}
 #'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
 #'   \item{Notes}{Notes or comments.}
+#'   \item{DissAmmonia}{Dissolved ammonia (mg/L).}
+#'   \item{DissCalcium}{Dissolved calcium (mg/L).}
+#'   \item{DissNitrateNitrite}{Dissolved Nitrate and Nitrite (mg/L).}
+#'   \item{DOC}{Dissolved organic carbon (mg/L).}
+#'   \item{TOC}{Total organic carbon (mg/L).}
+#'   \item{DON}{Dissolved organic nitrogen (mg/L).}
+#'   \item{TON}{Total organic nitrogen (mg/L).}
+#'   \item{DissOrthophos}{Dissolved ortho-phosphate (mg/L).}
+#'   \item{TotPhos}{Total phosphorous (mg/L).}
+#'   \item{DissSilica}{Dissolved sillica (mg/L).}
+#'   \item{TDS}{Total dissolved solids (mg/L).}
+#'   \item{TSS}{Total suspended solids (mg/L).}
+#'   \item{VSS}{Volatile suspended solids (mg/L).}
+#'   \item{TKN}{Total Kjeldahl nitrogen (mg/L).}
 #'   }
 #'
 #' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.458.3}{here}.
@@ -298,7 +312,7 @@
 #' Water quality data from the United States Geological Survey San Francisco Bay Water Quality Survey.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 22,557 rows and 12 variables
+#' @format a tibble with 22,557 rows and 16 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
@@ -312,6 +326,10 @@
 #'   \item{Temperature}{Temperature (°C) at surface.}
 #'   \item{Temperature_bottom}{Temperature (°C) at bottom.}
 #'   \item{Salinity}{Salinity at surface.}
+#'   \item{DissNitrateNitrite}{Dissolved Nitrate and Nitrite (mg/L).}
+#'   \item{DissAmmonia}{Dissolved Ammonia (mg/L).}
+#'   \item{DissOrthophos}{Dissolved ortho-phosphate (mg/L).}
+#'   \item{DissSilica}{Dissolved Silica (mg/L).}
 #'   }
 #' @details More metadata and information on methods are available \href{https://www.sciencebase.gov/catalog/item/5841f97ee4b04fc80e518d9f}{here for data from 1969-2015} and \href{https://www.sciencebase.gov/catalog/item/5966abe6e4b0d1f9f05cf551}{here for data from 2016-present}.
 #' @seealso \code{\link{wq}}

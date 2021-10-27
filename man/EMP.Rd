@@ -6,7 +6,7 @@
 \alias{EMP}
 \title{EMP water quality data}
 \format{
-a tibble with 16,760 rows and 15 variables
+a tibble with 16,760 rows and 30 variables
 \describe{
 \item{Source}{Name of the source dataset.}
 \item{Station}{Station where sample was collected.}
@@ -24,6 +24,20 @@ a tibble with 16,760 rows and 15 variables
 \item{Temperature_bottom}{Temperature (°C) at bottom.}
 \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
 \item{Notes}{Notes or comments.}
+\item{DissAmmonia}{Dissolved ammonia (mg/L).}
+\item{DissCalcium}{Dissolved calcium (mg/L).}
+\item{DissNitrateNitrite}{Dissolved Nitrate and Nitrite (mg/L).}
+\item{DOC}{Dissolved organic carbon (mg/L).}
+\item{TOC}{Total organic carbon (mg/L).}
+\item{DON}{Dissolved organic nitrogen (mg/L).}
+\item{TON}{Total organic nitrogen (mg/L).}
+\item{DissOrthophos}{Dissolved ortho-phosphate (mg/L).}
+\item{TotPhos}{Total phosphorous (mg/L).}
+\item{DissSilica}{Dissolved sillica (mg/L).}
+\item{TDS}{Total dissolved solids (mg/L).}
+\item{TSS}{Total suspended solids (mg/L).}
+\item{VSS}{Volatile suspended solids (mg/L).}
+\item{TKN}{Total Kjeldahl nitrogen (mg/L).}
 }
 }
 \usage{
