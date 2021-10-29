@@ -117,7 +117,7 @@
 #'   \item{TON}{Total organic nitrogen (mg/L).}
 #'   \item{DissOrthophos}{Dissolved ortho-phosphate (mg/L).}
 #'   \item{TotPhos}{Total phosphorous (mg/L).}
-#'   \item{DissSilica}{Dissolved sillica (mg/L).}
+#'   \item{DissSilica}{Dissolved silica (mg/L).}
 #'   \item{TDS}{Total dissolved solids (mg/L).}
 #'   \item{TSS}{Total suspended solids (mg/L).}
 #'   \item{VSS}{Volatile suspended solids (mg/L).}
