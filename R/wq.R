@@ -139,6 +139,33 @@ if(is.null(Sources) | !all(Sources%in%c("EMP", "STN", "FMWT", "EDSM", "DJFMP", "
       } else{
         dplyr::mutate(., Salinity=NA_real_)
       }
+    {if("Conductivity"%in%names(.)){
+      if("Salinity"%in%names(.)){
+        dplyr::mutate(., Salinity=dplyr::if_else(is.na(.data$Salinity), wql::ec2pss(.data$Conductivity/1000, t=25), .data$Salinity))
+      } else{
+        dplyr::mutate(., Salinity=wql::ec2pss(.data$Conductivity/1000, t=25))
+      }
+
+    } else{
+      if("Salinity"%in%names(.)){
+        .
+      } else{
+        dplyr::mutate(., Salinity=NA_real_)
+      }
+    }}
+    {if("Conductivity_bottom"%in%names(.)){
+      if("Salinity_bottom"%in%names(.)){
+        dplyr::mutate(., Salinity_bottom=dplyr::if_else(is.na(.data$Salinity_bottom), wql::ec2pss(.data$Conductivity_bottom/1000, t=25), .data$Salinity_bottom))
+      } else{
+        dplyr::mutate(., Salinity_bottom=wql::ec2pss(.data$Conductivity_bottom/1000, t=25))
+      }
+
+    } else{
+      if("Salinity_bottom"%in%names(.)){
+        .
+      } else{
+        dplyr::mutate(., Salinity_bottom=NA_real_)
+      }
     }}
 
   # Return ------------------------------------------------------------------
