@@ -78,7 +78,7 @@
 #' Water quality data from the California Department of Water Resources Environmental Monitoring Program.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 16,760 rows and 30 variables
+#' @format a tibble with 16,760 rows and 42 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
@@ -87,6 +87,7 @@
 #'   \item{Field_coords}{Were lat/long coordinates collected in the field (TRUE), or do they represent the location of a fixed station (FALSE)?}
 #'   \item{Date}{Date sample was collected.}
 #'   \item{Datetime}{Date and time sample was collected.}
+#'   \item{Notes}{Notes or comments.}
 #'   \item{Depth}{Bottom depth (m).}
 #'   \item{Tide}{Tidal stage (always High Slack).}
 #'   \item{Microcystis}{Microcystis bloom intensity on a qualitative scale from 1 to 5 where 1 = absent, 2 = low, 3 = medium, 4 = high, and 5 = very high.}
@@ -95,9 +96,20 @@
 #'   \item{Temperature}{Temperature (°C) at surface.}
 #'   \item{Temperature_bottom}{Temperature (°C) at bottom.}
 #'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
-#'   \item{Notes}{Notes or comments.}
+#'   \item{Conductivity_bottom}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at bottom.}
+#'   \item{DissolvedOxygen}{Dissolved oxygen (mg/L) at surface.}
+#'   \item{DissolvedOxygen_bottom}{Dissolved oxygen (mg/L) at bottom.}
+#'   \item{DissolvedOxygenPercent}{Dissolved oxygen percent (dimensionless) at surface.}
+#'   \item{DissolvedOxygenPercent_bottom}{Dissolved oxygen percent (dimensionless) at bottom.}
+#'   \item{pH}{pH (dimensionless) at surface.}
+#'   \item{pH_bottom}{pH (dimensionless) at bottom.}
+#'   \item{TotAlkalinity}{Total Alkalinity (mg/L).}
+#'   \item{TotAmmonia}{Total ammonia (mg/L).}
 #'   \item{DissAmmonia}{Dissolved ammonia (mg/L).}
+#'   \item{DissBromide}{Dissolved bromide (mg/L).}
 #'   \item{DissCalcium}{Dissolved calcium (mg/L).}
+#'   \item{TotChloride}{Total chloride (mg/L).}
+#'   \item{DissChloride}{Dissolved chloride (mg/L).}
 #'   \item{DissNitrateNitrite}{Dissolved Nitrate and Nitrite (mg/L).}
 #'   \item{DOC}{Dissolved organic carbon (mg/L).}
 #'   \item{TOC}{Total organic carbon (mg/L).}
@@ -105,7 +117,7 @@
 #'   \item{TON}{Total organic nitrogen (mg/L).}
 #'   \item{DissOrthophos}{Dissolved ortho-phosphate (mg/L).}
 #'   \item{TotPhos}{Total phosphorous (mg/L).}
-#'   \item{DissSilica}{Dissolved sillica (mg/L).}
+#'   \item{DissSilica}{Dissolved silica (mg/L).}
 #'   \item{TDS}{Total dissolved solids (mg/L).}
 #'   \item{TSS}{Total suspended solids (mg/L).}
 #'   \item{VSS}{Volatile suspended solids (mg/L).}
