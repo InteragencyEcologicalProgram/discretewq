@@ -1,3 +1,7 @@
+# discretewq 2.1.0
+
+* Added nutrient data to EMP and USGS datasets.
+
 # discretewq 2.0.0
 
 * Added the Yolo Bypass Fish Monitoring Program data
