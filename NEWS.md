@@ -1,3 +1,5 @@
+* Updated STN data to newest version with 2021 data
+
 # discretewq 2.1.0
 
 * Added nutrient data to EMP and USGS datasets.

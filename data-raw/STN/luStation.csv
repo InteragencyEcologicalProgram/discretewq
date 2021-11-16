@@ -19,7 +19,7 @@
 18,"335",0,0,0,,"SP Bay-2700 yds NW of rock wall on flats",38,4,16.00,122,19,26.40,"LSPC16",1,,"Only sampled in 1995 (2 tows)",,,,,,,,,,
 19,"336",0,0,0,,"SP Bay along N side of channel E of Light 15",38,3,40.00,122,16,40.80,"RSAC040",1,,"Sampled 6 tows in 1983 and 6 tows in 1995",,,,,,,,,,
 20,"340",1,1,0,"Napa River","Napa River along Vallejo seawall and park",38,5,51.00,122,15,43.90,"RNAP005",2,,"Sampled beginning 1978","02-Carquinez",0,1978,,38,5,51.00,122,15,43.90
-21,"342",0,0,,"Napa River",,,,,,,,,,,"Only sampled in 2006",,,,,,,,,,
+21,"342",0,0,0,"Napa River",,,,,,,,,,,"Only sampled in 2006",,,,,,,,,,
 22,"35",0,0,0,,,,,,,,,"RMKL006",,,"Sampled 1961-1965",,,,,,,,,,
 23,"36",0,0,0,,,,,,,,,"SLSTH10",,,"Only sampled in 1961",,,,,,,,,,
 24,"405",1,1,1,"Suisun Bay (Carquinez St.)","Carquinez Strait just W of Benecia army dock",38,2,22.90,122,9,1.80,"RSAC054",3,1,,"02-Carquinez",13,1959,,38,2,22.90,122,9,1.80
@@ -44,6 +44,7 @@
 43,"716",1,0,0,"Cache Slough","Cache Slough North of cable Ferry 1 & 51",38,14,18.50,121,41,5.20,,,,"Since 2011 (716 sampled in 2009 is closer to 721)","09-Cache Slough",0,2011,,38,14,19.20,121,41,5.30
 44,"719",1,0,0,"Sac. Deep Water Channel","Sac. Deep Water Channel - Between Lights 59 & 60",38,20,0.20,121,38,51.10,,,,"2009 (09 data in standalone DB) and since 2011","06-Sac Deep Water Shipping Channel",0,2011,,38,20,0.20,121,38,51.10
 45,"721",1,0,0,"Cache Slough","Cache Slough - 75 YDS. S. OF PUMPHOUSE ON W. BANK.",38,16,6.40,121,42,11.10,,,,"Since 2011","09-Cache Slough",0,2011,,38,16,5.30,121,42,10.00
+65,"722",1,0,0,"Cache Slough","Cache Slough",38,14,28.80,121,41,9.60,,,,"Same as SKT 716","09-Cache Slough",0,2021,,38,14,28.80,121,41,9.60
 46,"723",1,0,0,"Sac. Deep Water Channel","Sac. Deep Water Channel - Between Lights 51& 52",38,14,14.00,121,40,23.00,,,,"2009 (09 data in standalone DB) and since 2011","06-Sac Deep Water Shipping Channel",0,2011,,38,14,14.00,121,40,23.00
 47,"794",0,0,0,"Sac. Deep Water Channel","Sac. Deep Water Channel Turning Basin near S. Bank",,,,,,,,,,"Only sampled in 2009, data in standalone DB",,,,,,,,,,
 48,"795",1,0,0,"Sac. Deep Water Channel","Sac. Deep Water Channel - Between Lights 75 & 76",38,32,15.30,121,35,4.70,,,,"2009 (09 data in standalone DB) and since 2011","06-Sac Deep Water Shipping Channel",0,2011,,38,32,15.30,121,35,4.70

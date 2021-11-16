@@ -251,7 +251,7 @@
 #' Water quality data from the California Department of Fish and Wildlife Summer Townet Survey.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 8,738 rows and 14 variables
+#' @format a tibble with 8,978 rows and 14 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
