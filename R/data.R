@@ -339,9 +339,6 @@
 #'   \item{Salinity}{Salinity at surface.}
 #'   \item{Chlorophyll}{Chlorophyll concentration (\eqn{\mu}g \ifelse{html}{\out{L<sup>-1</sup>}}{\eqn{L^{-1}}}) at surface.}
 #'   \item{Sample_depth_nutr}{Depth (m) paired w/ nutrient sampling (ranges 0-5 m).}
-#'   \item{Chlorophyll_nutr}{Chlorophyll concentration (\eqn{\mu}g \ifelse{html}{\out{L<sup>-1</sup>}}{\eqn{L^{-1}}}) paired w/ nutrient data.}
-#'   \item{Temperature_nutr}{Temperature (°C) paired w/ nutrient data.}
-#'   \item{Salinity_nutr}{Salinity paired w/ nutrient data.}
 #'   \item{DissNitrateNitrite}{Dissolved Nitrate and Nitrite (mg/L).}
 #'   \item{DissAmmonia}{Dissolved Ammonia (mg/L).}
 #'   \item{DissOrthophos}{Dissolved Ortho-phosphate (mg/L).}
