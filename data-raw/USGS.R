@@ -80,7 +80,7 @@ USGS <- map_dfr(USGSfiles_pub, ~read_csv(., col_types = cols_only(Date="c", Time
   USGS$Salinity_nutr <- ifelse(USGS$Depth_bin %in% c('surface_only_nutr', 'surface_temp_nutr', 'bottom_only_nutr', 'bottom_temp_nutr'), USGS$Salinity, NA)
   USGS$Temperature_nutr <- ifelse(USGS$Depth_bin %in% c('surface_only_nutr', 'surface_temp_nutr', 'bottom_only_nutr', 'bottom_temp_nutr'), USGS$Temperature, NA)
   USGS$Sample_depth_nutr <- ifelse(USGS$Depth_bin %in% c('surface_only_nutr', 'surface_temp_nutr', 'bottom_only_nutr', 'bottom_temp_nutr'), USGS$Sample_depth, NA)
-  USGS$Chlorophyll_nutr <- ifelse(USGS$Depth_bin %in% c('surface_only_nutr', 'surface_temp_nutr', 'bottom_only_nutr', 'bottom_temp_nutr'), USGS$Sample_depth, NA)
+  USGS$Chlorophyll_nutr <- ifelse(USGS$Depth_bin %in% c('surface_only_nutr', 'surface_temp_nutr', 'bottom_only_nutr', 'bottom_temp_nutr'), USGS$Chlorophyll, NA)
 
   # remove vals for nutrient only rows to prepare for merge
   USGS[USGS$Depth_bin %in% c('surface_only_nutr', 'bottom_only_nutr'),]$Chlorophyll <- NA
@@ -108,8 +108,7 @@ USGS <- map_dfr(USGSfiles_pub, ~read_csv(., col_types = cols_only(Date="c", Time
   left_join(USGS_stations, by="Station") %>%
   select(Source, Station, Latitude, Longitude, Date, Datetime, Sample_depth=Sample_depth_surface, Sample_depth_bottom,
          Temperature=Temperature_surface, Temperature_bottom, Salinity=Salinity_surface, Chlorophyll=Chlorophyll_surface,
-         Sample_depth_nutr=Sample_depth_nutr_surface, Chlorophyll_nutr=Chlorophyll_nutr_surface, Temperature_nutr=Temperature_nutr_surface,
-         Salinity_nutr=Salinity_nutr_surface, DissNitrateNitrite=DissNitrateNitrite_surface, DissAmmonia=DissAmmonia_surface,
+         Sample_depth_nutr=Sample_depth_nutr_surface, DissNitrateNitrite=DissNitrateNitrite_surface, DissAmmonia=DissAmmonia_surface,
          DissOrthophos=DissOrthophos_surface, DissSilica=DissSilica_surface)
 
 
