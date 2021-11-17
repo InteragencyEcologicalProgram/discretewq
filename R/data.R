@@ -332,7 +332,7 @@
 #'   \item{Longitude}{Longitude in decimal degrees.}
 #'   \item{Date}{Date sample was collected.}
 #'   \item{Datetime}{Date and time of sample collection.}
-#'   \item{Sample_depth_surface}{Depth (m) of surface sample.}
+#'   \item{Sample_depth_surface}{Depth (m) of surface sample (between 0.5-5 meters).}
 #'   \item{Sample_depth_bottom}{Depth (m) of bottom sample.}
 #'   \item{Chlorophyll}{Chlorophyll concentration (\eqn{\mu}g \ifelse{html}{\out{L<sup>-1</sup>}}{\eqn{L^{-1}}}).}
 #'   \item{Temperature}{Temperature (°C) at surface.}
