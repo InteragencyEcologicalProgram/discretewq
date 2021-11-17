@@ -43,36 +43,74 @@ USGS <- map_dfr(USGSfiles_pub, ~read_csv(., col_types = cols_only(Date="c", Time
          Source="USGS")%>%
   select(-Time)%>%
   rename(Sample_depth=Depth)
+  # reset index
+  row.names(USGS) <- NULL
 
   # bin based on min depth and presense of nutrient vals (if no nutrients, then just min depth)
+  temp_surf_depth <- 2
+  nutr_surf_depth <- 5
+
   USGS <- USGS %>%
     group_by(Station, Date)%>%
     mutate(
       Depth_bin =
+        # surface
         if_else(
-          Sample_depth==min(Sample_depth) & Sample_depth < 5 & all(is.na(DissNitrateNitrite)) & all(is.na(DissAmmonia)) & all(is.na(DissOrthophos)) & all(is.na(DissSilica)), 'surface',
+          Sample_depth == min(Sample_depth) & Sample_depth < temp_surf_depth & all(is.na(DissNitrateNitrite)) & all(is.na(DissAmmonia)) & all(is.na(DissOrthophos)) & all(is.na(DissSilica)), 'surface_no_nutr', # only temp etc. data
           if_else(
-            Sample_depth < 5 & !is.na(DissNitrateNitrite) | !is.na(DissAmmonia) | !is.na(DissOrthophos) | !is.na(DissSilica), 'surface_nutr',
-            if_else(Sample_depth==max(Sample_depth) & Sample_depth>5, 'bottom',
-                    'other'))),
-      Datetime=min(Datetime)+(max(Datetime)-min(Datetime))/2)%>%
-    ungroup() %>%
-    # filter each group by min depth (mostly for surface/bottom_nutr, as there can be multiple)
-    group_by(Station, Date, Depth_bin) %>%
-    filter(Sample_depth == min(Sample_depth)) %>%
+            Sample_depth == min(Sample_depth) & Sample_depth < temp_surf_depth & c(!is.na(DissNitrateNitrite) | !is.na(DissAmmonia) | !is.na(DissOrthophos) | !is.na(DissSilica)), 'surface_temp_nutr', # temp/nutr data at same (min) depth
+            if_else(
+              Sample_depth != min(Sample_depth) & Sample_depth < nutr_surf_depth & c(!is.na(DissNitrateNitrite) | !is.na(DissAmmonia) | !is.na(DissOrthophos) | !is.na(DissSilica)), 'surface_only_nutr', # only nutr data if at lower depth than temp
+              if_else(
+                Sample_depth == min(Sample_depth) & Sample_depth < temp_surf_depth & c(any(is.na(DissNitrateNitrite)) | any(is.na(DissAmmonia)) | any(is.na(DissOrthophos)) | any(is.na(DissSilica))), 'surface_only_temp', # only temp data if at higher depth than nutr
+                # bottom
+                if_else(
+                  Sample_depth == max(Sample_depth) & Sample_depth > temp_surf_depth & all(is.na(DissNitrateNitrite)) & all(is.na(DissAmmonia)) & all(is.na(DissOrthophos)) & all(is.na(DissSilica)), 'bottom_no_nutr', # only temp etc. data
+                  if_else(
+                    Sample_depth == max(Sample_depth) & Sample_depth > temp_surf_depth & c(!is.na(DissNitrateNitrite) | !is.na(DissAmmonia) | !is.na(DissOrthophos) | !is.na(DissSilica)), 'bottom_temp_nutr', # temp/nutr data at same (min) depth
+                    if_else(
+                      Sample_depth != max(Sample_depth) & Sample_depth > nutr_surf_depth & c(!is.na(DissNitrateNitrite) | !is.na(DissAmmonia) | !is.na(DissOrthophos) | !is.na(DissSilica)), 'bottom_only_nutr', # only nutr data if at lower depth than temp
+                      if_else(
+                        Sample_depth == max(Sample_depth) & Sample_depth > temp_surf_depth & c(any(is.na(DissNitrateNitrite)) | any(is.na(DissAmmonia)) | any(is.na(DissOrthophos)) | any(is.na(DissSilica))), 'bottom_only_temp', # only temp data if at higher depth than nutr
+                        'other')))))))),
+      Datetime = min(Datetime)+(max(Datetime)-min(Datetime))/2) %>%
     ungroup()
 
-  # rename surface/bottom_nutr to standardize
-  USGS$Depth_bin[USGS$Depth_bin == 'surface_nutr'] <- 'surface'
-  USGS$Depth_bin[USGS$Depth_bin == 'bottom_nutr'] <- 'bottom'
+  # create nutrient cols for data that differs b/w nutrients and baseline
+  USGS$Salinity_nutr <- ifelse(USGS$Depth_bin %in% c('surface_only_nutr', 'surface_temp_nutr', 'bottom_only_nutr', 'bottom_temp_nutr'), USGS$Salinity, NA)
+  USGS$Temperature_nutr <- ifelse(USGS$Depth_bin %in% c('surface_only_nutr', 'surface_temp_nutr', 'bottom_only_nutr', 'bottom_temp_nutr'), USGS$Temperature, NA)
+  USGS$Sample_depth_nutr <- ifelse(USGS$Depth_bin %in% c('surface_only_nutr', 'surface_temp_nutr', 'bottom_only_nutr', 'bottom_temp_nutr'), USGS$Sample_depth, NA)
+  USGS$Chlorophyll_nutr <- ifelse(USGS$Depth_bin %in% c('surface_only_nutr', 'surface_temp_nutr', 'bottom_only_nutr', 'bottom_temp_nutr'), USGS$Sample_depth, NA)
 
+  # remove vals for nutrient only rows to prepare for merge
+  USGS[USGS$Depth_bin %in% c('surface_only_nutr', 'bottom_only_nutr'),]$Chlorophyll <- NA
+  USGS[USGS$Depth_bin %in% c('surface_only_nutr', 'bottom_only_nutr'),]$Salinity <- NA
+  USGS[USGS$Depth_bin %in% c('surface_only_nutr', 'bottom_only_nutr'),]$Temperature <- NA
+  USGS[USGS$Depth_bin %in% c('surface_only_nutr', 'bottom_only_nutr'),]$Sample_depth <- NA
+
+  # rename bins
+  USGS$Depth_bin <- ifelse(grepl('surface', USGS$Depth_bin), 'surface', ifelse(grepl('bottom', USGS$Depth_bin), 'bottom', 'other'))
+
+  # merge nutr_only and temp_only rows
+  coalesce_by_column <- function(df) {
+    return(dplyr::coalesce(!!! as.list(df)))
+  }
+
+  USGS <- USGS %>%
+    group_by(Station, Date, Datetime, Source, Depth_bin) %>%
+    summarise_all(coalesce_by_column) %>%
+    ungroup()
+
+  # filter data/cols
   USGS <- USGS %>% filter(Depth_bin %in% c('surface', 'bottom'))%>%
-  pivot_wider(names_from=Depth_bin, values_from=c(Sample_depth, Salinity, Chlorophyll, Temperature, DissNitrateNitrite, DissAmmonia, DissOrthophos, DissSilica),
-              values_fn=list(Sample_depth=mean, Salinity=mean, Chlorophyll=mean, Temperature=mean, DissNitrateNitrite=mean, DissAmmonia=mean, DissOrthophos=mean, DissSilica=mean))%>% # This will just average out multiple measurements at same depth
+  pivot_wider(names_from=Depth_bin, values_from=c(Sample_depth, Salinity, Chlorophyll, Temperature, Sample_depth_nutr, Salinity_nutr, Chlorophyll_nutr, Temperature_nutr, DissNitrateNitrite, DissAmmonia, DissOrthophos, DissSilica),
+              values_fn=list(Sample_depth=mean, Salinity=mean, Chlorophyll=mean, Temperature=mean, Sample_depth_nutr=mean, Salinity_nutr=mean, Chlorophyll_nutr=mean, Temperature_nutr=mean, DissNitrateNitrite=mean, DissAmmonia=mean, DissOrthophos=mean, DissSilica=mean))%>% # This will just average out multiple measurements at same depth
   left_join(USGS_stations, by="Station") %>%
-  select(Source, Station, Latitude, Longitude, Date, Datetime, Sample_depth_surface, Sample_depth_bottom, Chlorophyll=Chlorophyll_surface, Chlorophyll_bottom,
-         Temperature=Temperature_surface, Temperature_bottom, Salinity=Salinity_surface, DissNitrateNitrite=DissNitrateNitrite_surface,
-         DissAmmonia=DissAmmonia_surface, DissOrthophos=DissOrthophos_surface, DissSilica=DissSilica_surface)
+  select(Source, Station, Latitude, Longitude, Date, Datetime, Sample_depth=Sample_depth_surface, Sample_depth_bottom,
+         Temperature=Temperature_surface, Temperature_bottom, Salinity=Salinity_surface, Chlorophyll=Chlorophyll_surface,
+         Sample_depth_nutr=Sample_depth_nutr_surface, Chlorophyll_nutr=Chlorophyll_nutr_surface, Temperature_nutr=Temperature_nutr_surface,
+         Salinity_nutr=Salinity_nutr_surface, DissNitrateNitrite=DissNitrateNitrite_surface, DissAmmonia=DissAmmonia_surface,
+         DissOrthophos=DissOrthophos_surface, DissSilica=DissSilica_surface)
 
 
 # convert units
