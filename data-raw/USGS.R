@@ -102,13 +102,14 @@ USGS <- map_dfr(USGSfiles_pub, ~read_csv(., col_types = cols_only(Date="c", Time
     ungroup()
 
   # filter data/cols
-  USGS <- USGS %>% filter(Depth_bin %in% c('surface', 'bottom'))%>%
+  USGS <- USGS %>%
+    filter(Depth_bin %in% c('surface', 'bottom'))%>%
   pivot_wider(names_from=Depth_bin, values_from=c(Sample_depth, Salinity, Chlorophyll, Temperature, Sample_depth_nutr, Salinity_nutr, Chlorophyll_nutr, Temperature_nutr, DissNitrateNitrite, DissAmmonia, DissOrthophos, DissSilica),
               values_fn=list(Sample_depth=mean, Salinity=mean, Chlorophyll=mean, Temperature=mean, Sample_depth_nutr=mean, Salinity_nutr=mean, Chlorophyll_nutr=mean, Temperature_nutr=mean, DissNitrateNitrite=mean, DissAmmonia=mean, DissOrthophos=mean, DissSilica=mean))%>% # This will just average out multiple measurements at same depth
   left_join(USGS_stations, by="Station") %>%
-  select(Source, Station, Latitude, Longitude, Date, Datetime, Sample_depth=Sample_depth_surface, Sample_depth_bottom,
+  select(Source, Station, Latitude, Longitude, Date, Datetime, Sample_depth_surface, Sample_depth_bottom,
          Temperature=Temperature_surface, Temperature_bottom, Salinity=Salinity_surface, Chlorophyll=Chlorophyll_surface,
-         Sample_depth_nutr=Sample_depth_nutr_surface, DissNitrateNitrite=DissNitrateNitrite_surface, DissAmmonia=DissAmmonia_surface,
+         Sample_depth_nutr_surface, DissNitrateNitrite=DissNitrateNitrite_surface, DissAmmonia=DissAmmonia_surface,
          DissOrthophos=DissOrthophos_surface, DissSilica=DissSilica_surface)
 
 
