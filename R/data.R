@@ -105,17 +105,20 @@
 #'   \item{pH_bottom}{pH (dimensionless) at bottom.}
 #'   \item{TotAlkalinity}{Total Alkalinity (mg/L).}
 #'   \item{TotAmmonia}{Total ammonia (mg/L).}
-#'   \item{DissAmmonia}{Dissolved ammonia (mg/L).}
+#'   \item{DissAmmonia_Sign}{Whether the Dissolved Ammonia value is below the reporting limit or equal to it.}
+#'   \item{DissAmmonia}{Dissolved Ammonia (mg/L). If DissAmmonia_Sign is <, this is equal to the reporting limit.}
 #'   \item{DissBromide}{Dissolved bromide (mg/L).}
 #'   \item{DissCalcium}{Dissolved calcium (mg/L).}
 #'   \item{TotChloride}{Total chloride (mg/L).}
 #'   \item{DissChloride}{Dissolved chloride (mg/L).}
-#'   \item{DissNitrateNitrite}{Dissolved Nitrate and Nitrite (mg/L).}
+#'   \item{DissNitrateNitrite_Sign}{Whether the Dissolved Nitrate Nitrite value is below the reporting limit or equal to it.}
+#'   \item{DissNitrateNitrite}{Dissolved Nitrate and Nitrite (mg/L). If DissNitrateNitrite_Sign is <, this is equal to the reporting limit.}
 #'   \item{DOC}{Dissolved organic carbon (mg/L).}
 #'   \item{TOC}{Total organic carbon (mg/L).}
 #'   \item{DON}{Dissolved organic nitrogen (mg/L).}
 #'   \item{TON}{Total organic nitrogen (mg/L).}
-#'   \item{DissOrthophos}{Dissolved ortho-phosphate (mg/L).}
+#'   \item{DissOrthophos_Sign}{Whether the Dissolved Orthophos value is below the reporting limit or equal to it.}
+#'   \item{DissOrthophos}{Dissolved Ortho-phosphate (mg/L). If DissOrthophos_Sign is <, this is equal to the reporting limit.}
 #'   \item{TotPhos}{Total phosphorous (mg/L).}
 #'   \item{DissSilica}{Dissolved silica (mg/L).}
 #'   \item{TDS}{Total dissolved solids (mg/L).}
@@ -123,7 +126,6 @@
 #'   \item{VSS}{Volatile suspended solids (mg/L).}
 #'   \item{TKN}{Total Kjeldahl nitrogen (mg/L).}
 #'   }
-#'
 #' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.458.3}{here}.
 #' @seealso \code{\link{wq}}
 "EMP"
