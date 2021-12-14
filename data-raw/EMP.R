@@ -72,7 +72,7 @@ EMP$DissAmmonia <- ifelse(EMP$DissAmmonia == 'ND', EMP$DissAmmonia_RL, EMP$DissA
 EMP$DissNitrateNitrite <- ifelse(EMP$DissNitrateNitrite == 'ND', EMP$DissNitrateNitrite_RL, EMP$DissNitrateNitrite)
 EMP$DissNitrateNitrite <- ifelse(EMP$DissNitrateNitrite == 'ND', EMP$DissNitrateNitrite_TA_RL, EMP$DissNitrateNitrite)
 EMP$DissOrthophos <- ifelse(EMP$DissOrthophos == 'ND', EMP$DissOrthophos_RL, EMP$DissOrthophos)
-EMP$DissOrthophos <- ifelse(EMP$DissOrthophos == 'ND', EMP$DissOrthophos_TA_RL, EMP$DissNitrateNitrite)
+EMP$DissOrthophos <- ifelse(EMP$DissOrthophos == 'ND', EMP$DissOrthophos_TA_RL, EMP$DissDissOrthophos)
 
 # convert cols to numeric
 EMP$DissAmmonia <- as.numeric(EMP$DissAmmonia)
