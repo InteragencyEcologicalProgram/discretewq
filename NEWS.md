@@ -1,3 +1,4 @@
+* Add reporting limits (RLs) to EMP data.
 * Updated STN data to newest version with 2021 data
 
 # discretewq 2.1.0
