@@ -16,13 +16,14 @@ a tibble with 22,557 rows and 16 variables
 \item{Datetime}{Date and time of sample collection.}
 \item{Sample_depth_surface}{Depth (m) of surface sample.}
 \item{Sample_depth_bottom}{Depth (m) of bottom sample.}
-\item{Chlorophyll}{Chlorophyll concentration (\eqn{\mu}g \ifelse{html}{\out{L<sup>-1</sup>}}{\eqn{L^{-1}}}).}
 \item{Temperature}{Temperature (°C) at surface.}
 \item{Temperature_bottom}{Temperature (°C) at bottom.}
 \item{Salinity}{Salinity at surface.}
+\item{Chlorophyll}{Chlorophyll concentration (\eqn{\mu}g \ifelse{html}{\out{L<sup>-1</sup>}}{\eqn{L^{-1}}}) at surface.}
+\item{Sample_depth_nutr}{Depth (m) paired w/ nutrient sampling (ranges 0-5 m).}
 \item{DissNitrateNitrite}{Dissolved Nitrate and Nitrite (mg/L).}
 \item{DissAmmonia}{Dissolved Ammonia (mg/L).}
-\item{DissOrthophos}{Dissolved ortho-phosphate (mg/L).}
+\item{DissOrthophos}{Dissolved Ortho-phosphate (mg/L).}
 \item{DissSilica}{Dissolved Silica (mg/L).}
 }
 }

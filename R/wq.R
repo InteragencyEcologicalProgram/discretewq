@@ -37,7 +37,7 @@ wq <- function(Sources=NULL,
 if(is.null(Sources) | !all(Sources%in%c("EMP", "STN", "FMWT", "EDSM", "DJFMP", "SDO", "SKT", "SLS",
                                         "20mm", "Suisun", "Baystudy", "USBR", "USGS", "YBFMP"))){
   stop('You must specify the data sources you wish to include. Choices include
-  c("EMP", "STN", "FMWT", "EDSM", "DJFMP", "SDO", "SKT", "SLS", "20mm", "Suisun", "Baystudy", "USBR", "USGS", "YBFMP)')
+  c("EMP", "STN", "FMWT", "EDSM", "DJFMP", "SDO", "SKT", "SLS", "20mm", "Suisun", "Baystudy", "USBR", "USGS", "YBFMP")')
 }
 
   # Set end year to current year if blank
