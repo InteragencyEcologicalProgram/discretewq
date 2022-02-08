@@ -350,6 +350,28 @@
 #' @seealso \code{\link{wq}}
 "USGS"
 
+#' USGS CAWSC water quality data
+#'
+#' Discrete water quality data from the USGS California Water Science Center
+#'
+#' @encoding UTF-8
+#' @format a tibble with 2,071 rows and 10 variables
+#' \describe{
+#'   \item{Source}{Name of the source dataset.}
+#'   \item{Station}{Station where sample was collected.}
+#'   \item{Latitude}{Latitude in decimal degrees.}
+#'   \item{Longitude}{Longitude in decimal degrees.}
+#'   \item{Date}{Date sample was collected.}
+#'   \item{Datetime}{Date and time sample was collected.}
+#'   \item{Chlorophyll}{Chlorophyll concentration (\eqn{\mu}g \ifelse{html}{\out{L<sup>-1</sup>}}{\eqn{L^{-1}}}).}
+#'   \item{DissAmmonia}{Dissolved Ammonia (mg/L).
+#'   \item{DissNitrateNitrite}{Dissolved Nitrate and Nitrite (mg/L)
+#'   \item{DOC}{Dissolved Organic Carbon (mg/L)
+#'   \item{DissOrthophos}{Dissolved Ortho-phosphate (mg/L)}
+#' @details More metadata and information on methods are available \href{https://nwis.waterdata.usgs.gov/usa/nwis/qwdata}{https://help.waterdata.usgs.gov/codes-and-parameters}{here}.
+#' @seealso \code{\link{wq}}
+"USGS_CAWSC"
+
 #' YBFMP water quality data
 #'
 #' Water quality data from the California Department of Water Resources Yolo Bypass Fish Monitoring Program.
