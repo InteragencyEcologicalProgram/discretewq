@@ -41,7 +41,7 @@ To obtain the full integrated water quality dataset
 require(discretewq)
 Data <- wq(Sources = c("EMP", "STN", "FMWT", "EDSM", "DJFMP",
                        "SDO", "SKT", "SLS", "20mm", "Suisun", 
-                       "Baystudy", "USBR", "USGS", "YBFMP"))
+                       "Baystudy", "USBR", "USGS", "YBFMP", "USGS_CAWSC"))
 ```
 
 ## Data publication
@@ -80,5 +80,7 @@ O’Rear, T., J. Durand, and P. Moyle. 2020. Suisun Marsh Fish Study. [https://w
 Schraga, T. S., E. S. Nejad, C. A. Martin, and J. E. Cloern. 2018. USGS measurements of water quality in San Francisco Bay (CA), beginning in 2016 (ver. 3.0, March 2020). U. S. Geological Survey data release. [doi:https://doi.org/10.5066/F7D21WGF](https://doi.org/10.5066/F7D21WGF)
 
 United States Fish And Wildlife Service, C. Johnston, S. Durkacz, and others. 2020. Interagency Ecological Program and US Fish and Wildlife Service: San Francisco Estuary Enhanced Delta Smelt Monitoring Program data, 2016-2020. Environmental Data Initiative. [doi:10.6073/PASTA/764F27FF6B0A7B11A487A71C90397084](https://portal.edirepository.org/nis/mapbrowse?packageid=edi.415.3)
+
+U.S. Geological Survey. 2022. USGS water data for the Nation: U.S. Geological Survey National Water Information System database, accessed February 7, 2022, at [doi:10.5066/F7P55KJN](https://doi.org/10.5066/F7P55KJN)
 
 USBR, R. Dahlgren, L. Loken, and E. Van Nieuwenhuyse. 2020. Monthly vertical profiles of water quality in the Sacramento Deep Water Ship Channel 2012-2019.

@@ -23,7 +23,8 @@ Suggests:
     covr,
     tibble,
     readxl,
-    hms
+    hms,
+    dataRetrieval
 Depends: 
     R (>= 2.10)
 Imports: 

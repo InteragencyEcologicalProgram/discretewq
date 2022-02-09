@@ -35,7 +35,7 @@ To obtain the full integrated water quality dataset
 require(discretewq)
 Data <- wq(Sources = c("EMP", "STN", "FMWT", "EDSM", "DJFMP",
                        "SDO", "SKT", "SLS", "20mm", "Suisun", 
-                       "Baystudy", "USBR", "USGS", "YBFMP"))
+                       "Baystudy", "USBR", "USGS", "YBFMP", "USGS_CAWSC"))
 ```
 
 ## Data publication
@@ -125,6 +125,11 @@ others. 2020. Interagency Ecological Program and US Fish and Wildlife
 Service: San Francisco Estuary Enhanced Delta Smelt Monitoring Program
 data, 2016-2020. Environmental Data Initiative.
 [doi:10.6073/PASTA/764F27FF6B0A7B11A487A71C90397084](https://portal.edirepository.org/nis/mapbrowse?packageid=edi.415.3)
+
+U.S. Geological Survey. 2022. USGS water data for the Nation: U.S.
+Geological Survey National Water Information System database, accessed
+February 7, 2022, at
+[doi:10.5066/F7P55KJN](https://doi.org/10.5066/F7P55KJN)
 
 USBR, R. Dahlgren, L. Loken, and E. Van Nieuwenhuyse. 2020. Monthly
 vertical profiles of water quality in the Sacramento Deep Water Ship

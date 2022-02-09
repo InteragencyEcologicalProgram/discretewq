@@ -3,10 +3,10 @@ require(purrr)
 require(dplyr)
 require(lubridate)
 
-All_rows<-sum(map_dbl(list(baystudy, DJFMP, EDSM, EMP, FMWT, SDO, SKT, SLS, STN, suisun, twentymm, USBR, USGS, YBFMP), nrow))
-tzs<-map_chr(list(baystudy, DJFMP, EDSM, EMP, FMWT, SDO, SKT, SLS, STN, suisun, twentymm, USBR, USGS, YBFMP), ~tz(.x$Datetime))
+All_rows<-sum(map_dbl(list(baystudy, DJFMP, EDSM, EMP, FMWT, SDO, SKT, SLS, STN, suisun, twentymm, USBR, USGS, YBFMP, USGS_CAWSC), nrow))
+tzs<-map_chr(list(baystudy, DJFMP, EDSM, EMP, FMWT, SDO, SKT, SLS, STN, suisun, twentymm, USBR, USGS, YBFMP, USGS_CAWSC), ~tz(.x$Datetime))
 Data<-wq(Sources=c("EMP", "STN", "FMWT", "EDSM", "DJFMP", "SDO", "SKT", "SLS",
-                   "20mm", "Suisun", "Baystudy", "USBR", "USGS", "YBFMP"))%>%
+                   "20mm", "Suisun", "Baystudy", "USBR", "USGS", "YBFMP", "USGS_CAWSC"))%>%
   mutate(ID=paste(Source, Station, Date, Datetime, Latitude, Longitude))
 
 

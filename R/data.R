@@ -355,7 +355,7 @@
 #' Discrete water quality data from the USGS California Water Science Center
 #'
 #' @encoding UTF-8
-#' @format a tibble with 2,071 rows and 10 variables
+#' @format a tibble with 2,164 rows and 11 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
@@ -364,11 +364,12 @@
 #'   \item{Date}{Date sample was collected.}
 #'   \item{Datetime}{Date and time sample was collected.}
 #'   \item{Chlorophyll}{Chlorophyll concentration (\eqn{\mu}g \ifelse{html}{\out{L<sup>-1</sup>}}{\eqn{L^{-1}}}).}
-#'   \item{DissAmmonia}{Dissolved Ammonia (mg/L).
-#'   \item{DissNitrateNitrite}{Dissolved Nitrate and Nitrite (mg/L)
-#'   \item{DOC}{Dissolved Organic Carbon (mg/L)
+#'   \item{DissAmmonia}{Dissolved Ammonia (mg/L).}
+#'   \item{DissNitrateNitrite}{Dissolved Nitrate and Nitrite (mg/L)}
+#'   \item{DOC}{Dissolved Organic Carbon (mg/L)}
 #'   \item{DissOrthophos}{Dissolved Ortho-phosphate (mg/L)}
-#' @details More metadata and information on methods are available \href{https://nwis.waterdata.usgs.gov/usa/nwis/qwdata}{https://help.waterdata.usgs.gov/codes-and-parameters}{here}.
+#'   }
+#' @details More metadata and information on methods are available \href{https://nwis.waterdata.usgs.gov/usa/nwis/qwdata}{here for data} and \href{https://help.waterdata.usgs.gov/codes-and-parameters}{here for metadata}.
 #' @seealso \code{\link{wq}}
 "USGS_CAWSC"
 

@@ -14,8 +14,9 @@
 #'   "Baystudy" (Bay Study, \code{\link{baystudy}}),
 #'   "USGS" (USGS San Francisco Bay Surveys, \code{\link{USGS}}),
 #'   "USBR" (United States Bureau of Reclamation Sacramento Deepwater Ship Channel data, \code{\link{USBR}}),
-#'   "Suisun" (Suisun Marsh Fish Study, \code{\link{suisun}}), and
-#'   "YBFMP" (Yolo Bypass Fish Monitoring Program, \code{\link{YBFMP}}).
+#'   "Suisun" (Suisun Marsh Fish Study, \code{\link{suisun}})
+#'   "YBFMP" (Yolo Bypass Fish Monitoring Program, \code{\link{YBFMP}}), and
+#'   "USGS_CAWSC" (USGS California Water Science Center monitoring data, \code{\link{USGS_CAWSC}}).
 #' @param Start_year Earliest year you would like included in the dataset. Must be an integer. Defaults to year \code{0}.
 #' @param End_year Latest year you would like included in the dataset. Must be an integer. Defaults to the current year.
 #' @importFrom magrittr %>%
@@ -24,7 +25,7 @@
 #' @examples
 #' Data <- wq(Sources = c("EMP", "STN", "FMWT", "EDSM",
 #' "DJFMP", "SDO", "SKT", "SLS",
-#' "20mm", "Suisun", "Baystudy", "USBR", "USGS", "YBFMP"))
+#' "20mm", "Suisun", "Baystudy", "USBR", "USGS", "YBFMP", "USGS_CAWSC"))
 #' @export
 
 wq <- function(Sources=NULL,
@@ -35,9 +36,9 @@ wq <- function(Sources=NULL,
 # Check arguments ---------------------------------------------------------
 
 if(is.null(Sources) | !all(Sources%in%c("EMP", "STN", "FMWT", "EDSM", "DJFMP", "SDO", "SKT", "SLS",
-                                        "20mm", "Suisun", "Baystudy", "USBR", "USGS", "YBFMP"))){
+                                        "20mm", "Suisun", "Baystudy", "USBR", "USGS", "YBFMP", "USGS_CAWSC"))){
   stop('You must specify the data sources you wish to include. Choices include
-  c("EMP", "STN", "FMWT", "EDSM", "DJFMP", "SDO", "SKT", "SLS", "20mm", "Suisun", "Baystudy", "USBR", "USGS", "YBFMP")')
+  c("EMP", "STN", "FMWT", "EDSM", "DJFMP", "SDO", "SKT", "SLS", "20mm", "Suisun", "Baystudy", "USBR", "USGS", "YBFMP", "USGS_CAWSC")')
 }
 
   # Set end year to current year if blank
@@ -107,6 +108,10 @@ if(is.null(Sources) | !all(Sources%in%c("EMP", "STN", "FMWT", "EDSM", "DJFMP", "
 
   if("YBFMP"%in%Sources){
     WQ_list[["YBFMP"]]<-discretewq::YBFMP
+  }
+
+  if("USGS_CAWSC"%in%Sources){
+    WQ_list[["USGS_CAWSC"]]<-discretewq::USGS_CAWSC
   }
 
   out<-dplyr::bind_rows(WQ_list)%>%
