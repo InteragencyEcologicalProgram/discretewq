@@ -76,15 +76,14 @@ cawsc <- dataRetrieval::readWQPqw(siteNumbers, parameterCd)
 
 #retrieve station lat/long and attach to data
 
-lat_long <- whatWQPsites(siteid=siteNumbers)
-
-
-lat_long <- lat_long %>%
+lat_long <- whatWQPsites(siteid=siteNumbers)%>%
   select(MonitoringLocationIdentifier, LatitudeMeasure, LongitudeMeasure)
 
 cawsc_long <- cawsc%>%
   left_join(lat_long,
-            by ="MonitoringLocationIdentifier")%>%
+            by ="MonitoringLocationIdentifier")
+
+%>%
   mutate(Source = "USGS_CAWSC") %>%
   select(Source,
          MonitoringLocationIdentifier,
