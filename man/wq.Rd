@@ -18,7 +18,7 @@ Choices include "EMP" (Environmental Monitoring Program, \code{\link{EMP}}),
 "SKT" (Spring Kodiak Trawl, \code{\link{SKT}}),
 "SLS" (Smelt Larva Survey, \code{\link{SLS}}),
 "Baystudy" (Bay Study, \code{\link{baystudy}}),
-"USGS" (USGS San Francisco Bay Surveys, \code{\link{USGS}}),
+"USGS_SFBS" (USGS San Francisco Bay Surveys, \code{\link{USGS_SFBS}}),
 "USBR" (United States Bureau of Reclamation Sacramento Deepwater Ship Channel data, \code{\link{USBR}}),
 "Suisun" (Suisun Marsh Fish Study, \code{\link{suisun}})
 "YBFMP" (Yolo Bypass Fish Monitoring Program, \code{\link{YBFMP}}), and
@@ -37,5 +37,5 @@ Imports, filters, and processes water quality datasets and outputs an integrated
 \examples{
 Data <- wq(Sources = c("EMP", "STN", "FMWT", "EDSM",
 "DJFMP", "SDO", "SKT", "SLS",
-"20mm", "Suisun", "Baystudy", "USBR", "USGS", "YBFMP", "USGS_CAWSC"))
+"20mm", "Suisun", "Baystudy", "USBR", "USGS_SFBS", "YBFMP", "USGS_CAWSC"))
 }

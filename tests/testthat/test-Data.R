@@ -3,10 +3,10 @@ require(purrr)
 require(dplyr)
 require(lubridate)
 
-All_rows<-sum(map_dbl(list(baystudy, DJFMP, EDSM, EMP, FMWT, SDO, SKT, SLS, STN, suisun, twentymm, USBR, USGS, YBFMP, USGS_CAWSC), nrow))
-tzs<-map_chr(list(baystudy, DJFMP, EDSM, EMP, FMWT, SDO, SKT, SLS, STN, suisun, twentymm, USBR, USGS, YBFMP, USGS_CAWSC), ~tz(.x$Datetime))
+All_rows<-sum(map_dbl(list(baystudy, DJFMP, EDSM, EMP, FMWT, SDO, SKT, SLS, STN, suisun, twentymm, USBR, USGS_SFBS, YBFMP, USGS_CAWSC), nrow))
+tzs<-map_chr(list(baystudy, DJFMP, EDSM, EMP, FMWT, SDO, SKT, SLS, STN, suisun, twentymm, USBR, USGS_SFBS, YBFMP, USGS_CAWSC), ~tz(.x$Datetime))
 Data<-wq(Sources=c("EMP", "STN", "FMWT", "EDSM", "DJFMP", "SDO", "SKT", "SLS",
-                   "20mm", "Suisun", "Baystudy", "USBR", "USGS", "YBFMP", "USGS_CAWSC"))%>%
+                   "20mm", "Suisun", "Baystudy", "USBR", "USGS_SFBS", "YBFMP", "USGS_CAWSC"))%>%
   mutate(ID=paste(Source, Station, Date, Datetime, Latitude, Longitude))
 
 
@@ -30,4 +30,10 @@ test_that("All timezones are in local California time", {
 test_that("No zeros in environmental variables that shouldn't have them", {
   expect_true(!any(na.omit(Data$Temperature)==0))
   expect_true(!any(na.omit(Data$Conductivity)==0))
+})
+
+test_that("Errors work correctly", {
+  expect_error(wq(Sources="USGS"), 'The "USGS" data source has been renamed to "USGS_SFBS" because of the inclusion of an additional USGS dataset, "USGS_CAWSC".', fixed=TRUE)
+  expect_error(wq(Sources="SFBS"), 'You must specify the data sources you wish to include. Choices include
+  c("EMP", "STN", "FMWT", "EDSM", "DJFMP", "SDO", "SKT", "SLS", "20mm", "Suisun", "Baystudy", "USBR", "USGS_SFBS", "YBFMP", "USGS_CAWSC")', fixed=TRUE)
 })

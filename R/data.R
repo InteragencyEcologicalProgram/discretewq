@@ -321,7 +321,7 @@
 #' @seealso \code{\link{wq}}
 "USBR"
 
-#' USGS water quality data
+#' USGS SFBS water quality data
 #'
 #' Water quality data from the United States Geological Survey San Francisco Bay Water Quality Survey.
 #'
@@ -348,7 +348,7 @@
 #'   }
 #' @details More metadata and information on methods are available \href{https://www.sciencebase.gov/catalog/item/5841f97ee4b04fc80e518d9f}{here for data from 1969-2015} and \href{https://www.sciencebase.gov/catalog/item/5966abe6e4b0d1f9f05cf551}{here for data from 2016-present}.
 #' @seealso \code{\link{wq}}
-"USGS"
+"USGS_SFBS"
 
 #' USGS CAWSC water quality data
 #'

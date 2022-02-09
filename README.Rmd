@@ -37,12 +37,16 @@ devtools::install_github("sbashevkin/discretewq")
 ## Usage
 
 To obtain the full integrated water quality dataset
-``` r
+
+```{r}
 require(discretewq)
 Data <- wq(Sources = c("EMP", "STN", "FMWT", "EDSM", "DJFMP",
                        "SDO", "SKT", "SLS", "20mm", "Suisun", 
-                       "Baystudy", "USBR", "USGS", "YBFMP", "USGS_CAWSC"))
+                       "Baystudy", "USBR", "USGS_SFBS", "YBFMP", "USGS_CAWSC"))
+
+str(Data)
 ```
+
 
 ## Data publication
 

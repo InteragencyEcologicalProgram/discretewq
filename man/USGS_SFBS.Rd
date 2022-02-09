@@ -2,9 +2,9 @@
 % Please edit documentation in R/data.R
 \docType{data}
 \encoding{UTF-8}
-\name{USGS}
-\alias{USGS}
-\title{USGS water quality data}
+\name{USGS_SFBS}
+\alias{USGS_SFBS}
+\title{USGS SFBS water quality data}
 \format{
 a tibble with 22,557 rows and 16 variables
 \describe{
@@ -28,7 +28,7 @@ a tibble with 22,557 rows and 16 variables
 }
 }
 \usage{
-USGS
+USGS_SFBS
 }
 \description{
 Water quality data from the United States Geological Survey San Francisco Bay Water Quality Survey.
