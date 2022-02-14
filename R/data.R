@@ -363,11 +363,13 @@
 #'   \item{Longitude}{Longitude in decimal degrees.}
 #'   \item{Date}{Date sample was collected.}
 #'   \item{Datetime}{Date and time sample was collected.}
+#'   \item{Chlorophyll_Sign}{Whether the Chlorophyll value is estimated (extrapolated at low end) or equal to it.}
 #'   \item{Chlorophyll}{Chlorophyll concentration (\eqn{\mu}g \ifelse{html}{\out{L<sup>-1</sup>}}{\eqn{L^{-1}}}).}
-#'   \item{DissAmmonia}{Dissolved Ammonia (mg/L).}
-#'   \item{DissNitrateNitrite}{Dissolved Nitrate and Nitrite (mg/L)}
+#'   \item{DissAmmonia_Sign}{Whether the Dissolved Ammonia value is below the reporting limit, estimated, or equal to it.}
+#'   \item{DissAmmonia}{Dissolved Ammonia (mg/L). If DissAmmonia_Sign is <, this is equal to the reporting limit, NA = RL unknown.}
+#'   \item{DissNitrateNitrite_Sign}{Whether the Dissolved Nitrate Nitrite value is below the reporting limit, estimated, or equal to it.}#'   \item{DissNitrateNitrite}{Dissolved Nitrate and Nitrite (mg/L)}
 #'   \item{DOC}{Dissolved Organic Carbon (mg/L)}
-#'   \item{DissOrthophos}{Dissolved Ortho-phosphate (mg/L)}
+#'   \item{DissOrthophos_Sign}{Whether the Dissolved Orthophosphate value is below the reporting limit, estimated, or equal to it.}#'#'   \item{DissOrthophos}{Dissolved Ortho-phosphate (mg/L)}
 #'   }
 #' @details More metadata and information on methods are available \href{https://nwis.waterdata.usgs.gov/usa/nwis/qwdata}{here for data} and \href{https://help.waterdata.usgs.gov/codes-and-parameters}{here for metadata}.
 #' @seealso \code{\link{wq}}
