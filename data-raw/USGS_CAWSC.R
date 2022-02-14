@@ -111,7 +111,8 @@ cawsc_long_approved <- filter(cawsc_long, ResultStatusIdentifier!="Preliminary")
 
 cawsc_sign<-mutate(cawsc_long_approved, sign=case_when(ResultDetectionConditionText=="Not Detected" ~ "<",
                                                       ResultValueTypeName%in%c("Estimated") ~ "~",
-                                                      TRUE ~ "="))
+                                                      TRUE ~ "="))%>%
+  select(-ResultDetectionConditionText, -ResultValueTypeName, -ResultStatusIdentifier, -ResultLaboratoryCommentText, -DetectionQuantitationLimitMeasure.MeasureValue)
 #make df wide
 
 cawsc_wide <- pivot_wider(cawsc_sign, names_from=CharacteristicName, values_from=c(ResultMeasureValue, sign))
@@ -121,10 +122,12 @@ cawsc_wide <- pivot_wider(cawsc_sign, names_from=CharacteristicName, values_from
 USGS_CAWSC <- cawsc_wide %>%
   rename(Station = MonitoringLocationIdentifier, Latitude = LatitudeMeasure, Longitude = LongitudeMeasure,
          Date = ActivityStartDate, Datetime = ActivityStartDateTime, TimeDatum = ActivityStartTime.TimeZoneCode,
-         Chlorophyll = 'ResultMeasureValue_Chlorophyll a', Chlorophyll_Sign = "sign_Chlorophyll a", DissAmmonia_Sign = "sign_Ammonia and ammonium", DissAmmonia = 'ResultMeasureValue_Ammonia and ammonium', DissNitrateNitrite_Sign = "sign_Inorganic nitrogen (nitrate and nitrite)" , DissNitrateNitrite = 'ResultMeasureValue_Inorganic nitrogen (nitrate and nitrite)',
-         DissOrthophos = 'ResultMeasureValue_Orthophosphate', DissOrthphos_Sign = "sign_Orthophosphate", DOC = "ResultMeasureValue_Organic carbon", )%>%
+         Chlorophyll = 'ResultMeasureValue_Chlorophyll a', Chlorophyll_Sign = "sign_Chlorophyll a", DissAmmonia_Sign = "sign_Ammonia and ammonium",
+         DissAmmonia = 'ResultMeasureValue_Ammonia and ammonium', DissNitrateNitrite_Sign = "sign_Inorganic nitrogen (nitrate and nitrite)" ,
+         DissNitrateNitrite = 'ResultMeasureValue_Inorganic nitrogen (nitrate and nitrite)',
+         DissOrthophos = 'ResultMeasureValue_Orthophosphate', DissOrthophos_Sign = "sign_Orthophosphate", DOC = "ResultMeasureValue_Organic carbon", )%>%
   mutate(Datetime=with_tz(Datetime, tzone = "America/Los_Angeles"))%>% #convert times to Pacific time
 
-  select(Source, Station, Latitude, Longitude, Date, Datetime, Chlorophyll_Sign, Chlorophyll, DissAmmonia_Sign, DissAmmonia, DissNitrateNitrite_Sign, DissNitrateNitrite, DOC, DissOrthphos_Sign, DissOrthophos) #reorder columns
+  select(Source, Station, Latitude, Longitude, Date, Datetime, Chlorophyll_Sign, Chlorophyll, DissAmmonia_Sign, DissAmmonia, DissNitrateNitrite_Sign, DissNitrateNitrite, DOC, DissOrthophos_Sign, DissOrthophos) #reorder columns
 
 usethis::use_data(USGS_CAWSC, overwrite = TRUE)

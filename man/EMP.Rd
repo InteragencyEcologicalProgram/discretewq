@@ -33,19 +33,19 @@ a tibble with 16,760 rows and 42 variables
 \item{pH_bottom}{pH (dimensionless) at bottom.}
 \item{TotAlkalinity}{Total Alkalinity (mg/L).}
 \item{TotAmmonia}{Total ammonia (mg/L).}
-\item{DissAmmonia_Sign}{Whether the Dissolved Ammonia value is below the reporting limit or equal to it.}
+\item{DissAmmonia_Sign}{Whether the Dissolved Ammonia value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
 \item{DissAmmonia}{Dissolved Ammonia (mg/L). If DissAmmonia_Sign is <, this is equal to the reporting limit, NA = RL unknown.}
 \item{DissBromide}{Dissolved bromide (mg/L).}
 \item{DissCalcium}{Dissolved calcium (mg/L).}
 \item{TotChloride}{Total chloride (mg/L).}
 \item{DissChloride}{Dissolved chloride (mg/L).}
-\item{DissNitrateNitrite_Sign}{Whether the Dissolved Nitrate Nitrite value is below the reporting limit or equal to it.}
+\item{DissNitrateNitrite_Sign}{Whether the Dissolved Nitrate Nitrite value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
 \item{DissNitrateNitrite}{Dissolved Nitrate and Nitrite (mg/L). If DissNitrateNitrite_Sign is <, this is equal to the reporting limit, with NA = RL unknown.}
 \item{DOC}{Dissolved organic carbon (mg/L).}
 \item{TOC}{Total organic carbon (mg/L).}
 \item{DON}{Dissolved organic nitrogen (mg/L).}
 \item{TON}{Total organic nitrogen (mg/L).}
-\item{DissOrthophos_Sign}{Whether the Dissolved Orthophos value is below the reporting limit or equal to it.}
+\item{DissOrthophos_Sign}{Whether the Dissolved Orthophos value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
 \item{DissOrthophos}{Dissolved Ortho-phosphate (mg/L). If DissOrthophos_Sign is <, this is equal to the reporting limit, with NA = RL unknown.}
 \item{TotPhos}{Total phosphorous (mg/L).}
 \item{DissSilica}{Dissolved silica (mg/L).}

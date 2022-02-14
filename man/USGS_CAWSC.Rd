@@ -6,7 +6,7 @@
 \alias{USGS_CAWSC}
 \title{USGS CAWSC water quality data}
 \format{
-a tibble with 2,164 rows and 11 variables
+a tibble with 2,164 rows and 15 variables
 \describe{
 \item{Source}{Name of the source dataset.}
 \item{Station}{Station where sample was collected.}
@@ -14,10 +14,14 @@ a tibble with 2,164 rows and 11 variables
 \item{Longitude}{Longitude in decimal degrees.}
 \item{Date}{Date sample was collected.}
 \item{Datetime}{Date and time sample was collected.}
+\item{Chlorophyll_Sign}{Whether the Chlorophyll value is estimated (extrapolated at low end) or reported as measured.}
 \item{Chlorophyll}{Chlorophyll concentration (\eqn{\mu}g \ifelse{html}{\out{L<sup>-1</sup>}}{\eqn{L^{-1}}}).}
-\item{DissAmmonia}{Dissolved Ammonia (mg/L).}
+\item{DissAmmonia_Sign}{Whether the Dissolved Ammonia value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), estimated "~", or reported as the measured value "=".}
+\item{DissAmmonia}{Dissolved Ammonia (mg/L). If DissAmmonia_Sign is <, this is equal to the reporting limit, NA = RL unknown.}
+\item{DissNitrateNitrite_Sign}{Whether the Dissolved Nitrate Nitrite value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), estimated "~", or reported as the measured value "=".}
 \item{DissNitrateNitrite}{Dissolved Nitrate and Nitrite (mg/L)}
 \item{DOC}{Dissolved Organic Carbon (mg/L)}
+\item{DissOrthophos_Sign}{Whether the Dissolved Orthophosphate value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), estimated "~", or reported as the measured value "=".}
 \item{DissOrthophos}{Dissolved Ortho-phosphate (mg/L)}
 }
 }
