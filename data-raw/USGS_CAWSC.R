@@ -81,9 +81,7 @@ lat_long <- whatWQPsites(siteid=siteNumbers)%>%
 
 cawsc_long <- cawsc%>%
   left_join(lat_long,
-            by ="MonitoringLocationIdentifier")
-
-%>%
+            by ="MonitoringLocationIdentifier") %>%
   mutate(Source = "USGS_CAWSC") %>%
   select(Source,
          MonitoringLocationIdentifier,
@@ -95,25 +93,41 @@ cawsc_long <- cawsc%>%
          CharacteristicName,
          ResultMeasureValue,
          ActivityStartTime.TimeZoneCode,
-         ResultStatusIdentifier)
+         ResultStatusIdentifier,
+         ResultDetectionConditionText,
+         ResultLaboratoryCommentText,
+         ResultValueTypeName,
+         DetectionQuantitationLimitMeasure.MeasureValue)
 
+#summary as of Feb 2022
 summary(cawsc_long$ResultStatusIdentifier=="Historical")#2099
 summary(cawsc_long$ResultStatusIdentifier=="Accepted")#7412
 summary(cawsc_long$ResultStatusIdentifier=="Preliminary")#5885
 
 #limit data to historical and accepted
-cawsc_approved <- filter(cawsc_long, ResultStatusIdentifier!="Preliminary")
+cawsc_long_approved <- filter(cawsc_long, ResultStatusIdentifier!="Preliminary")
 
-cawsc_wide <- pivot_wider(cawsc_approved, names_from = "CharacteristicName", values_from = "ResultMeasureValue")
+#add qualifier code for 'estimated' values and '<' (nutrients). See dataRetrieval vignette: https://cran.r-project.org/web/packages/dataRetrieval/vignettes/qwdata_changes.html
+
+cawsc_sign<-mutate(cawsc_long_approved, sign=case_when(ResultDetectionConditionText=="Not Detected" ~ "<",
+                                                      ResultValueTypeName%in%c("Estimated") ~ "~",
+                                                      TRUE ~ "="))%>%
+  select(-ResultDetectionConditionText, -ResultValueTypeName, -ResultStatusIdentifier, -ResultLaboratoryCommentText, -DetectionQuantitationLimitMeasure.MeasureValue)
+#make df wide
+
+cawsc_wide <- pivot_wider(cawsc_sign, names_from=CharacteristicName, values_from=c(ResultMeasureValue, sign))
 
 #create new DateTime columns that pastes Data and Time
 
 USGS_CAWSC <- cawsc_wide %>%
   rename(Station = MonitoringLocationIdentifier, Latitude = LatitudeMeasure, Longitude = LongitudeMeasure,
          Date = ActivityStartDate, Datetime = ActivityStartDateTime, TimeDatum = ActivityStartTime.TimeZoneCode,
-         Chlorophyll = 'Chlorophyll a', DissAmmonia = 'Ammonia and ammonium', DissNitrateNitrite = 'Inorganic nitrogen (nitrate and nitrite)',
-         DissOrthophos = Orthophosphate, DOC = "Organic carbon")%>%
+         Chlorophyll = 'ResultMeasureValue_Chlorophyll a', Chlorophyll_Sign = "sign_Chlorophyll a", DissAmmonia_Sign = "sign_Ammonia and ammonium",
+         DissAmmonia = 'ResultMeasureValue_Ammonia and ammonium', DissNitrateNitrite_Sign = "sign_Inorganic nitrogen (nitrate and nitrite)" ,
+         DissNitrateNitrite = 'ResultMeasureValue_Inorganic nitrogen (nitrate and nitrite)',
+         DissOrthophos = 'ResultMeasureValue_Orthophosphate', DissOrthophos_Sign = "sign_Orthophosphate", DOC = "ResultMeasureValue_Organic carbon", )%>%
   mutate(Datetime=with_tz(Datetime, tzone = "America/Los_Angeles"))%>% #convert times to Pacific time
-  select(Source, Station, Latitude, Longitude, Date, Datetime, Chlorophyll, DissAmmonia, DissNitrateNitrite, DOC, DissOrthophos) #reorder columns
+
+  select(Source, Station, Latitude, Longitude, Date, Datetime, Chlorophyll_Sign, Chlorophyll, DissAmmonia_Sign, DissAmmonia, DissNitrateNitrite_Sign, DissNitrateNitrite, DOC, DissOrthophos_Sign, DissOrthophos) #reorder columns
 
 usethis::use_data(USGS_CAWSC, overwrite = TRUE)
