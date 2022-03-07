@@ -1,3 +1,5 @@
+# discretewq 2.3.1
+
 # discretewq 2.3.0
 
 * Changed the name of the `USGS` survey to `USGS_SFBS` to avoid confusion with the new `USGS_CAWSC` survey.
