@@ -1,3 +1,5 @@
+# discretewq (development version)
+
 * Adding `Secchi_estimated` variable to `FMWT` data
 
 # discretewq 2.3.1

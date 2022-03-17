@@ -1,6 +1,6 @@
 Package: discretewq
 Title: Integrated Dataset of Discrete Water Quality in the San Francisco Estuary
-Version: 2.3.1
+Version: 2.3.1.9000
 Authors@R: 
    person(given = "Sam",
            family = "Bashevkin",
