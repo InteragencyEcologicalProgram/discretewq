@@ -1,4 +1,4 @@
-# discretewq (development version)
+# discretewq 2.3.2
 
 * Fixing error where `YBFMP` Secchi data was in meters. Converted it to cm for consistency with other surveys. 
 * Adding `Secchi_estimated` variable to `FMWT` data
