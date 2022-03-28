@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 [![R build status](https://github.com/sbashevkin/discretewq/workflows/R-CMD-check/badge.svg)](https://github.com/sbashevkin/discretewq/actions)
 [![Codecov test coverage](https://codecov.io/gh/sbashevkin/discretewq/branch/main/graph/badge.svg)](https://codecov.io/gh/sbashevkin/discretewq?branch=main)
 [![DOI](https://zenodo.org/badge/309747392.svg)](https://zenodo.org/badge/latestdoi/309747392)
-[![Data DOI](https://img.shields.io/badge/Data%20publication%20DOI-10.6073/pasta/1694ea7f9ef9cc8619b01c3588029683-blue.svg)](https://portal.edirepository.org/nis/mapbrowse?scope=edi&identifier=731)
+[![Data DOI](https://img.shields.io/badge/Data%20publication%20DOI-10.6073/pasta/567ca1dce56cc819b1819117538bd718-blue.svg)](https://portal.edirepository.org/nis/mapbrowse?scope=edi&identifier=731)
 <!-- badges: end -->
 
 
