@@ -22,16 +22,16 @@ EMP_stations <-
 # read in EMP data
 # data without sign (ie. all = to 2021): TotAlkalinity, TotAmmonia, TotChloride, DissChloride, TON, TDS
 EMP <- read_csv(file.path(tempdir(), "SACSJ_delta_water_quality_1975_2021.csv"),
-                col_types = cols_only(Station="c", Date="c", Time="c", FieldNotes='c', Chla_Sign="c", Chla="c", Depth="d", Secchi="d",
+                col_types = cols_only(Station="c", Date="c", Time="c", FieldNotes='c', Chla_Sign="c", Chla="d", Depth="d", Secchi="d",
                           Microcystis="d", SpCndSurface="d", SpCndBottom='d', DOSurface='d', DOBottom='d',
                           DOpercentSurface='d', DOpercentBottom='d', WTSurface="d", WTBottom='d', pHSurface = 'd',
-                          pHBottom = 'd', NorthLat='d', WestLong='d', Pheophytin_Sign="c", Pheophytin="c", TotAlkalinity="c",
-                          TotAmmonia="c", DissAmmonia_Sign="c", DissAmmonia="c", DissBromide_Sign="c", DissBromide="c",
-                          DissCalcium_Sign="c", DissCalcium="c", TotChloride="c", DissChloride="c",
-                          DissNitrateNitrite_Sign="c", DissNitrateNitrite="c", DOC_Sign="c", DOC="c",
-                          TOC_Sign="c", TOC="c", DON_Sign="c",DON="c", TON="c", DissOrthophos_Sign="c",
-                          DissOrthophos="c", TotPhos_Sign="c", TotPhos="c", DissSilica_Sign="c", DissSilica="c",
-                          TDS="c", TSS_Sign="c", TSS="c", VSS_Sign="c", VSS="c", TKN_Sign="c", TKN="c"))
+                          pHBottom = 'd', NorthLat='d', WestLong='d', Pheophytin_Sign="c", Pheophytin="d", TotAlkalinity="d",
+                          TotAmmonia="d", DissAmmonia_Sign="c", DissAmmonia="d", DissBromide_Sign="c", DissBromide="d",
+                          DissCalcium_Sign="c", DissCalcium="d", TotChloride="d", DissChloride="d",
+                          DissNitrateNitrite_Sign="c", DissNitrateNitrite="d", DOC_Sign="c", DOC="d",
+                          TOC_Sign="c", TOC="d", DON_Sign="c",DON="d", TON="d", DissOrthophos_Sign="c",
+                          DissOrthophos="d", TotPhos_Sign="c", TotPhos="d", DissSilica_Sign="c", DissSilica="d",
+                          TDS="d", TSS_Sign="c", TSS="d", VSS_Sign="c", VSS="d", TKN_Sign="c", TKN="d"))
 
 # clean data w/o RLs
 EMP <- EMP %>%
