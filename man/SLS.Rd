@@ -6,7 +6,7 @@
 \alias{SLS}
 \title{SLS water quality data}
 \format{
-a tibble with 2,891 rows and 12 variables
+a tibble with 2,889 rows and 12 variables
 \describe{
 \item{Source}{Name of the source dataset.}
 \item{Station}{Station where sample was collected.}

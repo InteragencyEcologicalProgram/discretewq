@@ -156,7 +156,7 @@
 #' Water quality data from the California Department of Fish and Wildlife Fall Midwater Trawl.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 28,477 rows and 13 variables
+#' @format a tibble with 29,579 rows and 13 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
@@ -230,7 +230,7 @@
 #' Water quality data from the California Department of Fish and Wildlife Smelt Larva Survey.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 2,891 rows and 12 variables
+#' @format a tibble with 2,889 rows and 12 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
