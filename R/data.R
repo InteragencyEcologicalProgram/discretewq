@@ -78,7 +78,7 @@
 #' Water quality data from the California Department of Water Resources Environmental Monitoring Program.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 16,760 rows and 42 variables
+#' @format a tibble with 18,358 rows and 56 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
@@ -91,6 +91,7 @@
 #'   \item{Depth}{Bottom depth (m).}
 #'   \item{Tide}{Tidal stage (always High Slack).}
 #'   \item{Microcystis}{Microcystis bloom intensity on a qualitative scale from 1 to 5 where 1 = absent, 2 = low, 3 = medium, 4 = high, and 5 = very high.}
+#'   \item{Chlorophyll_Sign}{Whether the Chlorophyll value is below the reporting limit or equal to it.}
 #'   \item{Chlorophyll}{Chlorophyll concentration (\eqn{\mu}g \ifelse{html}{\out{L<sup>-1</sup>}}{\eqn{L^{-1}}}).}
 #'   \item{Secchi}{Secchi depth (cm).}
 #'   \item{Temperature}{Temperature (°C) at surface.}
@@ -107,26 +108,35 @@
 #'   \item{TotAmmonia}{Total ammonia (mg/L).}
 #'   \item{DissAmmonia_Sign}{Whether the Dissolved Ammonia value is below the reporting limit or equal to it.}
 #'   \item{DissAmmonia}{Dissolved Ammonia (mg/L). If DissAmmonia_Sign is <, this is equal to the reporting limit, NA = RL unknown.}
+#'   \item{DissBromide_Sign}{Whether the Dissolved Bromide value is below the reporting limit or equal to it.}
 #'   \item{DissBromide}{Dissolved bromide (mg/L).}
+#'   \item{DissCalcium_Sign}{Whether the Dissolved Calcium value is below the reporting limit or equal to it.}
 #'   \item{DissCalcium}{Dissolved calcium (mg/L).}
 #'   \item{TotChloride}{Total chloride (mg/L).}
 #'   \item{DissChloride}{Dissolved chloride (mg/L).}
 #'   \item{DissNitrateNitrite_Sign}{Whether the Dissolved Nitrate Nitrite value is below the reporting limit or equal to it.}
 #'   \item{DissNitrateNitrite}{Dissolved Nitrate and Nitrite (mg/L). If DissNitrateNitrite_Sign is <, this is equal to the reporting limit, with NA = RL unknown.}
+#'   \item{DOC_Sign}{Whether the Dissolved Organic Carbon value is below the reporting limit or equal to it.}
 #'   \item{DOC}{Dissolved organic carbon (mg/L).}
-#'   \item{TOC}{Total organic carbon (mg/L).}
-#'   \item{DON}{Dissolved organic nitrogen (mg/L).}
-#'   \item{TON}{Total organic nitrogen (mg/L).}
-#'   \item{DissOrthophos_Sign}{Whether the Dissolved Orthophos value is below the reporting limit or equal to it.}
+#'   \item{TOC_Sign}{Whether the Total Organic Carbon value is below the reporting limit or equal to it.}
+#'   \item{TOC}{Total Organic Carbon (mg/L).}
+#'   \item{DON_Sign}{Whether the Dissolved Organic Nitrate value is below the reporting limit or equal to it.}
+#'   \item{DON}{Dissolved Organic Nitrogen (mg/L).}
+#'   \item{TON}{Total Organic Nitrogen (mg/L).}
+#'   \item{DissOrthophos_Sign}{Whether the Dissolved Ortho-phosphate value is below the reporting limit or equal to it.}
 #'   \item{DissOrthophos}{Dissolved Ortho-phosphate (mg/L). If DissOrthophos_Sign is <, this is equal to the reporting limit, with NA = RL unknown.}
+#'   \item{TotPhos_Sign}{Whether the Total Phosphate value is below the reporting limit or equal to it.}
 #'   \item{TotPhos}{Total phosphorous (mg/L).}
+#'   \item{DissSilica_Sign}{Whether the Dissolved Silica value is below the reporting limit or equal to it.}
 #'   \item{DissSilica}{Dissolved silica (mg/L).}
 #'   \item{TDS}{Total dissolved solids (mg/L).}
+#'   \item{TSS_Sign}{Whether the Total Suspended Solids value is below the reporting limit or equal to it.}
 #'   \item{TSS}{Total suspended solids (mg/L).}
+#'   \item{VSS_Sign}{Whether the Volatile SUspended Solids value is below the reporting limit or equal to it.}
 #'   \item{VSS}{Volatile suspended solids (mg/L).}
-#'   \item{TKN}{Total Kjeldahl nitrogen (mg/L).}
-#'   }
-#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.458.3}{here}.
+#'   \item{TKN_Sign}{Whether the Total Kjeldahl Nitrogen value is below the reporting limit or equal to it.}
+#'   \item{TKN}{Total Kjeldahl Nitrogen (mg/L).}
+#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?scope=edi&identifier=458&revision=6}{here}.
 #' @seealso \code{\link{wq}}
 "EMP"
 
