@@ -118,19 +118,16 @@
 #'   \item{DissNitrateNitrite}{Dissolved Nitrate and Nitrite (mg/L). If DissNitrateNitrite_Sign is <, this is equal to the reporting limit, with NA = RL unknown.}
 #'   \item{DOC_Sign}{Whether the Dissolved Organic Carbon value is below the reporting limit or equal to it.}
 #'   \item{DOC}{Dissolved organic carbon (mg/L).}
-<<<<<<< HEAD
 #'   \item{TOC_Sign}{Whether the Total Organic Carbon value is below the reporting limit or equal to it.}
 #'   \item{TOC}{Total Organic Carbon (mg/L).}
 #'   \item{DON_Sign}{Whether the Dissolved Organic Nitrate value is below the reporting limit or equal to it.}
 #'   \item{DON}{Dissolved Organic Nitrogen (mg/L).}
 #'   \item{TON}{Total Organic Nitrogen (mg/L).}
 #'   \item{DissOrthophos_Sign}{Whether the Dissolved Ortho-phosphate value is below the reporting limit or equal to it.}
-=======
 #'   \item{TOC}{Total organic carbon (mg/L).}
 #'   \item{DON}{Dissolved organic nitrogen (mg/L).}
 #'   \item{TON}{Total organic nitrogen (mg/L).}
 #'   \item{DissOrthophos_Sign}{Whether the Dissolved Orthophos value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
->>>>>>> main
 #'   \item{DissOrthophos}{Dissolved Ortho-phosphate (mg/L). If DissOrthophos_Sign is <, this is equal to the reporting limit, with NA = RL unknown.}
 #'   \item{TotPhos_Sign}{Whether the Total Phosphate value is below the reporting limit or equal to it.}
 #'   \item{TotPhos}{Total phosphorous (mg/L).}
