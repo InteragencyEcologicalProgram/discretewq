@@ -1,3 +1,15 @@
+# discretewq 2.3.2
+
+* Fixing error where `YBFMP` Secchi data was in meters. Converted it to cm for consistency with other surveys. 
+* Adding `Secchi_estimated` variable to `FMWT` data
+
+# discretewq 2.3.1
+
+# discretewq 2.3.0
+
+* Changed the name of the `USGS` survey to `USGS_SFBS` to avoid confusion with the new `USGS_CAWSC` survey.
+* Added USGS_CAWSC data.
+
 # discretewq 2.2.0
 
 * Add reporting limits (RLs) to EMP data.

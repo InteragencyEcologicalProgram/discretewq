@@ -48,6 +48,7 @@ YBFMP<-read_csv(file.path(tempdir(), "Zooplankton_Data.csv"),
          Date=parse_date_time(Date, orders=c("%Y-%m-%d", "%m/%d/%Y"), tz="America/Los_Angeles"),
          Datetime=parse_date_time(if_else(is.na(Time), NA_character_, paste(Date, Time)), orders=c("%Y-%m-%d %H:%M", "%Y-%m-%d %H:%M:%S"), tz="America/Los_Angeles"),
          Tide=recode(Tide, High="High Slack", Low="Low Slack"),
+         Secchi=Secchi*100, #convert to cm
          Conductivity=if_else(is.na(SpCnd), Conductivity / (1 + 0.019 * (Temperature - 25)), SpCnd))%>% #See suisun.R for info
   mutate(ID=paste(Date, Station, Temperature, Secchi, Microcystis, Conductivity))%>% # Following steps to remove duplicated WQ data from multiple fish samples that were nearby in space and time
   group_by(Source, Date, Station, ID)%>%

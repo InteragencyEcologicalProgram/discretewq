@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 [![R build status](https://github.com/sbashevkin/discretewq/workflows/R-CMD-check/badge.svg)](https://github.com/sbashevkin/discretewq/actions)
 [![Codecov test coverage](https://codecov.io/gh/sbashevkin/discretewq/branch/main/graph/badge.svg)](https://codecov.io/gh/sbashevkin/discretewq?branch=main)
 [![DOI](https://zenodo.org/badge/309747392.svg)](https://zenodo.org/badge/latestdoi/309747392)
-[![Data DOI](https://img.shields.io/badge/Data%20publication%20DOI-10.6073/pasta/1694ea7f9ef9cc8619b01c3588029683-blue.svg)](https://portal.edirepository.org/nis/mapbrowse?scope=edi&identifier=731)
+[![Data DOI](https://img.shields.io/badge/Data%20publication%20DOI-10.6073/pasta/567ca1dce56cc819b1819117538bd718-blue.svg)](https://portal.edirepository.org/nis/mapbrowse?scope=edi&identifier=731)
 <!-- badges: end -->
 
 
@@ -37,16 +37,20 @@ devtools::install_github("sbashevkin/discretewq")
 ## Usage
 
 To obtain the full integrated water quality dataset
-``` r
+
+```{r}
 require(discretewq)
 Data <- wq(Sources = c("EMP", "STN", "FMWT", "EDSM", "DJFMP",
                        "SDO", "SKT", "SLS", "20mm", "Suisun", 
-                       "Baystudy", "USBR", "USGS", "YBFMP"))
+                       "Baystudy", "USBR", "USGS_SFBS", "YBFMP", "USGS_CAWSC"))
+
+str(Data)
 ```
+
 
 ## Data publication
 
-The dataset is also [published on the Environmental Data Initiative](https://portal.edirepository.org/nis/mapbrowse?scope=edi&identifier=731), where you can find detailed metadata. This static version of the dataset corresponds to version 1.0.0 of the R package ([archived on zenodo](https://zenodo.org/record/4631924)). 
+The dataset is also [published on the Environmental Data Initiative](https://portal.edirepository.org/nis/mapbrowse?scope=edi&identifier=731), where you can find detailed metadata. This static version of the dataset corresponds to version 2.3.2 of the R package ([archived on zenodo](https://zenodo.org/record/6390964)). 
 
 
 ## Data sources
@@ -80,5 +84,7 @@ O’Rear, T., J. Durand, and P. Moyle. 2020. Suisun Marsh Fish Study. [https://w
 Schraga, T. S., E. S. Nejad, C. A. Martin, and J. E. Cloern. 2018. USGS measurements of water quality in San Francisco Bay (CA), beginning in 2016 (ver. 3.0, March 2020). U. S. Geological Survey data release. [doi:https://doi.org/10.5066/F7D21WGF](https://doi.org/10.5066/F7D21WGF)
 
 United States Fish And Wildlife Service, C. Johnston, S. Durkacz, and others. 2020. Interagency Ecological Program and US Fish and Wildlife Service: San Francisco Estuary Enhanced Delta Smelt Monitoring Program data, 2016-2020. Environmental Data Initiative. [doi:10.6073/PASTA/764F27FF6B0A7B11A487A71C90397084](https://portal.edirepository.org/nis/mapbrowse?packageid=edi.415.3)
+
+U.S. Geological Survey. 2022. USGS water data for the Nation: U.S. Geological Survey National Water Information System database, accessed February 7, 2022, at [doi:10.5066/F7P55KJN](https://doi.org/10.5066/F7P55KJN)
 
 USBR, R. Dahlgren, L. Loken, and E. Van Nieuwenhuyse. 2020. Monthly vertical profiles of water quality in the Sacramento Deep Water Ship Channel 2012-2019.

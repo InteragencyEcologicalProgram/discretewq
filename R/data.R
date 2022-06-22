@@ -106,7 +106,7 @@
 #'   \item{pH_bottom}{pH (dimensionless) at bottom.}
 #'   \item{TotAlkalinity}{Total Alkalinity (mg/L).}
 #'   \item{TotAmmonia}{Total ammonia (mg/L).}
-#'   \item{DissAmmonia_Sign}{Whether the Dissolved Ammonia value is below the reporting limit or equal to it.}
+#'   \item{DissAmmonia_Sign}{Whether the Dissolved Ammonia value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
 #'   \item{DissAmmonia}{Dissolved Ammonia (mg/L). If DissAmmonia_Sign is <, this is equal to the reporting limit, NA = RL unknown.}
 #'   \item{DissBromide_Sign}{Whether the Dissolved Bromide value is below the reporting limit or equal to it.}
 #'   \item{DissBromide}{Dissolved bromide (mg/L).}
@@ -114,16 +114,23 @@
 #'   \item{DissCalcium}{Dissolved calcium (mg/L).}
 #'   \item{TotChloride}{Total chloride (mg/L).}
 #'   \item{DissChloride}{Dissolved chloride (mg/L).}
-#'   \item{DissNitrateNitrite_Sign}{Whether the Dissolved Nitrate Nitrite value is below the reporting limit or equal to it.}
+#'   \item{DissNitrateNitrite_Sign}{Whether the Dissolved Nitrate Nitrite value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
 #'   \item{DissNitrateNitrite}{Dissolved Nitrate and Nitrite (mg/L). If DissNitrateNitrite_Sign is <, this is equal to the reporting limit, with NA = RL unknown.}
 #'   \item{DOC_Sign}{Whether the Dissolved Organic Carbon value is below the reporting limit or equal to it.}
 #'   \item{DOC}{Dissolved organic carbon (mg/L).}
+<<<<<<< HEAD
 #'   \item{TOC_Sign}{Whether the Total Organic Carbon value is below the reporting limit or equal to it.}
 #'   \item{TOC}{Total Organic Carbon (mg/L).}
 #'   \item{DON_Sign}{Whether the Dissolved Organic Nitrate value is below the reporting limit or equal to it.}
 #'   \item{DON}{Dissolved Organic Nitrogen (mg/L).}
 #'   \item{TON}{Total Organic Nitrogen (mg/L).}
 #'   \item{DissOrthophos_Sign}{Whether the Dissolved Ortho-phosphate value is below the reporting limit or equal to it.}
+=======
+#'   \item{TOC}{Total organic carbon (mg/L).}
+#'   \item{DON}{Dissolved organic nitrogen (mg/L).}
+#'   \item{TON}{Total organic nitrogen (mg/L).}
+#'   \item{DissOrthophos_Sign}{Whether the Dissolved Orthophos value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
+>>>>>>> main
 #'   \item{DissOrthophos}{Dissolved Ortho-phosphate (mg/L). If DissOrthophos_Sign is <, this is equal to the reporting limit, with NA = RL unknown.}
 #'   \item{TotPhos_Sign}{Whether the Total Phosphate value is below the reporting limit or equal to it.}
 #'   \item{TotPhos}{Total phosphorous (mg/L).}
@@ -166,7 +173,7 @@
 #' Water quality data from the California Department of Fish and Wildlife Fall Midwater Trawl.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 28,477 rows and 13 variables
+#' @format a tibble with 29,579 rows and 13 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
@@ -178,6 +185,7 @@
 #'   \item{Tide}{Tidal stage.}
 #'   \item{Microcystis}{Microcystis bloom intensity on a qualitative scale from 1 to 5 where 1 = absent, 2 = low, 3 = medium, 4 = high, and 5 = very high.}
 #'   \item{Secchi}{Secchi depth (cm).}
+#'   \item{Secchi_estimated}{Was Secchi depth estimated?}
 #'   \item{Temperature}{Temperature (°C) at surface.}
 #'   \item{Temperature_bottom}{Temperature (°C) at bottom.}
 #'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
@@ -239,7 +247,7 @@
 #' Water quality data from the California Department of Fish and Wildlife Smelt Larva Survey.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 2,891 rows and 12 variables
+#' @format a tibble with 2,889 rows and 12 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
@@ -331,7 +339,7 @@
 #' @seealso \code{\link{wq}}
 "USBR"
 
-#' USGS water quality data
+#' USGS SFBS water quality data
 #'
 #' Water quality data from the United States Geological Survey San Francisco Bay Water Quality Survey.
 #'
@@ -345,12 +353,12 @@
 #'   \item{Date}{Date sample was collected.}
 #'   \item{Datetime}{Date and time of sample collection.}
 #'   \item{Sample_depth_surface}{Depth (m) of surface sample.}
+#'   \item{Sample_depth_nutr_surface}{Depth (m) paired w/ nutrient sampling (range: 0-5 m).}
 #'   \item{Sample_depth_bottom}{Depth (m) of bottom sample.}
 #'   \item{Temperature}{Temperature (°C) at surface.}
 #'   \item{Temperature_bottom}{Temperature (°C) at bottom.}
 #'   \item{Salinity}{Salinity at surface.}
 #'   \item{Chlorophyll}{Chlorophyll concentration (\eqn{\mu}g \ifelse{html}{\out{L<sup>-1</sup>}}{\eqn{L^{-1}}}) at surface.}
-#'   \item{Sample_depth_nutr}{Depth (m) paired w/ nutrient sampling (range: 0-5 m).}
 #'   \item{DissNitrateNitrite}{Dissolved Nitrate and Nitrite (mg/L).}
 #'   \item{DissAmmonia}{Dissolved Ammonia (mg/L).}
 #'   \item{DissOrthophos}{Dissolved Ortho-phosphate (mg/L).}
@@ -358,7 +366,34 @@
 #'   }
 #' @details More metadata and information on methods are available \href{https://www.sciencebase.gov/catalog/item/5841f97ee4b04fc80e518d9f}{here for data from 1969-2015} and \href{https://www.sciencebase.gov/catalog/item/5966abe6e4b0d1f9f05cf551}{here for data from 2016-present}.
 #' @seealso \code{\link{wq}}
-"USGS"
+"USGS_SFBS"
+
+#' USGS CAWSC water quality data
+#'
+#' Discrete water quality data from the USGS California Water Science Center
+#'
+#' @encoding UTF-8
+#' @format a tibble with 2,164 rows and 15 variables
+#' \describe{
+#'   \item{Source}{Name of the source dataset.}
+#'   \item{Station}{Station where sample was collected.}
+#'   \item{Latitude}{Latitude in decimal degrees.}
+#'   \item{Longitude}{Longitude in decimal degrees.}
+#'   \item{Date}{Date sample was collected.}
+#'   \item{Datetime}{Date and time sample was collected.}
+#'   \item{Chlorophyll_Sign}{Whether the Chlorophyll value is estimated (extrapolated at low end) or reported as measured.}
+#'   \item{Chlorophyll}{Chlorophyll concentration (\eqn{\mu}g \ifelse{html}{\out{L<sup>-1</sup>}}{\eqn{L^{-1}}}).}
+#'   \item{DissAmmonia_Sign}{Whether the Dissolved Ammonia value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), estimated "~", or reported as the measured value "=".}
+#'   \item{DissAmmonia}{Dissolved Ammonia (mg/L). If DissAmmonia_Sign is <, this is equal to the reporting limit, NA = RL unknown.}
+#'   \item{DissNitrateNitrite_Sign}{Whether the Dissolved Nitrate Nitrite value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), estimated "~", or reported as the measured value "=".}
+#'   \item{DissNitrateNitrite}{Dissolved Nitrate and Nitrite (mg/L)}
+#'   \item{DOC}{Dissolved Organic Carbon (mg/L)}
+#'   \item{DissOrthophos_Sign}{Whether the Dissolved Orthophosphate value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), estimated "~", or reported as the measured value "=".}
+#'   \item{DissOrthophos}{Dissolved Ortho-phosphate (mg/L)}
+#'   }
+#' @details More metadata and information on methods are available \href{https://nwis.waterdata.usgs.gov/usa/nwis/qwdata}{here for data} and \href{https://help.waterdata.usgs.gov/codes-and-parameters}{here for metadata}.
+#' @seealso \code{\link{wq}}
+"USGS_CAWSC"
 
 #' YBFMP water quality data
 #'

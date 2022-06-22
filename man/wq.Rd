@@ -18,10 +18,11 @@ Choices include "EMP" (Environmental Monitoring Program, \code{\link{EMP}}),
 "SKT" (Spring Kodiak Trawl, \code{\link{SKT}}),
 "SLS" (Smelt Larva Survey, \code{\link{SLS}}),
 "Baystudy" (Bay Study, \code{\link{baystudy}}),
-"USGS" (USGS San Francisco Bay Surveys, \code{\link{USGS}}),
+"USGS_SFBS" (USGS San Francisco Bay Surveys, \code{\link{USGS_SFBS}}),
 "USBR" (United States Bureau of Reclamation Sacramento Deepwater Ship Channel data, \code{\link{USBR}}),
-"Suisun" (Suisun Marsh Fish Study, \code{\link{suisun}}), and
-"YBFMP" (Yolo Bypass Fish Monitoring Program, \code{\link{YBFMP}}).}
+"Suisun" (Suisun Marsh Fish Study, \code{\link{suisun}})
+"YBFMP" (Yolo Bypass Fish Monitoring Program, \code{\link{YBFMP}}), and
+"USGS_CAWSC" (USGS California Water Science Center monitoring data, \code{\link{USGS_CAWSC}}).}
 
 \item{Start_year}{Earliest year you would like included in the dataset. Must be an integer. Defaults to year \code{0}.}
 
@@ -36,5 +37,5 @@ Imports, filters, and processes water quality datasets and outputs an integrated
 \examples{
 Data <- wq(Sources = c("EMP", "STN", "FMWT", "EDSM",
 "DJFMP", "SDO", "SKT", "SLS",
-"20mm", "Suisun", "Baystudy", "USBR", "USGS", "YBFMP"))
+"20mm", "Suisun", "Baystudy", "USBR", "USGS_SFBS", "YBFMP", "USGS_CAWSC"))
 }

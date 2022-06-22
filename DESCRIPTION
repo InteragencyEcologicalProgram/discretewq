@@ -1,6 +1,6 @@
 Package: discretewq
 Title: Integrated Dataset of Discrete Water Quality in the San Francisco Estuary
-Version: 2.2.0
+Version: 2.3.2
 Authors@R: 
    person(given = "Sam",
            family = "Bashevkin",
@@ -12,7 +12,7 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
 Suggests: 
     readr,
     tidyr,
@@ -23,7 +23,8 @@ Suggests:
     covr,
     tibble,
     readxl,
-    hms
+    hms,
+    dataRetrieval
 Depends: 
     R (>= 2.10)
 Imports: 
