@@ -1,5 +1,4 @@
 ## code to prepare `EMP` dataset goes here
-
 require(readr)
 require(dplyr)
 require(tidyr)
@@ -33,7 +32,7 @@ EMP <- read_csv(file.path(tempdir(), "SACSJ_delta_water_quality_1975_2021.csv"),
                           DissOrthophos="d", TotPhos_Sign="c", TotPhos="d", DissSilica_Sign="c", DissSilica="d",
                           TDS="d", TSS_Sign="c", TSS="d", VSS_Sign="c", VSS="d", TKN_Sign="c", TKN="d"))
 
-# clean data w/o RLs
+# clean data
 EMP <- EMP %>%
   rename(Notes=FieldNotes, Chlorophyll=Chla, Chlorophyll_Sign=Chla_Sign, Conductivity=SpCndSurface, Conductivity_bottom=SpCndBottom, Temperature=WTSurface, Temperature_bottom=WTBottom, DissolvedOxygen=DOSurface, DissolvedOxygen_bottom=DOBottom,
          DissolvedOxygenPercent=DOpercentSurface, DissolvedOxygenPercent_bottom=DOpercentBottom, pH=pHSurface,
@@ -54,6 +53,28 @@ EMP <- EMP %>%
     TRUE ~ FALSE),
     Latitude=if_else(is.na(Latitude), Latitude_field, Latitude),
     Longitude=if_else(is.na(Longitude), Longitude_field, Longitude))
+
+# average old data (collected multiple times per day)
+EMP <- EMP %>%
+  group_by(across(c(-VSS, -TSS, -Chlorophyll, -Secchi, -Temperature, -TotChloride, -DissNitrateNitrite, -DON,
+                    -Conductivity, -DissolvedOxygen, -pH, -TotAmmonia, -TON, -DissSilica, -TotPhos, -TDS)))%>%
+  summarize(TSS = mean(TSS, na.rm = TRUE),
+            VSS = mean(VSS, na.rm = TRUE),
+            DissolvedOxygen = mean(DissolvedOxygen, na.rm = TRUE),
+            pH = mean(pH, na.rm = TRUE),
+            Chlorophyll = mean(Chlorophyll, na.rm = TRUE),
+            Secchi = mean(Secchi, na.rm = TRUE),
+            Conductivity = mean(Conductivity, na.rm = TRUE),
+            Temperature = mean(Temperature, na.rm = TRUE),
+            TotChloride = mean(TotChloride, na.rm = TRUE),
+            DissNitrateNitrite = mean(DissNitrateNitrite, na.rm = TRUE),
+            DON = mean(DON, na.rm = TRUE),
+            TotAmmonia = mean(TotAmmonia, na.rm = TRUE),
+            TON = mean(TON, na.rm = TRUE),
+            DissSilica = mean(DissSilica, na.rm = TRUE),
+            TotPhos = mean(TotPhos, na.rm = TRUE),
+            TDS = mean(TDS, na.rm = TRUE),
+            .groups = 'drop')
 
 # select cols
 EMP <- EMP %>% select(Source, Station, Latitude, Longitude, Field_coords, Date, Datetime, Notes, Depth, Tide,
