@@ -52,7 +52,7 @@
 #' Water quality data from the United States Fish and Wildlife Service Enhanced Delta Smelt Monitoring Program.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 28,439 rows and 14 variables
+#' @format a tibble with 30,957 rows and 14 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected. This represents an identifier for the unique EDSM target location. Multiple tows (and water quality samples) were often collected at each target location on a day.}
@@ -135,7 +135,7 @@
 #' Water quality data from the United States Fish and Wildlife Service Delta Juvenile Fish Monitoring Program.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 146,231 rows and 9 variables
+#' @format a tibble with 150,488 rows and 9 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}

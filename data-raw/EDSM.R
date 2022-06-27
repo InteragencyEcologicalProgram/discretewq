@@ -6,26 +6,31 @@ require(lubridate)
 
 
 #EDSM 20mm
-download.file("https://portal.edirepository.org/nis/dataviewer?packageid=edi.415.7&entityid=d468c513fa69c4fc6ddc02e443785f28",
+download.file("https://portal.edirepository.org/nis/dataviewer?packageid=edi.415.8&entityid=d468c513fa69c4fc6ddc02e443785f28",
               file.path(tempdir(), "EDSM_20mm.csv"), mode="wb")
 #EDSM KDTR
-download.file("https://portal.edirepository.org/nis/dataviewer?packageid=edi.415.7&entityid=4d7de6f0a38eff744a009a92083d37ae",
+download.file("https://portal.edirepository.org/nis/dataviewer?packageid=edi.415.8&entityid=4d7de6f0a38eff744a009a92083d37ae",
               file.path(tempdir(), "EDSM_KDTR.csv"), mode="wb")
 
 
 #Methods in  metadata say they do not know if their data were corrected for temperature before May 3 or 17 2019 so I will not use conductivity data before June 2019
 EDSM <- read_csv(file.path(tempdir(), "EDSM_20mm.csv"),
-                 col_types=cols_only(Date="c", StartLat="d", StartLong="d", Station="c", TopEC="d",
-                                     TopTemp="d", BottomTemp="d", Scchi="d", Time="c",
-                                     Tide="c", Depth="d", SampleComments="c"))%>%
-  rename(Latitude=StartLat, Longitude=StartLong, Conductivity = TopEC, Temperature=TopTemp, Secchi=Scchi, Notes = SampleComments, Temperature_bottom=BottomTemp)%>%
+                 col_types=cols_only(SampleDate="c", LatitudeStart="d", LongitudeStart="d",
+                                     StationCode="c", SpecificConductanceTop="d",
+                                     WaterTempTop="d", WaterTempBottom="d", Secchi="d", SampleTime="c",
+                                     Tide="c", BottomDepth="d", Comments="c"))%>%
+  rename(Conductivity = SpecificConductanceTop, Temperature=WaterTempTop,
+         Notes = Comments, Temperature_bottom=WaterTempBottom)%>%
   mutate(Gear="20mm")%>%
   bind_rows(read_csv(file.path(tempdir(), "EDSM_KDTR.csv"),
-                     col_types=cols_only(Date="c", StartLat="d", StartLong="d", Station="c", EC="d",
-                                         Temp="d", Scchi="d", Time="c",
-                                         Tide="c", StartDepth="d", Comments="c"))%>%
-              rename(Latitude=StartLat, Longitude=StartLong, Conductivity = EC, Temperature=Temp, Secchi=Scchi, Depth=StartDepth, Notes=Comments)%>%
+                     col_types=cols_only(SampleDate="c", LatitudeStart="d", LongitudeStart="d",
+                                         StationCode="c", SpecificConductance="d",
+                                         WaterTemp="d", Secchi="d", SampleTime="c",
+                                         Tide="c", BottomDepth="d", Comments="c"))%>%
+              rename(Conductivity = SpecificConductance, Temperature=WaterTemp, Notes=Comments)%>%
               mutate(Gear="KDTR"))%>%
+  rename(Station=StationCode, Date=SampleDate, Time=SampleTime,
+         Latitude=LatitudeStart, Longitude=LongitudeStart, Depth=BottomDepth)%>%
   mutate(Secchi=Secchi*100, # convert Secchi to cm
          Tide=recode(Tide, HS="High Slack", LS = "Low Slack"), #Standardize tide codes
          Station=paste(Station, Date),
