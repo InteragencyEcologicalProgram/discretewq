@@ -136,11 +136,12 @@
 #'   \item{TDS}{Total dissolved solids (mg/L).}
 #'   \item{TSS_Sign}{Whether the Total Suspended Solids value is below the reporting limit or equal to it.}
 #'   \item{TSS}{Total suspended solids (mg/L).}
-#'   \item{VSS_Sign}{Whether the Volatile SUspended Solids value is below the reporting limit or equal to it.}
+#'   \item{VSS_Sign}{Whether the Volatile Suspended Solids value is below the reporting limit or equal to it.}
 #'   \item{VSS}{Volatile suspended solids (mg/L).}
 #'   \item{TKN_Sign}{Whether the Total Kjeldahl Nitrogen value is below the reporting limit or equal to it.}
 #'   \item{TKN}{Total Kjeldahl Nitrogen (mg/L).}
-#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?scope=edi&identifier=458&revision=6}{here}.
+#'   }
+#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.458.6}{here}.
 #' @seealso \code{\link{wq}}
 "EMP"
 
