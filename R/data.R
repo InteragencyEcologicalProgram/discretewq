@@ -413,6 +413,6 @@
 #'   \item{Notes}{Notes or comments.}
 #'   }
 #'
-#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.494.2}{here} and \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.233.3}{here}.
+#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.494.2}{here} and \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.233.3}{here}.
 #' @seealso \code{\link{wq}}
 "YBFMP"

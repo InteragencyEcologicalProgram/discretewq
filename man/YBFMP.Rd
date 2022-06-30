@@ -29,7 +29,7 @@ YBFMP
 Water quality data from the California Department of Water Resources Yolo Bypass Fish Monitoring Program.
 }
 \details{
-More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.494.2}{here} and \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.233.3}{here}.
+More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.494.2}{here} and \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.233.3}{here}.
 }
 \seealso{
 \code{\link{wq}}
