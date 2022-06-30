@@ -6,7 +6,7 @@
 \alias{YBFMP}
 \title{YBFMP water quality data}
 \format{
-a tibble with 7,478 rows and 12 variables
+a tibble with 8,874 rows and 12 variables
 \describe{
 \item{Source}{Name of the source dataset.}
 \item{Station}{Station where sample was collected.}
@@ -29,7 +29,7 @@ YBFMP
 Water quality data from the California Department of Water Resources Yolo Bypass Fish Monitoring Program.
 }
 \details{
-More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.494.1}{here} and \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.233.2}{here}.
+More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.494.2}{here} and \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.233.3}{here}.
 }
 \seealso{
 \code{\link{wq}}

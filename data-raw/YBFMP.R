@@ -3,6 +3,7 @@
 require(readr)
 require(dplyr)
 require(lubridate)
+require(tidyr)
 
 # Function to calculate mode
 # Modified from https://stackoverflow.com/questions/2547402/how-to-find-the-statistical-mode to remove NAs
@@ -12,55 +13,194 @@ Mode <- function(x) {
   ux[which.max(tabulate(match(x, ux)))]
 }
 
-download.file("https://portal.edirepository.org/nis/dataviewer?packageid=edi.494.1&entityid=9190cd46d697e59aca2de678f4ca1c95",
-              file.path(tempdir(), "Zooplankton_Data.csv"), mode="wb",method="libcurl")
-download.file("https://portal.edirepository.org/nis/dataviewer?packageid=edi.494.1&entityid=f2332a9a2aad594f61fea525584694da",
-              file.path(tempdir(), "YB_StationCoordinates.csv"), mode="wb",method="libcurl")
-download.file("https://portal.edirepository.org/nis/dataviewer?packageid=edi.233.2&entityid=015e494911cf35c90089ced5a3127334",
-              file.path(tempdir(), "YBFMP_Fish_Catch_and_Water_Quality.csv"), mode="wb",method="libcurl")
-download.file("https://portal.edirepository.org/nis/dataviewer?packageid=edi.233.2&entityid=6a82451e84be1fe82c9821f30ffc2d7d",
-              file.path(tempdir(), "YBFMP_Site_locations_latitude_and_longitude.csv"), mode="wb",method="libcurl")
+download.file("https://portal.edirepository.org/nis/dataviewer?packageid=edi.494.2&entityid=f0a145a59e6659c170988fa6afa3f232",
+              file.path(tempdir(), "Zoop_data_20211205.csv"), mode="wb",method="libcurl")
+download.file("https://portal.edirepository.org/nis/dataviewer?packageid=edi.494.2&entityid=89146f1382d7dfa3bbf3e4b1554eb5cc",
+              file.path(tempdir(), "Stations.csv"), mode="wb",method="libcurl")
+download.file("https://portal.edirepository.org/nis/dataviewer?packageid=edi.233.3&entityid=4488201fee45953b001f70acf30f7734",
+              file.path(tempdir(), "event.csv"), mode="wb",method="libcurl")
+download.file("https://portal.edirepository.org/nis/dataviewer?packageid=edi.233.3&entityid=89146f1382d7dfa3bbf3e4b1554eb5cc",
+              file.path(tempdir(), "station.csv"), mode="wb",method="libcurl")
 
-YBFMP_stations<-read_csv(file.path(tempdir(), "YB_StationCoordinates.csv"),
+YBFMP_stations<-read_csv(file.path(tempdir(), "Stations.csv"),
                          col_types=cols_only(StationCode="c", Latitude="d", Longitude="d"))%>%
   rename(Station=StationCode)%>%
   bind_rows(
-    read_csv(file.path(tempdir(), "YBFMP_Site_locations_latitude_and_longitude.csv"),
-             col_types=cols_only(StationCode="c", LatitudeLocation="d", LongitudeLocation="d"))%>%
-      rename(Station=StationCode, Latitude=LatitudeLocation, Longitude=LongitudeLocation))%>%
+    read_csv(file.path(tempdir(), "station.csv"),
+             col_types=cols_only(StationCode="c", Latitude="d", Longitude="d"))%>%
+      rename(Station=StationCode))%>%
   distinct()
 
-YBFMP<-read_csv(file.path(tempdir(), "Zooplankton_Data.csv"),
-                col_types=cols_only(Date="c", Time="c", StationCode="c",
-                                    Tide="c", WaterTemperature="d", Secchi="d",
-                                    Conductivity="d", SpCnd="d", MicrocystisVisualRank="d",
-                                    FieldComments="c"))%>%
-  rename(Station=StationCode, Temperature=WaterTemperature, Microcystis=MicrocystisVisualRank, Notes=FieldComments)%>%
-  distinct(Station, Date, Time, .keep_all = TRUE)%>%
-  bind_rows(
-    read_csv(file.path(tempdir(), "YBFMP_Fish_Catch_and_Water_Quality.csv"),
-         col_types=cols_only(SampleDate="c", SampleTime="c", StationCode="c",
-                             WaterTemperature="d", Secchi="d", Conductivity="d",
-                             SpCnd="d", Tide="c"))%>%
-           rename(Date=SampleDate, Time=SampleTime, Station=StationCode, Temperature=WaterTemperature)%>%
-           distinct(Station, Date, Time, .keep_all = TRUE))%>%
-  mutate(Source="YBFMP",
-         Date=parse_date_time(Date, orders=c("%Y-%m-%d", "%m/%d/%Y"), tz="America/Los_Angeles"),
-         Datetime=parse_date_time(if_else(is.na(Time), NA_character_, paste(Date, Time)), orders=c("%Y-%m-%d %H:%M", "%Y-%m-%d %H:%M:%S"), tz="America/Los_Angeles"),
-         Tide=recode(Tide, High="High Slack", Low="Low Slack"),
-         Secchi=Secchi*100, #convert to cm
-         Conductivity=if_else(is.na(SpCnd), Conductivity / (1 + 0.019 * (Temperature - 25)), SpCnd))%>% #See suisun.R for info
-  mutate(ID=paste(Date, Station, Temperature, Secchi, Microcystis, Conductivity))%>% # Following steps to remove duplicated WQ data from multiple fish samples that were nearby in space and time
-  group_by(Source, Date, Station, ID)%>%
-  summarise(across(c(Temperature, Secchi, Conductivity, Datetime), ~mean(.x, na.rm=T)),
-            Tide=Mode(Tide),
-            Microcystis=Mode(Microcystis),
-            Notes=paste(na.omit(Notes), collapse="; "),
-            .groups="drop")%>%
-  mutate(across(where(is.numeric), ~if_else(is.nan(.x), NA_real_, .x)), # Replace NaN values with NAs
-         Notes=na_if(Notes, ""))%>% # Replace empty string notes with NAs
-  left_join(YBFMP_stations, by="Station")%>%
-  distinct(Station, Date, Datetime, .keep_all = TRUE)%>%
-  select(Source, Station, Latitude, Longitude, Date, Datetime, Tide, Microcystis, Secchi, Temperature, Conductivity, Notes)
+YBFMP_zoop <-
+  read_csv(
+    file.path(tempdir(), "Zoop_data_20211205.csv"),
+    col_types = cols_only(
+      Date = "c",
+      Datetime = "c",
+      StationCode = "c",
+      Tide = "c",
+      WaterTemperature = "d",
+      Secchi = "d",
+      Conductivity = "d",
+      SpCnd = "d",
+      MicrocystisVisualRank = "d",
+      FieldComments = "c"
+    )
+  ) %>%
+  transmute(
+    Date = ymd(Date, tz = "America/Los_Angeles"),
+    Datetime = ymd_hms(Datetime, tz = "America/Los_Angeles"),
+    Station = StationCode,
+    Tide = recode(Tide, High="High Slack", Low="Low Slack"),
+    Temperature = WaterTemperature,
+    # Convert Secchi to cm
+    Secchi = Secchi * 100,
+    # Convert Conductivity to Specific Conductance, see suisun.R for info
+    Conductivity = if_else(
+      is.na(SpCnd),
+      Conductivity / (1 + 0.019 * (Temperature - 25)),
+      SpCnd
+    ),
+    Microcystis = MicrocystisVisualRank,
+    Notes = FieldComments
+  ) %>%
+  # Remove records where all parameters are NA
+  filter(!if_all(where(is.numeric), is.na)) %>%
+  # Remove duplicated records across all columns
+  distinct()
+
+YBFMP_fish <-
+  read_csv(
+    file.path(tempdir(), "event.csv"),
+    col_types = cols_only(
+      Datetime = "c",
+      SampleDate = "c",
+      StationCode = "c",
+      WaterTemp = "d",
+      Secchi = "d",
+      Conductivity = "d",
+      SpecificConductance = "d",
+      Tide = "c",
+      MicrocystisRank = "d",
+      FieldComments = "c"
+    )
+  ) %>%
+  transmute(
+    Date = mdy(SampleDate, tz = "America/Los_Angeles"),
+    Datetime = mdy_hm(Datetime, tz = "America/Los_Angeles"),
+    Station = StationCode,
+    Tide = recode(Tide, High="High Slack", Low="Low Slack"),
+    Temperature = WaterTemp,
+    # Convert Secchi to cm
+    Secchi = Secchi * 100,
+    # Convert Conductivity to Specific Conductance, see suisun.R for info
+    Conductivity = if_else(
+      is.na(SpecificConductance),
+      Conductivity / (1 + 0.019 * (Temperature - 25)),
+      SpecificConductance
+    ),
+    Microcystis = MicrocystisRank,
+    Notes = FieldComments
+  ) %>%
+  # Remove records where all parameters are NA
+  filter(!if_all(where(is.numeric), is.na)) %>%
+  # Remove duplicated records across all columns
+  distinct()
+
+# Pull out duplicated records with identical Station-Datetime combinations from fish data
+YBFMP_fish_dups <- YBFMP_fish %>%
+  count(Station, Datetime) %>%
+  filter(n > 1) %>%
+  select(-n) %>%
+  left_join(YBFMP_fish)
+
+# Clean up the duplicated records
+YBFMP_fish_dups_c <- YBFMP_fish_dups %>%
+  # Most of the duplicated records are due to different values in the Notes column
+  distinct(Date, Datetime, Station, Tide, Temperature, Secchi, Conductivity, Microcystis, .keep_all = TRUE) %>%
+  # Remove the one record with an NA value for Secchi since its pair has a value
+  drop_na(Secchi)
+
+# Add the cleaned up duplicate data to the original fish data set
+YBFMP_fish_c <- YBFMP_fish %>%
+  anti_join(YBFMP_fish_dups) %>%
+  bind_rows(YBFMP_fish_dups_c) %>%
+  # There are numerous records that were collected on the same day and station
+  # that have identical water quality measurements. After speaking with Nicole
+  # Kwan (SES Supervisor for the AES Unit), we decided to only keep the records
+  # with the earliest Datetime for the groups of records that share identical
+  # water quality measurements with different Datetimes.
+  group_by(Date, Station, Temperature, Secchi, Conductivity, Microcystis) %>%
+  filter(Datetime == min(Datetime)) %>%
+  ungroup() %>%
+  # There are two records (STTD on 2017-01-23) that share identical Temperature,
+  # Secchi, and Conductivity, but only one record has a Microcystis value (the
+  # record with the later Datetime). For this instance, we'll keep both records
+  # and convert Temperature, Secchi, and Conductivity to NA for the record
+  # with a reported Microcystis value.
+  mutate(
+    Temperature = if_else(Station == "STTD" & Datetime == "2017-01-23 13:30:00", NA_real_, Temperature),
+    Secchi = if_else(Station == "STTD" & Datetime == "2017-01-23 13:30:00", NA_real_, Secchi),
+    Conductivity = if_else(Station == "STTD" & Datetime == "2017-01-23 13:30:00", NA_real_, Conductivity)
+  )
+
+# Combine the zoop and fish WQ data sets
+YBFMP_comb <- bind_rows(YBFMP_zoop, YBFMP_fish_c) %>%
+  # Remove the duplicated records shared between the two data sets (STTD)
+  distinct()
+
+# Pull out the remaining duplicated records shared between the two data sets
+YBFMP_comb_dups <- YBFMP_comb %>%
+  count(Station, Datetime) %>%
+  filter(n > 1) %>%
+  select(-n) %>%
+  left_join(YBFMP_comb)
+
+# Clean up the remaining duplicated records
+YBFMP_comb_dups_c <- YBFMP_comb_dups %>%
+  # Most of the duplicated records are due to different values in the Notes column
+  distinct(Date, Datetime, Station, Tide, Temperature, Secchi, Conductivity, Microcystis, .keep_all = TRUE) %>%
+  # Clean up the remaining duplicates - identical water quality measurements
+  # with the exception of Microcystis - remove the pairs that have NA index
+  # values
+  arrange(Datetime, Microcystis) %>%
+  group_by(Datetime, Tide, Temperature, Secchi, Conductivity) %>%
+  mutate(row_num = row_number()) %>%
+  ungroup() %>%
+  filter(row_num == 1) %>%
+  # Clean up one last duplicate pair - records have different water quality
+  # measurements but same Datetime (one is from the zoop and the other is from
+  # the fish data set) - average the water quality values
+  group_by(Datetime) %>%
+  mutate(
+    across(c(Temperature, Secchi, Conductivity), mean),
+    Secchi = round(Secchi),
+    row_num = row_number()
+  ) %>%
+  ungroup() %>%
+  filter(row_num == 1) %>%
+  select(-row_num)
+
+# Add the cleaned up duplicate data to the combined data set and finish cleaning
+YBFMP <- YBFMP_comb %>%
+  anti_join(YBFMP_comb_dups) %>%
+  bind_rows(YBFMP_comb_dups_c) %>%
+  mutate(Source = "YBFMP") %>%
+  left_join(YBFMP_stations, by = "Station") %>%
+  select(
+    Source,
+    Station,
+    Latitude,
+    Longitude,
+    Date,
+    Datetime,
+    Tide,
+    Microcystis,
+    Secchi,
+    Temperature,
+    Conductivity,
+    Notes
+  ) %>%
+  arrange(Datetime)
 
 usethis::use_data(YBFMP, overwrite = TRUE)
