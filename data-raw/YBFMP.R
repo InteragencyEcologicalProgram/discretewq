@@ -168,6 +168,17 @@ YBFMP_comb_dups_c <- YBFMP_comb_dups %>%
   mutate(row_num = row_number()) %>%
   ungroup() %>%
   filter(row_num == 1) %>%
+  # Clean up one last duplicate pair - records have different water quality
+  # measurements but same Datetime (one is from the zoop and the other is from
+  # the fish data set) - average the water quality values
+  group_by(Datetime) %>%
+  mutate(
+    across(c(Temperature, Secchi, Conductivity), mean),
+    Secchi = round(Secchi),
+    row_num = row_number()
+  ) %>%
+  ungroup() %>%
+  filter(row_num == 1) %>%
   select(-row_num)
 
 # Add the cleaned up duplicate data to the combined data set and finish cleaning
