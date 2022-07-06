@@ -295,7 +295,7 @@
 #' Water quality data from the UC Davis Suisun Marsh Fish Study.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 13,616 rows and 11 variables
+#' @format a tibble with 14,206 rows and 11 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
