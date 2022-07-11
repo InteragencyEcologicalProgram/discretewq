@@ -43,80 +43,92 @@ USGS_SFBS <- map_dfr(USGS_SFBSfiles_pub, ~read_csv(., col_types = cols_only(Date
          Source="USGS_SFBS")%>%
   select(-Time)%>%
   rename(Sample_depth=Depth)
-  # reset index
-  row.names(USGS_SFBS) <- NULL
 
-  # bin based on min depth and presense of nutrient vals (if no nutrients, then just min depth)
-  temp_surf_depth <- 2
-  nutr_surf_depth <- 5
+# reset index
+row.names(USGS_SFBS) <- NULL
 
-  USGS_SFBS <- USGS_SFBS %>%
-    group_by(Station, Date)%>%
-    mutate(
-      Depth_bin =
-        # surface
-        if_else(
-          Sample_depth == min(Sample_depth) & Sample_depth < temp_surf_depth & all(is.na(DissNitrateNitrite)) & all(is.na(DissAmmonia)) & all(is.na(DissOrthophos)) & all(is.na(DissSilica)), 'surface_no_nutr', # only temp etc. data
-          if_else(
-            Sample_depth == min(Sample_depth) & Sample_depth < temp_surf_depth & c(!is.na(DissNitrateNitrite) | !is.na(DissAmmonia) | !is.na(DissOrthophos) | !is.na(DissSilica)), 'surface_temp_nutr', # temp/nutr data at same (min) depth
-            if_else(
-              Sample_depth != min(Sample_depth) & Sample_depth < nutr_surf_depth & c(!is.na(DissNitrateNitrite) | !is.na(DissAmmonia) | !is.na(DissOrthophos) | !is.na(DissSilica)), 'surface_only_nutr', # only nutr data if at lower depth than temp
-              if_else(
-                Sample_depth == min(Sample_depth) & Sample_depth < temp_surf_depth & c(any(is.na(DissNitrateNitrite)) | any(is.na(DissAmmonia)) | any(is.na(DissOrthophos)) | any(is.na(DissSilica))), 'surface_only_temp', # only temp data if at higher depth than nutr
-                # bottom
-                if_else(
-                  Sample_depth == max(Sample_depth) & Sample_depth > temp_surf_depth & all(is.na(DissNitrateNitrite)) & all(is.na(DissAmmonia)) & all(is.na(DissOrthophos)) & all(is.na(DissSilica)), 'bottom_no_nutr', # only temp etc. data
-                  if_else(
-                    Sample_depth == max(Sample_depth) & Sample_depth > temp_surf_depth & c(!is.na(DissNitrateNitrite) | !is.na(DissAmmonia) | !is.na(DissOrthophos) | !is.na(DissSilica)), 'bottom_temp_nutr', # temp/nutr data at same (min) depth
-                    if_else(
-                      Sample_depth != max(Sample_depth) & Sample_depth > nutr_surf_depth & c(!is.na(DissNitrateNitrite) | !is.na(DissAmmonia) | !is.na(DissOrthophos) | !is.na(DissSilica)), 'bottom_only_nutr', # only nutr data if at lower depth than temp
-                      if_else(
-                        Sample_depth == max(Sample_depth) & Sample_depth > temp_surf_depth & c(any(is.na(DissNitrateNitrite)) | any(is.na(DissAmmonia)) | any(is.na(DissOrthophos)) | any(is.na(DissSilica))), 'bottom_only_temp', # only temp data if at higher depth than nutr
-                        'other')))))))),
-      Datetime = min(Datetime)+(max(Datetime)-min(Datetime))/2) %>%
-    ungroup()
+# bin based on min depth and presense of nutrient vals (if no nutrients, then just min depth)
+temp_surf_depth <- 2
+nutr_surf_depth <- 5
 
-  # create nutrient cols for data that differs b/w nutrients and baseline
-  USGS_SFBS$Salinity_nutr <- ifelse(USGS_SFBS$Depth_bin %in% c('surface_only_nutr', 'surface_temp_nutr', 'bottom_only_nutr', 'bottom_temp_nutr'), USGS_SFBS$Salinity, NA)
-  USGS_SFBS$Temperature_nutr <- ifelse(USGS_SFBS$Depth_bin %in% c('surface_only_nutr', 'surface_temp_nutr', 'bottom_only_nutr', 'bottom_temp_nutr'), USGS_SFBS$Temperature, NA)
-  USGS_SFBS$Sample_depth_nutr <- ifelse(USGS_SFBS$Depth_bin %in% c('surface_only_nutr', 'surface_temp_nutr', 'bottom_only_nutr', 'bottom_temp_nutr'), USGS_SFBS$Sample_depth, NA)
-  USGS_SFBS$Chlorophyll_nutr <- ifelse(USGS_SFBS$Depth_bin %in% c('surface_only_nutr', 'surface_temp_nutr', 'bottom_only_nutr', 'bottom_temp_nutr'), USGS_SFBS$Chlorophyll, NA)
+USGS_SFBS <- USGS_SFBS %>%
+  group_by(Station, Date) %>%
+  mutate(
+    Depth_bin = case_when(
+      # Surface
+      Sample_depth == min(Sample_depth) & Sample_depth < temp_surf_depth & all(is.na(DissNitrateNitrite)) & all(is.na(DissAmmonia)) & all(is.na(DissOrthophos)) & all(is.na(DissSilica)) ~ 'surface_no_nutr', # only temp etc. data
+      Sample_depth == min(Sample_depth) & Sample_depth < temp_surf_depth & c(!is.na(DissNitrateNitrite) | !is.na(DissAmmonia) | !is.na(DissOrthophos) | !is.na(DissSilica)) ~ 'surface_temp_nutr', # temp/nutr data at same (min) depth
+      Sample_depth != min(Sample_depth) & Sample_depth < nutr_surf_depth & c(!is.na(DissNitrateNitrite) | !is.na(DissAmmonia) | !is.na(DissOrthophos) | !is.na(DissSilica)) ~ 'surface_only_nutr', # only nutr data if at lower depth than temp
+      Sample_depth == min(Sample_depth) & Sample_depth < temp_surf_depth & c(any(is.na(DissNitrateNitrite)) | any(is.na(DissAmmonia)) | any(is.na(DissOrthophos)) | any(is.na(DissSilica))) ~ 'surface_only_temp', # only temp data if at higher depth than nutr
+      # Bottom
+      Sample_depth == max(Sample_depth) & Sample_depth > temp_surf_depth & all(is.na(DissNitrateNitrite)) & all(is.na(DissAmmonia)) & all(is.na(DissOrthophos)) & all(is.na(DissSilica)) ~ 'bottom_no_nutr', # only temp etc. data
+      Sample_depth == max(Sample_depth) & Sample_depth > temp_surf_depth & c(!is.na(DissNitrateNitrite) | !is.na(DissAmmonia) | !is.na(DissOrthophos) | !is.na(DissSilica)) ~ 'bottom_temp_nutr', # temp/nutr data at same (min) depth
+      Sample_depth != max(Sample_depth) & Sample_depth > nutr_surf_depth & c(!is.na(DissNitrateNitrite) | !is.na(DissAmmonia) | !is.na(DissOrthophos) | !is.na(DissSilica)) ~ 'bottom_only_nutr', # only nutr data if at lower depth than temp
+      Sample_depth == max(Sample_depth) & Sample_depth > temp_surf_depth & c(any(is.na(DissNitrateNitrite)) | any(is.na(DissAmmonia)) | any(is.na(DissOrthophos)) | any(is.na(DissSilica))) ~ 'bottom_only_temp', # only temp data if at higher depth than nutr
+      TRUE ~ "other"
+    ),
+    Datetime = min(Datetime) + (max(Datetime) - min(Datetime)) / 2
+  ) %>%
+  ungroup() %>%
+  mutate(
+    # create nutrient cols for data that differs b/w nutrients and baseline
+    across(
+      c(Salinity, Temperature, Sample_depth, Chlorophyll),
+      list(nutr = ~ if_else(Depth_bin %in% c('surface_only_nutr', 'surface_temp_nutr', 'bottom_only_nutr', 'bottom_temp_nutr'), .x, NA_real_))
+    ),
+    # remove vals for nutrient only rows to prepare for merge
+    across(
+      c(Salinity, Temperature, Sample_depth, Chlorophyll),
+      ~ if_else(Depth_bin %in% c('surface_only_nutr', 'bottom_only_nutr'), NA_real_, .x)
+    ),
+    # rename bins
+    Depth_bin = case_when(
+      str_detect(Depth_bin, "surface") ~ "surface",
+      str_detect(Depth_bin, "bottom") ~ "bottom",
+      TRUE ~ "other"
+    )
+  )
 
-  # remove vals for nutrient only rows to prepare for merge
-  USGS_SFBS[USGS_SFBS$Depth_bin %in% c('surface_only_nutr', 'bottom_only_nutr'),]$Chlorophyll <- NA
-  USGS_SFBS[USGS_SFBS$Depth_bin %in% c('surface_only_nutr', 'bottom_only_nutr'),]$Salinity <- NA
-  USGS_SFBS[USGS_SFBS$Depth_bin %in% c('surface_only_nutr', 'bottom_only_nutr'),]$Temperature <- NA
-  USGS_SFBS[USGS_SFBS$Depth_bin %in% c('surface_only_nutr', 'bottom_only_nutr'),]$Sample_depth <- NA
+# merge nutr_only and temp_only rows
+coalesce_by_column <- function(df) {
+  return(dplyr::coalesce(!!! as.list(df)))
+}
 
-  # rename bins
-  USGS_SFBS$Depth_bin <- ifelse(grepl('surface', USGS_SFBS$Depth_bin), 'surface', ifelse(grepl('bottom', USGS_SFBS$Depth_bin), 'bottom', 'other'))
+USGS_SFBS <- USGS_SFBS %>%
+  group_by(Station, Date, Datetime, Source, Depth_bin) %>%
+  summarise_all(coalesce_by_column) %>%
+  ungroup()
 
-  # merge nutr_only and temp_only rows
-  coalesce_by_column <- function(df) {
-    return(dplyr::coalesce(!!! as.list(df)))
-  }
-
-  USGS_SFBS <- USGS_SFBS %>%
-    group_by(Station, Date, Datetime, Source, Depth_bin) %>%
-    summarise_all(coalesce_by_column) %>%
-    ungroup()
-
-  # filter data/cols
-  USGS_SFBS <- USGS_SFBS %>%
-    filter(Depth_bin %in% c('surface', 'bottom'))%>%
-  pivot_wider(names_from=Depth_bin, values_from=c(Sample_depth, Salinity, Chlorophyll, Temperature, Sample_depth_nutr, Salinity_nutr, Chlorophyll_nutr, Temperature_nutr, DissNitrateNitrite, DissAmmonia, DissOrthophos, DissSilica),
-              values_fn=list(Sample_depth=mean, Salinity=mean, Chlorophyll=mean, Temperature=mean, Sample_depth_nutr=mean, Salinity_nutr=mean, Chlorophyll_nutr=mean, Temperature_nutr=mean, DissNitrateNitrite=mean, DissAmmonia=mean, DissOrthophos=mean, DissSilica=mean))%>% # This will just average out multiple measurements at same depth
-  left_join(USGS_SFBS_stations, by="Station") %>%
-  select(Source, Station, Latitude, Longitude, Date, Datetime, Sample_depth_surface, Sample_depth_bottom,
-         Temperature=Temperature_surface, Temperature_bottom, Salinity=Salinity_surface, Chlorophyll=Chlorophyll_surface,
-         Sample_depth_nutr_surface, DissNitrateNitrite=DissNitrateNitrite_surface, DissAmmonia=DissAmmonia_surface,
-         DissOrthophos=DissOrthophos_surface, DissSilica=DissSilica_surface)
-
-
-# convert units
-USGS_SFBS$DissNitrateNitrite <- sapply(USGS_SFBS$DissNitrateNitrite, function(x) x*(14.007/(10^3))) # molar mass of N
-USGS_SFBS$DissAmmonia <- sapply(USGS_SFBS$DissAmmonia, function(x) x*(14.007/(10^3))) # molar mass of N
-USGS_SFBS$DissOrthophos <- sapply(USGS_SFBS$DissOrthophos, function(x) x*(30.974/(10^3))) # molar mass of P
-USGS_SFBS$DissSilica <- sapply(USGS_SFBS$DissSilica, function(x) x*(60.084/(10^3))) # molar mass of SiO2
+# filter data/cols
+USGS_SFBS <- USGS_SFBS %>%
+  filter(Depth_bin %in% c('surface', 'bottom')) %>%
+  pivot_wider(names_from = Depth_bin, values_from = where(is.numeric), values_fn = mean) %>%
+  left_join(USGS_SFBS_stations, by = "Station") %>%
+  select(
+    Source,
+    Station,
+    Latitude,
+    Longitude,
+    Date,
+    Datetime,
+    Sample_depth_surface,
+    Sample_depth_bottom,
+    Temperature = Temperature_surface,
+    Temperature_bottom,
+    Salinity = Salinity_surface,
+    Chlorophyll = Chlorophyll_surface,
+    Sample_depth_nutr_surface,
+    DissNitrateNitrite = DissNitrateNitrite_surface,
+    DissAmmonia = DissAmmonia_surface,
+    DissOrthophos = DissOrthophos_surface,
+    DissSilica = DissSilica_surface
+  ) %>%
+  # convert units
+  mutate(
+    DissNitrateNitrite = DissNitrateNitrite * (14.007 / (10^3)), # molar mass of N
+    DissAmmonia = DissAmmonia * (14.007 / (10^3)), # molar mass of N
+    DissOrthophos = DissOrthophos * (30.974 / (10^3)), # molar mass of P
+    DissSilica = DissSilica * (60.084 / (10^3)) # molar mass of SiO2
+  )
 
 usethis::use_data(USGS_SFBS, overwrite = TRUE)

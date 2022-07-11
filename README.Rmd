@@ -81,7 +81,7 @@ Interagency Ecological Program (IEP), C. Pien, J. Adams, and N. Kwan. 2021. Inte
 
 O’Rear, T., J. Durand, and P. Moyle. 2020. Suisun Marsh Fish Study. [https://watershed.ucdavis.edu/project/suisun-marsh-fish-study](https://watershed.ucdavis.edu/project/suisun-marsh-fish-study).
 
-Schraga, T. S., E. S. Nejad, C. A. Martin, and J. E. Cloern. 2018. USGS measurements of water quality in San Francisco Bay (CA), beginning in 2016 (ver. 3.0, March 2020). U. S. Geological Survey data release. [doi:https://doi.org/10.5066/F7D21WGF](https://doi.org/10.5066/F7D21WGF)
+Schraga, T. S., E. S. Nejad, C. A. Martin, and J. E. Cloern. 2020. USGS measurements of water quality in San Francisco Bay (CA), beginning in 2016 (ver. 3.0, March 2020). U. S. Geological Survey data release. [doi:https://doi.org/10.5066/F7D21WGF](https://doi.org/10.5066/F7D21WGF)
 
 United States Fish And Wildlife Service, C. Johnston, S. Durkacz, and others. 2020. Interagency Ecological Program and US Fish and Wildlife Service: San Francisco Estuary Enhanced Delta Smelt Monitoring Program data, 2016-2020. Environmental Data Initiative. [doi:10.6073/PASTA/764F27FF6B0A7B11A487A71C90397084](https://portal.edirepository.org/nis/mapbrowse?packageid=edi.415.3)
 
