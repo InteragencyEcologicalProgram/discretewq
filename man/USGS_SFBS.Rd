@@ -6,7 +6,7 @@
 \alias{USGS_SFBS}
 \title{USGS SFBS water quality data}
 \format{
-a tibble with 22,557 rows and 16 variables
+a tibble with 23,021 rows and 17 variables
 \describe{
 \item{Source}{Name of the source dataset.}
 \item{Station}{Station where sample was collected.}
@@ -15,12 +15,12 @@ a tibble with 22,557 rows and 16 variables
 \item{Date}{Date sample was collected.}
 \item{Datetime}{Date and time of sample collection.}
 \item{Sample_depth_surface}{Depth (m) of surface sample.}
-\item{Sample_depth_nutr_surface}{Depth (m) paired w/ nutrient sampling (range: 0-5 m).}
 \item{Sample_depth_bottom}{Depth (m) of bottom sample.}
 \item{Temperature}{Temperature (°C) at surface.}
 \item{Temperature_bottom}{Temperature (°C) at bottom.}
 \item{Salinity}{Salinity at surface.}
 \item{Chlorophyll}{Chlorophyll concentration (\eqn{\mu}g \ifelse{html}{\out{L<sup>-1</sup>}}{\eqn{L^{-1}}}) at surface.}
+\item{Sample_depth_nutr_surface}{Depth (m) paired w/ nutrient sampling (range: 0-5 m).}
 \item{DissNitrateNitrite}{Dissolved Nitrate and Nitrite (mg/L).}
 \item{DissAmmonia}{Dissolved Ammonia (mg/L).}
 \item{DissOrthophos}{Dissolved Ortho-phosphate (mg/L).}
@@ -34,7 +34,7 @@ USGS_SFBS
 Water quality data from the United States Geological Survey San Francisco Bay Water Quality Survey.
 }
 \details{
-More metadata and information on methods are available \href{https://www.sciencebase.gov/catalog/item/5841f97ee4b04fc80e518d9f}{here for data from 1969-2015} and \href{https://www.sciencebase.gov/catalog/item/5966abe6e4b0d1f9f05cf551}{here for data from 2016-present}.
+More metadata and information on methods are available \href{https://www.sciencebase.gov/catalog/item/5841f97ee4b04fc80e518d9f}{here for data from 1969-2015} and \href{https://www.sciencebase.gov/catalog/item/5966abe6e4b0d1f9f05cf551}{here for data from 2016-2019}.
 }
 \seealso{
 \code{\link{wq}}
