@@ -8,40 +8,38 @@ require(stringr)
 #this dataset just has the chlorophyll and pheophytin in it. I need to request the rest at some point.
 
 #read in the data file
-NCRO1 = read_csv("data-raw/NCRO/WQDataReport.SDelta_2000-2021_ChlaPheo.csv")
+NCRO1 = read_csv("data-raw/NCRO/WQDataReport.SDelta_2000-2021_ChlaPheo.csv",
+                 col_types = cols_only(LongStationName="c", ShortStationName="c", SampleCode="c",
+                                       CollectionDate="c", Analyte="c", Result="c",
+                                       SampleType="c", Notes="c"))
 
 #station coordinates
-SDelta_Station_lat_long <- read_csv("data-raw/NCRO/SDelta_Station_lat_long.csv")
+SDelta_Station_lat_long <- read_csv("data-raw/NCRO/SDelta_Station_lat_long.csv",
+                                    col_types = cols_only(LongStationName="c", `Latitude (WGS84)`="d",
+                                                          `Longitude (WGS84)`="d"))
 
 #Fix the "below reporting limit values" and attach coordinates
-NCRO1 = mutate(NCRO1, Result2 = as.numeric(str_remove(Result, "<")), sign = case_when(str_detect(Result, "<") ~ "<",
-                                                                   TRUE ~ "="),
-               Datetime = mdy_hm(CollectionDate),
-               Date = date(Datetime)) %>%
+NCRO <- mutate(NCRO1,
+                sign = if_else(str_detect(Result, "<"), "<", "="),
+                Result = as.numeric(case_when(
+                  str_detect(Result, "<") & !is.na(Result) ~ str_remove(Result, "<"),
+                  suppressWarnings(!is.na(as.numeric(Result))) ~ Result,
+                  TRUE ~ NA_character_)),
+                Datetime = mdy_hm(CollectionDate),
+                Date = date(Datetime)) %>%
   filter(SampleType == "Normal Sample") %>%
-  left_join(SDelta_Station_lat_long) %>%
-  filter(!is.na(`Latitude (WGS84)`))
-
-#Long to wide
-
-NCROwide = pivot_wider(NCRO1, id_cols = c(LongStationName, ShortStationName, SampleCode, CollectionDate, Notes, Date, Datetime, `Latitude (WGS84)`, `Longitude (WGS84)`),
-                       names_from = Analyte, values_from = Result2)
-NCROwide2 = pivot_wider(NCRO1, id_cols = c(LongStationName, ShortStationName, SampleCode, CollectionDate, Notes, Date, Datetime),
-                        names_from = Analyte, values_from = sign, names_prefix = "Sign")
-
-NCROwide3 = left_join(NCROwide, NCROwide2)
-
-#now rename things
-NCROx = NCROwide3 %>%
-rename(Chlorophyll=`Chlorophyll a`, Chlorophyll_Sign=`SignChlorophyll a`,
-       Latitude=`Latitude (WGS84)`, Longitude=`Longitude (WGS84)`, Station = ShortStationName) %>%
+  left_join(SDelta_Station_lat_long, by="LongStationName") %>%
+  filter(!is.na(`Latitude (WGS84)`))%>%
+  pivot_wider(id_cols = c(LongStationName, ShortStationName, SampleCode, CollectionDate, Notes, Date, Datetime, `Latitude (WGS84)`, `Longitude (WGS84)`),
+              names_from = Analyte, values_from = c(Result, sign))%>%
+  rename(Chlorophyll=`Result_Chlorophyll a`, Chlorophyll_Sign=`sign_Chlorophyll a`,
+         Pheophytin=`Result_Pheophytin a`, Pheophytin_Sign=`sign_Pheophytin a`,
+         Latitude=`Latitude (WGS84)`, Longitude=`Longitude (WGS84)`, Station = ShortStationName) %>%
   mutate(Field_coords= F, Source = "DWR_NCRO") %>%
   select(Source, Station,  Latitude, Longitude, Field_coords, Date, Datetime, Notes, Chlorophyll_Sign, Chlorophyll) %>%
-  mutate(ID=paste(Source, Station, Date, Datetime, Latitude, Longitude))
-
-#Average samples taken at the same date, time, and station
-NCRO = group_by(NCROx, ID, Source, Station,  Latitude, Longitude, Field_coords, Date, Datetime, Notes) %>%
-  summarize(Chlorophyll = mean(Chlorophyll, na.rm = T), Chlorophyll_Sign = first(Chlorophyll_Sign)) %>%
+  mutate(ID=paste(Source, Station, Date, Datetime, Latitude, Longitude))%>%
+  group_by(ID, Source, Station,  Latitude, Longitude, Field_coords, Date, Datetime, Notes) %>% #Average the one sample taken at the same date, time, and station
+  summarize(Chlorophyll = mean(Chlorophyll, na.rm = T), Chlorophyll_Sign = first(Chlorophyll_Sign), .groups="drop") %>%
   ungroup()
 
 usethis::use_data(NCRO, overwrite = TRUE)

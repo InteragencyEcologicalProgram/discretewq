@@ -12,7 +12,8 @@ a tibble with 4771 rows and 9 variables
 \item{Station}{Station where sample was collected.}
 \item{Latitude}{Latitude in decimal degrees.}
 \item{Longitude}{Longitude in decimal degrees.}
-\item{Date}{Date sample was collected.}9
+\item{Date}{Date sample was collected.}
+\item{Datetime}{Date and time sample was collected.}
 \item{Chlorophyll_Sign}{Whether the Chlorophyll value is estimated (extrapolated at low end) or reported as measured.}
 \item{Chlorophyll}{Chlorophyll concentration (\eqn{\mu}g \ifelse{html}{\out{L<sup>-1</sup>}}{\eqn{L^{-1}}}).}
 \item{Notes}{Notes or comments.}
