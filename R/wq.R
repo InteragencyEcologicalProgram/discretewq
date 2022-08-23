@@ -12,6 +12,7 @@
 #'   "SKT" (Spring Kodiak Trawl, \code{\link{SKT}}),
 #'   "SLS" (Smelt Larva Survey, \code{\link{SLS}}),
 #'   "Baystudy" (Bay Study, \code{\link{baystudy}}),
+#'   "NCRO" (NCRO, \code{\link{NCRO}}),
 #'   "USGS_SFBS" (USGS San Francisco Bay Surveys, \code{\link{USGS_SFBS}}),
 #'   "USBR" (United States Bureau of Reclamation Sacramento Deepwater Ship Channel data, \code{\link{USBR}}),
 #'   "Suisun" (Suisun Marsh Fish Study, \code{\link{suisun}})
@@ -24,7 +25,7 @@
 #' @return An integrated dataset
 #' @examples
 #' Data <- wq(Sources = c("EMP", "STN", "FMWT", "EDSM",
-#' "DJFMP", "SDO", "SKT", "SLS",
+#' "DJFMP", "SDO", "SKT", "SLS", "NCRO",
 #' "20mm", "Suisun", "Baystudy", "USBR", "USGS_SFBS", "YBFMP", "USGS_CAWSC"))
 #' @export
 
@@ -39,10 +40,10 @@ wq <- function(Sources=NULL,
     stop('The "USGS" data source has been renamed to "USGS_SFBS" because of the inclusion of an additional USGS dataset, "USGS_CAWSC".')
   }
 
-if(is.null(Sources) | !all(Sources%in%c("EMP", "STN", "FMWT", "EDSM", "DJFMP", "SDO", "SKT", "SLS",
+if(is.null(Sources) | !all(Sources%in%c("EMP", "STN", "FMWT", "EDSM", "DJFMP", "SDO", "SKT", "SLS","NCRO",
                                         "20mm", "Suisun", "Baystudy", "USBR", "USGS_SFBS", "YBFMP", "USGS_CAWSC"))){
   stop('You must specify the data sources you wish to include. Choices include
-  c("EMP", "STN", "FMWT", "EDSM", "DJFMP", "SDO", "SKT", "SLS", "20mm", "Suisun", "Baystudy", "USBR", "USGS_SFBS", "YBFMP", "USGS_CAWSC")')
+  c("EMP", "STN", "NCRO", "FMWT", "EDSM", "DJFMP", "SDO", "SKT", "SLS", "20mm", "Suisun", "Baystudy", "USBR", "USGS_SFBS", "YBFMP", "USGS_CAWSC")')
 }
 
   # Set end year to current year if blank
@@ -58,6 +59,9 @@ if(is.null(Sources) | !all(Sources%in%c("EMP", "STN", "FMWT", "EDSM", "DJFMP", "
   # Load and combine data ---------------------------------------------------
   WQ_list<-list()
 
+  if("NCRO"%in%Sources){
+    WQ_list[["NCRO"]]<-discretewq::NCRO
+  }
   if("FMWT"%in%Sources){
     WQ_list[["FMWT"]]<-discretewq::FMWT
   }

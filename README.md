@@ -36,7 +36,7 @@ require(discretewq)
 #> Loading required package: discretewq
 Data <- wq(Sources = c("EMP", "STN", "FMWT", "EDSM", "DJFMP",
                        "SDO", "SKT", "SLS", "20mm", "Suisun", 
-                       "Baystudy", "USBR", "USGS_SFBS", "YBFMP", "USGS_CAWSC"))
+                       "Baystudy", "USBR", "USGS_SFBS", "YBFMP", "USGS_CAWSC", "NCRO"))
 
 str(Data)
 #> tibble [327,290 x 67] (S3: tbl_df/tbl/data.frame)
