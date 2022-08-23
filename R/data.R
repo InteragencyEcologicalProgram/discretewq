@@ -417,3 +417,26 @@
 #' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.494.2}{here} and \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.233.3}{here}.
 #' @seealso \code{\link{wq}}
 "YBFMP"
+
+#' NCRO Chlorophyll data
+#'
+#' Chlorophyll from the South Delta collected by DWR's North Central Region Office
+#'
+#' @encoding UTF-8
+#' @format a tibble with 4771 rows and 9 variables
+#' \describe{
+#'   \item{Source}{Name of the source dataset.}
+#'   \item{Station}{Station where sample was collected.}
+#'   \item{Latitude}{Latitude in decimal degrees.}
+#'   \item{Longitude}{Longitude in decimal degrees.}
+#'   \item{Date}{Date sample was collected.}
+#'  \item{Datetime}{Date and time sample was collected.}
+#'   \item{Chlorophyll_Sign}{Whether the Chlorophyll value is estimated (extrapolated at low end) or reported as measured.}
+#'   \item{Chlorophyll}{Chlorophyll concentration (\eqn{\mu}g \ifelse{html}{\out{L<sup>-1</sup>}}{\eqn{L^{-1}}}).}
+#'   \item{Notes}{Notes or comments.}
+#'   }
+#'
+#' @details Contact Jared Frantzich Jared.Frantzich@water.ca.gov for more information.
+#' @seealso \code{\link{wq}}
+"NCRO"
+
