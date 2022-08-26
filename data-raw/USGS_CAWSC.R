@@ -7,7 +7,6 @@ library(tidyr)
 library(lubridate)
 
 # identify stations and parameters of interest
-
 siteNumbers<-c('USGS-11303500',
                'USGS-11304810',
                'USGS-11311300',
@@ -68,15 +67,12 @@ siteNumbers<-c('USGS-11303500',
                'USGS-383019121350701',
                'USGS-381944121405201')
 
-parameterCd <- c('00608', '00613', '00631', '00671', '00681', '62854', '70953')
-
-#00608 ammonium
-#00631 NO2+NO3
-#0613 Nitrite
-#00671 ortho-p kone
-#00681 doc
-#62854 TN
-#70953 Chl-a
+# 00608 Ammonium
+# 00631 NO2 + NO3
+# 00671 Ortho-phosphate
+# 00681 DOC
+# 70953 Chl-a
+parameterCd <- c('00608', '00631', '00671', '00681', '70953')
 
 # retrieve data-------------------
 
