@@ -371,7 +371,7 @@
 #' Discrete water quality data from the USGS California Water Science Center
 #'
 #' @encoding UTF-8
-#' @format a tibble with 3,587 rows and 15 variables
+#' @format a tibble with 3,597 rows and 15 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}

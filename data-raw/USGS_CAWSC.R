@@ -103,7 +103,7 @@ cawsc_long <- cawsc%>%
          DetectionQuantitationLimitMeasure.MeasureValue,
          ResultAnalyticalMethod.MethodIdentifier)
 
-# Summary as of Aug 29 2022
+# Status categories as of Aug 29 2022
 cawsc_long %>% count(ResultStatusIdentifier)
 # We will keep all Result status categories at this time, including Preliminary
 
@@ -263,8 +263,13 @@ USGS_CAWSC <- cawsc_sign_c %>%
   mutate(
     # Fill in "=" for the NA values in the _Sign variables
     across(ends_with("_Sign"), ~ if_else(is.na(.x), "=", .x)),
-    # Fix 4 records where Date and Datetime don't match
-    Date = date(Datetime)
+    # Fix 4 records where Date and Datetime don't match - these were collected
+      # near midnight in PST, they shifted one day later when converted to PDT
+    Date = case_when(
+      is.na(Datetime) ~ Date,
+      date(Datetime) != Date ~ date(Datetime),
+      TRUE ~ Date
+    )
   )
 
 usethis::use_data(USGS_CAWSC, overwrite = TRUE)
