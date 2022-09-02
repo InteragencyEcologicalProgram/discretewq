@@ -6,7 +6,7 @@
 \alias{USGS_CAWSC}
 \title{USGS CAWSC water quality data}
 \format{
-a tibble with 2,164 rows and 15 variables
+a tibble with 3,597 rows and 15 variables
 \describe{
 \item{Source}{Name of the source dataset.}
 \item{Station}{Station where sample was collected.}
