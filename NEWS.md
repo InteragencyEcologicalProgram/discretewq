@@ -1,7 +1,8 @@
 # discretewq (development version)
 
+* Updated to newest EMP data againwith some historical data issues fixed. 
 * Added NCRO chlorophyll data
-* Updated STN, FMWT, EDSM, DJFMP, SLS, Suisun, EMP, USGS_SFBS, YBFMP, and 20mm datasets
+* Updated STN, FMWT, EDSM, DJFMP, SLS, Suisun, EMP, USGS_SFBS, USGS_CAWSC, YBFMP, and 20mm datasets
 
 # discretewq 2.3.2
 
