@@ -423,17 +423,19 @@
 #' Chlorophyll from the South Delta collected by DWR's North Central Region Office
 #'
 #' @encoding UTF-8
-#' @format a tibble with 4771 rows and 9 variables
+#' @format a tibble with 4,820 rows and 9 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
 #'   \item{Latitude}{Latitude in decimal degrees.}
 #'   \item{Longitude}{Longitude in decimal degrees.}
 #'   \item{Date}{Date sample was collected.}
-#'  \item{Datetime}{Date and time sample was collected.}
-#'   \item{Chlorophyll_Sign}{Whether the Chlorophyll value is estimated (extrapolated at low end) or reported as measured.}
-#'   \item{Chlorophyll}{Chlorophyll concentration (\eqn{\mu}g \ifelse{html}{\out{L<sup>-1</sup>}}{\eqn{L^{-1}}}).}
+#'   \item{Datetime}{Date and time sample was collected.}
 #'   \item{Notes}{Notes or comments.}
+#'   \item{Chlorophyll_Sign}{Whether the Chlorophyll value is lower than
+#'     reported ("<" because it is below the reporting limit and the reporting
+#'     limit is used as the value), or reported as the measured value "=".}
+#'   \item{Chlorophyll}{Chlorophyll concentration (\eqn{\mu}g \ifelse{html}{\out{L<sup>-1</sup>}}{\eqn{L^{-1}}}).}
 #'   }
 #'
 #' @details Contact Jared Frantzich Jared.Frantzich@water.ca.gov for more information.
