@@ -25,21 +25,20 @@ NCRO <- mutate(NCRO1,
                   str_detect(Result, "<") & !is.na(Result) ~ str_remove(Result, "<"),
                   suppressWarnings(!is.na(as.numeric(Result))) ~ Result,
                   TRUE ~ NA_character_)),
-                Datetime = mdy_hm(CollectionDate),
+                # Since NCRO records only in PST, convert to local time to correspond with the other surveys
+                Datetime = with_tz(mdy_hm(CollectionDate, tz = "Etc/GMT+8"), tzone = "America/Los_Angeles"),
                 Date = date(Datetime)) %>%
   filter(SampleType == "Normal Sample") %>%
   left_join(SDelta_Station_lat_long, by="LongStationName") %>%
-  filter(!is.na(`Latitude (WGS84)`))%>%
+  filter(!is.na(Result))%>%
   pivot_wider(id_cols = c(LongStationName, ShortStationName, SampleCode, CollectionDate, Notes, Date, Datetime, `Latitude (WGS84)`, `Longitude (WGS84)`),
               names_from = Analyte, values_from = c(Result, sign))%>%
   rename(Chlorophyll=`Result_Chlorophyll a`, Chlorophyll_Sign=`sign_Chlorophyll a`,
          Pheophytin=`Result_Pheophytin a`, Pheophytin_Sign=`sign_Pheophytin a`,
          Latitude=`Latitude (WGS84)`, Longitude=`Longitude (WGS84)`, Station = ShortStationName) %>%
-  mutate(Field_coords= F, Source = "DWR_NCRO") %>%
-  select(Source, Station,  Latitude, Longitude, Field_coords, Date, Datetime, Notes, Chlorophyll_Sign, Chlorophyll) %>%
-  mutate(ID=paste(Source, Station, Date, Datetime, Latitude, Longitude))%>%
-  group_by(ID, Source, Station,  Latitude, Longitude, Field_coords, Date, Datetime, Notes) %>% #Average the one sample taken at the same date, time, and station
-  summarize(Chlorophyll = mean(Chlorophyll, na.rm = T), Chlorophyll_Sign = first(Chlorophyll_Sign), .groups="drop") %>%
-  ungroup()
+  mutate(Source = "DWR_NCRO") %>%
+  select(Source, Station,  Latitude, Longitude, Date, Datetime, Notes, Chlorophyll_Sign, Chlorophyll) %>%
+  group_by(Source, Station, Latitude, Longitude, Date, Datetime, Notes) %>% #Average the one sample taken at the same date, time, and station
+  summarize(Chlorophyll_Sign = first(Chlorophyll_Sign), Chlorophyll = mean(Chlorophyll, na.rm = T), .groups="drop")
 
 usethis::use_data(NCRO, overwrite = TRUE)
