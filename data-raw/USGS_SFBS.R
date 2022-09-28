@@ -20,7 +20,9 @@ USGS_SFBSfiles_web<-list.files(path = file.path("data-raw", "USGS_SFBS"), full.n
 USGS_SFBS <- map_dfr(USGS_SFBSfiles_pub, ~read_csv(., col_types = cols_only(Date="c", Time="c", Station_Number="d", Depth="d",
                                                               Calculated_Chlorophyll="d", Salinity="d", Temperature="d",
                                                              `Nitrate_+_Nitrite` = 'd', Ammonium = 'd', Phosphate = 'd', Silicate = 'd')))%>%
-  rename(Station=Station_Number, Chlorophyll=Calculated_Chlorophyll, DissNitrateNitrite=`Nitrate_+_Nitrite`, DissAmmonia = Ammonium, DissOrthophos = Phosphate,
+  rename(Station=Station_Number, Chlorophyll=Calculated_Chlorophyll,
+         DissNitrateNitrite=`Nitrate_+_Nitrite`,
+         DissAmmonia = Ammonium, DissOrthophos = Phosphate,
          DissSilica = Silicate) %>%
   mutate(Time=paste0(str_sub(Time, end=-3), ":", str_sub(Time, start=-2)))%>%
 
@@ -33,8 +35,10 @@ USGS_SFBS <- map_dfr(USGS_SFBSfiles_pub, ~read_csv(., col_types = cols_only(Date
                                                                       `Calculated Chlorophyll-a (micrograms/L)`="d",
                                                                       Salinity="d", `Temperature (Degrees Celsius)`="d", `NO32 (Micromolar)` = 'd',
                                                                       `NH4 (Micromolar)` = 'd', `PO4 (Micromolar)` = 'd', `Si (Micromolar)` = 'd')))%>%
-  rename(Depth=`Depth (m)`, Chlorophyll=`Calculated Chlorophyll-a (micrograms/L)`, Temperature=`Temperature (Degrees Celsius)`, DissNitrateNitrite=`NO32 (Micromolar)`,
-         DissAmmonia = `NH4 (Micromolar)`, DissOrthophos = `PO4 (Micromolar)`, DissSilica = `Si (Micromolar)`))%>%
+  rename(Depth=`Depth (m)`, Chlorophyll=`Calculated Chlorophyll-a (micrograms/L)`,
+         Temperature=`Temperature (Degrees Celsius)`, DissNitrateNitrite=`NO32 (Micromolar)`,
+         DissAmmonia = `NH4 (Micromolar)`, DissOrthophos = `PO4 (Micromolar)`,
+         DissSilica = `Si (Micromolar)`))%>%
   filter(!is.na(Date))%>%
   mutate(Date=parse_date_time(Date, orders=c("%m/%d/%Y", "%m/%d/%y", "%Y-%m-%d"), tz="America/Los_Angeles"),
          Time=hm(Time),

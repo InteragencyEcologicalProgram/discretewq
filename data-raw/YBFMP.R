@@ -44,6 +44,8 @@ YBFMP_zoop <-
       Conductivity = "d",
       SpCnd = "d",
       MicrocystisVisualRank = "d",
+      DO="d",
+      pH="d",
       FieldComments = "c"
     )
   ) %>%
@@ -62,6 +64,8 @@ YBFMP_zoop <-
       SpCnd
     ),
     Microcystis = MicrocystisVisualRank,
+    DissolvedOxygen=DO,
+    pH=pH,
     Notes = FieldComments
   ) %>%
   # Remove records where all parameters are NA
@@ -82,6 +86,8 @@ YBFMP_fish <-
       SpecificConductance = "d",
       Tide = "c",
       MicrocystisRank = "d",
+      DO="d",
+      pH="d",
       FieldComments = "c"
     )
   ) %>%
@@ -100,6 +106,8 @@ YBFMP_fish <-
       SpecificConductance
     ),
     Microcystis = MicrocystisRank,
+    DissolvedOxygen=DO,
+    pH=pH,
     Notes = FieldComments
   ) %>%
   # Remove records where all parameters are NA
@@ -117,7 +125,7 @@ YBFMP_fish_dups <- YBFMP_fish %>%
 # Clean up the duplicated records
 YBFMP_fish_dups_c <- YBFMP_fish_dups %>%
   # Most of the duplicated records are due to different values in the Notes column
-  distinct(Date, Datetime, Station, Tide, Temperature, Secchi, Conductivity, Microcystis, .keep_all = TRUE) %>%
+  distinct(Date, Datetime, Station, Tide, Temperature, Secchi, Conductivity, DissolvedOxygen, pH, Microcystis, .keep_all = TRUE) %>%
   # Remove the one record with an NA value for Secchi since its pair has a value
   drop_na(Secchi)
 
@@ -130,7 +138,7 @@ YBFMP_fish_c <- YBFMP_fish %>%
   # Kwan (SES Supervisor for the AES Unit), we decided to only keep the records
   # with the earliest Datetime for the groups of records that share identical
   # water quality measurements with different Datetimes.
-  group_by(Date, Station, Temperature, Secchi, Conductivity, Microcystis) %>%
+  group_by(Date, Station, Temperature, Secchi, Conductivity, Microcystis, DissolvedOxygen, pH) %>%
   filter(Datetime == min(Datetime)) %>%
   ungroup() %>%
   # There are two records (STTD on 2017-01-23) that share identical Temperature,
@@ -139,9 +147,7 @@ YBFMP_fish_c <- YBFMP_fish %>%
   # and convert Temperature, Secchi, and Conductivity to NA for the record
   # with a reported Microcystis value.
   mutate(
-    Temperature = if_else(Station == "STTD" & Datetime == "2017-01-23 13:30:00", NA_real_, Temperature),
-    Secchi = if_else(Station == "STTD" & Datetime == "2017-01-23 13:30:00", NA_real_, Secchi),
-    Conductivity = if_else(Station == "STTD" & Datetime == "2017-01-23 13:30:00", NA_real_, Conductivity)
+    across(c(Temperature, Secchi, Conductivity, DissolvedOxygen, pH),  ~if_else(Station == "STTD" & Datetime == "2017-01-23 13:30:00", NA_real_, .x))
   )
 
 # Combine the zoop and fish WQ data sets
@@ -159,12 +165,12 @@ YBFMP_comb_dups <- YBFMP_comb %>%
 # Clean up the remaining duplicated records
 YBFMP_comb_dups_c <- YBFMP_comb_dups %>%
   # Most of the duplicated records are due to different values in the Notes column
-  distinct(Date, Datetime, Station, Tide, Temperature, Secchi, Conductivity, Microcystis, .keep_all = TRUE) %>%
+  distinct(Date, Datetime, Station, Tide, Temperature, Secchi, Conductivity, DissolvedOxygen, pH, Microcystis, .keep_all = TRUE) %>%
   # Clean up the remaining duplicates - identical water quality measurements
   # with the exception of Microcystis - remove the pairs that have NA index
   # values
   arrange(Datetime, Microcystis) %>%
-  group_by(Datetime, Tide, Temperature, Secchi, Conductivity) %>%
+  group_by(Datetime, Tide, Temperature, Secchi, Conductivity, DissolvedOxygen, pH) %>%
   mutate(row_num = row_number()) %>%
   ungroup() %>%
   filter(row_num == 1) %>%
@@ -173,7 +179,7 @@ YBFMP_comb_dups_c <- YBFMP_comb_dups %>%
   # the fish data set) - average the water quality values
   group_by(Datetime) %>%
   mutate(
-    across(c(Temperature, Secchi, Conductivity), mean),
+    across(c(Temperature, Secchi, Conductivity, DissolvedOxygen, pH), mean),
     Secchi = round(Secchi),
     row_num = row_number()
   ) %>%
@@ -199,6 +205,8 @@ YBFMP <- YBFMP_comb %>%
     Secchi,
     Temperature,
     Conductivity,
+    DissolvedOxygen,
+    pH,
     Notes
   ) %>%
   arrange(Datetime)

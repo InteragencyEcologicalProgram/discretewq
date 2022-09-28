@@ -21,11 +21,14 @@ DJFMP_stations <- read_csv(file.path(tempdir(), "DJFMP_Site_Locations.csv"),
 
 DJFMP <- read_csv(file.path(tempdir(), "1976-2001_DJFMP_trawl_fish_and_water_quality_data.csv"),
                      col_types = cols_only(StationCode = "c", SampleDate="c", SampleTime="c",
-                                           SpecificConductance="d", WaterTemp="d", Secchi="d"))%>%
+                                           SpecificConductance="d", WaterTemp="d", Secchi="d",
+                                           DO="d"))%>%
   bind_rows(read_csv(file.path(tempdir(), "2002-2021_DJFMP_trawl_fish_and_water_quality_data.csv"),
                      col_types = cols_only(StationCode = "c", SampleDate="c", SampleTime="c",
-                                           SpecificConductance="d", WaterTemp="d", Secchi="d")))%>%
-  rename(Station=StationCode, Date=SampleDate, Temperature=WaterTemp, Conductivity=SpecificConductance)%>%
+                                           SpecificConductance="d", WaterTemp="d", Secchi="d",
+                                           DO="d")))%>%
+  rename(Station=StationCode, Date=SampleDate, Temperature=WaterTemp, Conductivity=SpecificConductance,
+         DissolvedOxygen=DO)%>%
   mutate(Secchi=Secchi*100)%>% # convert Secchi to cm
   mutate(Source="DJFMP",
          Date=parse_date_time(Date, "%Y-%m-%d", tz="America/Los_Angeles"),
@@ -34,6 +37,6 @@ DJFMP <- read_csv(file.path(tempdir(), "1976-2001_DJFMP_trawl_fish_and_water_qua
   select(-SampleTime)%>%
   distinct(Station, Datetime, .keep_all = TRUE)%>%
   left_join(DJFMP_stations, by="Station")%>%
-  select(Source, Station, Latitude, Longitude, Date, Datetime, Secchi, Temperature, Conductivity)
+  select(Source, Station, Latitude, Longitude, Date, Datetime, Secchi, Temperature, Conductivity, DissolvedOxygen)
 
 usethis::use_data(DJFMP, overwrite = TRUE)

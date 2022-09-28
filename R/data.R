@@ -67,6 +67,8 @@
 #'   \item{Temperature}{Temperature in °C.}
 #'   \item{Temperature_bottom}{Temperature (°C) at bottom.}
 #'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
+#'   \item{DissolvedOxygen}{Dissolved oxygen (mg/L) at surface.}
+#'   \item{DissolvedOxygen_bottom}{Dissolved oxygen (mg/L) at bottom.}
 #'   \item{Notes}{Comments.}
 #'   }
 #' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.415.1}{here}.
@@ -161,6 +163,7 @@
 #'   \item{Secchi}{Secchi depth (cm).}
 #'   \item{Temperature}{Temperature in °C.}
 #'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
+#'   \item{DissolvedOxygen}{Dissolved oxygen (mg/L) at surface.}
 #'   }
 #' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.244.3}{here}.
 #' @seealso \code{\link{wq}}
@@ -210,6 +213,10 @@
 #'   \item{Temperature}{Temperature (°C) at surface.}
 #'   \item{Temperature_bottom}{Temperature (°C) at bottom.}
 #'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
+#'   \item{DissolvedOxygen}{Dissolved oxygen (mg/L) at surface.}
+#'   \item{DissolvedOxygen_bottom}{Dissolved oxygen (mg/L) at bottom.}
+#'   \item{pH}{pH (dimensionless) at surface.}
+#'   \item{pH_bottom}{pH (dimensionless) at bottom.}
 #'   }
 #' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.276.2}{here}.
 #' @seealso \code{\link{wq}}
@@ -308,6 +315,8 @@
 #'   \item{Secchi}{Secchi depth (cm).}
 #'   \item{Temperature}{Temperature (°C) at surface.}
 #'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
+#'   \item{DissolvedOxygen}{Dissolved oxygen (mg/L) at surface.}
+#'   \item{DissolvedOxygenPercent}{Dissolved oxygen percent (dimensionless) at surface.}
 #'   }
 #' @details More metadata and information on methods are available \href{https://watershed.ucdavis.edu/project/suisun-marsh-fish-study}{here}.
 #' @seealso \code{\link{wq}}
@@ -411,6 +420,8 @@
 #'   \item{Secchi}{Secchi depth (cm).}
 #'   \item{Temperature}{Temperature (°C) at surface.}
 #'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
+#'   \item{DissolvedOxygen}{Dissolved oxygen (mg/L) at surface.}
+#'   \item{pH}{pH (dimensionless) at surface.}
 #'   \item{Notes}{Notes or comments.}
 #'   }
 #'
