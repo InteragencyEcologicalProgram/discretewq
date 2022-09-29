@@ -6,7 +6,7 @@
 \alias{YBFMP}
 \title{YBFMP water quality data}
 \format{
-a tibble with 8,874 rows and 12 variables
+a tibble with 8,883 rows and 14 variables
 \describe{
 \item{Source}{Name of the source dataset.}
 \item{Station}{Station where sample was collected.}

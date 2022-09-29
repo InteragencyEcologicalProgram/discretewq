@@ -142,12 +142,23 @@ YBFMP_fish_c <- YBFMP_fish %>%
   filter(Datetime == min(Datetime)) %>%
   ungroup() %>%
   # There are two records (STTD on 2017-01-23) that share identical Temperature,
-  # Secchi, and Conductivity, but only one record has a Microcystis value (the
-  # record with the later Datetime). For this instance, we'll keep both records
-  # and convert Temperature, Secchi, and Conductivity to NA for the record
-  # with a reported Microcystis value.
+  # Secchi, Conductivity, DO, and pH, but only one record has a Microcystis
+  # value (the record with the later Datetime). For this instance, we'll keep
+  # both records and convert Temperature, Secchi, Conductivity, DO, and pH to NA
+  # for the record with a reported Microcystis value.
   mutate(
     across(c(Temperature, Secchi, Conductivity, DissolvedOxygen, pH),  ~if_else(Station == "STTD" & Datetime == "2017-01-23 13:30:00", NA_real_, .x))
+  ) %>%
+  # Also, there are two additional pairs of records (STTD on 2017-01-20 and
+  # 2017-01-31) that share identical values for all but one of the water quality
+  # parameters. The values in the mismatched parameter seem to be from a typo
+  # during data entry. We will only keep the records with the earliest Datetime
+  # for these pairs since that is what we did with all of the other records
+  # collected on the same day and station that share identical water quality
+  # measurements with different Datetimes.
+  filter(
+    !(Station == "STTD" & Datetime == "2017-01-20 12:05:00"),
+    !(Station == "STTD" & Datetime == "2017-01-31 13:20:00")
   )
 
 # Combine the zoop and fish WQ data sets
@@ -166,26 +177,28 @@ YBFMP_comb_dups <- YBFMP_comb %>%
 YBFMP_comb_dups_c <- YBFMP_comb_dups %>%
   # Most of the duplicated records are due to different values in the Notes column
   distinct(Date, Datetime, Station, Tide, Temperature, Secchi, Conductivity, DissolvedOxygen, pH, Microcystis, .keep_all = TRUE) %>%
-  # Clean up the remaining duplicates - identical water quality measurements
-  # with the exception of Microcystis - remove the pairs that have NA index
+  # Clean up the duplicates with identical water quality measurements with the
+  # exception of Microcystis - remove the pairs that have NA Microcystis index
   # values
-  arrange(Datetime, Microcystis) %>%
-  group_by(Datetime, Tide, Temperature, Secchi, Conductivity, DissolvedOxygen, pH) %>%
+  arrange(Datetime, Station, Microcystis) %>%
+  group_by(Station, Datetime, Tide, Temperature, Secchi, Conductivity, DissolvedOxygen, pH) %>%
   mutate(row_num = row_number()) %>%
   ungroup() %>%
   filter(row_num == 1) %>%
-  # Clean up one last duplicate pair - records have different water quality
+  # Clean up last three duplicate pairs - records have different water quality
   # measurements but same Datetime (one is from the zoop and the other is from
   # the fish data set) - average the water quality values
-  group_by(Datetime) %>%
+  group_by(Station, Datetime) %>%
   mutate(
-    across(c(Temperature, Secchi, Conductivity, DissolvedOxygen, pH), mean),
+    across(c(Temperature, Secchi, Conductivity, DissolvedOxygen, pH), ~ mean(.x, na.rm = TRUE)),
     Secchi = round(Secchi),
     row_num = row_number()
   ) %>%
   ungroup() %>%
   filter(row_num == 1) %>%
-  select(-row_num)
+  select(-row_num) %>%
+  # Convert NaN values in DissolvedOxygen and pH columns to NA
+  mutate(across(c(DissolvedOxygen, pH), ~ if_else(is.nan(.x), NA_real_, .x)))
 
 # Add the cleaned up duplicate data to the combined data set and finish cleaning
 YBFMP <- YBFMP_comb %>%
