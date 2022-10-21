@@ -74,8 +74,13 @@ siteNumbers<-c(
 # 00671 Ortho-phosphate
 # 00681 DOC
 # 70953 Chl-a
-parameterCd <- c('00608', '00631', '00671', '00681', '70953')
+# 00300 DO
+# 00400 pH
+# 00010 Temp
+# 00095 Specific Conductivity
 
+
+parameterCd <- c('00608', '00631', '00671', '00681', '70953', '00400', '00300', '00010', '00095')
 # Retrieve data
 cawsc <- dataRetrieval::readWQPqw(siteNumbers, parameterCd)
 
@@ -137,9 +142,10 @@ missing_rl <- cawsc_sign %>% filter(is.na(Value))
 
 missing_rl %>% count(CharacteristicName)
 # 710 total NA values
-# NH4 = 425
-# NO3 + NO2 = 283
+# NH4 = 451
+# NO3 + NO2 = 285
 # Ortho-phosphate = 2
+# Oxygen = 1
 
 # These remaining NA values are <RL records that don't have RL values provided.
 # For these we'll assign RL values based on this internal USGS website:
@@ -233,13 +239,19 @@ USGS_CAWSC <- cawsc_sign_c %>%
       CharacteristicName == "Chlorophyll a" ~ "Chlorophyll",
       CharacteristicName == "Inorganic nitrogen (nitrate and nitrite)" ~ "DissNitrateNitrite",
       CharacteristicName == "Organic carbon" ~ "DOC",
-      CharacteristicName == "Orthophosphate" ~ "DissOrthophos"
+      CharacteristicName == "Orthophosphate" ~ "DissOrthophos",
+      CharacteristicName == "Oxygen" ~ "DissolvedOxygen",
+      CharacteristicName == "pH" ~ "pH",
+      CharacteristicName == "Temperature, water" ~ "Temperature",
+      CharacteristicName == "Specific conductance" ~ "Conductivity"
     )
   ) %>%
   pivot_wider(
     names_from = CharacteristicName,
     values_from = c(Value, Sign),
-    names_glue = "{CharacteristicName}_{.value}"
+    names_glue = "{CharacteristicName}_{.value}",
+    #remove duplicates - 2 - DO, 13 - pH, 4 - Temp., 14 - SpC
+    values_fn = "first"
   ) %>%
   rename_with(~ str_remove(.x, "_Value$")) %>%
   transmute(
@@ -258,7 +270,11 @@ USGS_CAWSC <- cawsc_sign_c %>%
     DissNitrateNitrite,
     DOC,
     DissOrthophos_Sign,
-    DissOrthophos
+    DissOrthophos,
+    DissolvedOxygen,
+    pH,
+    Temperature,
+    Conductivity
   ) %>%
   mutate(
     # Fill in "=" for the NA values in the _Sign variables
