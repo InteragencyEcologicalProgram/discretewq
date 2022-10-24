@@ -1,0 +1,36 @@
+TS 9/13/22 - (user defined) data takes up rows 65 to 2995 and is affiliated with an unknown station, however it appears about half 
+of those have a station listed in the Description column. These mostly were for ORBI, OBI, and RSCC. 
+
+A count of unique sample code values (sumproduct(1/countif(F65:F2995,F65:F2995)) shows there are 756 unique values (aka station 
+sample events) to sort through including replicates collected at the rate of once per run.
+
+I copied over any station reference in the sample description into the short station name column, I then used this to change the 
+long station name to match the affiliated station name, ie "Old River near Bacon Island @ USGS Pile" using variations on:
+=IFS(D1582="Rock Slough @ CCWD Trash Rack","Rock Slough @ Contra Costa WD Fish Screen",D1582="Old River @ Bacon Island Floating Mail
+box Platform","Old River at Bacon Island",D1582="Old River at Bacon Island","Old River near Bacon Island @ USGS Pile",D1582=
+"(User Defined)","(User Defined)")  This was for samples from 03/09/2004 11:15 to 08/30/2012 10:55, please note I may have mislabeled 
+the RSCC stations if trash rack and fish screen are two separate stations.
+
+I also took this opportunity to change any (User Defined) samples with sample type of replicate to ( None ) if it had 
+stations I could ID from the Description with the same time stamp and could be cross referenced against the paper record.
+
+I also combined long station names for Three Mile Slough to match the most up to date long station name. Left RSCC stations as is
+per prior email with Patrick.
+
+Able to identify ORBI samples from 11/15/2001 to 12/9/2003 by field measurement values and time stamps, Sample 11/6/2002 13:55 
+field values match field sheet for ORBI but at 13:15 time stamp. Assuming this is a data entry error and corrected.
+
+Also able to ID RSCC samples from 9/27/2001 10:00 to 4/17/2008 11:08 using field sheets, RSCC EC on 4/23/2003 11:00 should be 265 
+per field sheet, not 256
+
+Able to ID HCHM samples from 8/10/2001 11:30 to 11/07/2001 11:00
+
+Able to ID BLP samples from 12/11/2001 10:30 to 02/17/2010 09:57
+
+An additional set of RSCC samples was ID'd from 2007 and 2008 sample results binders by time stamp and sample results values, for 
+now I'm calling this Rock Slough @ CCWD until Patrick can disentangle these samples. The samples I changed from (User Defined) to 
+this value were from to 04/03/2008 11:15
+
+From to 01/20/2004 14:00, ID'd a number of old Rock Slough Chloride stations including RS@NorthSide and RS West of Veale Drain and
+RS East of Veale Drain, and Rock Slough at Sand Mound. I have no never been to these stations.
+
