@@ -21,6 +21,8 @@ a tibble with 30,957 rows and 14 variables
 \item{Temperature}{Temperature in °C.}
 \item{Temperature_bottom}{Temperature (°C) at bottom.}
 \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
+\item{DissolvedOxygen}{Dissolved oxygen (mg/L) at surface.}
+\item{DissolvedOxygen_bottom}{Dissolved oxygen (mg/L) at bottom.}
 \item{Notes}{Comments.}
 }
 }

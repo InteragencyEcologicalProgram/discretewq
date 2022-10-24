@@ -67,6 +67,8 @@
 #'   \item{Temperature}{Temperature in °C.}
 #'   \item{Temperature_bottom}{Temperature (°C) at bottom.}
 #'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
+#'   \item{DissolvedOxygen}{Dissolved oxygen (mg/L) at surface.}
+#'   \item{DissolvedOxygen_bottom}{Dissolved oxygen (mg/L) at bottom.}
 #'   \item{Notes}{Comments.}
 #'   }
 #' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.415.1}{here}.
@@ -161,6 +163,7 @@
 #'   \item{Secchi}{Secchi depth (cm).}
 #'   \item{Temperature}{Temperature in °C.}
 #'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
+#'   \item{DissolvedOxygen}{Dissolved oxygen (mg/L) at surface.}
 #'   }
 #' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.244.3}{here}.
 #' @seealso \code{\link{wq}}
@@ -210,6 +213,10 @@
 #'   \item{Temperature}{Temperature (°C) at surface.}
 #'   \item{Temperature_bottom}{Temperature (°C) at bottom.}
 #'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
+#'   \item{DissolvedOxygen}{Dissolved oxygen (mg/L) at surface.}
+#'   \item{DissolvedOxygen_bottom}{Dissolved oxygen (mg/L) at bottom.}
+#'   \item{pH}{pH (dimensionless) at surface.}
+#'   \item{pH_bottom}{pH (dimensionless) at bottom.}
 #'   }
 #' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.276.2}{here}.
 #' @seealso \code{\link{wq}}
@@ -308,6 +315,8 @@
 #'   \item{Secchi}{Secchi depth (cm).}
 #'   \item{Temperature}{Temperature (°C) at surface.}
 #'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
+#'   \item{DissolvedOxygen}{Dissolved oxygen (mg/L) at surface.}
+#'   \item{DissolvedOxygenPercent}{Dissolved oxygen percent (dimensionless) at surface.}
 #'   }
 #' @details More metadata and information on methods are available \href{https://watershed.ucdavis.edu/project/suisun-marsh-fish-study}{here}.
 #' @seealso \code{\link{wq}}
@@ -342,21 +351,32 @@
 #' Water quality data from the United States Geological Survey San Francisco Bay Water Quality Survey.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 23,021 rows and 17 variables
+#' @format a tibble with 23,923 rows and 22 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
 #'   \item{Latitude}{Latitude in decimal degrees.}
 #'   \item{Longitude}{Longitude in decimal degrees.}
 #'   \item{Date}{Date sample was collected.}
-#'   \item{Datetime}{Date and time of sample collection.}
-#'   \item{Sample_depth_surface}{Depth (m) of surface sample.}
-#'   \item{Sample_depth_bottom}{Depth (m) of bottom sample.}
+#'   \item{Datetime}{Date and time of sample collection. Reported as an average
+#'     when the collection times varied among the the surface and bottom WQ and
+#'     nutrient parameters.}
+#'   \item{Sample_depth_surface}{Depth (m) of surface sample. Reported as an
+#'     average when surface depths varied among the WQ parameters.}
+#'   \item{Sample_depth_bottom}{Depth (m) of bottom sample. Reported as an
+#'     average when bottom depths varied among the WQ parameters.}
 #'   \item{Temperature}{Temperature (°C) at surface.}
 #'   \item{Temperature_bottom}{Temperature (°C) at bottom.}
 #'   \item{Salinity}{Salinity at surface.}
+#'   \item{Salinity_bottom}{Salinity at bottom.}
 #'   \item{Chlorophyll}{Chlorophyll concentration (\eqn{\mu}g \ifelse{html}{\out{L<sup>-1</sup>}}{\eqn{L^{-1}}}) at surface.}
-#'   \item{Sample_depth_nutr_surface}{Depth (m) paired w/ nutrient sampling (range: 0-5 m).}
+#'   \item{DissolvedOxygen}{Dissolved oxygen (mg/L) at surface.}
+#'   \item{DissolvedOxygen_bottom}{Dissolved oxygen (mg/L) at bottom.}
+#'   \item{DissolvedOxygenPercent}{Dissolved oxygen percent (dimensionless) at surface.}
+#'   \item{DissolvedOxygenPercent_bottom}{Dissolved oxygen percent (dimensionless) at bottom.}
+#'   \item{Sample_depth_nutr_surface}{Depth (m) paired w/ nutrient sampling
+#'     (range: 0-5 m). Reported as an average when surface depths varied among the
+#'     nutrient parameters.}
 #'   \item{DissNitrateNitrite}{Dissolved Nitrate and Nitrite (mg/L).}
 #'   \item{DissAmmonia}{Dissolved Ammonia (mg/L).}
 #'   \item{DissOrthophos}{Dissolved Ortho-phosphate (mg/L).}
@@ -402,7 +422,7 @@
 #' Water quality data from the California Department of Water Resources Yolo Bypass Fish Monitoring Program.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 8,874 rows and 12 variables
+#' @format a tibble with 8,883 rows and 14 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
@@ -415,6 +435,8 @@
 #'   \item{Secchi}{Secchi depth (cm).}
 #'   \item{Temperature}{Temperature (°C) at surface.}
 #'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
+#'   \item{DissolvedOxygen}{Dissolved oxygen (mg/L) at surface.}
+#'   \item{pH}{pH (dimensionless) at surface.}
 #'   \item{Notes}{Notes or comments.}
 #'   }
 #'

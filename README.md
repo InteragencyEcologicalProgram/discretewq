@@ -199,8 +199,7 @@ data, 2016-2020. Environmental Data Initiative.
 
 U.S. Geological Survey. 2022. USGS water data for the Nation: U.S.
 Geological Survey National Water Information System database, accessed
-October 21, 2022, at
-[doi:10.5066/F7P55KJN](https://doi.org/10.5066/F7P55KJN)
+October 21, 2022, at [doi:10.5066/F7P55KJN](https://doi.org/10.5066/F7P55KJN)
 
 USBR, R. Dahlgren, L. Loken, and E. Van Nieuwenhuyse. 2020. Monthly
 vertical profiles of water quality in the Sacramento Deep Water Ship
