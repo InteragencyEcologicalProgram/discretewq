@@ -2,11 +2,31 @@ Package: discretewq
 Title: Integrated Dataset of Discrete Water Quality in the San Francisco Estuary
 Version: 2.3.2
 Authors@R: 
-   person(given = "Sam",
+   c(person(given = "Samuel M",
            family = "Bashevkin",
            role = c("aut", "cre"),
-           email = "sam.bashevkin@deltacouncil.ca.gov",
-           comment = c(ORCID = "0000-0001-7406-7089"))
+           email = "sam.bashevkin@waterboards.ca.gov",
+           comment = c(ORCID = "0000-0001-7406-7089")),
+     person(given = "Dave",
+           family = "Bosworth",
+           role = c("aut"),
+           email = "David.Bosworth@water.ca.gov",
+           comment = c(ORCID = "0000-0003-0740-3390")),
+     person(given = "Sarah",
+           family = "Perry",
+           role = c("aut"),
+           email = "Sarah.Perry@water.ca.gov",
+           comment = c(ORCID = "0000-0002-2561-8195")),
+     person(given = "Elizabeth B",
+           family = "Stumpner",
+           role = c("aut"),
+           email = "Elizabeth.Stumpner@water.ca.gov",
+           comment = c(ORCID = "0000-0003-2356-2244")),
+     person(given = "Rosemary",
+           family = "Hartman",
+           role = c("ctb"),
+           email = "Rosemary.Hartman@water.ca.gov",
+           comment = c(ORCID = "0000-0002-0642-183X")))
 Description: Produce an integrated dataset of discrete water quality measurements using any combination of the 10 source datasets included. 
 License: GPL-3
 Encoding: UTF-8
