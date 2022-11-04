@@ -227,7 +227,7 @@
 #' Water quality data from the California Department of Fish and Wildlife Spring Kodiak Trawl.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 4,309 rows and 13 variables
+#' @format a tibble with 4,505 rows and 13 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}

@@ -6,7 +6,7 @@
 \alias{USGS_CAWSC}
 \title{USGS CAWSC water quality data}
 \format{
-a tibble with 3,597 rows and 15 variables
+a tibble with 16,751 rows and 19 variables
 \describe{
 \item{Source}{Name of the source dataset.}
 \item{Station}{Station where sample was collected.}
@@ -23,6 +23,10 @@ a tibble with 3,597 rows and 15 variables
 \item{DOC}{Dissolved Organic Carbon (mg/L)}
 \item{DissOrthophos_Sign}{Whether the Dissolved Orthophosphate value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), estimated "~", or reported as the measured value "=".}
 \item{DissOrthophos}{Dissolved Ortho-phosphate (mg/L)}
+\item{DissolvedOxygen}{Dissolved oxygen (mg/L) at surface.}
+\item{pH}{pH (dimensionless) at surface.}
+\item{Temperature}{Temperature (°C) at surface.}
+\item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
 }
 }
 \usage{
