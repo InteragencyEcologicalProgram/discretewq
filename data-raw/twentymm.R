@@ -17,7 +17,7 @@ twentymm <- read_csv(file.path("data-raw", "20mm", "Station.csv"),
                      col_types = cols_only(StationID="c", SurveyID="c", Station="c",
                                            LatDeg="d", LatMin="d", LatSec="d", LonDeg="d",
                                            LonMin="d", LonSec="d", Temp="d", TopEC="d",
-                                           Secchi="d", Comments="c"))%>%
+                                           BottomEC = "d", Secchi="d", Comments="c"))%>%
   mutate(Latitude=LatDeg+LatMin/60+LatSec/3600,
          Longitude=(LonDeg+LonMin/60+LonSec/3600)*-1)%>%
   left_join(read_csv(file.path("data-raw", "20mm", "Survey.csv"),
@@ -44,7 +44,7 @@ twentymm <- read_csv(file.path("data-raw", "20mm", "Station.csv"),
               filter(Retain)%>%
               select(-Retain, -TowNum),
             by="StationID")%>%
-  select(Station, Temperature=Temp, Conductivity=TopEC, Secchi,
+  select(Station, Temperature=Temp, Conductivity=TopEC, Conductivity_bottom = BottomEC, Secchi,
          Notes=Comments, Latitude, Longitude, Date,
          Time, Depth=BottomDepth, Tide)%>%
   mutate(Datetime = parse_date_time(if_else(is.na(Time), NA_character_, paste0(Date, " ", hour(Time), ":", minute(Time))), "%Y-%m-%d %H:%M", tz="America/Los_Angeles"))%>%
@@ -58,7 +58,7 @@ twentymm <- read_csv(file.path("data-raw", "20mm", "Station.csv"),
     TRUE ~ FALSE),
     Latitude=if_else(is.na(Latitude), Latitude_field, Latitude),
     Longitude=if_else(is.na(Longitude), Longitude_field, Longitude))%>%
-  select(Source, Station, Latitude, Longitude, Field_coords, Date, Datetime, Depth, Tide, Secchi, Temperature, Conductivity, Notes)
+  select(Source, Station, Latitude, Longitude, Field_coords, Date, Datetime, Depth, Tide, Secchi, Temperature, Conductivity, Conductivity_bottom, Notes)
 
 
 usethis::use_data(twentymm, overwrite = TRUE)

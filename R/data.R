@@ -3,7 +3,7 @@
 #' Water quality data from the California Department of Fish and Wildlife 20mm survey.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 10,469 rows and 13 variables
+#' @format a tibble with 10,469 rows and 14 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
@@ -15,8 +15,9 @@
 #'   \item{Depth}{Bottom depth (m).}
 #'   \item{Tide}{Tidal stage.}
 #'   \item{Secchi}{Secchi depth (cm).}
-#'   \item{Temperature}{Temperature in °C.}
+#'   \item{Temperature}{Temperature (°C) at surface.}
 #'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
+#'   \item{Conductivity_bottom}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at bottom.}
 #'   \item{Notes}{Comments.}
 #'   }
 #' @details More metadata and information on methods are available \href{https://wildlife.ca.gov/Conservation/Delta/20mm-Survey}{here}.
