@@ -6,7 +6,7 @@
 \alias{twentymm}
 \title{20mm water quality data}
 \format{
-a tibble with 10,098 rows and 13 variables
+a tibble with 10,469 rows and 13 variables
 \describe{
 \item{Source}{Name of the source dataset.}
 \item{Station}{Station where sample was collected.}
