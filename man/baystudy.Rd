@@ -6,7 +6,7 @@
 \alias{baystudy}
 \title{Bay Study water quality data}
 \format{
-a tibble with 21,836 rows and 13 variables
+a tibble with 21,836 rows and 14 variables
 \describe{
 \item{Source}{Name of the source dataset.}
 \item{Station}{Station where sample was collected.}
@@ -21,6 +21,7 @@ a tibble with 21,836 rows and 13 variables
 \item{Temperature}{Temperature (°C) at surface.}
 \item{Temperature_bottom}{Temperature (°C) at bottom.}
 \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
+\item{Conductivity_bottom}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at bottom.}
 }
 }
 \usage{

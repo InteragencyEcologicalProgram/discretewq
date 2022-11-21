@@ -29,7 +29,7 @@ boatstation_baystudy <- read_csv(file.path("data-raw", "Baystudy", "BoatStation.
   rename(Tidestation=Description)%>%
   left_join(read_csv(file.path("data-raw", "Baystudy", "SalinTemp.csv"),
                      col_types = cols_only(Year="i", Survey="i", Station="c",
-                                           ECSurf="d", TempSurf="d", TempBott="d")),
+                                           ECSurf="d", ECBott = "d", TempSurf="d", TempBott="d")),
             by=c("Year", "Survey", "Station"))
 
 boattow_baystudy<-read_csv(file.path("data-raw", "Baystudy", "BoatTow.csv"),
@@ -86,7 +86,7 @@ baystudy <- left_join(boattow_baystudy, boatstation_baystudy, by=c("Year", "Surv
     Latitude = if_else(is.na(Latitude), Latitude_field, Latitude),
     Longitude = if_else(is.na(Longitude), Longitude_field, Longitude)
   ) %>%
-  select(Source, Station, Latitude, Longitude, Field_coords, Date, Datetime, Depth, Tide, Secchi, Temperature=TempSurf, Temperature_bottom=TempBott, Conductivity=ECSurf)%>%
+  select(Source, Station, Latitude, Longitude, Field_coords, Date, Datetime, Depth, Tide, Secchi, Temperature=TempSurf, Temperature_bottom=TempBott, Conductivity=ECSurf, Conductivity_bottom = ECBott)%>%
   distinct(Source, Station, Date, Datetime, .keep_all=T)
 
 
