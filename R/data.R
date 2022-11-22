@@ -29,12 +29,13 @@
 #' Water quality data from the California Department of Fish and Wildlife Bay Study.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 21,264 rows and 12 variables
+#' @format a tibble with 21,836 rows and 14 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
 #'   \item{Latitude}{Latitude in decimal degrees.}
 #'   \item{Longitude}{Longitude in decimal degrees.}
+#'   \item{Field_coords}{Were lat/long coordinates collected in the field (TRUE), or do they represent the location of a fixed station (FALSE)?}
 #'   \item{Date}{Date sample was collected.}
 #'   \item{Datetime}{Date and time of sample collection.}
 #'   \item{Depth}{Bottom depth (m).}
@@ -43,6 +44,7 @@
 #'   \item{Temperature}{Temperature (°C) at surface.}
 #'   \item{Temperature_bottom}{Temperature (°C) at bottom.}
 #'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
+#'   \item{Conductivity_bottom}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at bottom.}
 #'   }
 #' @details More metadata and information on methods are available \href{http://www.dfg.ca.gov/delta/projects.asp?ProjectID=BAYSTUDY}{here}.
 #' @seealso \code{\link{wq}}
