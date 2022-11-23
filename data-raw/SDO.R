@@ -26,9 +26,10 @@ SDO<-read_csv(file.path(tempdir(), "IEP_DOSDWSC_1997_2018.csv"),
          Conductivity=SpCndSurface, DissolvedOxygen=DOSurface, DissolvedOxygen_bottom=DOBottom,
          pH=pHSurface, pH_bottom=pHBottom)%>%
   mutate(Source="SDO",
-         Date=parse_date_time(Date, orders="%m/%d/%Y", tz="America/Los_Angeles"),
+         Date=parse_date_time(Date, orders="%m/%d/%Y", tz = "Etc/GMT+8"), # SDO reports time in PST throughout the year
          Time=stringr::str_pad(Time, width=4, side="left", pad="0"),
-         Datetime=parse_date_time(if_else(is.na(Time), NA_character_, paste(Date, Time)), orders="%Y-%m-%d %H%M", tz="America/Los_Angeles"),
+         Datetime=parse_date_time(if_else(is.na(Time), NA_character_, paste(Date, Time)), orders="%Y-%m-%d %H%M", tz = "Etc/GMT+8"),
+         Datetime = with_tz(Datetime, tzone = "America/Los_Angeles"), # Convert from PST to local time to correspond with the other surveys
          Microcystis=recode(Microcystis, present=NA_character_, absent=NA_character_),
          Microcystis=round(as.numeric(Microcystis)))%>%
   select(Source, Station, Latitude,
