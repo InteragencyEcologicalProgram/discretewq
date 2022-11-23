@@ -18,12 +18,12 @@ SDO_stations<-read_csv(file.path(tempdir(), "IEP_DOSDWSC_site_locations_latitude
 SDO<-read_csv(file.path(tempdir(), "IEP_DOSDWSC_1997_2018.csv"),
               col_types=cols_only(Date="c", Time="c", StationID="c",
                                   WTSurface="d", WTBottom="d", SpCndSurface="d",
-                                  Secchi="d", Microcystis="c",
+                                  SpCndBottom = "d", Secchi="d", Microcystis="c",
                                   DOSurface="d", DOBottom="d",
                                   pHSurface="d", pHBottom="d"))%>%
   left_join(SDO_stations, by="StationID")%>%
   rename(Station=StationID, Temperature=WTSurface, Temperature_bottom=WTBottom,
-         Conductivity=SpCndSurface, DissolvedOxygen=DOSurface, DissolvedOxygen_bottom=DOBottom,
+         Conductivity=SpCndSurface, Conductivity_bottom = SpCndBottom, DissolvedOxygen=DOSurface, DissolvedOxygen_bottom=DOBottom,
          pH=pHSurface, pH_bottom=pHBottom)%>%
   mutate(Source="SDO",
          Date=parse_date_time(Date, orders="%m/%d/%Y", tz = "Etc/GMT+8"), # SDO reports time in PST throughout the year
@@ -35,7 +35,7 @@ SDO<-read_csv(file.path(tempdir(), "IEP_DOSDWSC_1997_2018.csv"),
   select(Source, Station, Latitude,
          Longitude, Date, Datetime,
          Microcystis, Secchi, Temperature,
-         Temperature_bottom, Conductivity,
+         Temperature_bottom, Conductivity, Conductivity_bottom,
          DissolvedOxygen, DissolvedOxygen_bottom,
          pH, pH_bottom)
 

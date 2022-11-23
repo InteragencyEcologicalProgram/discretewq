@@ -6,7 +6,7 @@
 \alias{SDO}
 \title{SDO water quality data}
 \format{
-a tibble with 3,108 rows and 11 variables
+a tibble with 3,108 rows and 16 variables
 \describe{
 \item{Source}{Name of the source dataset.}
 \item{Station}{Station where sample was collected.}
@@ -19,6 +19,7 @@ a tibble with 3,108 rows and 11 variables
 \item{Temperature}{Temperature (°C) at surface.}
 \item{Temperature_bottom}{Temperature (°C) at bottom.}
 \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
+\item{Conductivity_bottom}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at bottom.}
 \item{DissolvedOxygen}{Dissolved oxygen (mg/L) at surface.}
 \item{DissolvedOxygen_bottom}{Dissolved oxygen (mg/L) at bottom.}
 \item{pH}{pH (dimensionless) at surface.}
