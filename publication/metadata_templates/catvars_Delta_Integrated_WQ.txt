@@ -1,0 +1,42 @@
+attributeName	code	definition
+DissAmmonia_Sign	<	"Below reporting limit. The value in the corresponding column represents the reporting limit, not the actual measured value (since the measured value was below the reporting limit and thus could not be measured). If the value in the correspondinc column is NA, the reporting value is unknown and the true value is below it."
+DissAmmonia_Sign	=	The value in the corresponding column is the true mesasured value because the measured value was at or above the reporting limit
+DissAmmonia_Sign	~	The value in the corresponding column is estimated.
+DissNitrateNitrite_Sign	<	"Below reporting limit. The value in the corresponding column represents the reporting limit, not the actual measured value (since the measured value was below the reporting limit and thus could not be measured). If the value in the correspondinc column is NA, the reporting value is unknown and the true value is below it."
+DissNitrateNitrite_Sign	=	The value in the corresponding column is the true mesasured value because the measured value was at or above the reporting limit
+DissNitrateNitrite_Sign	~	The value in the corresponding column is estimated.
+DissOrthophos_Sign	<	"Below reporting limit. The value in the corresponding column represents the reporting limit, not the actual measured value (since the measured value was below the reporting limit and thus could not be measured). If the value in the correspondinc column is NA, the reporting value is unknown and the true value is below it."
+DissOrthophos_Sign	=	The value in the corresponding column is the true mesasured value because the measured value was at or above the reporting limit
+DissOrthophos_Sign	~	The value in the corresponding column is estimated.
+Chlorophyll_Sign	<	"Below reporting limit. The value in the corresponding column represents the reporting limit, not the actual measured value (since the measured value was below the reporting limit and thus could not be measured). If the value in the correspondinc column is NA, the reporting value is unknown and the true value is below it."
+Chlorophyll_Sign	=	The value in the corresponding column is the true mesasured value because the measured value was at or above the reporting limit
+Chlorophyll_Sign	~	The value in the corresponding column is estimated.
+Field_coords	FALSE	"Coordinates were not recorded in the field. These coordinates represent the target location (e.g., location of the fixed sampling station)."
+Field_coords	TRUE	Coordinates were recorded in the field and represent the exact location the sample was collected
+Microcystis	1	absent
+Microcystis	2	low
+Microcystis	3	medium
+Microcystis	4	high
+Microcystis	5	very high
+Source	20mm	20-mm Survey
+Source	Baystudy	San Francisco Bay Study
+Source	DJFMP	Delta Juvenile Fish Monitoring Program
+Source	EDSM	Enhanced Delta Smelt Monitoring
+Source	EMP	Environmental Monitoring Program
+Source	FMWT	Fall Midwater Trawl
+Source	SDO	Stockton Dissolved Oxygen Monitoring
+Source	SKT	Spring Kodiak Trawl
+Source	SLS	Smelt Larva Survey
+Source	STN	Summer Townet Survey
+Source	Suisun	Suisun Marsh Fish Study
+Source	USBR	USBR Sacramento Deepwater Shipping Channel Survey
+Source	USGS_SFBS	USGS San Francisco Bay Survey
+Source	YBFMP	Yolo Bypass Fish Monitoring Program
+Source	USGS_CAWSC	USGS California Water Science Center discrete water quality data
+Tide	Ebb	Ebb tide
+Tide	Flood	Flood tide
+Tide	High Slack	High Slack tide
+Tide	Low Slack	Low Slack tide
+Tide	Overtopping	Periods of floodplain inundation that drown out tidal effects. Only used by YBFMP
+Secchi_estimated	TRUE	Secchi depth was estimated
+Secchi_estimated	FALSE	Secchi depth was not estimated

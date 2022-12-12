@@ -1,0 +1,9 @@
+attributeName	code	definition
+Agency	CDFW	California Department of Fish and Wildlife
+Agency	DWR	California Department of Water Resources
+Agency	UC Davis	"University of California, Davis"
+Agency	USBR	United States Bureau of Reclamation
+Agency	USFWS	United States Fish and Wildlife Service
+Agency	USGS	United States Geological Survey
+Survey_focus	Fish	Survey focused primarily on monitoring fish
+Survey_focus	Water quality	Survey focused primarily on monitoring water quality
