@@ -6,7 +6,7 @@
 \alias{SDO}
 \title{SDO water quality data}
 \format{
-a tibble with 3,108 rows and 16 variables
+a tibble with 3,112 rows and 16 variables
 \describe{
 \item{Source}{Name of the source dataset.}
 \item{Station}{Station where sample was collected.}

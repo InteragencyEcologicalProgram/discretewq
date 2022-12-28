@@ -203,7 +203,7 @@
 #' Water quality data from the California Department of Water Resources Stockton Dissolved Oxygen monitoring.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 3,108 rows and 16 variables
+#' @format a tibble with 3,112 rows and 16 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
