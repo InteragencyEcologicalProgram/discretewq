@@ -1,16 +1,61 @@
 attributeName	code	definition
-DissAmmonia_Sign	<	"Below reporting limit. The value in the corresponding column represents the reporting limit, not the actual measured value (since the measured value was below the reporting limit and thus could not be measured). If the value in the correspondinc column is NA, the reporting value is unknown and the true value is below it."
+DissAmmonia_Sign	<	"Below reporting limit. The value in the corresponding column represents the reporting limit, not the actual measured value (since the measured value was below the reporting limit and thus could not be measured). If the value in the corresponding column is NA, the reporting value is unknown and the true value is below it."
 DissAmmonia_Sign	=	The value in the corresponding column is the true mesasured value because the measured value was at or above the reporting limit
 DissAmmonia_Sign	~	The value in the corresponding column is estimated.
-DissNitrateNitrite_Sign	<	"Below reporting limit. The value in the corresponding column represents the reporting limit, not the actual measured value (since the measured value was below the reporting limit and thus could not be measured). If the value in the correspondinc column is NA, the reporting value is unknown and the true value is below it."
+DissNitrateNitrite_Sign	<	"Below reporting limit. The value in the corresponding column represents the reporting limit, not the actual measured value (since the measured value was below the reporting limit and thus could not be measured). If the value in the corresponding column is NA, the reporting value is unknown and the true value is below it."
 DissNitrateNitrite_Sign	=	The value in the corresponding column is the true mesasured value because the measured value was at or above the reporting limit
 DissNitrateNitrite_Sign	~	The value in the corresponding column is estimated.
-DissOrthophos_Sign	<	"Below reporting limit. The value in the corresponding column represents the reporting limit, not the actual measured value (since the measured value was below the reporting limit and thus could not be measured). If the value in the correspondinc column is NA, the reporting value is unknown and the true value is below it."
+DissOrthophos_Sign	<	"Below reporting limit. The value in the corresponding column represents the reporting limit, not the actual measured value (since the measured value was below the reporting limit and thus could not be measured). If the value in the corresponding column is NA, the reporting value is unknown and the true value is below it."
 DissOrthophos_Sign	=	The value in the corresponding column is the true mesasured value because the measured value was at or above the reporting limit
 DissOrthophos_Sign	~	The value in the corresponding column is estimated.
-Chlorophyll_Sign	<	"Below reporting limit. The value in the corresponding column represents the reporting limit, not the actual measured value (since the measured value was below the reporting limit and thus could not be measured). If the value in the correspondinc column is NA, the reporting value is unknown and the true value is below it."
+Chlorophyll_Sign	<	"Below reporting limit. The value in the corresponding column represents the reporting limit, not the actual measured value (since the measured value was below the reporting limit and thus could not be measured). If the value in the corresponding column is NA, the reporting value is unknown and the true value is below it."
 Chlorophyll_Sign	=	The value in the corresponding column is the true mesasured value because the measured value was at or above the reporting limit
 Chlorophyll_Sign	~	The value in the corresponding column is estimated.
+DissBromide_Sign	<	"Below reporting limit. The value in the corresponding column represents the reporting limit, not the actual measured value (since the measured value was below the reporting limit and thus could not be measured). If the value in the corresponding column is NA, the reporting value is unknown and the true value is below it."
+DissBromide_Sign	=	The value in the corresponding column is the true mesasured value because the measured value was at or above the reporting limit
+DissBromide_Sign	~	The value in the corresponding column is estimated.
+DissChloride_Sign	<	"Below reporting limit. The value in the corresponding column represents the reporting limit, not the actual measured value (since the measured value was below the reporting limit and thus could not be measured). If the value in the corresponding column is NA, the reporting value is unknown and the true value is below it."
+DissChloride_Sign	=	The value in the corresponding column is the true mesasured value because the measured value was at or above the reporting limit
+DissChloride_Sign	~	The value in the corresponding column is estimated.
+DOC_Sign	<	"Below reporting limit. The value in the corresponding column represents the reporting limit, not the actual measured value (since the measured value was below the reporting limit and thus could not be measured). If the value in the corresponding column is NA, the reporting value is unknown and the true value is below it."
+DOC_Sign	=	The value in the corresponding column is the true mesasured value because the measured value was at or above the reporting limit
+DOC_Sign	~	The value in the corresponding column is estimated.
+DON_Sign	<	"Below reporting limit. The value in the corresponding column represents the reporting limit, not the actual measured value (since the measured value was below the reporting limit and thus could not be measured). If the value in the corresponding column is NA, the reporting value is unknown and the true value is below it."
+DON_Sign	=	The value in the corresponding column is the true mesasured value because the measured value was at or above the reporting limit
+DON_Sign	~	The value in the corresponding column is estimated.
+pH_Sign	<	"Below reporting limit. The value in the corresponding column represents the reporting limit, not the actual measured value (since the measured value was below the reporting limit and thus could not be measured). If the value in the corresponding column is NA, the reporting value is unknown and the true value is below it."
+pH_Sign	=	The value in the corresponding column is the true mesasured value because the measured value was at or above the reporting limit
+pH_Sign	~	The value in the corresponding column is estimated.
+Turbidity_Sign	<	"Below reporting limit. The value in the corresponding column represents the reporting limit, not the actual measured value (since the measured value was below the reporting limit and thus could not be measured). If the value in the corresponding column is NA, the reporting value is unknown and the true value is below it."
+Turbidity_Sign	=	The value in the corresponding column is the true mesasured value because the measured value was at or above the reporting limit
+Turbidity_Sign	~	The value in the corresponding column is estimated.
+Pheophytin_Sign	<	"Below reporting limit. The value in the corresponding column represents the reporting limit, not the actual measured value (since the measured value was below the reporting limit and thus could not be measured). If the value in the corresponding column is NA, the reporting value is unknown and the true value is below it."
+Pheophytin_Sign	=	The value in the corresponding column is the true mesasured value because the measured value was at or above the reporting limit
+Pheophytin_Sign	~	The value in the corresponding column is estimated.
+TKN_Sign	<	"Below reporting limit. The value in the corresponding column represents the reporting limit, not the actual measured value (since the measured value was below the reporting limit and thus could not be measured). If the value in the corresponding column is NA, the reporting value is unknown and the true value is below it."
+TKN_Sign	=	The value in the corresponding column is the true mesasured value because the measured value was at or above the reporting limit
+TKN_Sign	~	The value in the corresponding column is estimated.
+TOC_Sign	<	"Below reporting limit. The value in the corresponding column represents the reporting limit, not the actual measured value (since the measured value was below the reporting limit and thus could not be measured). If the value in the corresponding column is NA, the reporting value is unknown and the true value is below it."
+TOC_Sign	=	The value in the corresponding column is the true mesasured value because the measured value was at or above the reporting limit
+TOC_Sign	~	The value in the corresponding column is estimated.
+TotPhos_Sign	<	"Below reporting limit. The value in the corresponding column represents the reporting limit, not the actual measured value (since the measured value was below the reporting limit and thus could not be measured). If the value in the corresponding column is NA, the reporting value is unknown and the true value is below it."
+TotPhos_Sign	=	The value in the corresponding column is the true mesasured value because the measured value was at or above the reporting limit
+TotPhos_Sign	~	The value in the corresponding column is estimated.
+TSS_Sign	<	"Below reporting limit. The value in the corresponding column represents the reporting limit, not the actual measured value (since the measured value was below the reporting limit and thus could not be measured). If the value in the corresponding column is NA, the reporting value is unknown and the true value is below it."
+TSS_Sign	=	The value in the corresponding column is the true mesasured value because the measured value was at or above the reporting limit
+TSS_Sign	~	The value in the corresponding column is estimated.
+DissCalcium_Sign	<	"Below reporting limit. The value in the corresponding column represents the reporting limit, not the actual measured value (since the measured value was below the reporting limit and thus could not be measured). If the value in the corresponding column is NA, the reporting value is unknown and the true value is below it."
+DissCalcium_Sign	=	The value in the corresponding column is the true mesasured value because the measured value was at or above the reporting limit
+DissCalcium_Sign	~	The value in the corresponding column is estimated.
+TotAlkalinity_Sign	<	"Below reporting limit. The value in the corresponding column represents the reporting limit, not the actual measured value (since the measured value was below the reporting limit and thus could not be measured). If the value in the corresponding column is NA, the reporting value is unknown and the true value is below it."
+TotAlkalinity_Sign	=	The value in the corresponding column is the true mesasured value because the measured value was at or above the reporting limit
+TotAlkalinity_Sign	~	The value in the corresponding column is estimated.
+VSS_Sign	<	"Below reporting limit. The value in the corresponding column represents the reporting limit, not the actual measured value (since the measured value was below the reporting limit and thus could not be measured). If the value in the corresponding column is NA, the reporting value is unknown and the true value is below it."
+VSS_Sign	=	The value in the corresponding column is the true mesasured value because the measured value was at or above the reporting limit
+VSS_Sign	~	The value in the corresponding column is estimated.
+DissSilica_Sign	<	"Below reporting limit. The value in the corresponding column represents the reporting limit, not the actual measured value (since the measured value was below the reporting limit and thus could not be measured). If the value in the corresponding column is NA, the reporting value is unknown and the true value is below it."
+DissSilica_Sign	=	The value in the corresponding column is the true mesasured value because the measured value was at or above the reporting limit
+DissSilica_Sign	~	The value in the corresponding column is estimated.
 Field_coords	FALSE	"Coordinates were not recorded in the field. These coordinates represent the target location (e.g., location of the fixed sampling station)."
 Field_coords	TRUE	Coordinates were recorded in the field and represent the exact location the sample was collected
 Microcystis	1	absent
