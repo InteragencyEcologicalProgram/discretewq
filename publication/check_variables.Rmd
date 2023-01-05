@@ -1,0 +1,107 @@
+---
+title: "Check variables in each data set"
+author: "Dave Bosworth"
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+output: 
+  html_document: 
+    code_folding: hide
+    toc: true
+    toc_float:
+      collapsed: false
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Purpose
+
+Check if each variable in every data set is accounted for in the package documentation.
+
+# Global code and functions
+
+```{r load packages, message = FALSE, warning = FALSE}
+# Load packages
+library(tidyverse)
+library(devtools)
+
+# Load most recent version of discretewq
+load_all()
+```
+
+# Import and Prepare Data
+
+```{r import data}
+# Create a list of all data sets in discretewq to run functions on
+ls_all_datasets <- lst(
+  baystudy,
+  DJFMP,
+  EDSM,
+  EMP,
+  FMWT,
+  NCRO,
+  SDO,
+  SKT,
+  SLS,
+  STN,
+  suisun,
+  twentymm,
+  USBR, 
+  USGS_CAWSC,
+  USGS_SFBS,
+  YBFMP
+)
+```
+
+# List variable names
+
+All names:
+
+```{r print all var names}
+map(ls_all_datasets, names)
+```
+
+Just `_Sign` variables:
+
+```{r print sign var names}
+ls_sign_vars <- map(ls_all_datasets, ~ select(.x, ends_with("_Sign"))) %>% compact()
+
+map(ls_sign_vars, names)
+```
+
+# Inspect Sign variables
+
+Count unique values for each `_Sign` variable in each data set that includes them:
+
+## EMP
+
+```{r count unique vals EMP}
+for (var in names(ls_sign_vars$EMP)) {
+  ls_sign_vars$EMP %>% 
+    count(.data[[var]]) %>% 
+    print()
+}
+```
+
+## NCRO
+
+```{r count unique vals NCRO}
+for (var in names(ls_sign_vars$NCRO)) {
+  ls_sign_vars$NCRO %>% 
+    count(.data[[var]]) %>% 
+    print()
+}
+```
+
+## USGS_CAWSC
+
+```{r count unique vals USGS_CAWSC}
+for (var in names(ls_sign_vars$USGS_CAWSC)) {
+  ls_sign_vars$USGS_CAWSC %>% 
+    count(.data[[var]]) %>% 
+    print()
+}
+```
+
