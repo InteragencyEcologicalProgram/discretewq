@@ -23,12 +23,6 @@ DOC_Sign	~	The value in the corresponding column is estimated.
 DON_Sign	<	"Below reporting limit. The value in the corresponding column represents the reporting limit, not the actual measured value (since the measured value was below the reporting limit and thus could not be measured). If the value in the corresponding column is NA, the reporting value is unknown and the true value is below it."
 DON_Sign	=	The value in the corresponding column is the true mesasured value because the measured value was at or above the reporting limit
 DON_Sign	~	The value in the corresponding column is estimated.
-pH_Sign	<	"Below reporting limit. The value in the corresponding column represents the reporting limit, not the actual measured value (since the measured value was below the reporting limit and thus could not be measured). If the value in the corresponding column is NA, the reporting value is unknown and the true value is below it."
-pH_Sign	=	The value in the corresponding column is the true mesasured value because the measured value was at or above the reporting limit
-pH_Sign	~	The value in the corresponding column is estimated.
-Turbidity_Sign	<	"Below reporting limit. The value in the corresponding column represents the reporting limit, not the actual measured value (since the measured value was below the reporting limit and thus could not be measured). If the value in the corresponding column is NA, the reporting value is unknown and the true value is below it."
-Turbidity_Sign	=	The value in the corresponding column is the true mesasured value because the measured value was at or above the reporting limit
-Turbidity_Sign	~	The value in the corresponding column is estimated.
 Pheophytin_Sign	<	"Below reporting limit. The value in the corresponding column represents the reporting limit, not the actual measured value (since the measured value was below the reporting limit and thus could not be measured). If the value in the corresponding column is NA, the reporting value is unknown and the true value is below it."
 Pheophytin_Sign	=	The value in the corresponding column is the true mesasured value because the measured value was at or above the reporting limit
 Pheophytin_Sign	~	The value in the corresponding column is estimated.

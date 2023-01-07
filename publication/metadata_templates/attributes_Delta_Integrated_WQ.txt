@@ -19,7 +19,6 @@ Salinity	Surface salinity	numeric	dimensionless		NA	Unknown or not measured
 Salinity_bottom	Bottom salinity	numeric	dimensionless		NA	Unknown or not measured
 Secchi	"Secchi depth (NOTE data are right censored in certain time periods, since in some cases the disk was still visible at the deepest depth to which it could be extended"	numeric	centimeter		NA	Unknown or not measured
 Secchi_estimated	Was Secchi depth estimated?	categorical			NA	This is only used for FMWT data
-Turbidity_Sign						
 Turbidity	Surface water turbidity	numeric	nephelometricTurbidityUnit			
 Microcystis	Qualitative abundance of the toxic microalga Microcystis	categorical			NA	Unknown or not measured
 Chlorophyll_Sign	"Whether the Chlorophyll value is lower than reported (< because it is below the reporting limit and the reporting limit is used as the value), estimated ~ (extrapolated at low end), or reported as the measured value =."	categorical			NA	Unknown or not measured. This is only used for USGS_CAWSC data
@@ -30,7 +29,6 @@ DissolvedOxygen	Dissolved oxygen at surface.	numeric	milligramsPerLiter		NA	Unkn
 DissolvedOxygen_bottom	Dissolved oxygen at bottom.	numeric	milligramsPerLiter		NA	Unknown or not measured
 DissolvedOxygenPercent	Dissolved oxygen percent at surface.	numeric	dimensionless		NA	Unknown or not measured
 DissolvedOxygenPercent_bottom	Dissolved oxygen percent at bottom.	numeric	dimensionless		NA	Unknown or not measured
-pH_Sign						
 pH	pH at surface	numeric	dimensionless		NA	Unknown or not measured
 pH_bottom	pH at bottom	numeric	dimensionless		NA	Unknown or not measured
 TotAlkalinity_Sign						

@@ -42,7 +42,8 @@ To obtain the full integrated water quality dataset
 require(discretewq)
 Data <- wq(Sources = c("EMP", "STN", "FMWT", "EDSM", "DJFMP",
                        "SDO", "SKT", "SLS", "20mm", "Suisun", 
-                       "Baystudy", "USBR", "USGS_SFBS", "YBFMP", "USGS_CAWSC"))
+                       "Baystudy", "USBR", "USGS_SFBS", "YBFMP", 
+                       "USGS_CAWSC", "NCRO"))
 
 str(Data)
 ```

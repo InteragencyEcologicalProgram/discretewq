@@ -1,5 +1,6 @@
 # discretewq (development version)
 
+* Removed `pH_Sign` and `Turbidity_Sign` variables from `NCRO` because they were not needed. 
 * Added temperature and conductivity to `USGS_CAWSC`
 * Added DO and pH data to all surveys that collect this data. `USGS_SFBS` collects both calculated (from a sensor) and discrete DO, so we used discrete DO up to 2016 and calculated DO afterwards to mirror the methodological change that occurred in the `EMP` survey in 2016. 
 * Updated to newest EMP data with some historical data issues fixed. 

@@ -34,9 +34,9 @@ data<-data_raw%>%
   select(Source, Station=StationID, Latitude, Longitude, Field_coords, Date, Datetime, Depth,
          Sample_depth_surface, Sample_depth_nutr_surface, Sample_depth_bottom, Tide, Temperature, Temperature_bottom,
          Conductivity, Conductivity_bottom, Salinity, Salinity_bottom, Secchi, Secchi_estimated,
-         Turbidity, Turbidity_Sign, Microcystis, Chlorophyll_Sign, Chlorophyll, Pheophytin, Pheophytin_Sign,
+         Turbidity, Microcystis, Chlorophyll_Sign, Chlorophyll, Pheophytin, Pheophytin_Sign,
          DissolvedOxygen, DissolvedOxygen_bottom, DissolvedOxygenPercent, DissolvedOxygenPercent_bottom,
-         pH, pH_Sign, pH_bottom, TotAlkalinity, TotAlkalinity_Sign, TotAmmonia, DissAmmonia_Sign, DissAmmonia,
+         pH, pH_bottom, TotAlkalinity, TotAlkalinity_Sign, TotAmmonia, DissAmmonia_Sign, DissAmmonia,
          DissBromide, DissBromide_Sign, DissCalcium, DissCalcium_Sign, TotChloride, DissChloride, DissChloride_Sign, DissNitrateNitrite_Sign,
          DissNitrateNitrite, DOC, DOC_Sign, TOC, TOC_Sign, DON, DON_Sign, TON, DissOrthophos_Sign, DissOrthophos, TotPhos, TotPhos_Sign,
          DissSilica, DissSilica_Sign, TDS, TSS, TSS_Sign, VSS, VSS_Sign, TKN, TKN_Sign, Notes)
