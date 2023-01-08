@@ -62,6 +62,8 @@ CDFW. 2020b. Fall Midwater Trawl data. [ftp://ftp.wildlife.ca.gov/TownetFallMidw
 
 CDFW. 2020c. Summer Townet data. [ftp://ftp.wildlife.ca.gov/TownetFallMidwaterTrawl/TNS MS Access Data/TNS data/](ftp://ftp.wildlife.ca.gov/TownetFallMidwaterTrawl/TNS MS Access Data/TNS data/).
 
+CDWR. 2022. Water Quality Investigations Section, North Central Region Office. [https://wdl.water.ca.gov/waterdatalibrary/WaterQualityDataLib.aspx](https://wdl.water.ca.gov/waterdatalibrary/WaterQualityDataLib.aspx). 
+
 Cloern, J. E., and T. S. Schraga. 2016. USGS Measurements of Water Quality in San Francisco Bay (CA), 1969-2015 (ver. 3.0 June 2017). U. S. Geological Survey data release. [doi:https://doi.org/10.5066/F7TQ5ZPR](https://doi.org/10.5066/F7TQ5ZPR)
 
 Interagency Ecological Program (IEP), L. Damon, T. Tempel, and A. Chorazyczewski. 2020a. Interagency Ecological Program San Francisco Estuary 20mm Survey 1995 - 2020. Environmental Data Initiative. [doi:10.6073/PASTA/DA7269F6B68975232A2665B211E57229](https://portal.edirepository.org/nis/mapbrowse?scope=edi&identifier=535&revision=2)

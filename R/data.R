@@ -448,7 +448,7 @@
 #' @seealso \code{\link{wq}}
 "YBFMP"
 
-#' NCRO Chlorophyll data
+#' NCRO Water Quality and Nutrients
 #'
 #' Chlorophyll from the South Delta collected by DWR's North Central Region Office
 #'
@@ -471,34 +471,38 @@
 #'   \item{TotAlkalinity}{Total Alkalinity (mg/L).}
 #'   \item{DissAmmonia_Sign}{Whether the Dissolved Ammonia value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
 #'   \item{DissAmmonia}{Dissolved Ammonia (mg/L). If DissAmmonia_Sign is <, this is equal to the reporting limit, NA = RL unknown.}
-#'   \item{DissBromide_Sign}{Whether the Dissolved Bromide value is below the reporting limit or equal to it.}
+#'   \item{DissBromide_Sign}{Whether the Dissolved Bromide valueis lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
 #'   \item{DissBromide}{Dissolved bromide (mg/L).}
-#'   \item{DissCalcium_Sign}{Whether the Dissolved Calcium value is below the reporting limit or equal to it.}
+#'   \item{DissCalcium_Sign}{Whether the Dissolved Calcium value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
 #'   \item{DissCalcium}{Dissolved calcium (mg/L).}
 #'   \item{DissChloride}{Dissolved chloride (mg/L).}
 #'   \item{DissNitrateNitrite_Sign}{Whether the Dissolved Nitrate Nitrite value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
 #'   \item{DissNitrateNitrite}{Dissolved Nitrate and Nitrite (mg/L). If DissNitrateNitrite_Sign is <, this is equal to the reporting limit, with NA = RL unknown.}
-#'   \item{DOC_Sign}{Whether the Dissolved Organic Carbon value is below the reporting limit or equal to it.}
+#'   \item{DOC_Sign}{Whether the Dissolved Organic Carbon value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "="}
 #'   \item{DOC}{Dissolved organic carbon (mg/L).}
-#'   \item{TOC_Sign}{Whether the Total Organic Carbon value is below the reporting limit or equal to it.}
+#'   \item{TOC_Sign}{Whether the Total Organic Carbon value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "="}
 #'   \item{TOC}{Total Organic Carbon (mg/L).}
-#'   \item{DON_Sign}{Whether the Dissolved Organic Nitrate value is below the reporting limit or equal to it.}
+#'   \item{DON_Sign}{Whether the Dissolved Organic Nitrate value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "="}
 #'   \item{DON}{Dissolved Organic Nitrogen (mg/L).}
 #'   \item{TON}{Total Organic Nitrogen (mg/L).}
-#'   \item{DissOrthophos_Sign}{Whether the Dissolved Ortho-phosphate value is below the reporting limit or equal to it.}
+#'   \item{DissOrthophos_Sign}{Whether the Dissolved Ortho-phosphate value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "="}
 #'   \item{TOC}{Total organic carbon (mg/L).}
 #'   \item{DON}{Dissolved organic nitrogen (mg/L).}
 #'   \item{TON}{Total organic nitrogen (mg/L).}
 #'   \item{DissOrthophos_Sign}{Whether the Dissolved Orthophos value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
 #'   \item{DissOrthophos}{Dissolved Ortho-phosphate (mg/L). If DissOrthophos_Sign is <, this is equal to the reporting limit, with NA = RL unknown.}
-#'   \item{TotPhos_Sign}{Whether the Total Phosphate value is below the reporting limit or equal to it.}
+#'   \item{TotPhos_Sign}{Whether the Total Phosphate value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "="}
 #'   \item{TotPhos}{Total phosphorous (mg/L).}
-#'   \item{TSS_Sign}{Whether the Total Suspended Solids value is below the reporting limit or equal to it.}
+#'   \item{TSS_Sign}{Whether the Total Suspended Solids value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "="}
 #'   \item{TSS}{Total suspended solids (mg/L).}
-#'   \item{VSS_Sign}{Whether the Volatile Suspended Solids value is below the reporting limit or equal to it.}
+#'   \item{VSS_Sign}{Whether the Volatile Suspended Solids value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "="}
 #'   \item{VSS}{Volatile suspended solids (mg/L).}
-#'   \item{TKN_Sign}{Whether the Total Kjeldahl Nitrogen value is below the reporting limit or equal to it.}
+#'   \item{TKN_Sign}{Whether the Total Kjeldahl Nitrogen value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=". "NA" indcates reporting limit unknown.}
 #'   \item{TKN}{Total Kjeldahl Nitrogen (mg/L).}
+#'   \item{Chlorophyll_Sign}{Whether the Chlorophyll value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "="}
+#'   \item{Chlorophyll}{Chlorophyll concentration (\eqn{\mu}g \ifelse{html}{\out{L<sup>-1</sup>}}{\eqn{L^{-1}}}).}
+#'   \item{Pheophytin_Sign}{Whether the Pheophytin is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
+#'   \item{Pheophytin}{Pheophytin concentration (\eqn{\mu}g \ifelse{html}{\out{L<sup>-1</sup>}}{\eqn{L^{-1}}}).}
 #'   }
 #'
 #' @details Contact Jared Frantzich Jared.Frantzich@water.ca.gov for more information.
