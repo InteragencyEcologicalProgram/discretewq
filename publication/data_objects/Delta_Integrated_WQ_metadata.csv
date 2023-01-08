@@ -1,0 +1,16 @@
+Survey,Abbreviation,Agency,Survey_focus,Start_year,Season,Frequency,Data_source,Surface_sample_depth,Bottom_sample_depth
+Fall Midwater Trawl,FMWT,CDFW,Fish,1967,Sep-Dec,Monthly,https://filelib.wildlife.ca.gov/Public/TownetFallMidwaterTrawl/FMWT%20Data/,Surface bucket,0.3 m
+Summer Townet Survey,STN,CDFW,Fish,1959,Jun-Aug,2X monthly,https://filelib.wildlife.ca.gov/Public/TownetFallMidwaterTrawl/TNS%20MS%20Access%20Data/TNS%20data/,Surface bucket,0.3 m
+Spring Kodiak Trawl,SKT,CDFW,Fish,2002,Jan-May & Dec,Monthly,https://filelib.wildlife.ca.gov/Public/Delta%20Smelt/,Surface bucket,NA
+20-mm Survey,20mm,CDFW,Fish,1995,Mar-Jul,2X monthly,https://filelib.wildlife.ca.gov/Public/Delta%20Smelt/,Surface bucket,NA
+San Francisco Bay Study,Baystudy,CDFW,Fish,1980,All year,Monthly,https://filelib.wildlife.ca.gov/Public/BayStudy/AccessDataBase/,0 - 1 m,0.5 m
+Enhanced Delta Smelt Monitoring,EDSM,USFWS,Fish,2016,Jan-Mar & Jul-Dec,Weekly,https://portal.edirepository.org/nis/metadataviewer?packageid=edi.415.3,0.3 m or bucket if choppy,0.3 ? 0.6 m
+Delta Juvenile Fish Monitoring Program,DJFMP,USFWS,Fish,1976,All year,3X weekly,https://portal.edirepository.org/nis/mapbrowse?packageid=edi.244.4,0.3 m or bucket if choppy,NA
+Suisun Marsh Fish Study,Suisun,UC Davis,Fish,1979,All year,Monthly,Personal communication,0.3 m,NA
+Environmental Monitoring Program,EMP,DWR,Water quality,1975,All year,Monthly,https://portal.edirepository.org/nis/metadataviewer?packageid=edi.458.3,0.9 m,0.9 m
+Sacramento Deepwater Shipping Channel Survey,USBR,USBR,Water quality,2012,All year,Monthly,Personal communication,0.3 m (recorded),0.3 m (recorded)
+San Francisco Bay Survey,USGS_SFBS,USGS,Water quality,1969,All year,Monthly,https://www.sciencebase.gov/catalog/item/5841f97ee4b04fc80e518d9f; https://www.sciencebase.gov/catalog/item/5966abe6e4b0d1f9f05cf551,0.5 - 1 m (recorded),0.3 m (recorded)
+Yolo Bypass Fish Monitoring Program,YBFMP,DWR,Fish,1998,All year,Weekly,https://portal.edirepository.org/nis/mapbrowse?packageid=edi.233.2; https://portal.edirepository.org/nis/mapbrowse?packageid=edi.494.2,0 - 1 m ,
+Stockton Dissolved Oxygen survey,SDO,DWR,Water quality,1997,Jun-Nov,2X monthly,https://portal.edirepository.org/nis/mapbrowse?packageid=edi.276.2,1 m,1 m
+Smelt Larva Survey,SLS,CDFW,Fish,2009,Jan-Mar,Every 2 weeks,https://filelib.wildlife.ca.gov/Public/Delta%20Smelt/,Surface bucket,Few inches
+USGS California Water Science Center discrete water quality data,USGS_CAWSC,USGS,Water quality,1971,All year,Various,https://nwis.waterdata.usgs.gov/usa/nwis/qwdata,1 m,

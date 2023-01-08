@@ -1,0 +1,68 @@
+attributeName	attributeDefinition	class	unit	dateTimeFormatString	missingValueCode	missingValueCodeExplanation
+Source	Survey from which data originated	categorical				
+Station	Identifier for the sampling station	character				
+Latitude	Latitude where sample was collected	numeric	degree		NA	Unknown or not measured
+Longitude	Longitude where sample was collected	numeric	degree		NA	Unknown or not measured
+Field_coords	Do the Latitude and Longitude coordinates represent field-collected coordinates at the time of sample collection?	categorical				
+Date	Date sample was collected (America/Los_Angeles timezone)	Date		YYYY-MM-DD		
+Datetime	Date and time when sample was collected (America/Los_Angeles timezone)	Date		YYYY-MM-DD hh:mm:ss	NA	Time not recorded
+Depth	"Bottom depth at the location the sample was collected. This can be either a depth measured at the time of sample collection or the average water depth for the sampling station, depending on the survey."	numeric	meter		NA	Unknown or not measured
+Sample_depth_surface	Depth below surface at which the surface samples were collected	numeric	meter		NA	Unknown or not measured
+Sample_depth_nutr_surface	"Depth below surface of the surface nutrient sample. This is only used for the USGS_SFBS survey, in which nutrients were sometimes collected at a deeper depth than the shallowest water quality samples"	numeric	meter		NA	Unknown or not measured. This is only used for USGS_SFBS data
+Sample_depth_bottom	Depth below surface at which the bottom temperature measurement was taken	numeric	meter		NA	Unknown or not measured
+Tide	Tidal stage	categorical			NA	Unknown or not measured
+Temperature	Surface water temperature	numeric	celsius		NA	Unknown or not measured
+Temperature_bottom	Bottom water temperature	numeric	celsius		NA	Unknown or not measured
+Conductivity	Surface specific conductivity	numeric	microSeimenPerCentimeter		NA	Unknown or not measured
+Conductivity_bottom	Bottom specific conductivity	numeric	microSeimenPerCentimeter		NA	Unknown or not measured
+Salinity	Surface salinity	numeric	dimensionless		NA	Unknown or not measured
+Salinity_bottom	Bottom salinity	numeric	dimensionless		NA	Unknown or not measured
+Secchi	"Secchi depth (NOTE data are right censored in certain time periods, since in some cases the disk was still visible at the deepest depth to which it could be extended"	numeric	centimeter		NA	Unknown or not measured
+Secchi_estimated	Was Secchi depth estimated?	categorical			NA	This is only used for FMWT data
+Turbidity	Surface water turbidity	numeric	nephelometricTurbidityUnit			
+Microcystis	Qualitative abundance of the toxic microalga Microcystis	categorical			NA	Unknown or not measured
+Chlorophyll_Sign	"Whether the Chlorophyll value is lower than reported (< because it is below the reporting limit and the reporting limit is used as the value), estimated ~ (extrapolated at low end), or reported as the measured value =."	categorical			NA	Unknown or not measured. This is only used for USGS_CAWSC data
+Chlorophyll	"Chlorophyll-a concentration at surface. For USGS_CAWSC data, if Chlorophyll_Sign is <, this value is equal to the reporting limit and if Chlorophyll_Sign is ~ then this value is estimated (extrapolated at low end). Otherwise this value is the actual measured value."	numeric	microgramsPerLiter		NA	Unknown or not measured
+Pheophytin_Sign						
+Pheophytin						
+DissolvedOxygen	Dissolved oxygen at surface.	numeric	milligramsPerLiter		NA	Unknown or not measured
+DissolvedOxygen_bottom	Dissolved oxygen at bottom.	numeric	milligramsPerLiter		NA	Unknown or not measured
+DissolvedOxygenPercent	Dissolved oxygen percent at surface.	numeric	dimensionless		NA	Unknown or not measured
+DissolvedOxygenPercent_bottom	Dissolved oxygen percent at bottom.	numeric	dimensionless		NA	Unknown or not measured
+pH	pH at surface	numeric	dimensionless		NA	Unknown or not measured
+pH_bottom	pH at bottom	numeric	dimensionless		NA	Unknown or not measured
+TotAlkalinity_Sign						
+TotAlkalinity	Total Alkalinity	numeric	milligramsPerLiter		NA	Unknown or not measured
+TotAmmonia	Total Ammonia	numeric	milligramsPerLiter		NA	Unknown or not measured
+DissAmmonia_Sign	"Whether the DissAmmonia value is lower than reported (< because it is below the reporting limit and the reporting limit is used as the value), estimated ~, or reported as the measured value =."	categorical			NA	Unknown or not measured
+DissAmmonia	"Dissolved Ammonia. For EMP and USGS_CAWSC data, if DissAmmonia_Sign is <, this value is equal to the reporting limit. For  USGS_CAWSC data, if DissAmmonia_Sign is ~ then this value is estimated. Otherwise this value is the actual measured value."	numeric	milligramsPerLiter		NA	"Unknown or not measured. If the DissAmmonia_Sign value is ""<"", then the reporting limit is unknown and this value is below the reporting limit."
+DissBromide_Sign						
+DissBromide	Dissolved bromide	numeric	milligramsPerLiter		NA	Unknown or not measured
+DissCalcium_Sign						
+DissCalcium	Dissolved calcium	numeric	milligramsPerLiter		NA	Unknown or not measured
+TotChloride	Total chloride	numeric	milligramsPerLiter		NA	Unknown or not measured
+DissChloride_Sign						
+DissChloride	Dissolved chloride	numeric	milligramsPerLiter		NA	Unknown or not measured
+DissNitrateNitrite_Sign	"Whether the DissNitrateNitrite value is lower than reported (< because it is below the reporting limit and the reporting limit is used as the value), estimated ~, or reported as the measured value =."	categorical			NA	Unknown or not measured
+DissNitrateNitrite	"Dissolved Nitrate and Nitrite. For EMP and USGS_CAWSC data, if DissNitrateNitrite_Sign is <, this value is equal to the reporting limit. For  USGS_CAWSC data, if DissNitrateNitrite_Sign is ~ then this value is estimated. Otherwise this value is the actual measured value."	numeric	milligramsPerLiter		NA	"Unknown or not measured. If the DissNitrateNitrite_Sign value is ""<"", then the reporting limit is unknown and this value is below the reporting limit."
+DOC_Sign						
+DOC	Dissolved organic carbon	numeric	milligramsPerLiter		NA	Unknown or not measured
+TOC_Sign						
+TOC	Total organic carbon	numeric	milligramsPerLiter		NA	Unknown or not measured
+DON_Sign						
+DON	Dissolved organic nitrogen	numeric	milligramsPerLiter		NA	Unknown or not measured
+TON	Total organic nitrogen	numeric	milligramsPerLiter		NA	Unknown or not measured
+DissOrthophos_Sign	"Whether the DissOrthophos value is lower than reported (< because it is below the reporting limit and the reporting limit is used as the value), estimated ~, or reported as the measured value =."	categorical			NA	Unknown or not measured
+DissOrthophos	"Dissolved Ortho-phosphate. For EMP and USGS_CAWSC data, if DissOrthophos_Sign is <, this value is equal to the reporting limit. For  USGS_CAWSC data, if DissOrthophos_Sign is ~ then this value is estimated. Otherwise this value is the actual measured value."	numeric	milligramsPerLiter		NA	"Unknown or not measured. If the DissOrthophos_Sign value is ""<"", then the reporting limit is unknown and this value is below the reporting limit."
+TotPhos_Sign						
+TotPhos	Total phosphorous	numeric	milligramsPerLiter		NA	Unknown or not measured
+DissSilica_Sign						
+DissSilica	Dissolved Silica	numeric	milligramsPerLiter		NA	Unknown or not measured
+TDS	Total dissolved solids	numeric	milligramsPerLiter		NA	Unknown or not measured
+TSS_Sign						
+TSS	Total suspended solids	numeric	milligramsPerLiter		NA	Unknown or not measured
+VSS_Sign						
+VSS	Volatile suspended solids	numeric	milligramsPerLiter		NA	Unknown or not measured
+TKN_Sign						
+TKN	Total Kjeldahl nitrogen	numeric	milligramsPerLiter		NA	Unknown or not measured
+Notes	Any notes recorded during sampling	character			NA	Unknown or not measured

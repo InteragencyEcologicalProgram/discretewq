@@ -1,0 +1,11 @@
+attributeName	attributeDefinition	class	unit	dateTimeFormatString	missingValueCode	missingValueCodeExplanation
+Survey	Name of the monitoring survey	character				
+Abbreviation	Abbreviation of the monitoring survey name	character				
+Agency	Lead agency for the monitoring survey	categorical				
+Survey_focus	Primary focus of the monitoring survey	categorical				
+Start_year	First year data were collected	Date		YYYY		
+Season	"Months in which data are primarily collected, although some sampling may have occurred outside the indicated months"	character				
+Frequency	"Normal frequency of sampling, although this has changed over time for many of the surveys"	character				
+Data_source	Raw data source	character				
+Surface_sample_depth	"Depth below surface at which surface water samples were collected. Surface bucket indicates samples collected by scooping water with a bucket from the surface. ""recorded"" indicates that the actual depth of the sample (from the surface) is recorded in the dataset in Sample_depth_surface."	character				
+Bottom_sample_depth	"Depth above the bottom at which bottom temperature data were generally collected. ""recorded"" indicates that the actual depth of the sample (from the surface) is recorded in the dataset in Sample_depth_bottom."	character				

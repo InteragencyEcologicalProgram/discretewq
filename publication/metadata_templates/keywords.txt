@@ -1,0 +1,13 @@
+keyword	keywordThesaurus
+estuaries	https://vocab.lternet.edu/
+water quality	https://vocab.lternet.edu/
+water temperature	https://vocab.lternet.edu/
+secchi depth	https://vocab.lternet.edu/
+algae	https://vocab.lternet.edu/
+chlorophyll a	https://vocab.lternet.edu/
+specific conductivity	https://vocab.lternet.edu/
+salinity	https://vocab.lternet.edu/
+surveys	https://vocab.lternet.edu/
+long term monitoring	https://vocab.lternet.edu/
+nutrients	https://vocab.lternet.edu/
+data integration	

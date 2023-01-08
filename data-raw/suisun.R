@@ -28,7 +28,8 @@ suisun<-read_csv(file.path("data-raw", "Suisun", "Sample.csv"),
                                        SpecificConductance="d", ElecCond="d", TideCode="c",
                                        DO="d", PctSaturation="d", Salinity="d"))%>%
   rename(Station=StationCode, Date=SampleDate, Time=SampleTime,
-         Temperature=WaterTemperature, Tide=TideCode)%>%
+         Temperature=WaterTemperature, Tide=TideCode,
+         DissolvedOxygen=DO, DissolvedOxygenPercent=PctSaturation)%>%
   mutate(Date=parse_date_time(Date, "%m/%d/%Y %H:%M:%S", tz="America/Los_Angeles"),
          Time=parse_date_time(Time, "%m/%d/%Y %H:%M:%S", tz="America/Los_Angeles"),
          Conductivity=if_else(is.na(SpecificConductance), ElecCond / (1 + 0.019 * (Temperature - 25)), SpecificConductance),
@@ -43,14 +44,14 @@ suisun<-read_csv(file.path("data-raw", "Suisun", "Sample.csv"),
               group_by(SampleRowID)%>%
               summarise(Depth=mean(Depth, na.rm=T), .groups="drop"), # Use the average depth for each sample
             by="SampleRowID")%>%
-  mutate(ID=paste(Date, Station, Temperature, Salinity, DO, PctSaturation, Secchi, Conductivity))%>% # Following steps to remove duplicated WQ data from multiple fish samples that were nearby in space and time
+  mutate(ID=paste(Date, Station, Temperature, Salinity, DissolvedOxygen, DissolvedOxygenPercent, Secchi, Conductivity))%>% # Following steps to remove duplicated WQ data from multiple fish samples that were nearby in space and time
   group_by(Source, Date, Station, ID)%>%
-  summarise(across(c(Temperature, Secchi, Conductivity, Depth, Datetime), ~mean(.x, na.rm=T)),
+  summarise(across(c(Temperature, Secchi, Conductivity, DissolvedOxygen, DissolvedOxygenPercent, Depth, Datetime), ~mean(.x, na.rm=T)),
             Tide=Mode(Tide),
             .groups="drop")%>%
   mutate(across(where(is.numeric), ~if_else(is.nan(.x), NA_real_, .x)))%>% # Replace NaN values with NAs
   left_join(Suisun_stations, by="Station")%>%
-  select(Source, Station, Latitude, Longitude, Date, Datetime, Depth, Tide, Secchi, Temperature, Conductivity)%>%
+  select(Source, Station, Latitude, Longitude, Date, Datetime, Depth, Tide, Secchi, Temperature, Conductivity, DissolvedOxygen, DissolvedOxygenPercent)%>%
   distinct(Source, Station, Date, Datetime, .keep_all=T)
 
 usethis::use_data(suisun, overwrite = TRUE)

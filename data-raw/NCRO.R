@@ -91,7 +91,8 @@ rename_with(~gsub("Result_", "", .x, fixed = TRUE)) %>%
   rename_with( ~ paste0(str_remove(.x, "^sign_"), "_Sign"), starts_with("sign_")) %>%
   rename(Conductivity = Conductivity_top) %>%
   filter(!is.na(Latitude), !is.na(Datetime)) %>%
-  select(-Conductivity_top_Sign, -Temperature_Sign, -DissolvedOxygen_Sign, -DissolvedOxygen_bottom_Sign)
+  select(-Conductivity_top_Sign, -Temperature_Sign, -DissolvedOxygen_Sign, -DissolvedOxygen_bottom_Sign,
+         -pH_Sign, -Turbidity_Sign)
 
 
 NCRO = left_join(NCRO, secHABs)

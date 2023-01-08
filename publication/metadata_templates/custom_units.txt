@@ -1,0 +1,3 @@
+id	unitType	parentSI	multiplierToSI	description
+microSeimenPerCentimeter	Specific conductivity	seimenPerMeter	0.00001	Conductivity unit
+nephelometricTurbidityUnit	dimensionless	dimensionless	dimensionless	The intensity of light scattered at 90 degrees incident to a beam of light projected through the sample

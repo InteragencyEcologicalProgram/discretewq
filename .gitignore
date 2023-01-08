@@ -38,3 +38,5 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 .Rproj.user
+
+publication/data_objects/Delta_Integrated_WQ.csv

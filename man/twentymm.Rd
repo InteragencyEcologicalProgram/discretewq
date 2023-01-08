@@ -6,7 +6,7 @@
 \alias{twentymm}
 \title{20mm water quality data}
 \format{
-a tibble with 10,098 rows and 13 variables
+a tibble with 10,469 rows and 14 variables
 \describe{
 \item{Source}{Name of the source dataset.}
 \item{Station}{Station where sample was collected.}
@@ -18,8 +18,9 @@ a tibble with 10,098 rows and 13 variables
 \item{Depth}{Bottom depth (m).}
 \item{Tide}{Tidal stage.}
 \item{Secchi}{Secchi depth (cm).}
-\item{Temperature}{Temperature in °C.}
+\item{Temperature}{Temperature (°C) at surface.}
 \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
+\item{Conductivity_bottom}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at bottom.}
 \item{Notes}{Comments.}
 }
 }

@@ -18,16 +18,20 @@ EDSM <- read_csv(file.path(tempdir(), "EDSM_20mm.csv"),
                  col_types=cols_only(SampleDate="c", LatitudeStart="d", LongitudeStart="d",
                                      StationCode="c", SpecificConductanceTop="d",
                                      WaterTempTop="d", WaterTempBottom="d", Secchi="d", SampleTime="c",
-                                     Tide="c", BottomDepth="d", Comments="c"))%>%
+                                     Tide="c", BottomDepth="d", Comments="c",
+                                     DOTop="d", DOBottom="d"))%>%
   rename(Conductivity = SpecificConductanceTop, Temperature=WaterTempTop,
-         Notes = Comments, Temperature_bottom=WaterTempBottom)%>%
+         Notes = Comments, Temperature_bottom=WaterTempBottom,
+         DissolvedOxygen=DOTop, DissolvedOxygen_bottom=DOBottom)%>%
   mutate(Gear="20mm")%>%
   bind_rows(read_csv(file.path(tempdir(), "EDSM_KDTR.csv"),
                      col_types=cols_only(SampleDate="c", LatitudeStart="d", LongitudeStart="d",
                                          StationCode="c", SpecificConductance="d",
                                          WaterTemp="d", Secchi="d", SampleTime="c",
-                                         Tide="c", BottomDepth="d", Comments="c"))%>%
-              rename(Conductivity = SpecificConductance, Temperature=WaterTemp, Notes=Comments)%>%
+                                         Tide="c", BottomDepth="d", Comments="c",
+                                         DO="d"))%>%
+              rename(Conductivity = SpecificConductance, Temperature=WaterTemp, Notes=Comments,
+                     DissolvedOxygen=DO)%>%
               mutate(Gear="KDTR"))%>%
   rename(Station=StationCode, Date=SampleDate, Time=SampleTime,
          Latitude=LatitudeStart, Longitude=LongitudeStart, Depth=BottomDepth)%>%
@@ -42,7 +46,11 @@ EDSM <- read_csv(file.path(tempdir(), "EDSM_20mm.csv"),
          Depth = if_else(Gear=="20mm", Depth*0.3048, Depth))%>%  # Convert feet to meters for 20mm (KDTR already in meters)
   select(-Time)%>%
   distinct(Source, Station, Latitude, Longitude, Date, Datetime, .keep_all=T)%>% #Remove replicate samples with the same datetime and location. This keeps the first row. This results in no more NA values in water quality variables than if we had used summarise(mean(.x, na.rm=T))
-  select(Source, Station, Latitude, Longitude, Field_coords, Date, Datetime, Depth, Tide, Secchi, Temperature, Temperature_bottom, Conductivity, Notes)
+  select(Source, Station, Latitude,
+         Longitude, Field_coords, Date,
+         Datetime, Depth, Tide, Secchi,
+         Temperature, Temperature_bottom, Conductivity,
+         DissolvedOxygen, DissolvedOxygen_bottom, Notes)
 
 
 usethis::use_data(EDSM, overwrite = TRUE)
