@@ -22,6 +22,10 @@ NCRO3 = read_excel("data-raw/NCRO/WQES South Delta Sample Results 1999-2021.xlsx
 
 NCROX = bind_rows(NCRO1, NCRO2, NCRO3)
 
+#Why do some values have no reporting limits?
+
+test = filter(NCROX, is.na(`Rpt Limit`), Analyte %in% c("Total Kjeldahl Nitrogen", "Dissolved Organic Nitrogen"))
+
 # #station coordinates
 # SDelta_Station_lat_long <- read_csv("data-raw/NCRO/SDelta_Station_lat_long.csv",
 #                                     col_types = cols_only(LongStationName="c", `Latitude (WGS84)`="d",
