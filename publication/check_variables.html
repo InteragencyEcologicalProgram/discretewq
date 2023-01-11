@@ -11,7 +11,7 @@
 
 <meta name="author" content="Dave Bosworth" />
 
-<meta name="date" content="2023-01-04" />
+<meta name="date" content="2023-01-11" />
 
 <title>Check variables in each data set</title>
 
@@ -1581,7 +1581,7 @@ font-size: 0.95em;
 
 <h1 class="title toc-ignore">Check variables in each data set</h1>
 <h4 class="author">Dave Bosworth</h4>
-<h4 class="date">January 04, 2023</h4>
+<h4 class="date">January 11, 2023</h4>
 
 </div>
 
@@ -1701,13 +1701,12 @@ ls_all_datasets &lt;- lst(
 ## [29] &quot;DissAmmonia_Sign&quot;        &quot;DissBromide_Sign&quot;       
 ## [31] &quot;DissChloride_Sign&quot;       &quot;DissNitrateNitrite_Sign&quot;
 ## [33] &quot;DOC_Sign&quot;                &quot;DON_Sign&quot;               
-## [35] &quot;DissOrthophos_Sign&quot;      &quot;pH_Sign&quot;                
-## [37] &quot;Turbidity_Sign&quot;          &quot;Pheophytin_Sign&quot;        
-## [39] &quot;TKN_Sign&quot;                &quot;TOC_Sign&quot;               
-## [41] &quot;TotPhos_Sign&quot;            &quot;TSS_Sign&quot;               
-## [43] &quot;DissCalcium_Sign&quot;        &quot;TotAlkalinity_Sign&quot;     
-## [45] &quot;VSS_Sign&quot;                &quot;Source&quot;                 
-## [47] &quot;Secchi&quot;                  &quot;Microcystis&quot;            
+## [35] &quot;DissOrthophos_Sign&quot;      &quot;Pheophytin_Sign&quot;        
+## [37] &quot;TKN_Sign&quot;                &quot;TOC_Sign&quot;               
+## [39] &quot;TotPhos_Sign&quot;            &quot;TSS_Sign&quot;               
+## [41] &quot;DissCalcium_Sign&quot;        &quot;TotAlkalinity_Sign&quot;     
+## [43] &quot;VSS_Sign&quot;                &quot;Source&quot;                 
+## [45] &quot;Secchi&quot;                  &quot;Microcystis&quot;            
 ## 
 ## $SDO
 ##  [1] &quot;Source&quot;                 &quot;Station&quot;                &quot;Latitude&quot;              
@@ -1803,11 +1802,10 @@ map(ls_sign_vars, names)</code></pre>
 ##  [3] &quot;DissBromide_Sign&quot;        &quot;DissChloride_Sign&quot;      
 ##  [5] &quot;DissNitrateNitrite_Sign&quot; &quot;DOC_Sign&quot;               
 ##  [7] &quot;DON_Sign&quot;                &quot;DissOrthophos_Sign&quot;     
-##  [9] &quot;pH_Sign&quot;                 &quot;Turbidity_Sign&quot;         
-## [11] &quot;Pheophytin_Sign&quot;         &quot;TKN_Sign&quot;               
-## [13] &quot;TOC_Sign&quot;                &quot;TotPhos_Sign&quot;           
-## [15] &quot;TSS_Sign&quot;                &quot;DissCalcium_Sign&quot;       
-## [17] &quot;TotAlkalinity_Sign&quot;      &quot;VSS_Sign&quot;               
+##  [9] &quot;Pheophytin_Sign&quot;         &quot;TKN_Sign&quot;               
+## [11] &quot;TOC_Sign&quot;                &quot;TotPhos_Sign&quot;           
+## [13] &quot;TSS_Sign&quot;                &quot;DissCalcium_Sign&quot;       
+## [15] &quot;TotAlkalinity_Sign&quot;      &quot;VSS_Sign&quot;               
 ## 
 ## $USGS_CAWSC
 ## [1] &quot;Chlorophyll_Sign&quot;        &quot;DissAmmonia_Sign&quot;       
@@ -1815,226 +1813,255 @@ map(ls_sign_vars, names)</code></pre>
 </div>
 <div id="inspect-sign-variables" class="section level1">
 <h1>Inspect Sign variables</h1>
-<p>Count unique values for each <code>_Sign</code> variable in each data
-set that includes them:</p>
+<p>Count unique values for each <code>_Sign</code> variable and its
+associated data variable in each data set that includes them:</p>
+<pre class="r"><code>ndf_sign_datasets &lt;- 
+  tibble(
+    df_data = ls_all_datasets[c(names(ls_sign_vars))],
+    SignNames = unname(map(df_data, ~ str_subset(names(.x), &quot;_Sign$&quot;))),
+    SignNamesData = map(SignNames, ~ append(.x, str_remove(.x, &quot;_Sign$&quot;)))
+  ) %&gt;% 
+  transmute(
+    df_data = map2(
+      df_data,
+      SignNamesData,
+      ~ select(.x, any_of(.y)) %&gt;% 
+        mutate(across(!ends_with(&quot;_Sign&quot;), ~ as.character(if_else(is.na(.x), &quot;NA&quot;, &quot;numeric&quot;))))
+    )
+  )</code></pre>
 <div id="emp" class="section level2">
 <h2>EMP</h2>
-<pre class="r"><code>for (var in names(ls_sign_vars$EMP)) {
-  ls_sign_vars$EMP %&gt;% 
-    count(.data[[var]]) %&gt;% 
+<pre class="r"><code>for (var in str_subset(names(ndf_sign_datasets$df_data$EMP), &quot;_Sign$&quot;, negate = TRUE)) {
+  var_sign &lt;- paste0(var, &quot;_Sign&quot;)
+  ndf_sign_datasets$df_data$EMP %&gt;% 
+    count(.data[[var_sign]], .data[[var]]) %&gt;% 
     print()
 }</code></pre>
-<pre><code>## # A tibble: 2 × 2
-##   Chlorophyll_Sign     n
-##   &lt;chr&gt;            &lt;int&gt;
-## 1 &lt;                   35
-## 2 =                17002
-## # A tibble: 2 × 2
-##   DissAmmonia_Sign     n
-##   &lt;chr&gt;            &lt;int&gt;
-## 1 &lt;                  722
-## 2 =                16315
-## # A tibble: 2 × 2
-##   DissBromide_Sign     n
-##   &lt;chr&gt;            &lt;int&gt;
-## 1 &lt;                   57
-## 2 =                16980
-## # A tibble: 2 × 2
-##   DissCalcium_Sign     n
-##   &lt;chr&gt;            &lt;int&gt;
-## 1 &lt;                    1
-## 2 =                17036
-## # A tibble: 2 × 2
-##   DissNitrateNitrite_Sign     n
-##   &lt;chr&gt;                   &lt;int&gt;
-## 1 &lt;                          71
-## 2 =                       16966
-## # A tibble: 2 × 2
-##   DOC_Sign     n
-##   &lt;chr&gt;    &lt;int&gt;
-## 1 &lt;           49
-## 2 =        16988
-## # A tibble: 2 × 2
-##   TOC_Sign     n
-##   &lt;chr&gt;    &lt;int&gt;
-## 1 &lt;           46
-## 2 =        16991
-## # A tibble: 2 × 2
-##   DON_Sign     n
-##   &lt;chr&gt;    &lt;int&gt;
-## 1 &lt;          589
-## 2 =        16448
-## # A tibble: 2 × 2
-##   DissOrthophos_Sign     n
-##   &lt;chr&gt;              &lt;int&gt;
-## 1 &lt;                     59
-## 2 =                  16978
-## # A tibble: 2 × 2
-##   TotPhos_Sign     n
-##   &lt;chr&gt;        &lt;int&gt;
-## 1 &lt;               18
-## 2 =            17019
-## # A tibble: 2 × 2
-##   DissSilica_Sign     n
-##   &lt;chr&gt;           &lt;int&gt;
-## 1 &lt;                   6
-## 2 =               17031
-## # A tibble: 2 × 2
-##   TSS_Sign     n
-##   &lt;chr&gt;    &lt;int&gt;
-## 1 &lt;           32
-## 2 =        17005
-## # A tibble: 2 × 2
-##   VSS_Sign     n
-##   &lt;chr&gt;    &lt;int&gt;
-## 1 &lt;          728
-## 2 =        16309
-## # A tibble: 2 × 2
-##   TKN_Sign     n
-##   &lt;chr&gt;    &lt;int&gt;
-## 1 &lt;           25
-## 2 =        17012</code></pre>
+<pre><code>## # A tibble: 3 × 3
+##   Chlorophyll_Sign Chlorophyll     n
+##   &lt;chr&gt;            &lt;chr&gt;       &lt;int&gt;
+## 1 &lt;                numeric        35
+## 2 =                NA           1061
+## 3 =                numeric     15941
+## # A tibble: 4 × 3
+##   DissAmmonia_Sign DissAmmonia     n
+##   &lt;chr&gt;            &lt;chr&gt;       &lt;int&gt;
+## 1 &lt;                NA             16
+## 2 &lt;                numeric       706
+## 3 =                NA           4760
+## 4 =                numeric     11555
+## # A tibble: 3 × 3
+##   DissBromide_Sign DissBromide     n
+##   &lt;chr&gt;            &lt;chr&gt;       &lt;int&gt;
+## 1 &lt;                numeric        57
+## 2 =                NA          16550
+## 3 =                numeric       430
+## # A tibble: 3 × 3
+##   DissCalcium_Sign DissCalcium     n
+##   &lt;chr&gt;            &lt;chr&gt;       &lt;int&gt;
+## 1 &lt;                numeric         1
+## 2 =                NA          14430
+## 3 =                numeric      2606
+## # A tibble: 4 × 3
+##   DissNitrateNitrite_Sign DissNitrateNitrite     n
+##   &lt;chr&gt;                   &lt;chr&gt;              &lt;int&gt;
+## 1 &lt;                       NA                    13
+## 2 &lt;                       numeric               58
+## 3 =                       NA                  2589
+## 4 =                       numeric            14377
+## # A tibble: 3 × 3
+##   DOC_Sign DOC         n
+##   &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;
+## 1 &lt;        numeric    49
+## 2 =        NA      14430
+## 3 =        numeric  2558
+## # A tibble: 3 × 3
+##   TOC_Sign TOC         n
+##   &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;
+## 1 &lt;        numeric    46
+## 2 =        NA      14431
+## 3 =        numeric  2560
+## # A tibble: 3 × 3
+##   DON_Sign DON         n
+##   &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;
+## 1 &lt;        numeric   589
+## 2 =        NA       2867
+## 3 =        numeric 13581
+## # A tibble: 4 × 3
+##   DissOrthophos_Sign DissOrthophos     n
+##   &lt;chr&gt;              &lt;chr&gt;         &lt;int&gt;
+## 1 &lt;                  NA               10
+## 2 &lt;                  numeric          49
+## 3 =                  NA             4990
+## 4 =                  numeric       11988
+## # A tibble: 3 × 3
+##   TotPhos_Sign TotPhos     n
+##   &lt;chr&gt;        &lt;chr&gt;   &lt;int&gt;
+## 1 &lt;            numeric    18
+## 2 =            NA       4962
+## 3 =            numeric 12057
+## # A tibble: 3 × 3
+##   DissSilica_Sign DissSilica     n
+##   &lt;chr&gt;           &lt;chr&gt;      &lt;int&gt;
+## 1 &lt;               numeric        6
+## 2 =               NA          2577
+## 3 =               numeric    14454
+## # A tibble: 3 × 3
+##   TSS_Sign TSS         n
+##   &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;
+## 1 &lt;        numeric    32
+## 2 =        NA       2550
+## 3 =        numeric 14455
+## # A tibble: 4 × 3
+##   VSS_Sign VSS         n
+##   &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;
+## 1 &lt;        NA          1
+## 2 &lt;        numeric   727
+## 3 =        NA       3060
+## 4 =        numeric 13249
+## # A tibble: 3 × 3
+##   TKN_Sign TKN         n
+##   &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;
+## 1 &lt;        numeric    25
+## 2 =        NA       2515
+## 3 =        numeric 14497</code></pre>
 </div>
 <div id="ncro" class="section level2">
 <h2>NCRO</h2>
-<pre class="r"><code>for (var in names(ls_sign_vars$NCRO)) {
-  ls_sign_vars$NCRO %&gt;% 
-    count(.data[[var]]) %&gt;% 
+<pre class="r"><code>for (var in str_subset(names(ndf_sign_datasets$df_data$NCRO), &quot;_Sign$&quot;, negate = TRUE)) {
+  var_sign &lt;- paste0(var, &quot;_Sign&quot;)
+  ndf_sign_datasets$df_data$NCRO %&gt;% 
+    count(.data[[var_sign]], .data[[var]]) %&gt;% 
     print()
 }</code></pre>
-<pre><code>## # A tibble: 3 × 2
-##   Chlorophyll_Sign     n
-##   &lt;chr&gt;            &lt;int&gt;
-## 1 &lt;                   40
-## 2 =                 3823
-## 3 &lt;NA&gt;              3071
-## # A tibble: 3 × 2
-##   DissAmmonia_Sign     n
-##   &lt;chr&gt;            &lt;int&gt;
-## 1 &lt;                   98
-## 2 =                  805
-## 3 &lt;NA&gt;              6031
-## # A tibble: 3 × 2
-##   DissBromide_Sign     n
-##   &lt;chr&gt;            &lt;int&gt;
-## 1 &lt;                  159
-## 2 =                 4019
-## 3 &lt;NA&gt;              2756
-## # A tibble: 2 × 2
-##   DissChloride_Sign     n
-##   &lt;chr&gt;             &lt;int&gt;
-## 1 =                  4257
-## 2 &lt;NA&gt;               2677
-## # A tibble: 3 × 2
-##   DissNitrateNitrite_Sign     n
-##   &lt;chr&gt;                   &lt;int&gt;
-## 1 &lt;                          43
-## 2 =                         893
-## 3 &lt;NA&gt;                     5998
-## # A tibble: 2 × 2
-##   DOC_Sign     n
-##   &lt;chr&gt;    &lt;int&gt;
-## 1 =          829
-## 2 &lt;NA&gt;      6105
-## # A tibble: 3 × 2
-##   DON_Sign     n
-##   &lt;chr&gt;    &lt;int&gt;
-## 1 &lt;            6
-## 2 =          804
-## 3 &lt;NA&gt;      6124
-## # A tibble: 3 × 2
-##   DissOrthophos_Sign     n
-##   &lt;chr&gt;              &lt;int&gt;
-## 1 &lt;                     21
-## 2 =                    874
-## 3 &lt;NA&gt;                6039
-## # A tibble: 2 × 2
-##   pH_Sign     n
-##   &lt;chr&gt;   &lt;int&gt;
-## 1 =        6089
-## 2 &lt;NA&gt;      845
-## # A tibble: 2 × 2
-##   Turbidity_Sign     n
-##   &lt;chr&gt;          &lt;int&gt;
-## 1 =               4722
-## 2 &lt;NA&gt;            2212
-## # A tibble: 3 × 2
-##   Pheophytin_Sign     n
-##   &lt;chr&gt;           &lt;int&gt;
-## 1 &lt;                 260
-## 2 =                3603
-## 3 &lt;NA&gt;             3071
-## # A tibble: 3 × 2
-##   TKN_Sign     n
-##   &lt;chr&gt;    &lt;int&gt;
-## 1 &lt;            4
-## 2 =          470
-## 3 &lt;NA&gt;      6460
-## # A tibble: 2 × 2
-##   TOC_Sign     n
-##   &lt;chr&gt;    &lt;int&gt;
-## 1 =          827
-## 2 &lt;NA&gt;      6107
-## # A tibble: 3 × 2
-##   TotPhos_Sign     n
-##   &lt;chr&gt;        &lt;int&gt;
-## 1 &lt;                2
-## 2 =              442
-## 3 &lt;NA&gt;          6490
-## # A tibble: 3 × 2
-##   TSS_Sign     n
-##   &lt;chr&gt;    &lt;int&gt;
-## 1 &lt;           55
-## 2 =         2734
-## 3 &lt;NA&gt;      4145
-## # A tibble: 2 × 2
-##   DissCalcium_Sign     n
-##   &lt;chr&gt;            &lt;int&gt;
-## 1 =                  207
-## 2 &lt;NA&gt;              6727
-## # A tibble: 2 × 2
-##   TotAlkalinity_Sign     n
-##   &lt;chr&gt;              &lt;int&gt;
-## 1 =                    205
-## 2 &lt;NA&gt;                6729
-## # A tibble: 3 × 2
-##   VSS_Sign     n
-##   &lt;chr&gt;    &lt;int&gt;
-## 1 &lt;          210
-## 2 =          232
-## 3 &lt;NA&gt;      6492</code></pre>
+<pre><code>## # A tibble: 3 × 3
+##   Chlorophyll_Sign Chlorophyll     n
+##   &lt;chr&gt;            &lt;chr&gt;       &lt;int&gt;
+## 1 &lt;                numeric        40
+## 2 =                numeric      3823
+## 3 &lt;NA&gt;             NA           3071
+## # A tibble: 3 × 3
+##   DissAmmonia_Sign DissAmmonia     n
+##   &lt;chr&gt;            &lt;chr&gt;       &lt;int&gt;
+## 1 &lt;                numeric        98
+## 2 =                numeric       805
+## 3 &lt;NA&gt;             NA           6031
+## # A tibble: 3 × 3
+##   DissBromide_Sign DissBromide     n
+##   &lt;chr&gt;            &lt;chr&gt;       &lt;int&gt;
+## 1 &lt;                numeric       159
+## 2 =                numeric      4019
+## 3 &lt;NA&gt;             NA           2756
+## # A tibble: 2 × 3
+##   DissChloride_Sign DissChloride     n
+##   &lt;chr&gt;             &lt;chr&gt;        &lt;int&gt;
+## 1 =                 numeric       4257
+## 2 &lt;NA&gt;              NA            2677
+## # A tibble: 3 × 3
+##   DissNitrateNitrite_Sign DissNitrateNitrite     n
+##   &lt;chr&gt;                   &lt;chr&gt;              &lt;int&gt;
+## 1 &lt;                       numeric               43
+## 2 =                       numeric              893
+## 3 &lt;NA&gt;                    NA                  5998
+## # A tibble: 2 × 3
+##   DOC_Sign DOC         n
+##   &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;
+## 1 =        numeric   829
+## 2 &lt;NA&gt;     NA       6105
+## # A tibble: 3 × 3
+##   DON_Sign DON         n
+##   &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;
+## 1 &lt;        numeric     6
+## 2 =        numeric   804
+## 3 &lt;NA&gt;     NA       6124
+## # A tibble: 3 × 3
+##   DissOrthophos_Sign DissOrthophos     n
+##   &lt;chr&gt;              &lt;chr&gt;         &lt;int&gt;
+## 1 &lt;                  numeric          21
+## 2 =                  numeric         874
+## 3 &lt;NA&gt;               NA             6039
+## # A tibble: 3 × 3
+##   Pheophytin_Sign Pheophytin     n
+##   &lt;chr&gt;           &lt;chr&gt;      &lt;int&gt;
+## 1 &lt;               numeric      260
+## 2 =               numeric     3603
+## 3 &lt;NA&gt;            NA          3071
+## # A tibble: 3 × 3
+##   TKN_Sign TKN         n
+##   &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;
+## 1 &lt;        numeric     4
+## 2 =        numeric   470
+## 3 &lt;NA&gt;     NA       6460
+## # A tibble: 2 × 3
+##   TOC_Sign TOC         n
+##   &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;
+## 1 =        numeric   827
+## 2 &lt;NA&gt;     NA       6107
+## # A tibble: 3 × 3
+##   TotPhos_Sign TotPhos     n
+##   &lt;chr&gt;        &lt;chr&gt;   &lt;int&gt;
+## 1 &lt;            numeric     2
+## 2 =            numeric   442
+## 3 &lt;NA&gt;         NA       6490
+## # A tibble: 3 × 3
+##   TSS_Sign TSS         n
+##   &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;
+## 1 &lt;        numeric    55
+## 2 =        numeric  2734
+## 3 &lt;NA&gt;     NA       4145
+## # A tibble: 2 × 3
+##   DissCalcium_Sign DissCalcium     n
+##   &lt;chr&gt;            &lt;chr&gt;       &lt;int&gt;
+## 1 =                numeric       207
+## 2 &lt;NA&gt;             NA           6727
+## # A tibble: 2 × 3
+##   TotAlkalinity_Sign TotAlkalinity     n
+##   &lt;chr&gt;              &lt;chr&gt;         &lt;int&gt;
+## 1 =                  numeric         205
+## 2 &lt;NA&gt;               NA             6729
+## # A tibble: 3 × 3
+##   VSS_Sign VSS         n
+##   &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;
+## 1 &lt;        numeric   210
+## 2 =        numeric   232
+## 3 &lt;NA&gt;     NA       6492</code></pre>
 </div>
 <div id="usgs_cawsc" class="section level2">
 <h2>USGS_CAWSC</h2>
-<pre class="r"><code>for (var in names(ls_sign_vars$USGS_CAWSC)) {
-  ls_sign_vars$USGS_CAWSC %&gt;% 
-    count(.data[[var]]) %&gt;% 
+<pre class="r"><code>for (var in str_subset(names(ndf_sign_datasets$df_data$USGS_CAWSC), &quot;_Sign$&quot;, negate = TRUE)) {
+  var_sign &lt;- paste0(var, &quot;_Sign&quot;)
+  ndf_sign_datasets$df_data$USGS_CAWSC %&gt;% 
+    count(.data[[var_sign]], .data[[var]]) %&gt;% 
     print()
 }</code></pre>
-<pre><code>## # A tibble: 3 × 2
-##   Chlorophyll_Sign     n
-##   &lt;chr&gt;            &lt;int&gt;
-## 1 ~                  165
-## 2 &lt;                    1
-## 3 =                16585
-## # A tibble: 3 × 2
-##   DissAmmonia_Sign     n
-##   &lt;chr&gt;            &lt;int&gt;
-## 1 ~                   39
-## 2 &lt;                  872
-## 3 =                15840
-## # A tibble: 3 × 2
-##   DissNitrateNitrite_Sign     n
-##   &lt;chr&gt;                   &lt;int&gt;
-## 1 ~                           8
-## 2 &lt;                         336
-## 3 =                       16407
-## # A tibble: 3 × 2
-##   DissOrthophos_Sign     n
-##   &lt;chr&gt;              &lt;int&gt;
-## 1 ~                     11
-## 2 &lt;                     16
-## 3 =                  16724</code></pre>
+<pre><code>## # A tibble: 4 × 3
+##   Chlorophyll_Sign Chlorophyll     n
+##   &lt;chr&gt;            &lt;chr&gt;       &lt;int&gt;
+## 1 ~                numeric       165
+## 2 &lt;                numeric         1
+## 3 =                NA          15149
+## 4 =                numeric      1436
+## # A tibble: 4 × 3
+##   DissAmmonia_Sign DissAmmonia     n
+##   &lt;chr&gt;            &lt;chr&gt;       &lt;int&gt;
+## 1 ~                numeric        39
+## 2 &lt;                numeric       872
+## 3 =                NA          13888
+## 4 =                numeric      1952
+## # A tibble: 4 × 3
+##   DissNitrateNitrite_Sign DissNitrateNitrite     n
+##   &lt;chr&gt;                   &lt;chr&gt;              &lt;int&gt;
+## 1 ~                       numeric                8
+## 2 &lt;                       numeric              336
+## 3 =                       NA                 13793
+## 4 =                       numeric             2614
+## # A tibble: 4 × 3
+##   DissOrthophos_Sign DissOrthophos     n
+##   &lt;chr&gt;              &lt;chr&gt;         &lt;int&gt;
+## 1 ~                  numeric          11
+## 2 &lt;                  numeric          16
+## 3 =                  NA            13807
+## 4 =                  numeric        2917</code></pre>
 </div>
 </div>
 

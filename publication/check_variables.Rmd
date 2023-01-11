@@ -73,14 +73,32 @@ map(ls_sign_vars, names)
 
 # Inspect Sign variables
 
-Count unique values for each `_Sign` variable in each data set that includes them:
+Count unique values for each `_Sign` variable and its associated data variable in each data set that includes them:
+
+```{r prepare data for sign var analysis}
+ndf_sign_datasets <- 
+  tibble(
+    df_data = ls_all_datasets[c(names(ls_sign_vars))],
+    SignNames = unname(map(df_data, ~ str_subset(names(.x), "_Sign$"))),
+    SignNamesData = map(SignNames, ~ append(.x, str_remove(.x, "_Sign$")))
+  ) %>% 
+  transmute(
+    df_data = map2(
+      df_data,
+      SignNamesData,
+      ~ select(.x, any_of(.y)) %>% 
+        mutate(across(!ends_with("_Sign"), ~ as.character(if_else(is.na(.x), "NA", "numeric"))))
+    )
+  )
+```
 
 ## EMP
 
 ```{r count unique vals EMP}
-for (var in names(ls_sign_vars$EMP)) {
-  ls_sign_vars$EMP %>% 
-    count(.data[[var]]) %>% 
+for (var in str_subset(names(ndf_sign_datasets$df_data$EMP), "_Sign$", negate = TRUE)) {
+  var_sign <- paste0(var, "_Sign")
+  ndf_sign_datasets$df_data$EMP %>% 
+    count(.data[[var_sign]], .data[[var]]) %>% 
     print()
 }
 ```
@@ -88,9 +106,10 @@ for (var in names(ls_sign_vars$EMP)) {
 ## NCRO
 
 ```{r count unique vals NCRO}
-for (var in names(ls_sign_vars$NCRO)) {
-  ls_sign_vars$NCRO %>% 
-    count(.data[[var]]) %>% 
+for (var in str_subset(names(ndf_sign_datasets$df_data$NCRO), "_Sign$", negate = TRUE)) {
+  var_sign <- paste0(var, "_Sign")
+  ndf_sign_datasets$df_data$NCRO %>% 
+    count(.data[[var_sign]], .data[[var]]) %>% 
     print()
 }
 ```
@@ -98,9 +117,10 @@ for (var in names(ls_sign_vars$NCRO)) {
 ## USGS_CAWSC
 
 ```{r count unique vals USGS_CAWSC}
-for (var in names(ls_sign_vars$USGS_CAWSC)) {
-  ls_sign_vars$USGS_CAWSC %>% 
-    count(.data[[var]]) %>% 
+for (var in str_subset(names(ndf_sign_datasets$df_data$USGS_CAWSC), "_Sign$", negate = TRUE)) {
+  var_sign <- paste0(var, "_Sign")
+  ndf_sign_datasets$df_data$USGS_CAWSC %>% 
+    count(.data[[var_sign]], .data[[var]]) %>% 
     print()
 }
 ```
