@@ -77,7 +77,7 @@ NCRO <- mutate(NCROX,
                 # Since NCRO records only in PST, convert to local time to correspond with the other surveys
                 Datetime = with_tz(mdy_hm(`Collection Date`, tz = "Etc/GMT+8"), tzone = "America/Los_Angeles"),
                 Date = date(Datetime)) %>%
-  filter(`Sample Type` == "Normal Sample") %>%
+  filter(`Sample Type` == "Normal Sample", !is.na(sign)) %>%
   left_join(stations) %>%
   rename(StationName = `Long Station Name`) %>%
   left_join(analytes) %>%
@@ -94,7 +94,21 @@ rename_with(~gsub("Result_", "", .x, fixed = TRUE)) %>%
   select(-Conductivity_top_Sign, -Temperature_Sign, -DissolvedOxygen_Sign, -DissolvedOxygen_bottom_Sign,
          -pH_Sign, -Turbidity_Sign)
 
+#reorder to match the others
+NCRO = left_join(NCRO, secHABs) %>%
+  select(Source, Station, Date, Datetime, Latitude, Longitude,Secchi, Microcystis,
+         Temperature,Conductivity,  DissolvedOxygen, DissolvedOxygen_bottom,pH,
+         Turbidity, TotAlkalinity_Sign, TotAlkalinity,
+           DissAmmonia_Sign, DissAmmonia, DissChloride_Sign, DissChloride,
+         DissCalcium_Sign, DissCalcium,
+         Chlorophyll_Sign, Chlorophyll,  Pheophytin_Sign, Pheophytin,
+       DissBromide_Sign,
+         DissBromide, DissNitrateNitrite_Sign,
+        DissNitrateNitrite,DOC_Sign, DOC,  DON_Sign, DON,TKN_Sign, TKN,
+        DissOrthophos_Sign, DissOrthophos, TotPhos_Sign,TotPhos,
+       TOC_Sign, TOC,
+        VSS_Sign, VSS, TSS_Sign, TSS)
 
-NCRO = left_join(NCRO, secHABs)
+
 
 usethis::use_data(NCRO, overwrite = TRUE)

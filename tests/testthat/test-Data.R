@@ -38,3 +38,4 @@ test_that("Errors work correctly", {
   expect_error(wq(Sources="SFBS"), 'You must specify the data sources you wish to include. Choices include
   c("EMP", "STN", "NCRO", "FMWT", "EDSM", "DJFMP", "SDO", "SKT", "SLS", "20mm", "Suisun", "Baystudy", "USBR", "USGS_SFBS", "YBFMP", "USGS_CAWSC")', fixed=TRUE)
 })
+
