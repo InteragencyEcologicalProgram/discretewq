@@ -77,7 +77,7 @@ NCRO <- mutate(NCROX,
                 # Since NCRO records only in PST, convert to local time to correspond with the other surveys
                 Datetime = with_tz(mdy_hm(`Collection Date`, tz = "Etc/GMT+8"), tzone = "America/Los_Angeles"),
                 Date = date(Datetime)) %>%
-  filter(`Sample Type` == "Normal Sample", !is.na(sign)) %>%
+  filter(`Sample Type` == "Normal Sample") %>%
   left_join(stations) %>%
   rename(StationName = `Long Station Name`) %>%
   left_join(analytes) %>%
