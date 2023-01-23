@@ -22,6 +22,10 @@ NCRO3 = read_excel("data-raw/NCRO/WQES South Delta Sample Results 1999-2021.xlsx
 
 NCROX = bind_rows(NCRO1, NCRO2, NCRO3)
 
+#Why do some values have no reporting limits?
+
+test = filter(NCROX, is.na(`Rpt Limit`), Analyte %in% c("Total Kjeldahl Nitrogen", "Dissolved Organic Nitrogen"))
+
 # #station coordinates
 # SDelta_Station_lat_long <- read_csv("data-raw/NCRO/SDelta_Station_lat_long.csv",
 #                                     col_types = cols_only(LongStationName="c", `Latitude (WGS84)`="d",
@@ -90,7 +94,21 @@ rename_with(~gsub("Result_", "", .x, fixed = TRUE)) %>%
   select(-Conductivity_top_Sign, -Temperature_Sign, -DissolvedOxygen_Sign, -DissolvedOxygen_bottom_Sign,
          -pH_Sign, -Turbidity_Sign)
 
+#reorder to match the others
+NCRO = left_join(NCRO, secHABs) %>%
+  select(Source, Station, Date, Datetime, Latitude, Longitude,Secchi, Microcystis,
+         Temperature,Conductivity,  DissolvedOxygen, DissolvedOxygen_bottom,pH,
+         Turbidity, TotAlkalinity_Sign, TotAlkalinity,
+           DissAmmonia_Sign, DissAmmonia, DissChloride_Sign, DissChloride,
+         DissCalcium_Sign, DissCalcium,
+         Chlorophyll_Sign, Chlorophyll,  Pheophytin_Sign, Pheophytin,
+       DissBromide_Sign,
+         DissBromide, DissNitrateNitrite_Sign,
+        DissNitrateNitrite,DOC_Sign, DOC,  DON_Sign, DON,TKN_Sign, TKN,
+        DissOrthophos_Sign, DissOrthophos, TotPhos_Sign,TotPhos,
+       TOC_Sign, TOC,
+        VSS_Sign, VSS, TSS_Sign, TSS)
 
-NCRO = left_join(NCRO, secHABs)
+
 
 usethis::use_data(NCRO, overwrite = TRUE)
