@@ -109,15 +109,19 @@
 #'   \item{DissolvedOxygenPercent_bottom}{Dissolved oxygen percent (dimensionless) at bottom.}
 #'   \item{pH}{pH (dimensionless) at surface.}
 #'   \item{pH_bottom}{pH (dimensionless) at bottom.}
+#'   \item{TotAlkalinity_Sign}{Whether the Total Alkalinity value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
 #'   \item{TotAlkalinity}{Total Alkalinity (mg/L).}
-#'   \item{TotAmmonia}{Total ammonia (mg/L).}
+#'   \item{TotAmmonia_Sign}{Whether the Total Ammonia value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
+#'   \item{TotAmmonia}{Total Ammonia (mg/L).}
 #'   \item{DissAmmonia_Sign}{Whether the Dissolved Ammonia value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
 #'   \item{DissAmmonia}{Dissolved Ammonia (mg/L). If DissAmmonia_Sign is <, this is equal to the reporting limit, NA = RL unknown.}
 #'   \item{DissBromide_Sign}{Whether the Dissolved Bromide value is below the reporting limit or equal to it.}
 #'   \item{DissBromide}{Dissolved bromide (mg/L).}
 #'   \item{DissCalcium_Sign}{Whether the Dissolved Calcium value is below the reporting limit or equal to it.}
 #'   \item{DissCalcium}{Dissolved calcium (mg/L).}
+#'   \item{TotChloride_Sign}{Whether the Total Chloride value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
 #'   \item{TotChloride}{Total chloride (mg/L).}
+#'   \item{DissChloride_Sign}{Whether the Dissolved Chloride value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
 #'   \item{DissChloride}{Dissolved chloride (mg/L).}
 #'   \item{DissNitrateNitrite_Sign}{Whether the Dissolved Nitrate Nitrite value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
 #'   \item{DissNitrateNitrite}{Dissolved Nitrate and Nitrite (mg/L). If DissNitrateNitrite_Sign is <, this is equal to the reporting limit, with NA = RL unknown.}
@@ -127,22 +131,20 @@
 #'   \item{TOC}{Total Organic Carbon (mg/L).}
 #'   \item{DON_Sign}{Whether the Dissolved Organic Nitrate value is below the reporting limit or equal to it.}
 #'   \item{DON}{Dissolved Organic Nitrogen (mg/L).}
+#'   \item{TON_Sign}{Whether the Total Organic Nitrogen value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
 #'   \item{TON}{Total Organic Nitrogen (mg/L).}
-#'   \item{DissOrthophos_Sign}{Whether the Dissolved Ortho-phosphate value is below the reporting limit or equal to it.}
-#'   \item{TOC}{Total organic carbon (mg/L).}
-#'   \item{DON}{Dissolved organic nitrogen (mg/L).}
-#'   \item{TON}{Total organic nitrogen (mg/L).}
-#'   \item{DissOrthophos_Sign}{Whether the Dissolved Orthophos value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
+#'   \item{DissOrthophos_Sign}{Whether the Dissolved Ortho-phosphate value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
 #'   \item{DissOrthophos}{Dissolved Ortho-phosphate (mg/L). If DissOrthophos_Sign is <, this is equal to the reporting limit, with NA = RL unknown.}
 #'   \item{TotPhos_Sign}{Whether the Total Phosphate value is below the reporting limit or equal to it.}
 #'   \item{TotPhos}{Total phosphorous (mg/L).}
 #'   \item{DissSilica_Sign}{Whether the Dissolved Silica value is below the reporting limit or equal to it.}
 #'   \item{DissSilica}{Dissolved silica (mg/L).}
-#'   \item{TDS}{Total dissolved solids (mg/L).}
+#'   \item{TDS_Sign}{Whether the Total Dissolved Solids value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
+#'   \item{TDS}{Total Dissolved Solids (mg/L).}
 #'   \item{TSS_Sign}{Whether the Total Suspended Solids value is below the reporting limit or equal to it.}
-#'   \item{TSS}{Total suspended solids (mg/L).}
+#'   \item{TSS}{Total Suspended Solids (mg/L).}
 #'   \item{VSS_Sign}{Whether the Volatile Suspended Solids value is below the reporting limit or equal to it.}
-#'   \item{VSS}{Volatile suspended solids (mg/L).}
+#'   \item{VSS}{Volatile Suspended Solids (mg/L).}
 #'   \item{TKN_Sign}{Whether the Total Kjeldahl Nitrogen value is below the reporting limit or equal to it.}
 #'   \item{TKN}{Total Kjeldahl Nitrogen (mg/L).}
 #'   }
