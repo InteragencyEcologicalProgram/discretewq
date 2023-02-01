@@ -96,7 +96,7 @@
 #'   \item{Depth}{Bottom depth (m).}
 #'   \item{Tide}{Tidal stage (always High Slack).}
 #'   \item{Microcystis}{Microcystis bloom intensity on a qualitative scale from 1 to 5 where 1 = absent, 2 = low, 3 = medium, 4 = high, and 5 = very high.}
-#'   \item{Chlorophyll_Sign}{Whether the Chlorophyll value is below the reporting limit or equal to it.}
+#'   \item{Chlorophyll_Sign}{Whether the Chlorophyll value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
 #'   \item{Chlorophyll}{Chlorophyll concentration (\eqn{\mu}g \ifelse{html}{\out{L<sup>-1</sup>}}{\eqn{L^{-1}}}).}
 #'   \item{Secchi}{Secchi depth (cm).}
 #'   \item{Temperature}{Temperature (°C) at surface.}
@@ -109,6 +109,12 @@
 #'   \item{DissolvedOxygenPercent_bottom}{Dissolved oxygen percent (dimensionless) at bottom.}
 #'   \item{pH}{pH (dimensionless) at surface.}
 #'   \item{pH_bottom}{pH (dimensionless) at bottom.}
+#'   \item{TurbidityNTU}{Turbidity (NTU) at surface.}
+#'   \item{TurbidityNTU_bottom}{Turbidity (NTU) at bottom.}
+#'   \item{TurbidityFNU}{Turbidity (FNU) at surface.}
+#'   \item{TurbidityFNU_bottom}{Turbidity (FNU) at bottom.}
+#'   \item{Pheophytin_Sign}{Whether the Pheophytin value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
+#'   \item{Pheophytin}{Pheophytin concentration (\eqn{\mu}g \ifelse{html}{\out{L<sup>-1</sup>}}{\eqn{L^{-1}}}).}
 #'   \item{TotAlkalinity_Sign}{Whether the Total Alkalinity value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
 #'   \item{TotAlkalinity}{Total Alkalinity (mg/L).}
 #'   \item{TotAmmonia_Sign}{Whether the Total Ammonia value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}

@@ -18,14 +18,16 @@ EMP_stations <-
   ) %>%
   drop_na()
 
-# read in EMP data
+# read in EMP data (two turbidity units, will change for 2023 to all FNU)
 EMP <- read_csv(file.path(tempdir(), "SACSJ_delta_water_quality_1975_2021.csv"),
                 col_types = cols_only(
                   Station="c", Date="c", Time="c", FieldNotes='c',
                   Chla_Sign="c", Chla="d", Depth="d", Secchi="d", Microcystis="d",
                   SpCndSurface="d", SpCndBottom='d', DOSurface='d', DOBottom='d',
                   DOpercentSurface='d', DOpercentBottom='d', WTSurface="d", WTBottom='d',
-                  pHSurface = 'd', pHBottom = 'd', NorthLat='d', WestLong='d',
+                  pHSurface = 'd', pHBottom = 'd',
+                  TurbiditySurface_NTU = 'd', TurbidityBottom_NTU = 'd', TurbiditySurface_FNU = 'd', TurbidityBottom_FNU = 'd',
+                  NorthLat='d', WestLong='d',
                   Pheophytin_Sign="c", Pheophytin="d", TotAlkalinity_Sign="c", TotAlkalinity="d",
                   TotAmmonia_Sign="c", TotAmmonia="d", DissAmmonia_Sign="c", DissAmmonia="d",
                   DissBromide_Sign="c", DissBromide="d", DissCalcium_Sign="c", DissCalcium="d",
@@ -41,9 +43,17 @@ EMP <- read_csv(file.path(tempdir(), "SACSJ_delta_water_quality_1975_2021.csv"),
 
 # clean data
 EMP <- EMP %>%
-  rename(Notes=FieldNotes, Chlorophyll=Chla, Chlorophyll_Sign=Chla_Sign, Conductivity=SpCndSurface, Conductivity_bottom=SpCndBottom, Temperature=WTSurface, Temperature_bottom=WTBottom, DissolvedOxygen=DOSurface, DissolvedOxygen_bottom=DOBottom,
-         DissolvedOxygenPercent=DOpercentSurface, DissolvedOxygenPercent_bottom=DOpercentBottom, pH=pHSurface,
-         pH_bottom = pHBottom, Latitude=NorthLat, Longitude=WestLong) %>%
+  rename(
+    Notes=FieldNotes, Chlorophyll=Chla, Chlorophyll_Sign=Chla_Sign,
+    Conductivity=SpCndSurface, Conductivity_bottom=SpCndBottom,
+    Temperature=WTSurface, Temperature_bottom=WTBottom,
+    DissolvedOxygen=DOSurface, DissolvedOxygen_bottom=DOBottom,
+    DissolvedOxygenPercent=DOpercentSurface, DissolvedOxygenPercent_bottom=DOpercentBottom,
+    TurbidityFNU = TurbiditySurface_FNU, TurbidityFNU_bottom = TurbidityBottom_FNU,
+    TurbidityNTU = TurbiditySurface_NTU, TurbidityNTU_bottom = TurbidityBottom_NTU,
+    pH=pHSurface, pH_bottom = pHBottom,
+    Latitude=NorthLat, Longitude=WestLong
+    ) %>%
   mutate(Datetime=parse_date_time(if_else(is.na(Time), NA_character_, paste(Date, Time)), "%Y-%m-%d %H:%M:%S", tz="Etc/GMT+8"), # EMP only reports time in PST, which corresponds to Etc/GMT+8 see https://stackoverflow.com/questions/53076575/time-zones-etc-gmt-why-it-is-other-way-round
          Date=parse_date_time(Date, "%Y-%m-%d", tz="America/Los_Angeles"),
          Microcystis=round(Microcystis)) %>% #EMP has some 2.5 and 3.5 values
@@ -64,9 +74,11 @@ EMP <- EMP %>%
 # select cols
 EMP <- EMP %>% select(
   Source, Station, Latitude, Longitude, Field_coords, Date, Datetime, Notes, Depth, Tide,
-  Microcystis, Chlorophyll_Sign, Chlorophyll, Secchi, Temperature, Temperature_bottom,
-  Conductivity, Conductivity_bottom, DissolvedOxygen, DissolvedOxygen_bottom,
-  DissolvedOxygenPercent, DissolvedOxygenPercent_bottom, pH, pH_bottom,
+  Microcystis, Chlorophyll_Sign, Chlorophyll, Secchi,
+  Temperature, Temperature_bottom, Conductivity, Conductivity_bottom,
+  DissolvedOxygen, DissolvedOxygen_bottom, DissolvedOxygenPercent, DissolvedOxygenPercent_bottom,
+  pH, pH_bottom, TurbidityNTU, TurbidityNTU_bottom, TurbidityFNU, TurbidityFNU_bottom,
+  Pheophytin_Sign, Pheophytin,
   TotAlkalinity_Sign, TotAlkalinity, TotAmmonia_Sign, TotAmmonia,
   DissAmmonia_Sign, DissAmmonia, DissBromide_Sign, DissBromide,
   DissCalcium_Sign, DissCalcium, TotChloride_Sign, TotChloride,
