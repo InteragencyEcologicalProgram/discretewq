@@ -149,7 +149,7 @@
 #'   \item{TKN}{Total Kjeldahl Nitrogen (mg/L).}
 #'   }
 #' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.458.6}{here}.
-#' @seealso \code{\link{wq}}
+#' @seealso \code{\link{wq}}; for more information on _Sign variables: [sign_variables]
 "EMP"
 
 #' DJFMP water quality data
@@ -420,7 +420,7 @@
 #'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
 #'   }
 #' @details More metadata and information on methods are available \href{https://nwis.waterdata.usgs.gov/usa/nwis/qwdata}{here for data} and \href{https://help.waterdata.usgs.gov/codes-and-parameters}{here for metadata}.
-#' @seealso \code{\link{wq}}
+#' @seealso \code{\link{wq}}; for more information on _Sign variables: [sign_variables]
 "USGS_CAWSC"
 
 #' YBFMP water quality data
@@ -508,6 +508,21 @@
 #'   }
 #'
 #' @details Contact Jared Frantzich Jared.Frantzich@water.ca.gov for more information.
-#' @seealso \code{\link{wq}}
+#' @seealso \code{\link{wq}}; for more information on _Sign variables: [sign_variables]
 "NCRO"
 
+#' @title Sign Variables
+#' @description For the variables that have the _Sign suffix, the symbols in
+#'   these variables represent three conditions of the value contained in its
+#'   corresponding result variable:
+#' * "<" - The value is below the Reporting Limit (RL) with the value in the
+#' corresponding result variable equal to the RL. An `NA` value in the
+#' corresponding result variable indicates that the RL value is unknown.
+#' * "=" - The value is above the RL with the value in the corresponding result
+#' variable equal to the actual value measured by the laboratory. An `NA` value
+#' in the corresponding result variable indicates that the value is missing or
+#' wasn't collected.
+#' * "~" - The value in the corresponding result variable was estimated by the laboratory.
+#' @name sign_variables
+#' @keywords internal
+NULL

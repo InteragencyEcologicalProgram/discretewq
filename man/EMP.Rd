@@ -82,6 +82,6 @@ Water quality data from the California Department of Water Resources Environment
 More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.458.6}{here}.
 }
 \seealso{
-\code{\link{wq}}
+\code{\link{wq}}; for more information on _Sign variables: \link{sign_variables}
 }
 \keyword{datasets}

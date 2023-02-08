@@ -67,6 +67,6 @@ Water Quality, Chlorophyll, and Nutrients from the South Delta collected by DWR'
 Contact Jared Frantzich Jared.Frantzich@water.ca.gov for more information.
 }
 \seealso{
-\code{\link{wq}}
+\code{\link{wq}}; for more information on _Sign variables: \link{sign_variables}
 }
 \keyword{datasets}
