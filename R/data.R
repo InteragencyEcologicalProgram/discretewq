@@ -474,7 +474,7 @@
 #'   \item{TotAlkalinity}{Total Alkalinity (mg/L).}
 #'   \item{DissAmmonia_Sign}{Whether the Dissolved Ammonia value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
 #'   \item{DissAmmonia}{Dissolved Ammonia (mg/L). If DissAmmonia_Sign is <, this is equal to the reporting limit}
-#'   \item{DissBromide_Sign}{Whether the Dissolved Bromide valueis lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
+#'   \item{DissBromide_Sign}{Whether the Dissolved Bromide value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
 #'   \item{DissBromide}{Dissolved bromide (mg/L). If DissBromide_Sign is <, this is equal to the reporting limit}
 #'   \item{DissCalcium_Sign}{Whether the Dissolved Calcium value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
 #'   \item{DissCalcium}{Dissolved calcium (mg/L). If DissCalcium_Sign is <, this is equal to the reporting limit}
@@ -502,7 +502,7 @@
 #'   \item{TSS}{Total suspended solids (mg/L). If TSS_Sign is <, this is equal to the reporting limit}
 #'   \item{VSS_Sign}{Whether the Volatile Suspended Solids value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "="}
 #'   \item{VSS}{Volatile suspended solids (mg/L). If VSS_Sign is <, this is equal to the reporting limit}
-#'   \item{TKN_Sign}{Whether the Total Kjeldahl Nitrogen value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=". "NA" indcates reporting limit unknown.}
+#'   \item{TKN_Sign}{Whether the Total Kjeldahl Nitrogen value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=". "NA" indicates reporting limit unknown.}
 #'   \item{TKN}{Total Kjeldahl Nitrogen (mg/L). IF TKN_Sign is <, this is equal to the reporting limit.}
 
 #'   }
