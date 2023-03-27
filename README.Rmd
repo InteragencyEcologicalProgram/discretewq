@@ -56,37 +56,37 @@ The dataset is also [published on the Environmental Data Initiative](https://por
 
 ## Data sources
 
-CDFW. 2020a. Bay Study data. [ftp://ftp.wildlife.ca.gov/BayStudy/](ftp://ftp.wildlife.ca.gov/BayStudy/).
+Battey, M. and S. Perry. 2022. Interagency Ecological Program: Discrete water quality monitoring in the Sacramento-San Joaquin Bay-Delta, collected by the Environmental Monitoring Program, 1975-2021. ver 7. Environmental Data Initiative. [doi:10.6073/pasta/3b12b205c1b53290ff555abd809edfcf](https://doi.org/10.6073/pasta/3b12b205c1b53290ff555abd809edfcf)
 
-CDFW. 2020b. Fall Midwater Trawl data. [ftp://ftp.wildlife.ca.gov/TownetFallMidwaterTrawl/FMWT%20Data/](ftp://ftp.wildlife.ca.gov/TownetFallMidwaterTrawl/FMWT%20Data/).
+CDFW. 2022a. Bay Study data. [https://filelib.wildlife.ca.gov/public/BayStudy/](https://filelib.wildlife.ca.gov/public/BayStudy/).
 
-CDFW. 2020c. Summer Townet data. [ftp://ftp.wildlife.ca.gov/TownetFallMidwaterTrawl/TNS MS Access Data/TNS data/](ftp://ftp.wildlife.ca.gov/TownetFallMidwaterTrawl/TNS MS Access Data/TNS data/).
+CDFW. 2022b. Fall Midwater Trawl data. [https://filelib.wildlife.ca.gov/public/TownetFallMidwaterTrawl/FMWT%20Data/](https://filelib.wildlife.ca.gov/public/TownetFallMidwaterTrawl/FMWT%20Data/).
+
+CDFW. 2022c. Summer Townet data. [https://filelib.wildlife.ca.gov/public/TownetFallMidwaterTrawl/TNS%20MS%20Access%20Data/TNS%20data/](https://filelib.wildlife.ca.gov/public/TownetFallMidwaterTrawl/TNS%20MS%20Access%20Data/TNS%20data/).
 
 CDWR. 2022. Water Quality Investigations Section, North Central Region Office. [https://wdl.water.ca.gov/waterdatalibrary/WaterQualityDataLib.aspx](https://wdl.water.ca.gov/waterdatalibrary/WaterQualityDataLib.aspx). 
 
 Cloern, J. E., and T. S. Schraga. 2016. USGS Measurements of Water Quality in San Francisco Bay (CA), 1969-2015 (ver. 3.0 June 2017). U. S. Geological Survey data release. [doi:https://doi.org/10.5066/F7TQ5ZPR](https://doi.org/10.5066/F7TQ5ZPR)
 
-Interagency Ecological Program (IEP), L. Damon, T. Tempel, and A. Chorazyczewski. 2020a. Interagency Ecological Program San Francisco Estuary 20mm Survey 1995 - 2020. Environmental Data Initiative. [doi:10.6073/PASTA/DA7269F6B68975232A2665B211E57229](https://portal.edirepository.org/nis/mapbrowse?scope=edi&identifier=535&revision=2)
+Interagency Ecological Program (IEP), S. Lesmeister, and J. Rinde. 2020. Interagency Ecological Program: Discrete dissolved oxygen monitoring in the Stockton Deep Water Ship Channel, collected by the Environmental Monitoring Program, 1997-2018. ver2. Environmental Data Initiative. [doi:10.6073/PASTA/3268530C683726CD430C81894FFAD768](https://portal.edirepository.org/nis/mapbrowse?packageid=edi.276.2)
 
-Interagency Ecological Program (IEP), L. Damon, T. Tempel, and A. Chorazyczewski. 2020b. Interagency Ecological Program San Francisco Estuary Spring Kodiak Trawl Survey 2002 - 2020. Environmental Data Initiative. [doi:10.6073/PASTA/2EDAAA415ABE672008E0AF7542AA5D31](https://portal.edirepository.org/nis/mapbrowse?scope=edi&identifier=527&revision=2)
+Interagency Ecological Program (IEP), L. Damon, and A. Chorazyczewski. 2021a. Interagency Ecological Program San Francisco Estuary 20mm Survey 1995 - 2021. ver 4. Environmental Data Initiative. [doi:10.6073/pasta/32de8b7ffbe674bc6e79dbcd29ac1cc2](https://doi.org/10.6073/pasta/32de8b7ffbe674bc6e79dbcd29ac1cc2)
 
-Interagency Ecological Program (IEP), L. Damon, T. Tempel, and A. Chorazyczewski. 2021c. Interagency Ecological Program San Francisco Estuary Smelt Larva Survey 2009 – 2021. Environmental Data Initiative. [doi:10.6073/PASTA/696749029898FEF9AD268435BEE54D3D](https://portal.edirepository.org/nis/mapbrowse?scope=edi&identifier=534&revision=3)
+Interagency Ecological Program (IEP), L. Damon, and A. Chorazyczewski. 2021b. Interagency Ecological Program San Francisco Estuary Spring Kodiak Trawl Survey 2002 - 2021. ver 4. Environmental Data Initiative. [doi:10.6073/pasta/f0e2916f4a026f3f812a0855cee74a8d](https://doi.org/10.6073/pasta/f0e2916f4a026f3f812a0855cee74a8d)
 
-Interagency Ecological Program (IEP), S. Lesmeister, and J. Rinde. 2020. Interagency Ecological Program: Discrete dissolved oxygen monitoring in the Stockton Deep Water Ship Channel, collected by the Environmental Monitoring Program, 1997-2018. Environmental Data Initiative. [doi:10.6073/PASTA/3268530C683726CD430C81894FFAD768](https://portal.edirepository.org/nis/mapbrowse?packageid=edi.276.2)
+Interagency Ecological Program (IEP), L. Damon, T. Tempel, and A. Chorazyczewski. 2021c. Interagency Ecological Program San Francisco Estuary Smelt Larva Survey 2009 – 2021. ver 4. Environmental Data Initiative. [doi:10.6073/pasta/8e1ceb1c02fbc8b0ba7a6b58229109f2](https://doi.org/10.6073/pasta/8e1ceb1c02fbc8b0ba7a6b58229109f2)
 
-Interagency Ecological Program (IEP), M. Martinez, and S. Perry. 2021. Interagency Ecological Program: Discrete water quality monitoring in the Sacramento-San Joaquin Bay-Delta, collected by the Environmental Monitoring Program, 1975-2020. Environmental Data Initiative. [doi:10.6073/PASTA/31F724011CAE3D51B2C31C6D144B60B0](https://portal.edirepository.org/nis/mapbrowse?scope=edi&identifier=458&revision=4)
+Interagency Ecological Program (IEP), C. Pien, J. Adams, and N. Kwan. 2021d. Interagency Ecological Program: Zooplankton catch and water quality data from the Sacramento River floodplain and tidal slough, collected by the Yolo Bypass Fish Monitoring Program, 1998-2018. ver 2. Environmental Data Initiative. [doi:10.6073/pasta/baad532af96cba1d58d43b89c08ca081](https://portal.edirepository.org/nis/mapbrowse?packageid=edi.494.2)
 
-Interagency Ecological Program (IEP), R. McKenzie, J. Speegle, A. Nanninga, J. R. Cook, J. Hagen, and B. Mahardja. 2020c. Interagency Ecological Program: Over four decades of juvenile fish monitoring data from the San Francisco Estuary, collected by the Delta Juvenile Fish Monitoring Program, 1976-2019. Environmental Data Initiative. [doi:10.6073/PASTA/41B9EEBED270C0463B41C5795537CA7C](https://portal.edirepository.org/nis/mapbrowse?packageid=edi.244.4)
+Interagency Ecological Program (IEP), R. McKenzie, J. Speegle, A. Nanninga, J.R. Cook, J. Hagen, and B. Mahardja. 2022a. Interagency Ecological Program: Over four decades of juvenile fish monitoring data from the San Francisco Estuary, collected by the Delta Juvenile Fish Monitoring Program, 1976-2021. ver 9. Environmental Data Initiative. [doi:10.6073/pasta/30a3232084be9c936c976fbb6b31c5a2](https://doi.org/10.6073/pasta/30a3232084be9c936c976fbb6b31c5a2)
 
-Interagency Ecological Program (IEP), C. Pien, and N. Kwan. 2022. Interagency Ecological Program: Fish catch and water quality data from the Sacramento River floodplain and tidal slough, collected by the Yolo Bypass Fish Monitoring Program, 1998-2021. ver 3. Environmental Data Initiative. [doi:10.6073/pasta/f5c4362f4a1f370723e2b9113432909f](https://portal.edirepository.org/nis/mapbrowse?packageid=edi.233.3)
+Interagency Ecological Program (IEP), C. Pien, and N. Kwan. 2022b. Interagency Ecological Program: Fish catch and water quality data from the Sacramento River floodplain and tidal slough, collected by the Yolo Bypass Fish Monitoring Program, 1998-2021. ver 3. Environmental Data Initiative. [doi:10.6073/pasta/f5c4362f4a1f370723e2b9113432909f](https://portal.edirepository.org/nis/mapbrowse?packageid=edi.233.3)
 
-Interagency Ecological Program (IEP), C. Pien, J. Adams, and N. Kwan. 2021. Interagency Ecological Program: Zooplankton catch and water quality data from the Sacramento River floodplain and tidal slough, collected by the Yolo Bypass Fish Monitoring Program, 1998-2018. ver 2. Environmental Data Initiative. [doi:10.6073/pasta/baad532af96cba1d58d43b89c08ca081](https://portal.edirepository.org/nis/mapbrowse?packageid=edi.494.2)
-
-O’Rear, T., J. Durand, and P. Moyle. 2020. Suisun Marsh Fish Study. [https://watershed.ucdavis.edu/project/suisun-marsh-fish-study](https://watershed.ucdavis.edu/project/suisun-marsh-fish-study).
+O’Rear, T., J. Durand, and P. Moyle. 2022. Suisun Marsh Fish Study. [https://watershed.ucdavis.edu/project/suisun-marsh-fish-study](https://watershed.ucdavis.edu/project/suisun-marsh-fish-study).
 
 Schraga, T. S., E. S. Nejad, C. A. Martin, and J. E. Cloern. 2020. USGS measurements of water quality in San Francisco Bay (CA), beginning in 2016 (ver. 3.0, March 2020). U. S. Geological Survey data release. [doi:https://doi.org/10.5066/F7D21WGF](https://doi.org/10.5066/F7D21WGF)
 
-United States Fish And Wildlife Service, C. Johnston, S. Durkacz, and others. 2020. Interagency Ecological Program and US Fish and Wildlife Service: San Francisco Estuary Enhanced Delta Smelt Monitoring Program data, 2016-2020. Environmental Data Initiative. [doi:10.6073/PASTA/764F27FF6B0A7B11A487A71C90397084](https://portal.edirepository.org/nis/mapbrowse?packageid=edi.415.3)
+United States Fish and Wildlife Service, T. Senegal, R. Mckenzie, J. Speegle, B. Perales, D. Bridgman, K. Erly, S. Staiger, A. Arrambide, and M. Gilbert. 2022. Interagency Ecological Program and US Fish and Wildlife Service: San Francisco Estuary Enhanced Delta Smelt Monitoring Program data, 2016-2021. Environmental Data Initiative. [doi:10.6073/pasta/e1a540c161b7be56b941df50fd7b44c5](https://doi.org/10.6073/pasta/e1a540c161b7be56b941df50fd7b44c5)
 
 U.S. Geological Survey. 2022. USGS water data for the Nation: U.S. Geological Survey National Water Information System database, accessed October 21, 2022, at
 [doi:10.5066/F7P55KJN](https://doi.org/10.5066/F7P55KJN)

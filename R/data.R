@@ -74,7 +74,7 @@
 #'   \item{DissolvedOxygen_bottom}{Dissolved oxygen (mg/L) at bottom.}
 #'   \item{Notes}{Comments.}
 #'   }
-#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.415.1}{here}.
+#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.415.8}{here}.
 #' @seealso \code{\link{wq}}
 "EDSM"
 
@@ -154,7 +154,7 @@
 #'   \item{TKN_Sign}{Whether the TKN value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
 #'   \item{TKN}{Total Kjeldahl Nitrogen (mg/L).}
 #'   }
-#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.458.6}{here}.
+#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.458.7}{here}.
 #' @seealso \code{\link{wq}}; for more information on _Sign variables: [sign_variables]
 "EMP"
 
@@ -176,7 +176,7 @@
 #'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
 #'   \item{DissolvedOxygen}{Dissolved oxygen (mg/L) at surface.}
 #'   }
-#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.244.3}{here}.
+#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.244.8}{here}.
 #' @seealso \code{\link{wq}}
 "DJFMP"
 

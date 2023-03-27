@@ -33,7 +33,7 @@ EDSM
 Water quality data from the United States Fish and Wildlife Service Enhanced Delta Smelt Monitoring Program.
 }
 \details{
-More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.415.1}{here}.
+More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.415.8}{here}.
 }
 \seealso{
 \code{\link{wq}}
