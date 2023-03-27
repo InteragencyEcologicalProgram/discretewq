@@ -50,6 +50,18 @@ VSS_Sign	~	The value in the corresponding column is estimated.
 DissSilica_Sign	<	"Below reporting limit. The value in the corresponding column represents the reporting limit, not the actual measured value (since the measured value was below the reporting limit and thus could not be measured). If the value in the corresponding column is NA, the reporting value is unknown and the true value is below it."
 DissSilica_Sign	=	The value in the corresponding column is the true mesasured value because the measured value was at or above the reporting limit
 DissSilica_Sign	~	The value in the corresponding column is estimated.
+TotAmmonia_Sign	<	"Below reporting limit. The value in the corresponding column represents the reporting limit, not the actual measured value (since the measured value was below the reporting limit and thus could not be measured). If the value in the corresponding column is NA, the reporting value is unknown and the true value is below it."
+TotAmmonia_Sign	=	The value in the corresponding column is the true mesasured value because the measured value was at or above the reporting limit
+TotAmmonia_Sign	~	The value in the corresponding column is estimated.
+TotChloride_Sign	<	"Below reporting limit. The value in the corresponding column represents the reporting limit, not the actual measured value (since the measured value was below the reporting limit and thus could not be measured). If the value in the corresponding column is NA, the reporting value is unknown and the true value is below it."
+TotChloride_Sign	=	The value in the corresponding column is the true mesasured value because the measured value was at or above the reporting limit
+TotChloride_Sign	~	The value in the corresponding column is estimated.
+TON_Sign	<	"Below reporting limit. The value in the corresponding column represents the reporting limit, not the actual measured value (since the measured value was below the reporting limit and thus could not be measured). If the value in the corresponding column is NA, the reporting value is unknown and the true value is below it."
+TON_Sign	=	The value in the corresponding column is the true mesasured value because the measured value was at or above the reporting limit
+TON_Sign	~	The value in the corresponding column is estimated.
+TDS_Sign	<	"Below reporting limit. The value in the corresponding column represents the reporting limit, not the actual measured value (since the measured value was below the reporting limit and thus could not be measured). If the value in the corresponding column is NA, the reporting value is unknown and the true value is below it."
+TDS_Sign	=	The value in the corresponding column is the true mesasured value because the measured value was at or above the reporting limit
+TDS_Sign	~	The value in the corresponding column is estimated.
 Field_coords	FALSE	"Coordinates were not recorded in the field. These coordinates represent the target location (e.g., location of the fixed sampling station)."
 Field_coords	TRUE	Coordinates were recorded in the field and represent the exact location the sample was collected
 Microcystis	1	absent

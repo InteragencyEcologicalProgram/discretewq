@@ -5,7 +5,7 @@
 # Update EMLassemblyline and load
 
 #remotes::install_github("EDIorg/EMLassemblyline")
-devtools::install_github("sbashevkin/discretewq")
+devtools::install_github("InteragencyEcologicalProgram/discretewq")
 library(EMLassemblyline)
 library(EML)
 library(dplyr)
@@ -34,12 +34,15 @@ data<-data_raw%>%
   select(Source, Station=StationID, Latitude, Longitude, Field_coords, Date, Datetime, Depth,
          Sample_depth_surface, Sample_depth_nutr_surface, Sample_depth_bottom, Tide, Temperature, Temperature_bottom,
          Conductivity, Conductivity_bottom, Salinity, Salinity_bottom, Secchi, Secchi_estimated,
-         Turbidity, Microcystis, Chlorophyll_Sign, Chlorophyll, Pheophytin, Pheophytin_Sign,
+         TurbidityNTU, TurbidityNTU_bottom, TurbidityFNU, TurbidityFNU_bottom, Microcystis,
+         Chlorophyll_Sign, Chlorophyll, Pheophytin, Pheophytin_Sign,
          DissolvedOxygen, DissolvedOxygen_bottom, DissolvedOxygenPercent, DissolvedOxygenPercent_bottom,
-         pH, pH_bottom, TotAlkalinity, TotAlkalinity_Sign, TotAmmonia, DissAmmonia_Sign, DissAmmonia,
-         DissBromide, DissBromide_Sign, DissCalcium, DissCalcium_Sign, TotChloride, DissChloride, DissChloride_Sign, DissNitrateNitrite_Sign,
-         DissNitrateNitrite, DOC, DOC_Sign, TOC, TOC_Sign, DON, DON_Sign, TON, DissOrthophos_Sign, DissOrthophos, TotPhos, TotPhos_Sign,
-         DissSilica, DissSilica_Sign, TDS, TSS, TSS_Sign, VSS, VSS_Sign, TKN, TKN_Sign, Notes)
+         pH, pH_bottom, TotAlkalinity, TotAlkalinity_Sign, TotAmmonia, TotAmmonia_Sign, DissAmmonia_Sign, DissAmmonia,
+         DissBromide, DissBromide_Sign, DissCalcium, DissCalcium_Sign, TotChloride, TotChloride_Sign,
+         DissChloride, DissChloride_Sign, DissNitrateNitrite_Sign,
+         DissNitrateNitrite, DOC, DOC_Sign, TOC, TOC_Sign, DON, DON_Sign, TON, TON_Sign,
+         DissOrthophos_Sign, DissOrthophos, TotPhos, TotPhos_Sign,
+         DissSilica, DissSilica_Sign, TDS, TDS_Sign, TSS, TSS_Sign, VSS, VSS_Sign, TKN, TKN_Sign, Notes)
 
 write_csv(data, file.path(path_data, "Delta_Integrated_WQ.csv"))
 # Create metadata templates ---------------------------------------------------
