@@ -5,21 +5,21 @@ require(tidyr)
 require(lubridate)
 
 # import data from EDI to temp dir
-download.file("https://portal.edirepository.org/nis/dataviewer?packageid=edi.458.7&entityid=dfeaee030be901ae00b8c0449ea39e9c",
-              file.path(tempdir(), "SACSJ_delta_water_quality_1975_2021.csv"), mode="wb")
-download.file("https://portal.edirepository.org/nis/dataviewer?packageid=edi.458.7&entityid=ecf241d54a8335a49f8dfc8813d75609",
-              file.path(tempdir(), "EMP_Discrete_Water_Quality_Stations_1975-2021.csv"), mode="wb")
+download.file("https://portal.edirepository.org/nis/dataviewer?packageid=edi.458.8&entityid=cf231071093ac2861893793517db26f3",
+              file.path(tempdir(), "EMP_DWQ_1975_2022.csv"), mode="wb")
+download.file("https://portal.edirepository.org/nis/dataviewer?packageid=edi.458.8&entityid=86dd696bc3f8407ff52954094e1e9dcf",
+              file.path(tempdir(), "EMP_DWQ_Stations_1975-2022"), mode="wb")
 
 # read in station data
 EMP_stations <-
   read_csv(
-    file.path(tempdir(), "EMP_Discrete_Water_Quality_Stations_1975-2021.csv"),
+    file.path(tempdir(), "EMP_DWQ_Stations_1975-2022"),
     col_types = cols_only(Station="c", Latitude="d", Longitude="d")
   ) %>%
   drop_na()
 
 # read in EMP data (two turbidity units, will change for 2023 to all FNU)
-EMP <- read_csv(file.path(tempdir(), "SACSJ_delta_water_quality_1975_2021.csv"),
+EMP <- read_csv(file.path(tempdir(), "EMP_DWQ_1975_2022.csv"),
                 col_types = cols_only(
                   Station="c", Date="c", Time="c", FieldNotes='c',
                   Chla_Sign="c", Chla="d", Depth="d", Secchi="d", Microcystis="d",
