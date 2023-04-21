@@ -1,0 +1,77 @@
+StationNumber,StationName,ShortStationName,NumSamples,MinDate,MaxDate
+(NONE),Old River near Bacon Island @ USGS Pile,( None ),2,2007-09-18,2008-04-03
+(NONE),Veale Drain,( None ),1,2002-09-04,2002-09-04
+(UserDefined),COP/MSS/Paradise Cut,(User Defined),5,2021-09-02,2021-09-29
+(UserDefined),Holland Cut at Holland Marina,(User Defined),15,2001-08-01,2001-11-07
+(UserDefined),Middle River @ Undine Road,(User Defined),1,2002-08-15,2002-08-15
+(UserDefined),Middle River near Tracy Road,(User Defined),17,2003-01-15,2006-02-08
+(UserDefined),Old River at Bacon Island,(User Defined),58,2001-11-15,2003-12-09
+(UserDefined),Old River at Bacon Island,Old River @ Bacon Island Floating Mailbox Platform,95,2004-03-09,2008-04-17
+(UserDefined),Old River near Bacon Island @ USGS Pile,Old River at Bacon Island,19,2010-02-02,2011-03-29
+(UserDefined),PC11,(User Defined),1,2021-10-26,2021-10-26
+(UserDefined),Rock Slough - 100 yards East of Veale Drain Pipe,(User Defined),26,2002-01-15,2004-01-20
+(UserDefined),Rock Slough - 100 yards East of Veale Drain Pipe,Rock Slough - 100 yards East of Veale Drain Pipe,3,2004-03-17,2005-01-18
+(UserDefined),Rock Slough - 100 yards West of Veale Drain Pipe,(User Defined),26,2002-01-15,2004-01-20
+(UserDefined),Rock Slough - 100 yards West of Veale Drain Pipe,Rock Slough - 100 yards West of Veale Drain Pipe,3,2004-03-17,2005-01-18
+(UserDefined),Rock Slough @ CCWD,(User Defined),37,2006-10-31,2008-04-03
+(UserDefined),Rock Slough @ Contra Costa WD Fish Screen,(User Defined),100,2001-08-23,2008-04-17
+(UserDefined),Rock Slough @ Contra Costa WD Fish Screen,Rock Slough @ CCWD Trash Rack,29,2004-03-09,2006-08-25
+(UserDefined),Rock Slough @ Contra Costa WD Fish Screen,Rock Slough at CCWD Trash Rack,40,2010-02-02,2012-08-30
+(UserDefined),Rock Slough @ Dead End,(User Defined),22,2001-08-01,2002-04-09
+(UserDefined),Rock Slough @ North Side,(User Defined),70,2001-08-10,2004-01-20
+(UserDefined),Rock Slough @ Sand Mound,(User Defined),49,2001-08-01,2002-11-15
+(UserDefined),Rock Slough @ Tide Gauge,(User Defined),3,2001-08-01,2001-08-16
+(UserDefined),Rock Slough Between Towers,(User Defined),1,2002-04-09,2002-04-09
+(UserDefined),Rock Slough at GD Howard Cut,(User Defined),1,2003-11-14,2003-11-14
+(UserDefined),San Joaquin River at Blind Point,(User Defined),2,2010-02-11,2010-02-17
+(UserDefined),Sugar Cut 2,(User Defined),1,2021-10-26,2021-10-26
+(UserDefined),Veale Drain Data (Draining),(User Defined),2,2003-01-29,2003-06-11
+B9203300,Three Mile Slough at San Joaquin River,3 Mile Slough,22,2007-04-10,2009-12-30
+B9204500,Mokelumne River near Highway 12,MOK near HWY 12,194,2008-04-04,2021-11-17
+B9522200,Rock Slough @ Contra Costa WD Fish Screen,RS @CCWD Fish Screen,87,2015-04-14,2021-12-09
+B9536500,Old River Downstream DMC Barrier,OR@DMC-DS,429,1999-06-02,2021-11-02
+B9536600,Old River above DMC Barrier,OR@DMC-US,434,1999-05-11,2017-11-28
+B9537000,Old River Upstream of Mountain House Creek,OR up Mtn House Crk,75,2015-02-25,2021-10-05
+B9591000,Contra Costa PP Number 01,CONCOSPP1,146,2008-04-23,2015-03-03
+B9D72921327,Grant Line Canal near Old River,GLC n. OR,246,2007-02-02,2021-12-14
+B9D74721184,San Joaquin River @ Mossdale Bridge - C7A,C7A - Mossdale,2,2018-06-01,2018-09-20
+B9D74761253,Sugar Cut downstream of Tom Paine Slough,SUGAR CUT,84,2014-05-20,2021-12-01
+B9D74811224,Paradise Cut Upstream,Paradise C Upstream,37,2018-07-11,2021-09-29
+B9D74811247,Paradise Cut,PARADISE CUT,81,2014-05-20,2021-12-01
+B9D74821274,Old River at Tracy Wildlife Association,Old River at TWA,314,2000-10-26,2021-12-01
+B9D74831270,Old River @ Tracy Road Bridge - P12,P12 - OR@TracyRdBr,202,1999-05-11,2015-04-29
+B9D74851200,Old River below Headwaters,OLD R BL HEAD,433,1999-05-11,2021-12-01
+B9D74871232,Old River near Doughty Cut - ORX,OR Nr DOUGHTY CUT,91,2014-05-30,2021-12-01
+B9D74911256,Doughty Cut near Grantline Canal,DOUGHTY CUT - DGL,388,1999-05-11,2018-07-17
+B9D74921216,Old River near Head,OR nr Head,48,2002-07-30,2018-09-20
+B9D74921261,Grant Line Canal East,GLC-East,143,2013-03-21,2021-12-01
+B9D74921269,Grant Ln Can @ Tracy Rd Bdg,GLC@Tracy,415,1999-05-11,2018-07-17
+B9D74921510,Grantline Canal above Dam,GLCaboveDam,300,1999-06-08,2013-08-27
+B9D74971332,Old River Below Clifton Court Intake,ORI,41,2018-05-24,2021-12-14
+B9D74991332,West Canal Above Clifton Court Intake,WCI,40,2018-06-13,2021-12-14
+B9D75011230,Middle River at Undine Road,MR@UNDINE,482,1999-05-11,2021-12-01
+B9D75231318,Victoria Canal near Byron,Victoria Canal,244,2007-04-27,2021-12-14
+B9D75261230,Middle River at Howard Road,MR at Howard Rd.,308,2001-01-24,2021-12-01
+B9D75291273,Middle R @ Tracy Rd Bdg,MRIVTRACY,206,1999-05-11,2010-11-17
+B9D75291280,Middle River near Tracy Road,MR n. Tracy Rd.,232,2006-02-15,2021-12-01
+B9D75351292,Middle River @ Union Point - P10A,MR@UnionPt/P10A,421,1999-05-11,2018-11-27
+B9D75781357,Werner Dredger Cut near Palm Tract,WDC. n. Palm Tract,238,2007-06-20,2021-12-09
+B9D75811344,Old River at Bacon Island,OR@Bacon Is,167,1999-03-17,2011-04-06
+B9D75821343A,Old River near Bacon Island @ USGS Pile,OBI @ USGS Pile,236,2007-08-17,2021-12-08
+B9D75841349,Holland Cut at Holland Marina,HC@HollandMarina,542,2001-11-15,2021-12-09
+B9D75861372,Rock Slough at Delta Road Bridge,RS@DRB,462,2002-11-20,2021-12-09
+B9D75961273,"Turner Cut near Holt, CA",Turner Cut,147,2011-07-20,2021-12-08
+B9D80021306,Middle River near Holt,Middle River Nr Holt,212,2005-12-06,2021-12-08
+B9D80101349,Holland Cut near Bethel Island,Holland Cut Nr BI,266,2005-10-20,2021-12-08
+B9D80161339,Old River at Quimby Island,OR at Quimby Island,212,2005-10-20,2021-12-08
+B9D80201431,San Joaquin River at Blind Point,Blind Point,204,2010-03-16,2021-12-30
+B9D80251385,Bethel Island near Piper Slough,Bethel near Piper,122,2014-05-20,2021-12-30
+B9D80311414,San Joaquin River @ Jersey Point - D15,D15 - Jersey Pt,2,2010-02-02,2010-02-23
+B9D80331400,False River near Oakley,False R Nr Oakley,206,2005-10-20,2021-11-17
+B9D80361334,San Joaquin River at Prisoner's Point,SJR at Prisoner's P,38,2005-12-06,2010-02-16
+B9D80411389,Fisherman's Cut,Fisherman's Cut,94,2014-05-28,2021-11-17
+B9D80431347,Old River near Frank's Tract,OR Nr Franks Tract,206,2005-10-20,2021-11-17
+B9D80621412,Three Mile Slough at San Joaquin River,Three Mile Slough,174,2009-12-30,2021-11-17
+B9D81051394,Sacramento River Downstream of Isleton,Sac R. DS Isleton,88,2015-06-12,2021-11-30
+B9S81131386,Steamboat Slough,Steamboat Slough,89,2015-06-12,2021-11-30
+B9S81421400,Miner Slough near Sacramento River,Miner Slough nr SR,90,2015-06-12,2021-11-30

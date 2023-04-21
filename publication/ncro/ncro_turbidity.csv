@@ -1,0 +1,94 @@
+StationNumber,StationName,Analyte,Method,NumSamples,MinDate,MaxDate
+(UserDefined),COP/MSS/Paradise Cut,Field Turbidity,"Turbidity, Sonde [D-2]*",5,2021-09-02,2021-09-29
+(UserDefined),Middle River near Tracy Road,Field Turbidity,EPA 180.1 (Field) [D-2]*,7,2003-01-15,2003-11-20
+(UserDefined),PC11,Field Turbidity,"Turbidity, Sonde [D-2]*",1,2021-10-26,2021-10-26
+(UserDefined),San Joaquin River at Blind Point,Field Turbidity,EPA 180.1 (Field) [D-2]*,2,2010-02-11,2010-02-17
+(UserDefined),Sugar Cut 2,Field Turbidity,"Turbidity, Sonde [D-2]*",1,2021-10-26,2021-10-26
+B9203300,Three Mile Slough at San Joaquin River,Field Turbidity,EPA 180.1 (Field) [D-2]*,21,2008-05-30,2009-12-30
+B9204500,Mokelumne River near Highway 12,Field Turbidity,EPA 180.1 (Field) [D-2]*,179,2008-04-04,2021-11-17
+B9204500,Mokelumne River near Highway 12,Field Turbidity,"Turbidity, Sonde [D-2]*",14,2019-09-17,2021-04-20
+B9522200,Rock Slough @ Contra Costa WD Fish Screen,Field Turbidity,"Turbidity, Sonde [D-2]*",23,2019-09-10,2021-12-09
+B9536500,Old River Downstream DMC Barrier,Field Turbidity,EPA 180.1 (Field) [D-2]*,198,2008-03-21,2019-07-31
+B9536500,Old River Downstream DMC Barrier,Field Turbidity,"Turbidity, Sonde [D-2]*",24,2019-08-27,2021-11-02
+B9536500,Old River Downstream DMC Barrier,Turbidity,EPA 180.1 [D-2]*,179,1999-06-02,2010-11-17
+B9536600,Old River above DMC Barrier,Field Turbidity,EPA 180.1 (Field) [D-2]*,205,2002-07-30,2017-11-28
+B9536600,Old River above DMC Barrier,Turbidity,EPA 180.1 [D-2]*,183,1999-05-11,2010-11-17
+B9537000,Old River Upstream of Mountain House Creek,Field Turbidity,EPA 180.1 (Field) [D-2]*,40,2015-07-10,2019-07-31
+B9537000,Old River Upstream of Mountain House Creek,Field Turbidity,"Turbidity, Sonde [D-2]*",21,2019-08-27,2021-10-05
+B9D72921327,Grant Line Canal near Old River,Field Turbidity,EPA 180.1 (Field) [D-2]*,201,2008-03-21,2019-07-31
+B9D72921327,Grant Line Canal near Old River,Field Turbidity,"Turbidity, Sonde [D-2]*",25,2019-08-27,2021-12-14
+B9D74721184,San Joaquin River @ Mossdale Bridge - C7A,Field Turbidity,EPA 180.1 (Field) [D-2]*,2,2018-06-01,2018-09-20
+B9D74761253,Sugar Cut downstream of Tom Paine Slough,Field Turbidity,EPA 180.1 (Field) [D-2]*,36,2014-05-20,2019-08-06
+B9D74761253,Sugar Cut downstream of Tom Paine Slough,Field Turbidity,"Turbidity, Sonde [D-2]*",22,2019-09-04,2021-12-01
+B9D74811224,Paradise Cut Upstream,Field Turbidity,EPA 180.1 (Field) [D-2]*,15,2018-07-11,2019-08-21
+B9D74811224,Paradise Cut Upstream,Field Turbidity,"Turbidity, Sonde [D-2]*",17,2019-09-11,2021-09-29
+B9D74811247,Paradise Cut,Field Turbidity,EPA 180.1 (Field) [D-2]*,36,2014-05-20,2019-08-06
+B9D74811247,Paradise Cut,Field Turbidity,"Turbidity, Sonde [D-2]*",23,2019-09-04,2021-12-01
+B9D74821274,Old River at Tracy Wildlife Association,Field Turbidity,EPA 180.1 (Field) [D-2]*,232,2000-10-26,2020-12-04
+B9D74821274,Old River at Tracy Wildlife Association,Field Turbidity,"Turbidity, Sonde [D-2]*",29,2019-09-11,2021-12-01
+B9D74831270,Old River @ Tracy Road Bridge - P12,Field Turbidity,EPA 180.1 (Field) [D-2]*,1,2015-01-22,2015-01-22
+B9D74831270,Old River @ Tracy Road Bridge - P12,Turbidity,EPA 180.1 [D-2]*,183,1999-05-11,2010-11-17
+B9D74851200,Old River below Headwaters,Field Turbidity,EPA 180.1 (Field) [D-2]*,195,2008-03-18,2019-08-06
+B9D74851200,Old River below Headwaters,Field Turbidity,"Turbidity, Sonde [D-2]*",27,2019-09-04,2021-12-01
+B9D74851200,Old River below Headwaters,Turbidity,EPA 180.1 [D-2]*,183,1999-05-11,2010-11-17
+B9D74871232,Old River near Doughty Cut - ORX,Field Turbidity,EPA 180.1 (Field) [D-2]*,42,2014-07-08,2019-08-06
+B9D74871232,Old River near Doughty Cut - ORX,Field Turbidity,"Turbidity, Sonde [D-2]*",27,2019-09-04,2021-12-01
+B9D74911256,Doughty Cut near Grantline Canal,Field Turbidity,EPA 180.1 (Field) [D-2]*,179,2008-03-18,2018-07-17
+B9D74911256,Doughty Cut near Grantline Canal,Turbidity,EPA 180.1 [D-2]*,183,1999-05-11,2010-11-17
+B9D74921216,Old River near Head,Field Turbidity,EPA 180.1 (Field) [D-2]*,27,2002-07-30,2018-09-20
+B9D74921261,Grant Line Canal East,Field Turbidity,EPA 180.1 (Field) [D-2]*,114,2013-03-21,2019-08-06
+B9D74921261,Grant Line Canal East,Field Turbidity,"Turbidity, Sonde [D-2]*",27,2019-09-04,2021-12-01
+B9D74921269,Grant Ln Can @ Tracy Rd Bdg,Field Turbidity,EPA 180.1 (Field) [D-2]*,194,2008-03-17,2018-06-20
+B9D74921269,Grant Ln Can @ Tracy Rd Bdg,Turbidity,EPA 180.1 [D-2]*,182,1999-05-11,2010-11-17
+B9D74921510,Grantline Canal above Dam,Field Turbidity,EPA 180.1 (Field) [D-2]*,98,2008-03-21,2013-08-27
+B9D74921510,Grantline Canal above Dam,Turbidity,EPA 180.1 [D-2]*,175,1999-06-08,2010-11-17
+B9D74971332,Old River Below Clifton Court Intake,Field Turbidity,EPA 180.1 (Field) [D-2]*,15,2018-05-24,2019-07-31
+B9D74971332,Old River Below Clifton Court Intake,Field Turbidity,"Turbidity, Sonde [D-2]*",25,2019-08-28,2021-12-14
+B9D74991332,West Canal Above Clifton Court Intake,Field Turbidity,EPA 180.1 (Field) [D-2]*,14,2018-06-13,2019-07-31
+B9D74991332,West Canal Above Clifton Court Intake,Field Turbidity,"Turbidity, Sonde [D-2]*",25,2019-08-28,2021-12-14
+B9D75011230,Middle River at Undine Road,Field Turbidity,EPA 180.1 (Field) [D-2]*,225,2002-07-30,2019-08-14
+B9D75011230,Middle River at Undine Road,Field Turbidity,"Turbidity, Sonde [D-2]*",26,2019-09-18,2021-12-01
+B9D75011230,Middle River at Undine Road,Turbidity,EPA 180.1 [D-2]*,183,1999-05-11,2010-11-17
+B9D75231318,Victoria Canal near Byron,Field Turbidity,EPA 180.1 (Field) [D-2]*,203,2008-03-21,2019-07-31
+B9D75231318,Victoria Canal near Byron,Field Turbidity,"Turbidity, Sonde [D-2]*",25,2019-08-28,2021-12-14
+B9D75261230,Middle River at Howard Road,Field Turbidity,EPA 180.1 (Field) [D-2]*,226,2001-01-24,2019-08-14
+B9D75261230,Middle River at Howard Road,Field Turbidity,"Turbidity, Sonde [D-2]*",26,2019-09-18,2021-12-01
+B9D75291273,Middle R @ Tracy Rd Bdg,Turbidity,EPA 180.1 [D-2]*,183,1999-05-11,2010-11-17
+B9D75291280,Middle River near Tracy Road,Field Turbidity,EPA 180.1 (Field) [D-2]*,196,2008-03-07,2019-08-14
+B9D75291280,Middle River near Tracy Road,Field Turbidity,"Turbidity, Sonde [D-2]*",26,2019-09-18,2021-12-01
+B9D75351292,Middle River @ Union Point - P10A,Field Turbidity,EPA 180.1 (Field) [D-2]*,206,2008-03-17,2018-11-27
+B9D75351292,Middle River @ Union Point - P10A,Turbidity,EPA 180.1 [D-2]*,183,1999-05-11,2010-11-17
+B9D75781357,Werner Dredger Cut near Palm Tract,Field Turbidity,"Turbidity, Sonde [D-2]*",24,2019-09-10,2021-12-09
+B9D75821343A,Old River near Bacon Island @ USGS Pile,Field Turbidity,EPA 180.1 (Field) [D-2]*,194,2008-01-30,2019-08-01
+B9D75821343A,Old River near Bacon Island @ USGS Pile,Field Turbidity,"Turbidity, Sonde [D-2]*",25,2019-09-10,2021-12-08
+B9D75841349,Holland Cut at Holland Marina,Field Turbidity,"Turbidity, Sonde [D-2]*",24,2019-09-10,2021-12-09
+B9D75861372,Rock Slough at Delta Road Bridge,Field Turbidity,EPA 180.1 (Field) [D-2]*,1,2008-07-23,2008-07-23
+B9D75861372,Rock Slough at Delta Road Bridge,Field Turbidity,"Turbidity, Sonde [D-2]*",23,2019-09-10,2021-12-09
+B9D75961273,"Turner Cut near Holt, CA",Field Turbidity,EPA 180.1 (Field) [D-2]*,124,2011-07-20,2019-08-07
+B9D75961273,"Turner Cut near Holt, CA",Field Turbidity,"Turbidity, Sonde [D-2]*",23,2019-09-11,2021-12-08
+B9D80021306,Middle River near Holt,Field Turbidity,EPA 180.1 (Field) [D-2]*,157,2008-08-05,2019-08-07
+B9D80021306,Middle River near Holt,Field Turbidity,"Turbidity, Sonde [D-2]*",23,2019-09-11,2021-12-08
+B9D80101349,Holland Cut near Bethel Island,Field Turbidity,EPA 180.1 (Field) [D-2]*,215,2008-01-09,2019-08-07
+B9D80101349,Holland Cut near Bethel Island,Field Turbidity,"Turbidity, Sonde [D-2]*",24,2019-09-11,2021-12-08
+B9D80161339,Old River at Quimby Island,Field Turbidity,EPA 180.1 (Field) [D-2]*,155,2008-08-05,2019-08-07
+B9D80161339,Old River at Quimby Island,Field Turbidity,"Turbidity, Sonde [D-2]*",23,2019-09-11,2021-12-08
+B9D80201431,San Joaquin River at Blind Point,Field Turbidity,EPA 180.1 (Field) [D-2]*,173,2010-03-16,2019-07-30
+B9D80201431,San Joaquin River at Blind Point,Field Turbidity,"Turbidity, Sonde [D-2]*",26,2019-09-05,2021-12-30
+B9D80251385,Bethel Island near Piper Slough,Field Turbidity,EPA 180.1 (Field) [D-2]*,93,2014-05-20,2019-07-30
+B9D80251385,Bethel Island near Piper Slough,Field Turbidity,"Turbidity, Sonde [D-2]*",27,2019-09-05,2021-12-30
+B9D80311414,San Joaquin River @ Jersey Point - D15,Field Turbidity,EPA 180.1 (Field) [D-2]*,2,2010-02-02,2010-02-23
+B9D80331400,False River near Oakley,Field Turbidity,EPA 180.1 (Field) [D-2]*,175,2008-05-30,2021-11-17
+B9D80331400,False River near Oakley,Field Turbidity,"Turbidity, Sonde [D-2]*",14,2019-09-17,2021-04-20
+B9D80361334,San Joaquin River at Prisoner's Point,Field Turbidity,EPA 180.1 (Field) [D-2]*,10,2008-08-05,2010-02-16
+B9D80411389,Fisherman's Cut,Field Turbidity,EPA 180.1 (Field) [D-2]*,79,2014-05-28,2021-11-17
+B9D80411389,Fisherman's Cut,Field Turbidity,"Turbidity, Sonde [D-2]*",14,2019-09-17,2021-04-20
+B9D80431347,Old River near Frank's Tract,Field Turbidity,EPA 180.1 (Field) [D-2]*,159,2008-08-05,2021-11-17
+B9D80431347,Old River near Frank's Tract,Field Turbidity,"Turbidity, Sonde [D-2]*",14,2019-09-17,2021-04-20
+B9D80621412,Three Mile Slough at San Joaquin River,Field Turbidity,EPA 180.1 (Field) [D-2]*,159,2009-12-30,2021-11-17
+B9D80621412,Three Mile Slough at San Joaquin River,Field Turbidity,"Turbidity, Sonde [D-2]*",14,2019-09-17,2021-04-20
+B9D81051394,Sacramento River Downstream of Isleton,Field Turbidity,EPA 180.1 (Field) [D-2]*,64,2015-06-12,2019-08-22
+B9D81051394,Sacramento River Downstream of Isleton,Field Turbidity,"Turbidity, Sonde [D-2]*",24,2019-09-24,2021-11-30
+B9S81131386,Steamboat Slough,Field Turbidity,EPA 180.1 (Field) [D-2]*,64,2015-06-12,2019-08-22
+B9S81131386,Steamboat Slough,Field Turbidity,"Turbidity, Sonde [D-2]*",24,2019-09-24,2021-11-30
+B9S81421400,Miner Slough near Sacramento River,Field Turbidity,EPA 180.1 (Field) [D-2]*,66,2015-06-12,2019-08-22
+B9S81421400,Miner Slough near Sacramento River,Field Turbidity,"Turbidity, Sonde [D-2]*",24,2019-09-24,2021-11-30
