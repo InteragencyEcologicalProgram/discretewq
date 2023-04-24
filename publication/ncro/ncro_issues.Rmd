@@ -915,7 +915,9 @@ df_ncro_all_c5 %>%
   write_csv(here("publication/ncro/ncro_turbidity.csv"))
 
 # Duplicates with the same DateTime
-df_ncro_all_dups %>% write_csv(here("publication/ncro/ncro_duplicates.csv"))
+df_ncro_all_dups %>% 
+  mutate(DateTime = as.character(DateTime)) %>% 
+  write_csv(here("publication/ncro/ncro_duplicates.csv"))
 
 # Multiple samples collected at a station on the same day - after removing
   # duplicates with same DateTime
@@ -924,6 +926,7 @@ df_ncro_all_c5 %>%
   filter(n > 1) %>% 
   select(-n) %>% 
   left_join(df_ncro_all_c5, by = join_by(StationName, Date, Analyte)) %>% 
+  mutate(DateTime = as.character(DateTime)) %>% 
   write_csv(here("publication/ncro/ncro_multiple_daily_samples.csv"))
 ```
 

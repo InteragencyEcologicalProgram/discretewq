@@ -11,7 +11,7 @@
 
 <meta name="author" content="Dave Bosworth" />
 
-<meta name="date" content="2023-04-21" />
+<meta name="date" content="2023-04-24" />
 
 <title>NCRO Data Issues</title>
 
@@ -1581,7 +1581,7 @@ font-size: 0.95em;
 
 <h1 class="title toc-ignore">NCRO Data Issues</h1>
 <h4 class="author">Dave Bosworth</h4>
-<h4 class="date">April 21, 2023</h4>
+<h4 class="date">April 24, 2023</h4>
 
 </div>
 
@@ -3556,7 +3556,9 @@ df_ncro_all_c5 %&gt;%
   write_csv(here(&quot;publication/ncro/ncro_turbidity.csv&quot;))
 
 # Duplicates with the same DateTime
-df_ncro_all_dups %&gt;% write_csv(here(&quot;publication/ncro/ncro_duplicates.csv&quot;))
+df_ncro_all_dups %&gt;% 
+  mutate(DateTime = as.character(DateTime)) %&gt;% 
+  write_csv(here(&quot;publication/ncro/ncro_duplicates.csv&quot;))
 
 # Multiple samples collected at a station on the same day - after removing
   # duplicates with same DateTime
@@ -3565,6 +3567,7 @@ df_ncro_all_c5 %&gt;%
   filter(n &gt; 1) %&gt;% 
   select(-n) %&gt;% 
   left_join(df_ncro_all_c5, by = join_by(StationName, Date, Analyte)) %&gt;% 
+  mutate(DateTime = as.character(DateTime)) %&gt;% 
   write_csv(here(&quot;publication/ncro/ncro_multiple_daily_samples.csv&quot;))</code></pre>
 </div>
 
