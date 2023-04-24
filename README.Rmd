@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 # discretewq
 
 <!-- badges: start -->
-[![R build status](https://github.com/InteragencyEcologicalProgram/discretewq/workflows/R-CMD-check/badge.svg)](https://github.com/InteragencyEcologicalProgram/discretewq/actions)
+[![R-CMD-check](https://github.com/InteragencyEcologicalProgram/discretewq/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/InteragencyEcologicalProgram/discretewq/actions/workflows/R-CMD-check.yaml)
 [![Codecov test coverage](https://codecov.io/gh/InteragencyEcologicalProgram/discretewq/branch/main/graph/badge.svg)](https://codecov.io/gh/InteragencyEcologicalProgram/discretewq?branch=main)
 [![DOI](https://zenodo.org/badge/309747392.svg)](https://zenodo.org/badge/latestdoi/309747392)
 [![Data DOI](https://img.shields.io/badge/Data%20publication%20DOI-10.6073/pasta/567ca1dce56cc819b1819117538bd718-blue.svg)](https://portal.edirepository.org/nis/mapbrowse?scope=edi&identifier=731)
