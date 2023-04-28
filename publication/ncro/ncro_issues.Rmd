@@ -28,6 +28,7 @@ library(tidyverse)
 library(readxl)
 library(jsonlite)
 library(glue)
+library(scales)
 library(here)
 library(conflicted)
 conflicts_prefer(dplyr::filter())
@@ -484,6 +485,31 @@ df_ncro_all_c5 %>%
 
 Hmmm, there are more of these than I thought. We may need to revisit this...
 
+## Sampling effort by Station
+
+Let's take a look at the sampling effort by station for each year. This could help when trying to standardize station names. This will be counts of distinct sampling events (unique DateTime-Station combinations).
+
+```{r sampling effort xlsx, fig.width = 9, fig.height = 12}
+# Count number of distinct sampling events by station for each year
+df_ncro_all_se <- df_ncro_all_c5 %>% 
+  distinct(StationNumber, StationName, DateTime) %>% 
+  mutate(Year = year(DateTime)) %>% 
+  count(StationNumber, StationName, Year, name = "NumSamples") %>% 
+  unite(col = "Station", StationName, StationNumber, sep = " - ")
+
+# Create heat map
+df_ncro_all_se %>% 
+  mutate(Station = factor(Station)) %>% 
+  ggplot(aes(x = Year, y = fct_rev(Station), fill = NumSamples)) +
+  geom_tile() +
+  scale_fill_viridis_c(name = "Number of\nSampling\nEvents") +
+  ylab(NULL) +
+  scale_x_continuous(breaks = breaks_pretty(20), expand = expansion()) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
+```
+
+
 # Data from CNRA data portal
 
 We'll take a closer look at the data downloaded from the CNRA data portal before we compare it to the data provided by NCRO. We'll start by looking at the number of `NA` values in each column.
@@ -928,5 +954,12 @@ df_ncro_all_c5 %>%
   left_join(df_ncro_all_c5, by = join_by(StationName, Date, Analyte)) %>% 
   mutate(DateTime = as.character(DateTime)) %>% 
   write_csv(here("publication/ncro/ncro_multiple_daily_samples.csv"))
+
+# Sampling effort summary
+df_ncro_all_se %>% 
+  arrange(Year) %>% 
+  pivot_wider(names_from = Year, values_from = NumSamples) %>% 
+  arrange(Station) %>% 
+  write_csv(here("publication/ncro/ncro_sampling_effort.csv"), na = "")
 ```
 
