@@ -10,7 +10,8 @@ Suisun Marsh Fish Study,Suisun,UC Davis,Fish,1979,All year,Monthly,Personal comm
 Environmental Monitoring Program,EMP,DWR,Water quality,1975,All year,Monthly,https://portal.edirepository.org/nis/metadataviewer?packageid=edi.458.3,0.9 m,0.9 m
 Sacramento Deepwater Shipping Channel Survey,USBR,USBR,Water quality,2012,All year,Monthly,Personal communication,0.3 m (recorded),0.3 m (recorded)
 San Francisco Bay Survey,USGS_SFBS,USGS,Water quality,1969,All year,Monthly,https://www.sciencebase.gov/catalog/item/5841f97ee4b04fc80e518d9f; https://www.sciencebase.gov/catalog/item/5966abe6e4b0d1f9f05cf551,0.5 - 1 m (recorded),0.3 m (recorded)
-Yolo Bypass Fish Monitoring Program,YBFMP,DWR,Fish,1998,All year,Weekly,https://portal.edirepository.org/nis/mapbrowse?packageid=edi.233.2; https://portal.edirepository.org/nis/mapbrowse?packageid=edi.494.2,0 - 1 m ,
+Yolo Bypass Fish Monitoring Program,YBFMP,DWR,Fish,1998,All year,Weekly,https://portal.edirepository.org/nis/mapbrowse?packageid=edi.233.2; https://portal.edirepository.org/nis/mapbrowse?packageid=edi.494.2,0 - 1 m,NA
 Stockton Dissolved Oxygen survey,SDO,DWR,Water quality,1997,Jun-Nov,2X monthly,https://portal.edirepository.org/nis/mapbrowse?packageid=edi.276.2,1 m,1 m
 Smelt Larva Survey,SLS,CDFW,Fish,2009,Jan-Mar,Every 2 weeks,https://filelib.wildlife.ca.gov/Public/Delta%20Smelt/,Surface bucket,Few inches
-USGS California Water Science Center discrete water quality data,USGS_CAWSC,USGS,Water quality,1971,All year,Various,https://nwis.waterdata.usgs.gov/usa/nwis/qwdata,1 m,
+USGS California Water Science Center discrete water quality data,USGS_CAWSC,USGS,Water quality,1971,All year,Various,https://nwis.waterdata.usgs.gov/usa/nwis/qwdata,1 m,NA
+DWR North Central Region Office,DWR_NCRO,DWR,Water quality,1999,All year,Monthly,https://wdl.water.ca.gov/waterdatalibrary/WaterQualityDataLib.aspx,0 - 1 m,NA
