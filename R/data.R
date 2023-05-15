@@ -456,9 +456,9 @@
 #' @seealso \code{\link{wq}}
 "YBFMP"
 
-#' NCRO Water Quality and Nutrients
+#' NCRO water quality data
 #'
-#' Water Quality, Chlorophyll, and Nutrients from the South Delta collected by DWR's North Central Region Office
+#' Water quality data from the California Department of Water Resources North Central Region Office.
 #'
 #' @encoding UTF-8
 #' @format a tibble with 10,350 rows and 49 variables

@@ -4,7 +4,7 @@
 \encoding{UTF-8}
 \name{NCRO}
 \alias{NCRO}
-\title{NCRO Water Quality and Nutrients}
+\title{NCRO water quality data}
 \format{
 a tibble with 10,350 rows and 49 variables
 \describe{
@@ -63,7 +63,7 @@ a tibble with 10,350 rows and 49 variables
 NCRO
 }
 \description{
-Water Quality, Chlorophyll, and Nutrients from the South Delta collected by DWR's North Central Region Office
+Water quality data from the California Department of Water Resources North Central Region Office.
 }
 \details{
 Contact Jared Frantzich Jared.Frantzich@water.ca.gov for more information.
