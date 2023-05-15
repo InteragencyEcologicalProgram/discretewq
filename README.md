@@ -138,7 +138,7 @@ Environmental Data Initiative.
 [doi:10.6073/pasta/bcff9e330b7d99a9c5c9bda5e168cfc9](https://doi.org/10.6073/pasta/bcff9e330b7d99a9c5c9bda5e168cfc9)
 
 CDFW. 2022a. Bay Study data.
-<https://filelib.wildlife.ca.gov/public/BayStudy/>.
+<https://filelib.wildlife.ca.gov/Public/BayStudy/Access_Database/>.
 
 CDFW. 2022b. Fall Midwater Trawl data.
 <https://filelib.wildlife.ca.gov/public/TownetFallMidwaterTrawl/FMWT%20Data/>.
@@ -159,7 +159,7 @@ Interagency Ecological Program (IEP), S. Lesmeister, and J. Rinde. 2020.
 Interagency Ecological Program: Discrete dissolved oxygen monitoring in
 the Stockton Deep Water Ship Channel, collected by the Environmental
 Monitoring Program, 1997-2018. ver2. Environmental Data Initiative.
-[doi:10.6073/PASTA/3268530C683726CD430C81894FFAD768](https://portal.edirepository.org/nis/mapbrowse?packageid=edi.276.2)
+[doi:10.6073/PASTA/3268530C683726CD430C81894FFAD768](https://doi.org/10.6073/pasta/3268530c683726cd430c81894ffad768)
 
 Interagency Ecological Program (IEP), L. Damon, and A. Chorazyczewski.
 2021a. Interagency Ecological Program San Francisco Estuary 20mm Survey
@@ -182,7 +182,7 @@ Interagency Ecological Program (IEP), C. Pien, J. Adams, and N. Kwan.
 quality data from the Sacramento River floodplain and tidal slough,
 collected by the Yolo Bypass Fish Monitoring Program, 1998-2018. ver 2.
 Environmental Data Initiative.
-[doi:10.6073/pasta/baad532af96cba1d58d43b89c08ca081](https://portal.edirepository.org/nis/mapbrowse?packageid=edi.494.2)
+[doi:10.6073/pasta/baad532af96cba1d58d43b89c08ca081](https://doi.org/10.6073/pasta/baad532af96cba1d58d43b89c08ca081)
 
 Interagency Ecological Program (IEP), R. McKenzie, J. Speegle, A.
 Nanninga, J.R. Cook, J. Hagen, and B. Mahardja. 2022a. Interagency
@@ -196,7 +196,7 @@ Interagency Ecological Program: Fish catch and water quality data from
 the Sacramento River floodplain and tidal slough, collected by the Yolo
 Bypass Fish Monitoring Program, 1998-2021. ver 3. Environmental Data
 Initiative.
-[doi:10.6073/pasta/f5c4362f4a1f370723e2b9113432909f](https://portal.edirepository.org/nis/mapbrowse?packageid=edi.233.3)
+[doi:10.6073/pasta/f5c4362f4a1f370723e2b9113432909f](https://doi.org/10.6073/pasta/f5c4362f4a1f370723e2b9113432909f)
 
 O’Rear, T., J. Durand, and P. Moyle. 2022. Suisun Marsh Fish Study.
 <https://watershed.ucdavis.edu/project/suisun-marsh-fish-study>.
@@ -210,7 +210,7 @@ United States Fish and Wildlife Service, T. Senegal, R. Mckenzie, J.
 Speegle, B. Perales, D. Bridgman, K. Erly, S. Staiger, A. Arrambide, and
 M. Gilbert. 2022. Interagency Ecological Program and US Fish and
 Wildlife Service: San Francisco Estuary Enhanced Delta Smelt Monitoring
-Program data, 2016-2021. Environmental Data Initiative.
+Program data, 2016-2021 ver 8. Environmental Data Initiative.
 [doi:10.6073/pasta/e1a540c161b7be56b941df50fd7b44c5](https://doi.org/10.6073/pasta/e1a540c161b7be56b941df50fd7b44c5)
 
 U.S. Geological Survey. 2022. USGS water data for the Nation: U.S.
