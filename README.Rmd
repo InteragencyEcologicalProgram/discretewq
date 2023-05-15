@@ -56,7 +56,7 @@ The dataset is also [published on the Environmental Data Initiative](https://por
 
 ## Data sources
 
-Battey, M. and S. Perry. 2022. Interagency Ecological Program: Discrete water quality monitoring in the Sacramento-San Joaquin Bay-Delta, collected by the Environmental Monitoring Program, 1975-2021. ver 7. Environmental Data Initiative. [doi:10.6073/pasta/3b12b205c1b53290ff555abd809edfcf](https://doi.org/10.6073/pasta/3b12b205c1b53290ff555abd809edfcf)
+Battey, M. and S. Perry. 2023. Interagency Ecological Program: Discrete water quality monitoring in the Sacramento-San Joaquin Bay-Delta, collected by the Environmental Monitoring Program, 1975-2022 ver 8. Environmental Data Initiative. [doi:10.6073/pasta/bcff9e330b7d99a9c5c9bda5e168cfc9](https://doi.org/10.6073/pasta/bcff9e330b7d99a9c5c9bda5e168cfc9)
 
 CDFW. 2022a. Bay Study data. [https://filelib.wildlife.ca.gov/public/BayStudy/](https://filelib.wildlife.ca.gov/public/BayStudy/).
 
@@ -64,7 +64,7 @@ CDFW. 2022b. Fall Midwater Trawl data. [https://filelib.wildlife.ca.gov/public/T
 
 CDFW. 2022c. Summer Townet data. [https://filelib.wildlife.ca.gov/public/TownetFallMidwaterTrawl/TNS%20MS%20Access%20Data/TNS%20data/](https://filelib.wildlife.ca.gov/public/TownetFallMidwaterTrawl/TNS%20MS%20Access%20Data/TNS%20data/).
 
-CDWR. 2022. Water Quality Investigations Section, North Central Region Office. [https://wdl.water.ca.gov/waterdatalibrary/WaterQualityDataLib.aspx](https://wdl.water.ca.gov/waterdatalibrary/WaterQualityDataLib.aspx). 
+CDWR. 2022. Water Quality Evaluation Section, North Central Region Office. [https://wdl.water.ca.gov/waterdatalibrary/WaterQualityDataLib.aspx](https://wdl.water.ca.gov/waterdatalibrary/WaterQualityDataLib.aspx). 
 
 Cloern, J. E., and T. S. Schraga. 2016. USGS Measurements of Water Quality in San Francisco Bay (CA), 1969-2015 (ver. 3.0 June 2017). U. S. Geological Survey data release. [doi:https://doi.org/10.5066/F7TQ5ZPR](https://doi.org/10.5066/F7TQ5ZPR)
 
