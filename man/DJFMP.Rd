@@ -27,7 +27,7 @@ DJFMP
 Water quality data from the United States Fish and Wildlife Service Delta Juvenile Fish Monitoring Program.
 }
 \details{
-More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.244.8}{here}.
+More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.244.9}{here}.
 }
 \seealso{
 \code{\link{wq}}

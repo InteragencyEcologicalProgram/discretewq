@@ -74,7 +74,7 @@
 #'   \item{DissolvedOxygen_bottom}{Dissolved oxygen (mg/L) at bottom.}
 #'   \item{Notes}{Comments.}
 #'   }
-#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.415.8}{here}.
+#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.415.8}{here}.
 #' @seealso \code{\link{wq}}
 "EDSM"
 
@@ -154,7 +154,7 @@
 #'   \item{TKN_Sign}{Whether the TKN value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
 #'   \item{TKN}{Total Kjeldahl Nitrogen (mg/L).}
 #'   }
-#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.458.8}{here}.
+#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.458.8}{here}.
 #' @seealso \code{\link{wq}}; for more information on _Sign variables: [sign_variables]
 "EMP"
 
@@ -176,7 +176,7 @@
 #'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
 #'   \item{DissolvedOxygen}{Dissolved oxygen (mg/L) at surface.}
 #'   }
-#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.244.8}{here}.
+#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.244.9}{here}.
 #' @seealso \code{\link{wq}}
 "DJFMP"
 
@@ -230,7 +230,7 @@
 #'   \item{pH}{pH (dimensionless) at surface.}
 #'   \item{pH_bottom}{pH (dimensionless) at bottom.}
 #'   }
-#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.276.2}{here}.
+#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.276.2}{here}.
 #' @seealso \code{\link{wq}}
 "SDO"
 
@@ -394,7 +394,7 @@
 #'   \item{DissOrthophos}{Dissolved Ortho-phosphate (mg/L).}
 #'   \item{DissSilica}{Dissolved Silica (mg/L).}
 #'   }
-#' @details More metadata and information on methods are available \href{https://www.sciencebase.gov/catalog/item/5841f97ee4b04fc80e518d9f}{here for data from 1969-2015} and \href{https://www.sciencebase.gov/catalog/item/5966abe6e4b0d1f9f05cf551}{here for data from 2016-2019}.
+#' @details More metadata and information on methods are available \href{https://www.sciencebase.gov/catalog/item/64248ee5d34e370832fe343d}{here for data from 1969-2015} and \href{https://www.sciencebase.gov/catalog/item/5966abe6e4b0d1f9f05cf551}{here for data from 2016-2019}.
 #' @seealso \code{\link{wq}}
 "USGS_SFBS"
 
@@ -452,7 +452,7 @@
 #'   \item{Notes}{Notes or comments.}
 #'   }
 #'
-#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.494.2}{here} and \href{https://portal.edirepository.org/nis/mapbrowse?packageid=edi.233.3}{here}.
+#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.494.2}{here} and \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.233.3}{here}.
 #' @seealso \code{\link{wq}}
 "YBFMP"
 
