@@ -1,5 +1,5 @@
 dataPackageID	systemID	title	givenName	middleInitial	surName	role	organizationName	email	onlineDescription	url
-edi.458.7	EDI									
+edi.458.8	EDI									
 edi.527.4	EDI									
 edi.244.8	EDI									
 edi.415.8	EDI									
@@ -33,5 +33,5 @@ edi.534.4	EDI
 		Monthly vertical profiles of water quality in the Sacramento Deep Water Ship Channel 2012-2019	Van Nieuwenhuyse		E	creator	United States Bureau of Reclamation		This online link references the USBR regional office leading this project	https://www.usbr.gov/mp/bdo/index.html
 		USGS water data for the Nation: U.S. Geological Survey National Water Information System database	U.S. Geological Survey			contact	U.S. Geological Survey		This online link references the online data portal from which these data were retrieved	https://doi.org/10.5066/F7P55KJN
 		USGS water data for the Nation: U.S. Geological Survey National Water Information System database	U.S. Geological Survey			creator	U.S. Geological Survey		This online link references the online data portal from which these data were retrieved	https://doi.org/10.5066/F7P55KJN
-		"Water Quality Investigations Section, North Central Region Office"	CDWR			contact	California Department of Water Resources		This online link references the online data portal from which these data were retrieved	https://wdl.water.ca.gov/waterdatalibrary/WaterQualityDataLib.aspx
-		"Water Quality Investigations Section, North Central Region Office"	CDWR			creator	California Department of Water Resources		This online link references the online data portal from which these data were retrieved	https://wdl.water.ca.gov/waterdatalibrary/WaterQualityDataLib.aspx
+		"Water Quality Evaluation Section, North Central Region Office"	CDWR			contact	California Department of Water Resources		This online link references the online data portal from which these data were retrieved	https://wdl.water.ca.gov/waterdatalibrary/WaterQualityDataLib.aspx
+		"Water Quality Evaluation Section, North Central Region Office"	CDWR			creator	California Department of Water Resources		This online link references the online data portal from which these data were retrieved	https://wdl.water.ca.gov/waterdatalibrary/WaterQualityDataLib.aspx
