@@ -9,9 +9,9 @@ Delta Juvenile Fish Monitoring Program,DJFMP,USFWS,Fish,1976,All year,3X weekly,
 Suisun Marsh Fish Study,Suisun,UC Davis,Fish,1979,All year,Monthly,Personal communication,0.3 m,NA
 Environmental Monitoring Program,EMP,DWR,Water quality,1975,All year,Monthly,https://portal.edirepository.org/nis/metadataviewer?packageid=edi.458.8,0.9 m,0.9 m
 Sacramento Deepwater Shipping Channel Survey,USBR,USBR,Water quality,2012,All year,Monthly,Personal communication,0.3 m (recorded),0.3 m (recorded)
-San Francisco Bay Survey,USGS_SFBS,USGS,Water quality,1969,All year,Monthly,https://www.sciencebase.gov/catalog/item/64248ee5d34e370832fe343d; https://www.sciencebase.gov/catalog/item/5966abe6e4b0d1f9f05cf551,0.5 - 1 m (recorded),0.3 m (recorded)
+San Francisco Bay Survey,USGS_SFBS,USGS,Water quality,1969,All year,Monthly,https://doi.org/10.5066/F7TQ5ZPR; https://doi.org/10.5066/F7D21WGF,0.5 - 1 m (recorded),0.3 m (recorded)
 Yolo Bypass Fish Monitoring Program,YBFMP,DWR,Fish,1998,All year,Weekly,https://portal.edirepository.org/nis/metadataviewer?packageid=edi.233.3; https://portal.edirepository.org/nis/metadataviewer?packageid=edi.494.2,0 - 1 m,NA
 Stockton Dissolved Oxygen survey,SDO,DWR,Water quality,1997,Jun-Nov,2X monthly,https://portal.edirepository.org/nis/metadataviewer?packageid=edi.276.2,1 m,1 m
 Smelt Larva Survey,SLS,CDFW,Fish,2009,Jan-Mar,Every 2 weeks,https://portal.edirepository.org/nis/metadataviewer?packageid=edi.534.4,Surface bucket,Few inches
-USGS California Water Science Center discrete water quality data,USGS_CAWSC,USGS,Water quality,1971,All year,Various,https://nwis.waterdata.usgs.gov/usa/nwis/qwdata,1 m,NA
+USGS California Water Science Center discrete water quality data,USGS_CAWSC,USGS,Water quality,1971,All year,Various,https://doi.org/10.5066/F7P55KJN,1 m,NA
 DWR North Central Region Office,DWR_NCRO,DWR,Water quality,1999,All year,Monthly,https://wdl.water.ca.gov/waterdatalibrary/WaterQualityDataLib.aspx,0 - 1 m,NA

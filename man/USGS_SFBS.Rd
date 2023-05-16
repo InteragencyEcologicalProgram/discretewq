@@ -45,7 +45,7 @@ USGS_SFBS
 Water quality data from the United States Geological Survey San Francisco Bay Water Quality Survey.
 }
 \details{
-More metadata and information on methods are available \href{https://www.sciencebase.gov/catalog/item/64248ee5d34e370832fe343d}{here for data from 1969-2015} and \href{https://www.sciencebase.gov/catalog/item/5966abe6e4b0d1f9f05cf551}{here for data from 2016-2019}.
+More metadata and information on methods are available \href{https://doi.org/10.5066/F7TQ5ZPR}{here for data from 1969-2015} and \href{https://doi.org/10.5066/F7D21WGF}{here for data from 2016-2019}.
 }
 \seealso{
 \code{\link{wq}}

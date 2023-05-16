@@ -20,7 +20,7 @@
 #'   \item{Conductivity_bottom}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at bottom.}
 #'   \item{Notes}{Comments.}
 #'   }
-#' @details More metadata and information on methods are available \href{https://wildlife.ca.gov/Conservation/Delta/20mm-Survey}{here}.
+#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.535.4}{here}.
 #' @seealso \code{\link{wq}}
 "twentymm"
 
@@ -255,7 +255,7 @@
 #'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
 #'   \item{Notes}{Comments.}
 #'   }
-#' @details More metadata and information on methods are available \href{http://www.dfg.ca.gov/delta/projects.asp?ProjectID=SKT}{here}.
+#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.527.4}{here}.
 #' @seealso \code{\link{wq}}
 "SKT"
 
@@ -279,7 +279,7 @@
 #'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
 #'   \item{Notes}{Comments.}
 #'   }
-#' @details More metadata and information on methods are available \href{https://wildlife.ca.gov/Conservation/Delta/Smelt-Larva-Survey}{here}.
+#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.534.4}{here}.
 #' @seealso \code{\link{wq}}
 "SLS"
 
@@ -394,7 +394,7 @@
 #'   \item{DissOrthophos}{Dissolved Ortho-phosphate (mg/L).}
 #'   \item{DissSilica}{Dissolved Silica (mg/L).}
 #'   }
-#' @details More metadata and information on methods are available \href{https://www.sciencebase.gov/catalog/item/64248ee5d34e370832fe343d}{here for data from 1969-2015} and \href{https://www.sciencebase.gov/catalog/item/5966abe6e4b0d1f9f05cf551}{here for data from 2016-2019}.
+#' @details More metadata and information on methods are available \href{https://doi.org/10.5066/F7TQ5ZPR}{here for data from 1969-2015} and \href{https://doi.org/10.5066/F7D21WGF}{here for data from 2016-2019}.
 #' @seealso \code{\link{wq}}
 "USGS_SFBS"
 
@@ -425,7 +425,7 @@
 #'   \item{Temperature}{Temperature (°C) at surface.}
 #'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
 #'   }
-#' @details More metadata and information on methods are available \href{https://nwis.waterdata.usgs.gov/usa/nwis/qwdata}{here for data} and \href{https://help.waterdata.usgs.gov/codes-and-parameters}{here for metadata}.
+#' @details More metadata and information on methods are available \href{https://doi.org/10.5066/F7P55KJN}{here for data} and \href{https://help.waterdata.usgs.gov/codes-and-parameters}{here for metadata}.
 #' @seealso \code{\link{wq}}; for more information on _Sign variables: [sign_variables]
 "USGS_CAWSC"
 

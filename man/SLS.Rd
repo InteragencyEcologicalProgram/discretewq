@@ -29,7 +29,7 @@ SLS
 Water quality data from the California Department of Fish and Wildlife Smelt Larva Survey.
 }
 \details{
-More metadata and information on methods are available \href{https://wildlife.ca.gov/Conservation/Delta/Smelt-Larva-Survey}{here}.
+More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.534.4}{here}.
 }
 \seealso{
 \code{\link{wq}}
