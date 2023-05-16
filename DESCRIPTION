@@ -27,7 +27,7 @@ Authors@R:
            role = c("ctb"),
            email = "Rosemary.Hartman@water.ca.gov",
            comment = c(ORCID = "0000-0002-0642-183X")))
-Description: Produce an integrated dataset of discrete water quality measurements using any combination of the 10 source datasets included. 
+Description: Produce an integrated dataset of discrete water quality measurements using any combination of the 16 source datasets included. 
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
@@ -35,8 +35,6 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Suggests: 
     readr,
-    tidyr,
-    stringr,
     purrr,
     spelling,
     testthat,
@@ -48,9 +46,11 @@ Suggests:
 Depends: 
     R (>= 2.10)
 Imports: 
-    magrittr,
     dplyr,
     lubridate,
+    magrittr,
+    stringr,
+    tidyr,
     wql
 Remotes: 
     InteragencyEcologicalProgram/deltamapr

@@ -8,22 +8,22 @@ wq(Sources = NULL, Start_year = NULL, End_year = NULL)
 }
 \arguments{
 \item{Sources}{Character vector of data sources for the water quality variables. No default, this must be specified.
-Choices include "EMP" (Environmental Monitoring Program, \code{\link{EMP}}),
-"STN" (Summer Townet Survey, \code{\link{STN}}),
-"FMWT" (Fall Midwater Trawl, \code{\link{FMWT}}),
-"EDSM" (Enhanced Delta Smelt Monitoring, \code{\link{EDSM}}),
+Choices include "20mm" (20mm Survey, \code{\link{twentymm}}),
+"Baystudy" (Bay Study, \code{\link{baystudy}}),
 "DJFMP" (Delta Juvenile Fish Monitoring Program, \code{\link{DJFMP}}),
-"20mm" (20mm Survey, \code{\link{twentymm}}),
+"EDSM" (Enhanced Delta Smelt Monitoring, \code{\link{EDSM}}),
+"EMP" (Environmental Monitoring Program, \code{\link{EMP}}),
+"FMWT" (Fall Midwater Trawl, \code{\link{FMWT}}),
+"NCRO" (NCRO, \code{\link{NCRO}}),
 "SDO" (Stockton Dissolved Oxygen Survey, \code{\link{SDO}}),
 "SKT" (Spring Kodiak Trawl, \code{\link{SKT}}),
 "SLS" (Smelt Larva Survey, \code{\link{SLS}}),
-"Baystudy" (Bay Study, \code{\link{baystudy}}),
-"NCRO" (NCRO, \code{\link{NCRO}}),
-"USGS_SFBS" (USGS San Francisco Bay Surveys, \code{\link{USGS_SFBS}}),
+"STN" (Summer Townet Survey, \code{\link{STN}}),
+"Suisun" (Suisun Marsh Fish Study, \code{\link{suisun}}),
 "USBR" (United States Bureau of Reclamation Sacramento Deepwater Ship Channel data, \code{\link{USBR}}),
-"Suisun" (Suisun Marsh Fish Study, \code{\link{suisun}})
-"YBFMP" (Yolo Bypass Fish Monitoring Program, \code{\link{YBFMP}}), and
-"USGS_CAWSC" (USGS California Water Science Center monitoring data, \code{\link{USGS_CAWSC}}).}
+"USGS_CAWSC" (USGS California Water Science Center monitoring data, \code{\link{USGS_CAWSC}}),
+"USGS_SFBS" (USGS San Francisco Bay Surveys, \code{\link{USGS_SFBS}}), and
+"YBFMP" (Yolo Bypass Fish Monitoring Program, \code{\link{YBFMP}}).}
 
 \item{Start_year}{Earliest year you would like included in the dataset. Must be an integer. Defaults to year \code{0}.}
 
@@ -36,7 +36,24 @@ An integrated dataset
 Imports, filters, and processes water quality datasets and outputs an integrated dataset
 }
 \examples{
-Data <- wq(Sources = c("EMP", "STN", "FMWT", "EDSM",
-"DJFMP", "SDO", "SKT", "SLS", "NCRO",
-"20mm", "Suisun", "Baystudy", "USBR", "USGS_SFBS", "YBFMP", "USGS_CAWSC"))
+Data <- wq(
+  Sources = c(
+    "20mm",
+    "Baystudy",
+    "DJFMP",
+    "EDSM",
+    "EMP",
+    "FMWT",
+    "NCRO",
+    "SDO",
+    "SKT",
+    "SLS",
+    "STN",
+    "Suisun",
+    "USBR",
+    "USGS_CAWSC",
+    "USGS_SFBS",
+    "YBFMP"
+  )
+)
 }
