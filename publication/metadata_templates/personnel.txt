@@ -5,4 +5,4 @@ Samuel	M	Bashevkin	"Delta Science Program, Delta Stewardship Council"	sam.bashev
 David		Bosworth	California Department of Water Resources	David.Bosworth@water.ca.gov	0000-0003-0740-3390	creator			
 David		Bosworth	California Department of Water Resources	David.Bosworth@water.ca.gov	0000-0003-0740-3390	contact			
 Sarah	E	Perry	CA Department of Water Resources	Sarah.Perry@water.ca.gov	0000-0002-3708-6675	creator			
-Elizabeth	B	Stumpner	USGS-CAWSC	estumpner@usgs.gov	0000-0003-2356-2244	creator			
+Elizabeth	B	Stumpner	CA Department of Water Resources	Elizabeth.Stumpner@water.ca.gov	0000-0003-2356-2244	creator			
