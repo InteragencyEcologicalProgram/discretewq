@@ -45,7 +45,7 @@ data_raw <- discretewq::wq(
 )
 
 data <- data_raw %>%
-  arrange(Source, Datetime) %>%
+  arrange(Source, Station, Datetime) %>%
   mutate(
     Date = as.character(Date, format = "%Y-%m-%d"),
     Datetime = as.character(Datetime),
