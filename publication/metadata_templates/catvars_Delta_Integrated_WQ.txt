@@ -2,10 +2,10 @@ attributeName	code	definition
 Source	20mm	20-mm Survey
 Source	Baystudy	San Francisco Bay Study
 Source	DJFMP	Delta Juvenile Fish Monitoring Program
-Source	DWR_NCRO	North Central Region Office monitoring
 Source	EDSM	Enhanced Delta Smelt Monitoring
 Source	EMP	Environmental Monitoring Program
 Source	FMWT	Fall Midwater Trawl
+Source	NCRO	North Central Region Office monitoring
 Source	SDO	Stockton Dissolved Oxygen Monitoring
 Source	SKT	Spring Kodiak Trawl
 Source	SLS	Smelt Larva Survey

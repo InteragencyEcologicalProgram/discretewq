@@ -295,7 +295,7 @@ NCRO <- NCRO_all_c6_wide %>%
   ) %>%
   # reorder to match all other datasets in package
   transmute(
-    Source = "DWR_NCRO",
+    Source = "NCRO",
     Station = StationName,
     Latitude,
     Longitude,
