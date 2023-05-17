@@ -1,8 +1,8 @@
 givenName	middleInitial	surName	organizationName	electronicMailAddress	userId	role	projectTitle	fundingAgency	fundingNumber
-Samuel	M	Bashevkin	"Delta Science Program, Delta Stewardship Council"	sam.bashevkin@deltacouncil.ca.gov	0000-0001-7406-7089	creator			
-Samuel	M	Bashevkin	"Delta Science Program, Delta Stewardship Council"	sam.bashevkin@deltacouncil.ca.gov	0000-0001-7406-7089	contact			
-Samuel	M	Bashevkin	"Delta Science Program, Delta Stewardship Council"	sam.bashevkin@deltacouncil.ca.gov	0000-0001-7406-7089	PI			
-David		Bosworth	California Department of Water Resources	David.Bosworth@water.ca.gov	0000-0003-0740-3390	creator			
-David		Bosworth	California Department of Water Resources	David.Bosworth@water.ca.gov	0000-0003-0740-3390	contact			
-Sarah	E	Perry	CA Department of Water Resources	Sarah.Perry@water.ca.gov	0000-0002-3708-6675	creator			
-Elizabeth	B	Stumpner	CA Department of Water Resources	Elizabeth.Stumpner@water.ca.gov	0000-0003-2356-2244	creator			
+Samuel	M	Bashevkin	"California State Water Resources Control Board"	sam.bashevkin@waterboards.ca.gov	0000-0001-7406-7089	creator
+Samuel	M	Bashevkin	"California State Water Resources Control Board"	sam.bashevkin@waterboards.ca.gov	0000-0001-7406-7089	contact
+Samuel	M	Bashevkin	"California State Water Resources Control Board"	sam.bashevkin@waterboards.ca.gov	0000-0001-7406-7089	PI
+David		Bosworth	California Department of Water Resources	David.Bosworth@water.ca.gov	0000-0003-0740-3390	creator
+David		Bosworth	California Department of Water Resources	David.Bosworth@water.ca.gov	0000-0003-0740-3390	contact
+Sarah	E	Perry	CA Department of Water Resources	Sarah.Perry@water.ca.gov	0000-0002-3708-6675	creator
+Elizabeth	B	Stumpner	CA Department of Water Resources	Elizabeth.Stumpner@water.ca.gov	0000-0003-2356-2244	creator
