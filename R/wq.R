@@ -76,7 +76,7 @@ wq <- function(Sources = NULL,
   )
 
   if(is.null(Sources) | !all(Sources %in% sources_expect)) {
-    stop(paste0("You must specify the data sources you wish to include. Choices include: ", stringr::str_c(sources_expect, collapse = ", ")))
+    stop(paste0("You must specify the data sources you wish to include. Choices include:\n ", stringr::str_c(sources_expect, collapse = ", ")))
   }
 
   # Set end year to current year if blank
