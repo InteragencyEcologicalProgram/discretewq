@@ -39,11 +39,28 @@ devtools::install_github("InteragencyEcologicalProgram/discretewq")
 To obtain the full integrated water quality dataset
 
 ```{r}
-require(discretewq)
-Data <- wq(Sources = c("EMP", "STN", "FMWT", "EDSM", "DJFMP",
-                       "SDO", "SKT", "SLS", "20mm", "Suisun", 
-                       "Baystudy", "USBR", "USGS_SFBS", "YBFMP", 
-                       "USGS_CAWSC", "NCRO"))
+library(discretewq)
+
+Data <- wq(
+  Sources = c(
+    "20mm",
+    "Baystudy",
+    "DJFMP",
+    "EDSM",
+    "EMP",
+    "FMWT",
+    "NCRO",
+    "SDO",
+    "SKT",
+    "SLS",
+    "STN",
+    "Suisun",
+    "USBR",
+    "USGS_CAWSC",
+    "USGS_SFBS",
+    "YBFMP"
+  )
+)
 
 str(Data)
 ```
