@@ -149,9 +149,9 @@ zenodo](https://zenodo.org/record/6390964)).
 
 Battey, M. and S. Perry. 2023. Interagency Ecological Program: Discrete
 water quality monitoring in the Sacramento-San Joaquin Bay-Delta,
-collected by the Environmental Monitoring Program, 1975-2022 ver 8.
+collected by the Environmental Monitoring Program, 1975-2022 ver 9.
 Environmental Data Initiative.
-[doi:10.6073/pasta/bcff9e330b7d99a9c5c9bda5e168cfc9](https://portal.edirepository.org/nis/metadataviewer?packageid=edi.458.8)
+[doi:10.6073/pasta/a306956e3ebdc78348c2df8d05cd2ccb](https://portal.edirepository.org/nis/metadataviewer?packageid=edi.458.9)
 
 CDFW. 2022a. Bay Study data.
 <https://filelib.wildlife.ca.gov/Public/BayStudy/Access_Database/>.

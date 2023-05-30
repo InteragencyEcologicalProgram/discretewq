@@ -85,7 +85,7 @@ EMP
 Water quality data from the California Department of Water Resources Environmental Monitoring Program.
 }
 \details{
-More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.458.8}{here}.
+More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.458.9}{here}.
 }
 \seealso{
 \code{\link{wq}}; for more information on _Sign variables: \link{sign_variables}

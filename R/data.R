@@ -191,7 +191,7 @@
 #'   \item{TKN_Sign}{Whether the TKN value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
 #'   \item{TKN}{Total Kjeldahl Nitrogen (mg/L).}
 #'   }
-#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.458.8}{here}.
+#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.458.9}{here}.
 #' @seealso \code{\link{wq}}; for more information on _Sign variables: [sign_variables]
 "EMP"
 
