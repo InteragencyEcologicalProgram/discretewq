@@ -5,9 +5,9 @@ require(tidyr)
 require(lubridate)
 
 # import data from EDI to temp dir
-download.file("https://portal.edirepository.org/nis/dataviewer?packageid=edi.458.8&entityid=cf231071093ac2861893793517db26f3",
+download.file("https://portal.edirepository.org/nis/dataviewer?packageid=edi.458.9&entityid=cf231071093ac2861893793517db26f3",
               file.path(tempdir(), "EMP_DWQ_1975_2022.csv"), mode="wb")
-download.file("https://portal.edirepository.org/nis/dataviewer?packageid=edi.458.8&entityid=86dd696bc3f8407ff52954094e1e9dcf",
+download.file("https://portal.edirepository.org/nis/dataviewer?packageid=edi.458.9&entityid=86dd696bc3f8407ff52954094e1e9dcf",
               file.path(tempdir(), "EMP_DWQ_Stations_1975-2022"), mode="wb")
 
 # read in station data
