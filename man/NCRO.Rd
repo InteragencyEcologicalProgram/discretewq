@@ -4,9 +4,9 @@
 \encoding{UTF-8}
 \name{NCRO}
 \alias{NCRO}
-\title{NCRO Water Quality and Nutrients}
+\title{NCRO water quality data}
 \format{
-a tibble with 4,820 rows and 9 variables
+a tibble with 10,350 rows and 49 variables
 \describe{
 \item{Source}{Name of the source dataset.}
 \item{Station}{Station where sample was collected.}
@@ -21,11 +21,13 @@ a tibble with 4,820 rows and 9 variables
 \item{DissolvedOxygen}{Dissolved oxygen (mg/L) at surface.}
 \item{DissolvedOxygen_bottom}{Dissolved oxygen (mg/L) at bottom.}
 \item{pH}{pH (dimensionless) at surface.}
+\item{TurbidityNTU}{Turbidity (NTU) at surface.}
+\item{TurbidityFNU}{Turbidity (FNU) at surface.}
 \item{TotAlkalinity_Sign}{Whether the Total Alkalinity value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
 \item{TotAlkalinity}{Total Alkalinity (mg/L).}
 \item{DissAmmonia_Sign}{Whether the Dissolved Ammonia value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
 \item{DissAmmonia}{Dissolved Ammonia (mg/L). If DissAmmonia_Sign is <, this is equal to the reporting limit}
-\item{DissBromide_Sign}{Whether the Dissolved Bromide valueis lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
+\item{DissBromide_Sign}{Whether the Dissolved Bromide value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
 \item{DissBromide}{Dissolved bromide (mg/L). If DissBromide_Sign is <, this is equal to the reporting limit}
 \item{DissCalcium_Sign}{Whether the Dissolved Calcium value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
 \item{DissCalcium}{Dissolved calcium (mg/L). If DissCalcium_Sign is <, this is equal to the reporting limit}
@@ -43,8 +45,6 @@ a tibble with 4,820 rows and 9 variables
 \item{TOC}{Total Organic Carbon (mg/L).If TOC_Sign is <, this is equal to the reporting limit}
 \item{DON_Sign}{Whether the Dissolved Organic Nitrate value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "="}
 \item{DON}{Dissolved Organic Nitrogen (mg/L).If DON_Sign is <, this is equal to the reporting limit}
-\item{TON_Sign}{Whether the Total Organic Nitrate value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "="}
-\item{TON}{Total organic nitrogen (mg/L). If TON_Sign is <, this is equal to the reporting limit}
 \item{DissOrthophos_Sign}{Whether the Dissolved Orthophos value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
 \item{DissOrthophos}{Dissolved Ortho-phosphate (mg/L). If DissOrthophos_Sign is <, this is equal to the reporting limit}
 \item{TotPhos_Sign}{Whether the Total Phosphate value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "="}
@@ -53,20 +53,22 @@ a tibble with 4,820 rows and 9 variables
 \item{TSS}{Total suspended solids (mg/L). If TSS_Sign is <, this is equal to the reporting limit}
 \item{VSS_Sign}{Whether the Volatile Suspended Solids value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "="}
 \item{VSS}{Volatile suspended solids (mg/L). If VSS_Sign is <, this is equal to the reporting limit}
-\item{TKN_Sign}{Whether the Total Kjeldahl Nitrogen value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=". "NA" indcates reporting limit unknown.}
+\item{TKN_Sign}{Whether the Total Kjeldahl Nitrogen value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=". "NA" indicates reporting limit unknown.}
 \item{TKN}{Total Kjeldahl Nitrogen (mg/L). IF TKN_Sign is <, this is equal to the reporting limit.}
+\item{TDS_Sign}{Whether the Total Dissolved Solids value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), or reported as the measured value "=".}
+\item{TDS}{Total Dissolved Solids (mg/L).}
 }
 }
 \usage{
 NCRO
 }
 \description{
-Water Quality, Chlorophyll, and Nutrients from the South Delta collected by DWR's North Central Region Office
+Water quality data from the California Department of Water Resources North Central Region Office.
 }
 \details{
 Contact Jared Frantzich Jared.Frantzich@water.ca.gov for more information.
 }
 \seealso{
-\code{\link{wq}}
+\code{\link{wq}}; for more information on _Sign variables: \link{sign_variables}
 }
 \keyword{datasets}

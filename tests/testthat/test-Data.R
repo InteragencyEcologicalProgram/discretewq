@@ -35,7 +35,6 @@ test_that("No zeros in environmental variables that shouldn't have them", {
 
 test_that("Errors work correctly", {
   expect_error(wq(Sources="USGS"), 'The "USGS" data source has been renamed to "USGS_SFBS" because of the inclusion of an additional USGS dataset, "USGS_CAWSC".', fixed=TRUE)
-  expect_error(wq(Sources="SFBS"), 'You must specify the data sources you wish to include. Choices include
-  c("EMP", "STN", "NCRO", "FMWT", "EDSM", "DJFMP", "SDO", "SKT", "SLS", "20mm", "Suisun", "Baystudy", "USBR", "USGS_SFBS", "YBFMP", "USGS_CAWSC")', fixed=TRUE)
+  expect_error(wq(Sources="SFBS"), 'You must specify the data sources you wish to include. Choices include:\n 20mm, Baystudy, DJFMP, EDSM, EMP, FMWT, NCRO, SDO, SKT, SLS, STN, Suisun, USBR, USGS_CAWSC, USGS_SFBS, YBFMP', fixed=TRUE)
 })
 

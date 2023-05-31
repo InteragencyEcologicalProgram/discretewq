@@ -30,7 +30,7 @@ SKT
 Water quality data from the California Department of Fish and Wildlife Spring Kodiak Trawl.
 }
 \details{
-More metadata and information on methods are available \href{http://www.dfg.ca.gov/delta/projects.asp?ProjectID=SKT}{here}.
+More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.527.4}{here}.
 }
 \seealso{
 \code{\link{wq}}

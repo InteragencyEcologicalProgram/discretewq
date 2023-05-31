@@ -1,11 +1,11 @@
 dataPackageID	systemID	title	givenName	middleInitial	surName	role	organizationName	email	onlineDescription	url
-edi.458.4	EDI									
+edi.458.9	EDI									
 edi.527.4	EDI									
-edi.244.8	EDI									
-edi.415.7	EDI									
+edi.244.9	EDI									
+edi.415.8	EDI									
 edi.276.2	EDI									
 edi.494.2	EDI									
-edi.233.2	EDI									
+edi.233.3	EDI									
 edi.535.4	EDI									
 edi.534.4	EDI									
 		"USGS Measurements of Water Quality in San Francisco Bay (CA), 1969-2015 (ver. 3.0 June 2017)"	Cloern	E	J	creator	United States Geological Survey		This online link references a USGS data publication	https://doi.org/10.5066/F7TQ5ZPR
@@ -16,8 +16,8 @@ edi.534.4	EDI
 		"USGS measurements of water quality in San Francisco Bay (CA), beginning in 2016 (ver. 3.0, March 2020)"	Nejad	S	E	creator	United States Geological Survey		This online link references a USGS data publication	https://doi.org/10.5066/F7D21WGF
 		"USGS measurements of water quality in San Francisco Bay (CA), beginning in 2016 (ver. 3.0, March 2020)"	Martin	A	C	creator	United States Geological Survey		This online link references a USGS data publication	https://doi.org/10.5066/F7D21WGF
 		"USGS measurements of water quality in San Francisco Bay (CA), beginning in 2016 (ver. 3.0, March 2020)"	Cloern	E	J	creator	United States Geological Survey		This online link references a USGS data publication	https://doi.org/10.5066/F7D21WGF
-		Bay Study data	CDFW			creator	California Department of Fish and Wildlife		This online link references the location of the metadata and original data from this survey	https://filelib.wildlife.ca.gov/Public/BayStudy/
-		Bay Study data	Hieb		Kathy	contact	California Department of Fish and Wildlife	Kathy.Hieb@wildlife.ca.gov	This online link references the location of the metadata and original data from this survey	https://filelib.wildlife.ca.gov/Public/BayStudy/
+		Bay Study data	CDFW			creator	California Department of Fish and Wildlife		This online link references the location of the metadata and original data from this survey	https://filelib.wildlife.ca.gov/Public/BayStudy/Access_Database/
+		Bay Study data	Hieb		Kathy	contact	California Department of Fish and Wildlife	Kathy.Hieb@wildlife.ca.gov	This online link references the location of the metadata and original data from this survey	https://filelib.wildlife.ca.gov/Public/BayStudy/Access_Database/
 		Fall Midwater Trawl data	CDFW			creator	California Department of Fish and Wildlife		This online link references the location of the metadata and original data from this survey	https://filelib.wildlife.ca.gov/Public/TownetFallMidwaterTrawl/FMWT%20Data/
 		Fall Midwater Trawl data	White		James	contact	California Department of Fish and Wildlife	James.White@wildlife.ca.gov	This online link references the location of the metadata and original data from this survey	https://filelib.wildlife.ca.gov/Public/TownetFallMidwaterTrawl/FMWT%20Data/
 		Summer Townet data	CDFW			creator	California Department of Fish and Wildlife		This online link references the location of the metadata and original data from this survey	https://filelib.wildlife.ca.gov/Public/TownetFallMidwaterTrawl/TNS%20MS%20Access%20Data/TNS%20data/
@@ -33,3 +33,5 @@ edi.534.4	EDI
 		Monthly vertical profiles of water quality in the Sacramento Deep Water Ship Channel 2012-2019	Van Nieuwenhuyse		E	creator	United States Bureau of Reclamation		This online link references the USBR regional office leading this project	https://www.usbr.gov/mp/bdo/index.html
 		USGS water data for the Nation: U.S. Geological Survey National Water Information System database	U.S. Geological Survey			contact	U.S. Geological Survey		This online link references the online data portal from which these data were retrieved	https://doi.org/10.5066/F7P55KJN
 		USGS water data for the Nation: U.S. Geological Survey National Water Information System database	U.S. Geological Survey			creator	U.S. Geological Survey		This online link references the online data portal from which these data were retrieved	https://doi.org/10.5066/F7P55KJN
+		"Water Quality Evaluation Section, North Central Region Office"	CDWR			contact	California Department of Water Resources		This online link references the online data portal from which these data were retrieved	https://wdl.water.ca.gov/waterdatalibrary/WaterQualityDataLib.aspx
+		"Water Quality Evaluation Section, North Central Region Office"	CDWR			creator	California Department of Water Resources		This online link references the online data portal from which these data were retrieved	https://wdl.water.ca.gov/waterdatalibrary/WaterQualityDataLib.aspx

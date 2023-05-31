@@ -36,9 +36,9 @@ USGS_CAWSC
 Discrete water quality data from the USGS California Water Science Center
 }
 \details{
-More metadata and information on methods are available \href{https://nwis.waterdata.usgs.gov/usa/nwis/qwdata}{here for data} and \href{https://help.waterdata.usgs.gov/codes-and-parameters}{here for metadata}.
+More metadata and information on methods are available \href{https://doi.org/10.5066/F7P55KJN}{here for data} and \href{https://help.waterdata.usgs.gov/codes-and-parameters}{here for metadata}.
 }
 \seealso{
-\code{\link{wq}}
+\code{\link{wq}}; for more information on _Sign variables: \link{sign_variables}
 }
 \keyword{datasets}

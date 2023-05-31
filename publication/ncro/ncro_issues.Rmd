@@ -1,0 +1,965 @@
+---
+title: "NCRO Data Issues"
+author: "Dave Bosworth"
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+output: 
+  html_document: 
+    code_folding: show
+    toc: true
+    toc_float:
+      collapsed: false
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Purpose
+
+Identify and highlight issues in the NCRO data set that need to be addressed before latest EDI publication of `discretewq`.
+
+# Global code and functions
+
+```{r load packages, message = FALSE, warning = FALSE}
+# Load packages
+library(tidyverse)
+library(readxl)
+library(jsonlite)
+library(glue)
+library(scales)
+library(here)
+library(conflicted)
+conflicts_prefer(dplyr::filter())
+```
+
+# Import and Prepare Data
+
+```{r import data xlsx, message = FALSE}
+# Import original NCRO data files
+df_ncro_cdrs <- read_excel(here("data-raw/NCRO/WQES Central Delta and Rock Slough Sample Results 2001-2021.xlsx"))
+df_ncro_nd <- read_excel(here("data-raw/NCRO/WQES North Delta Sample Results 2015 - 2021.xlsx"))
+df_ncro_sd <- read_excel(here("data-raw/NCRO/WQES South Delta Sample Results 1999-2021.xlsx"))
+
+# Import station and analyte look up tables
+stations <- read_csv(here("data-raw/NCRO/stationLatLongs.csv"))
+analytes <- read_csv(here("data-raw/NCRO/Analytes.csv"))
+```
+
+```{r prepare data xlsx}
+# Combine original NCRO data files and prepare for further analysis
+df_ncro_all <- bind_rows(df_ncro_cdrs, df_ncro_nd, df_ncro_sd) %>% 
+  # only include normal samples
+  filter(`Sample Type` == "Normal Sample") %>%
+  # Join table with standardized analyte names
+  left_join(analytes, by = join_by(Analyte)) %>% 
+  # only include analytes marked as "Y" in table
+  filter(UseYN == "Y") %>% 
+  # join station info from stations table
+  left_join(stations, by = join_by(`Long Station Name`)) %>%
+  transmute(
+    DataStatus = `Data Status`,
+    StationName = `Long Station Name`,
+    ShortStationName = `Short Station Name`,
+    StationNumber = `Station Number`,
+    SampleCode = `Sample Code`,
+    DateTime = mdy_hm(`Collection Date`, tz = "Etc/GMT+8"),
+    Date = date(DateTime),
+    Analyte,
+    AnalyteAbbr = Abbreviation,
+    Result,
+    # add ResultSign which indicates <RL values 
+    ResultSign = if_else(str_detect(Result, "^<"), "<", "="),
+    RL = `Rpt Limit`,
+    Units,
+    Method,
+    Depth,
+    Matrix,
+    Description,
+    Notes,
+    ResultRejected = `Result Rejected`,
+    Latitude,
+    Longitude
+  ) %>% 
+  # remove stations with no station name or number
+  filter(!str_detect(StationName, "^\\(")) %>% 
+  # convert Result to numeric making <RL values equal to their RL 
+  mutate(
+    Result = case_when(
+      Result %in% c("N.S.", "D1") ~ NA_character_,
+      ResultSign == "<" ~ RL,
+      TRUE ~ Result
+    ),
+    Result = as.numeric(Result)
+  ) %>% 
+  # remove rows with NA values in Result
+  drop_na(Result)
+```
+
+It turns out that most of the data NCRO collects is available on the CNRA data portal. We can download data directly into R with their data API. Let's download and prepare that data as well, and then compare it to the data provided directly by NCRO staff.
+
+```{r cnra data download func}
+# Function to import DWR lab data from CNRA data portal by Station Number
+import_lab_data <- function(StationNumber) {
+  # Import first row of data to access total number of rows in data set
+  import1 <- fromJSON(glue("https://data.cnra.ca.gov/api/3/action/datastore_search?resource_id=a9e7ef50-54c3-4031-8e44-aa46f3c660fe&q={StationNumber}&limit=1"))
+  # Pull out total number of rows in data set
+  total_res <- import1$result$total
+  # Import all data
+  import_total <- fromJSON(glue("https://data.cnra.ca.gov/api/3/action/datastore_search?resource_id=a9e7ef50-54c3-4031-8e44-aa46f3c660fe&q={StationNumber}&limit={total_res}"))
+  
+  # Convert to tibble and format data
+  as_tibble(import_total$result$records) %>% 
+    select(
+      DataStatus = status,
+      StationName = full_station_name,
+      ShortStationName = station_name,
+      StationNumber = station_number,
+      SampleCode = sample_code,
+      DateTime = sample_date,
+      Analyte = parameter,
+      Result = result,
+      RL = reporting_limit,
+      Units = units,
+      Method = method_name,
+      Depth = sample_depth,
+      DepthUnits = sample_depth_units,
+      Latitude = latitude,
+      Longitude = longitude
+    ) %>% 
+    mutate(DateTime = ymd_hms(DateTime, tz = "Etc/GMT+8"))
+}
+
+# Function to import DWR lab data from CNRA data portal by Station Number
+import_field_data <- function(StationNumber) {
+  # Import first row of data to access total number of rows in data set
+  import1 <- fromJSON(glue("https://data.cnra.ca.gov/api/3/action/datastore_search?resource_id=1911e554-37ab-44c0-89b0-8d7044dd891d&q={StationNumber}&limit=1"))
+  # Pull out total number of rows in data set
+  total_res <- import1$result$total
+  # Import all data
+  import_total <- fromJSON(glue("https://data.cnra.ca.gov/api/3/action/datastore_search?resource_id=1911e554-37ab-44c0-89b0-8d7044dd891d&q={StationNumber}&limit={total_res}"))
+
+  # Convert to tibble and format data
+  as_tibble(import_total$result$records) %>%
+    select(
+      DataStatus = status,
+      StationName = full_station_name,
+      ShortStationName = station_name,
+      StationNumber = station_number,
+      SampleCode = sample_code,
+      DateTime = sample_date,
+      Analyte = parameter,
+      Result = fdr_result,
+      RL = fdr_reporting_limit,
+      Units = uns_name,
+      Method = mth_name,
+      Depth = sample_depth,
+      DepthUnits = sample_depth_units,
+      Latitude = latitude,
+      Longitude = longitude
+    ) %>%
+    mutate(DateTime = ymd_hms(DateTime, tz = "Etc/GMT+8"))
+}
+```
+
+```{r download and save cnra data, eval = FALSE}
+# Create a vector of all NCRO StationNumbers
+ncro_sta_num <- unique(df_ncro_all$StationNumber) %>% str_subset("^\\(", negate = TRUE)
+
+# Import all NCRO lab data from CNRA data portal
+df_cnra_lab <- map(ncro_sta_num, import_lab_data) %>% list_rbind()
+
+# Import all NCRO field data from CNRA data portal
+df_cnra_fd <- map(ncro_sta_num, import_field_data) %>% list_rbind()
+
+# Combine lab and field data and save as rds file
+bind_rows(df_cnra_lab, df_cnra_fd) %>% saveRDS(file = here("publication/ncro/cnra_download.rds"))
+```
+
+Bring in and prepare NCRO data downloaded from the CNRA data portal for comparison.
+
+```{r import and prepare data cnra}
+df_ncro_cnra <- readRDS(here("publication/ncro/cnra_download.rds")) %>% 
+  # Standardize a few analyte names so join works correctly
+  mutate(
+    Analyte = case_match(
+      Analyte,
+      "(Bottom) DissolvedOxygen" ~ "Field (Bottom) Dissolved Oxygen",
+      "DissolvedOxygen" ~ "Field Dissolved Oxygen",
+      "SpecificConductance" ~ "Field Specific Conductance",
+      "WaterTemperature" ~ "Field Water Temperature",
+      "pH" ~ "Field pH",
+      .default = Analyte
+    )
+  ) %>%
+  # Join table with standardized analyte names
+  left_join(analytes, by = join_by(Analyte)) %>% 
+  # only include analytes marked as "Y" in table
+  filter(UseYN == "Y") %>% 
+  rename(AnalyteAbbr = Abbreviation) %>% 
+  relocate(AnalyteAbbr, .after = Analyte) %>% 
+  select(-UseYN) %>% 
+  # Add Date column and combine Depth and units into one column
+  mutate(Date = date(DateTime), .after = DateTime) %>% 
+  mutate(Depth = paste(as.character(Depth), DepthUnits)) %>% 
+  select(-DepthUnits) %>% 
+  # Trim whitespace at end of strings in ShortStationName
+  mutate(ShortStationName = str_trim(ShortStationName)) %>% 
+  # Restrict data to period of record of df_ncro_all
+  filter(Date >= min(df_ncro_all$Date) & Date <= max(df_ncro_all$Date)) %>% 
+  # remove rows with NA values in Result for now
+  drop_na(Result) %>% 
+  # Convert Result and RL to numeric
+  mutate(across(c(Result, RL), as.numeric)) %>% 
+  # Remove one negative Turbidity value
+  filter(Result >= 0) %>% 
+  # We'll define <RL values as those equal to zero
+  mutate(ResultSign = if_else(Result == 0, "<", "="), .after = Result) %>% 
+  mutate(Result = if_else(ResultSign == "<", RL, Result)) %>% 
+  select(-RL)
+```
+
+# Data from data request
+
+We'll take a closer look at the data provided directly by NCRO before we compare it to the data downloaded from the CNRA data portal. We'll start by looking at the number of `NA` values in each column.
+
+```{r count NA values xlsx}
+df_ncro_all %>% 
+  summarize(across(everything(), ~ sum(is.na(.x)))) %>% 
+  pivot_longer(cols = everything(), names_to = "Column", values_to = "NumNA") %>% 
+  print(n = 25)
+```
+
+Overall, the important columns don't have missing values. Next, let's look at the unique values in some of the less-used columns.
+
+```{r unique values less used xlsx}
+df_ncro_all_lu <- df_ncro_all %>% 
+  select(
+    Depth,
+    Matrix,
+    Description,
+    Notes,
+    ResultRejected
+  )
+
+for (var in names(df_ncro_all_lu)) {
+  df_ncro_all_lu %>% count(.data[[var]]) %>% print(n = 150)
+}
+```
+
+It looks like the sample matrix for all samples is "Water, Natural" and there were no rejected results. We can remove the columns for these. We can also remove the `RL` column since that is no longer necessary. There seems to be some variation in sample depths with some possible errors, but they were all collected at the surface.
+
+```{r remove unnecessary cols xlsx}
+# Remove columns for Sample Matrix and Result Rejected
+df_ncro_all_c1 <- df_ncro_all %>% select(-c(RL, Matrix, ResultRejected))
+```
+
+## Stations
+
+First, let's look to see how the station names and station numbers match up, and look for any synonyms in the station names.
+
+```{r all stations xlsx}
+df_ncro_all_c1 %>% 
+  count(StationNumber, StationName, ShortStationName) %>% 
+  arrange(StationNumber) %>% 
+  print(n = 80)
+```
+
+None of the station numbers are duplicated with different station names, but there are a few stations with (UserDefined) as their station numbers that need to be standardized. Now let's take a look at the stations without matches in the stations table. These are currently excluded from the data publication.
+
+```{r excluded stations xlsx}
+df_ncro_all_c1 %>% 
+  # Records without Latitude-Longitude coordinates are not in the stations table
+  filter(is.na(Latitude)) %>% 
+  count(StationName, ShortStationName, StationNumber) %>% 
+  arrange(desc(n)) %>% 
+  print(n = 40)
+```
+
+There are 18 excluded stations that have over 100 records, and there are two additional stations with established Station Numbers. We may want to include some or all of these.
+
+## Analytes
+
+Next, let's take a look at the analytes, their abbreviations and methods.
+
+```{r analyte abbr xlsx}
+df_ncro_all_c1 %>% 
+  count(AnalyteAbbr, Analyte, Method) %>% 
+  arrange(AnalyteAbbr) %>% 
+  print(n = 50)
+```
+
+Some of nutrients and cations have had method changes throughout the years; however, a few issues jump out:
+
+1) The analyte "Specific Conductance" may actually be a laboratory measurement, which we would most likely exclude. We'll need to look into this further.
+2) There are a significant number of Turbidity samples measured with method "EPA 180.1 [D-2]*". These also could be laboratory measurements, which we would also exclude. We'll need to look into this further as well.
+3) "Dissolved Total Kjeldahl Nitrogen" is not an actual analyte and should be removed.
+4) Total Dissolved Solids is not TSS and should be a separate analyte abbreviated as TDS.
+5) Some of the Turbidity measurements are made with a sonde. We'll need to make sure their units are FNU, not NTU.
+
+Let's fix issues 3 and 4 above:
+
+```{r fix analytes xlsx}
+df_ncro_all_c2 <- df_ncro_all_c1 %>% 
+  filter(Analyte != "Dissolved Total Kjeldahl Nitrogen") %>% 
+  mutate(AnalyteAbbr = if_else(Analyte == "Total Dissolved Solids", "TDS", AnalyteAbbr))
+
+# Make sure they are fixed
+df_ncro_all_c2 %>% 
+  count(AnalyteAbbr, Analyte, Method) %>% 
+  arrange(AnalyteAbbr) %>% 
+  print(n = 50)
+```
+
+Now let's take a closer look at issue 1 to see if "Field Specific Conductance" was collected alongside the "Specific Conductance" measurements.
+
+```{r investigate spcnd xlsx}
+# Find all SampleCodes where "Field Specific Conductance" was collected
+  # along with "Specific Conductance"
+df_ncro_all_c2 %>% 
+  filter(Analyte == "Specific Conductance") %>% 
+  left_join(
+    df_ncro_all_c2 %>% filter(Analyte == "Field Specific Conductance"), 
+    by = join_by(SampleCode) 
+  ) %>%
+  filter(!is.na(Analyte.y)) %>% 
+  nrow()
+
+# Find all SampleCodes where "Field Specific Conductance" wasn't collected
+  # along with "Specific Conductance"
+df_ncro_all_c2 %>% 
+  filter(Analyte == "Specific Conductance") %>% 
+  left_join(
+    df_ncro_all_c2 %>% filter(Analyte == "Field Specific Conductance"), 
+    by = join_by(SampleCode) 
+  ) %>%
+  filter(is.na(Analyte.y)) %>% 
+  nrow()
+```
+
+It looks like most the Sample Codes with "Specific Conductance" as an analyte also have "Field Specific Conductance". There are only 10 Sample Codes that have only "Specific Conductance" as an analyte. We will remove all records with "Specific Conductance" as an analyte since they are most likely laboratory measurements.
+
+```{r fix spcnd xlsx}
+df_ncro_all_c3 <- df_ncro_all_c2 %>% filter(Analyte != "Specific Conductance")
+```
+
+We'll take a closer look at issue 2 to see if the Turbidity measurements with Method "EPA 180.1 [D-2]*" were collected alongside a field Turbidity measurement.
+
+```{r investigate turbidity xlsx}
+# Find all SampleCodes where "Field Turbidity" was collected along with "Turbidity"
+df_ncro_all_c3 %>% 
+  filter(Method == "EPA 180.1 [D-2]*") %>% 
+  left_join(
+    df_ncro_all_c3 %>% filter(Analyte == "Field Turbidity"), 
+    by = join_by(SampleCode) 
+  ) %>% 
+  filter(!is.na(Analyte.y)) %>% 
+  nrow()
+```
+
+None of the Turbidity measurements with Method "EPA 180.1 [D-2]*" were collected alongside a field Turbidity measurement. These may all be synonyms for field-collected Turbidity, but we should check on this to confirm.
+
+Let's take a look at the Analytes and their units including Turbidity to address issue 5.
+
+```{r investigate analyte units xlsx}
+df_ncro_all_c3 %>%
+  count(AnalyteAbbr, Analyte, Method, Units) %>% 
+  arrange(AnalyteAbbr) %>% 
+  print(n = 50)
+```
+
+Most of the units are consistent among analytes and their methods including Turbidity. There are 13 Dissolved Calcium records with "ug/L" as their unit of measure, while the majority of records for this analyte have "mg/L" as their unit of measure. These 13 records will need to be converted to mg/L.
+
+```{r convert calcium units xlsx}
+df_ncro_all_c4 <- df_ncro_all_c3 %>% 
+  mutate(
+    Result = if_else(Analyte == "Dissolved Calcium" & Units == "ug/L", Result / 1000, Result),
+    Units = if_else(Analyte == "Dissolved Calcium" & Units == "ug/L", "mg/L", Units)
+  )
+
+# Make sure they are fixed
+df_ncro_all_c4 %>%
+  count(AnalyteAbbr, Analyte, Method, Units) %>% 
+  arrange(AnalyteAbbr) %>% 
+  print(n = 50)
+```
+
+## Duplicate records
+
+Let's look for and remove any duplicate samples - more than 1 sample collected at a station and same `DateTime`.
+
+```{r look for duplicates xlsx}
+df_ncro_all_c4 %>%
+  count(StationName, DateTime, Analyte) %>% 
+  filter(n > 1) %>% 
+  nrow()
+
+# Pull out duplicate records
+df_ncro_all_dups <- df_ncro_all_c4 %>%
+  count(StationName, DateTime, Analyte) %>% 
+  filter(n > 1) %>% 
+  select(-n) %>% 
+  left_join(df_ncro_all_c4, by = join_by(StationName, DateTime, Analyte))
+```
+
+There are 3703 instances when more than one sample was collected at a station and same `DateTime`. Let's see if there is any way to determine which record is the Duplicate QA sample, so we can remove those.
+
+```{r investigate duplicates xlsx}
+df_ncro_all_dups %>% count(Notes)
+```
+
+We may be able to remove the records from `df_ncro_all_dups` with the following `Notes`:
+
+* DILUTION DUPLICATE
+* Duplicate
+* Duplicate & Matrix Spike
+* laboratory-duplicate
+
+Let's see if these have matching records.
+
+```{r investigate duplicates xlsx 2}
+# Define regex for notes for the records we are considering to remove
+regex_notes_dups <- regex("duplicate", ignore_case = TRUE)
+
+df_ncro_all_dups %>% 
+  filter(str_detect(Notes, regex_notes_dups)) %>% 
+  left_join(
+    df_ncro_all_dups %>% filter(!str_detect(Notes, regex_notes_dups) | is.na(Notes)),
+    by = join_by(StationName, DateTime, Analyte)
+  ) %>% 
+  summarize(across(everything(), ~ sum(is.na(.x)))) %>% 
+  pivot_longer(cols = everything(), names_to = "Column", values_to = "NumNA") %>% 
+  print(n = 40)
+```
+
+It looks like all records with the `Notes` indicated above have matching records, so it is safe to remove these.
+
+```{r remove duplicates xlsx}
+# Remove duplicates with Notes in regex_notes_dups
+df_ncro_all_dups_c1 <- df_ncro_all_dups %>% filter(!str_detect(Notes, regex_notes_dups) | is.na(Notes))
+
+# Look for more duplicates after removing records with these notes
+df_ncro_all_dups_c1 %>% 
+  count(StationName, DateTime, Analyte) %>% 
+  filter(n > 1)
+```
+
+There are still a significant amount of duplicates remaining. We'll try to fix these by keeping the first sample of the pair.
+
+```{r remove duplicates xlsx 2}
+df_ncro_all_dups_c2 <- df_ncro_all_dups_c1 %>% 
+  group_by(StationName, DateTime, Analyte) %>% 
+  mutate(RepNum = row_number()) %>% 
+  ungroup() %>% 
+  filter(RepNum == 1) %>% 
+  select(-RepNum)
+
+# Make sure all duplicates are removed now
+df_ncro_all_dups_c2 %>% 
+  count(StationName, DateTime, Analyte) %>% 
+  filter(n > 1)
+```
+
+We'll add the data frame with the cleaned up duplicates back to the main data frame.
+
+```{r add cleaned duplicates xlsx}
+df_ncro_all_c5 <- df_ncro_all_c4 %>% 
+  anti_join(df_ncro_all_dups) %>% 
+  bind_rows(df_ncro_all_dups_c2)
+
+# Make sure all duplicates are removed now
+df_ncro_all_c5 %>% 
+  count(StationName, DateTime, Analyte) %>% 
+  filter(n > 1)
+```
+
+All duplicates are cleaned up now. Let's see how many instances when more than one sample was collected at a station and same day. This should be pretty rare.
+
+```{r investigate duplicates daily xlsx}
+df_ncro_all_c5 %>% 
+  count(StationName, Date, Analyte) %>% 
+  filter(n > 1) %>% 
+  nrow()
+```
+
+Hmmm, there are more of these than I thought. We may need to revisit this...
+
+## Sampling effort by Station
+
+Let's take a look at the sampling effort by station for each year. This could help when trying to standardize station names. This will be counts of distinct sampling events (unique DateTime-Station combinations).
+
+```{r sampling effort xlsx, fig.width = 9, fig.height = 12}
+# Count number of distinct sampling events by station for each year
+df_ncro_all_se <- df_ncro_all_c5 %>% 
+  distinct(StationNumber, StationName, DateTime) %>% 
+  mutate(Year = year(DateTime)) %>% 
+  count(StationNumber, StationName, Year, name = "NumSamples") %>% 
+  unite(col = "Station", StationName, StationNumber, sep = " - ")
+
+# Create heat map
+df_ncro_all_se %>% 
+  mutate(Station = factor(Station)) %>% 
+  ggplot(aes(x = Year, y = fct_rev(Station), fill = NumSamples)) +
+  geom_tile() +
+  scale_fill_viridis_c(name = "Number of\nSampling\nEvents") +
+  ylab(NULL) +
+  scale_x_continuous(breaks = breaks_pretty(20), expand = expansion()) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
+```
+
+
+# Data from CNRA data portal
+
+We'll take a closer look at the data downloaded from the CNRA data portal before we compare it to the data provided by NCRO. We'll start by looking at the number of `NA` values in each column.
+
+```{r count NA values cnra}
+df_ncro_cnra %>% 
+  summarize(across(everything(), ~ sum(is.na(.x)))) %>% 
+  pivot_longer(cols = everything(), names_to = "Column", values_to = "NumNA") %>% 
+  print(n = 20)
+```
+
+There are no `NA` values in the data set, which is nice.
+
+## Stations
+
+Let's look to see how the station names and station numbers match up, and look for any synonyms in the station names.
+
+```{r all stations cnra}
+df_ncro_cnra %>% 
+  count(StationNumber, StationName, ShortStationName) %>% 
+  arrange(StationNumber) %>% 
+  print(n = 50)
+```
+
+The station names and numbers look clean and standardized which is great.
+
+## Analytes
+
+Next, let's take a look at the analytes, their abbreviations and methods.
+
+```{r analyte abbr cnra}
+df_ncro_cnra %>% 
+  count(AnalyteAbbr, Analyte, Method) %>% 
+  arrange(AnalyteAbbr) %>% 
+  print(n = 50)
+```
+
+As with the data from NCRO, some of nutrients and cations have had method changes throughout the years, and there are a few similar issues that jump out:
+
+1) The analyte "Specific Conductance" may actually be a laboratory measurement, which we would most likely exclude. We'll need to look into this further.
+2) There are a significant number of Turbidity samples measured with method "EPA 180.1". These also could be laboratory measurements, which we would also exclude. We'll need to look into this further as well.
+3) There may also be some pH records that were measured in the laboratory with "Std Method 5910B (DWR Modified)".
+4) "Dissolved Total Kjeldahl Nitrogen" is not an actual analyte and should be removed.
+5) Total Dissolved Solids is not TSS and should be a separate analyte abbreviated as TDS.
+6) Some of the Turbidity measurements are made with a sonde. We'll need to make sure their units are FNU, not NTU.
+
+Let's fix issues 4 and 5 above:
+
+```{r fix analytes cnra}
+df_ncro_cnra_c1 <- df_ncro_cnra %>% 
+  filter(Analyte != "Dissolved Total Kjeldahl Nitrogen") %>% 
+  mutate(AnalyteAbbr = if_else(Analyte == "Total Dissolved Solids", "TDS", AnalyteAbbr))
+
+# Make sure they are fixed
+df_ncro_cnra_c1 %>% 
+  count(AnalyteAbbr, Analyte, Method) %>% 
+  arrange(AnalyteAbbr) %>% 
+  print(n = 50)
+```
+
+Now let's take a closer look at issue 1 to see if "Field Specific Conductance" was collected alongside the "Specific Conductance" measurements.
+
+```{r investigate spcnd cnra}
+# Find all SampleCodes where "Field Specific Conductance" was collected
+  # along with "Specific Conductance"
+df_ncro_cnra_c1 %>% 
+  filter(Analyte == "Specific Conductance") %>% 
+  left_join(
+    df_ncro_cnra_c1 %>% filter(Analyte == "Field Specific Conductance"), 
+    by = join_by(SampleCode) 
+  ) %>%
+  filter(!is.na(Analyte.y)) %>% 
+  nrow()
+
+# Find all SampleCodes where "Field Specific Conductance" wasn't collected
+  # along with "Specific Conductance"
+df_ncro_cnra_c1 %>% 
+  filter(Analyte == "Specific Conductance") %>% 
+  left_join(
+    df_ncro_cnra_c1 %>% filter(Analyte == "Field Specific Conductance"), 
+    by = join_by(SampleCode) 
+  ) %>%
+  filter(is.na(Analyte.y)) %>%
+  nrow()
+```
+
+It looks like most the Sample Codes with "Specific Conductance" as an analyte also have "Field Specific Conductance". There are only 12 Sample Codes that have only "Specific Conductance" as an analyte. We will remove all records with "Specific Conductance" as an analyte since they are most likely laboratory measurements.
+
+```{r fix spcnd cnra}
+df_ncro_cnra_c2 <- df_ncro_cnra_c1 %>% filter(Analyte != "Specific Conductance")
+```
+
+We'll take a closer look at issue 2 to see if the Turbidity measurements with Method "EPA 180.1" were collected alongside a field Turbidity measurement.
+
+```{r investigate turbidity cnra}
+# Find all SampleCodes where "Field Turbidity" was collected along with "Turbidity"
+df_ncro_cnra_c2 %>% 
+  filter(Method == "EPA 180.1") %>% 
+  left_join(
+    df_ncro_cnra_c2 %>% filter(Method %in% c("EPA 180.1 (Field)", "Turbidity, Sonde")), 
+    by = join_by(SampleCode) 
+  ) %>% 
+  filter(!is.na(Analyte.y)) %>% 
+  nrow()
+
+# Find all SampleCodes where "Field Turbidity" wasn't collected along with "Turbidity"
+df_ncro_cnra_c2 %>% 
+  filter(Method == "EPA 180.1") %>% 
+  left_join(
+    df_ncro_cnra_c2 %>% filter(Method %in% c("EPA 180.1 (Field)", "Turbidity, Sonde")), 
+    by = join_by(SampleCode) 
+  ) %>% 
+  filter(is.na(Analyte.y)) %>% 
+  nrow()
+```
+
+Hmm, this is kind of a mystery. Some of the SampleCodes have both "Turbidity" and "Field Turbidity" samples, but a majority of SampleCodes when "Turbidity" was collected don't have an associated "Field Turbidity" sample. We may have to remove the 554 "Turbidity" samples that have an associated "Field Turbidity" sample, but keep the remaining 1883 "Turbidity" samples. This may be something to look into further...
+
+Next, let's take a look at issue 3 to see if the pH measurements with Method "Std Method 5910B (DWR Modified)" were collected alongside a field pH measurement.
+
+```{r investigate ph cnra}
+# Find all SampleCodes where "Field pH" was collected along with "pH"
+df_ncro_cnra_c2 %>% 
+  filter(Method == "Std Method 5910B (DWR Modified)") %>% 
+  left_join(
+    df_ncro_cnra_c2 %>% filter(Method %in% c("EPA 150.1 (Field)", "SM 4500-H B-2000 (Field)")), 
+    by = join_by(SampleCode) 
+  ) %>% 
+  filter(!is.na(Analyte.y)) %>% 
+  nrow()
+
+# Find all SampleCodes where "Field pH" wasn't collected along with "pH"
+df_ncro_cnra_c2 %>% 
+  filter(Method == "Std Method 5910B (DWR Modified)") %>% 
+  left_join(
+    df_ncro_cnra_c2 %>% filter(Method %in% c("EPA 150.1 (Field)", "SM 4500-H B-2000 (Field)")), 
+    by = join_by(SampleCode) 
+  ) %>% 
+  filter(is.na(Analyte.y)) %>% 
+  nrow()
+```
+
+It looks like almost the Sample Codes with "pH" as an analyte also have "Field pH". There is only 1 Sample Code that has only "pH" as an analyte. We will remove all records with "Std Method 5910B (DWR Modified)" as an method since they are most likely laboratory measurements.
+
+```{r fix ph cnra}
+df_ncro_cnra_c3 <- df_ncro_cnra_c2 %>% filter(Method != "Std Method 5910B (DWR Modified)")
+```
+
+Finally, let's take a look at the Analytes and their units including Turbidity to address issue 5.
+
+```{r investigate analyte units cnra}
+df_ncro_cnra_c3 %>%
+  count(AnalyteAbbr, Analyte, Method, Units) %>% 
+  arrange(AnalyteAbbr) %>% 
+  print(n = 50)
+```
+
+Most of the units are consistent among analytes and their methods including Turbidity. There are 5 Dissolved Calcium records with "ug/L" as their unit of measure, while the majority of records for this analyte have "mg/L" as their unit of measure. These 5 records will need to be converted to mg/L. In addition, there are 2 Water Temperature measurements that need to be converted from degrees F to degrees C.
+
+```{r convert units cnra}
+df_ncro_cnra_c4 <- df_ncro_cnra_c3 %>% 
+  mutate(
+    Result = case_when(
+      Analyte == "Dissolved Calcium" & Units == "ug/L" ~ Result / 1000,
+      Analyte == "Field Water Temperature" & str_detect(Units, "F$") ~ (Result - 32) * 5/9,
+      TRUE ~ Result
+    ),
+    Units = case_when(
+      Analyte == "Dissolved Calcium" & Units == "ug/L" ~ "mg/L",
+      Analyte == "Field Water Temperature" & str_detect(Units, "F$") ~ "C",
+      TRUE ~ Units
+    )
+  )
+
+# Make sure they are fixed
+df_ncro_cnra_c4 %>%
+  count(AnalyteAbbr, Analyte, Method, Units) %>% 
+  arrange(AnalyteAbbr) %>% 
+  print(n = 50)
+```
+
+## Duplicate records
+
+Let's look for and remove any duplicate samples - more than 1 sample collected at a station and same `DateTime`.
+
+```{r look for duplicates cnra}
+df_ncro_cnra_c4 %>%
+  count(StationName, DateTime, Analyte) %>% 
+  filter(n > 1) %>%
+  nrow()
+
+# Pull out duplicate records
+df_ncro_cnra_dups <- df_ncro_cnra_c4 %>%
+  count(StationName, DateTime, Analyte) %>% 
+  filter(n > 1) %>% 
+  select(-n) %>% 
+  left_join(df_ncro_cnra_c4, by = join_by(StationName, DateTime, Analyte))
+```
+
+There are 4021 instances when more than one sample was collected at a station and same `DateTime`. We'll try to fix these by keeping the first sample of the pair.
+
+```{r remove duplicates cnra}
+df_ncro_cnra_dups_c1 <- df_ncro_cnra_dups %>% 
+  group_by(StationName, DateTime, Analyte) %>% 
+  mutate(RepNum = row_number()) %>% 
+  ungroup() %>% 
+  filter(RepNum == 1) %>% 
+  select(-RepNum)
+
+# Make sure all duplicates are removed now
+df_ncro_cnra_dups_c1 %>% 
+  count(StationName, DateTime, Analyte) %>% 
+  filter(n > 1)
+```
+
+We'll add the data frame with the cleaned up duplicates back to the main data frame.
+
+```{r add cleaned duplicates cnra}
+df_ncro_cnra_c5 <- df_ncro_cnra_c4 %>% 
+  anti_join(df_ncro_cnra_dups) %>% 
+  bind_rows(df_ncro_cnra_dups_c1)
+
+# Make sure all duplicates are removed now
+df_ncro_cnra_c5 %>% 
+  count(StationName, DateTime, Analyte) %>% 
+  filter(n > 1)
+```
+
+All duplicates are cleaned up now. Let's see how many instances when more than one sample was collected at a station and same day. This should be pretty rare.
+
+```{r investigate duplicates daily cnra}
+df_ncro_cnra_c5 %>% 
+  count(StationName, Date, Analyte) %>% 
+  filter(n > 1) %>% 
+  nrow()
+```
+
+Hmmm, again there are more of these than I thought. We may need to revisit this...
+
+# Compare data sets
+
+Now that the two data sets are cleaned up, let's take a look at how they compare. First of all, it looks like there is more data in the CNRA data set. This is probably because it includes some samples collected by groups other than NCRO at the same stations they sample. This probably isn't a big deal assuming that they were collected using similar methods.
+
+The first thing I'm curious about is how many of the SampleCode-Analyte combinations in the NCRO data set are also in the CNRA data set. We'll use the data sets without duplicates removed since the removal process was probably not consistent between the two data sets.
+
+```{r investigate samplecode analyte combos}
+# Match up data sets by SampleCode and AnalyteAbbr
+df_ncro_match_sc <- df_ncro_all_c4 %>% 
+  distinct(DataStatus, StationNumber, StationName, SampleCode, AnalyteAbbr) %>%
+  left_join(
+    df_ncro_cnra_c4 %>% distinct(SampleCode, AnalyteAbbr),
+    by = join_by(SampleCode, AnalyteAbbr),
+    suffix = c("_ncro", "_cnra"),
+    keep = TRUE
+  ) 
+
+# Shared SampleCode-Analyte combinations
+df_ncro_match_sc %>% 
+  filter(!is.na(SampleCode_cnra)) %>% 
+  nrow()
+
+df_ncro_match_sc %>% 
+  filter(!is.na(SampleCode_cnra)) %>% 
+  count(DataStatus, StationNumber) %>% 
+  print(n = 100)
+
+# How many of these shared SampleCode-Analyte combinations are considered non-public?
+df_ncro_match_sc %>% 
+  filter(
+    !is.na(SampleCode_cnra),
+    str_detect(DataStatus, "^1000|^2000")
+  ) %>% 
+  nrow()
+
+# SampleCode-Analyte combinations in NCRO data set that aren't in the CNRA data set
+df_ncro_match_sc %>% 
+  filter(is.na(SampleCode_cnra)) %>% 
+  nrow()
+
+df_ncro_match_sc %>% 
+  filter(is.na(SampleCode_cnra)) %>% 
+  count(DataStatus, StationNumber) %>% 
+  print(n = 30)
+```
+
+Unfortunately, there are 3291 SampleCode-Analyte combinations in the NCRO data set are not in the CNRA data set. All of these either have a data status of Non-public or Internal (codes 1000 and 2000) or an unknown StationNumber, or both. Interestingly, there are 663 records that share SampleCode-Analyte combinations but are considered non-public.
+
+Now let's take a closer look at the SampleCode-Analyte combinations in the CNRA data set that are not in the NCRO data set.
+
+```{r investigate samplecode analyte combos 2}
+# SampleCode-Analyte combinations in CNRA data set that aren't in the NCRO data set
+# Stations:
+df_ncro_cnra_c4 %>% 
+  distinct(StationNumber, StationName, SampleCode, AnalyteAbbr) %>%
+  left_join(
+    df_ncro_all_c4 %>% distinct(SampleCode, AnalyteAbbr),
+    by = join_by(SampleCode, AnalyteAbbr),
+    suffix = c("_cnra", "_ncro"),
+    keep = TRUE
+  ) %>% 
+  filter(is.na(SampleCode_ncro)) %>% 
+  count(StationName) %>% 
+  print(n = 30)
+
+# Analytes
+df_ncro_cnra_c4 %>% 
+  distinct(StationNumber, StationName, SampleCode, AnalyteAbbr) %>%
+  left_join(
+    df_ncro_all_c4 %>% distinct(SampleCode, AnalyteAbbr),
+    by = join_by(SampleCode, AnalyteAbbr),
+    suffix = c("_cnra", "_ncro"),
+    keep = TRUE
+  ) %>% 
+  filter(is.na(SampleCode_ncro)) %>% 
+  count(AnalyteAbbr_cnra) %>% 
+  print(n = 30)
+```
+
+There are 20 NCRO stations where other groups have collected data for almost all analytes we're including. 
+
+For the records in the NCRO and CNRA data sets that share SampleCode-Analyte combinations, we'll see if they contain the same data.
+
+```{r investigate matching data}
+# Define column names that we want to check for equivalency
+names_check <- c(
+  "StationName",
+  "ShortStationName",
+  "StationNumber",
+  "SampleCode",
+  "DateTime",
+  "AnalyteAbbr",
+  "Result",
+  "ResultSign",
+  "Depth"
+)
+
+# Join matching SampleCode-Analyte combinations
+df_ncro_match_all <- inner_join(
+  df_ncro_all_c4 %>% select(any_of(names_check)),
+  df_ncro_cnra_c4 %>% select(any_of(names_check)),
+  by = join_by(SampleCode, AnalyteAbbr),
+  suffix = c("_ncro", "_cnra"),
+  relationship = "many-to-many"
+)
+
+# Check equivalency among matching records
+# StationName
+all(df_ncro_match_all$StationName_ncro == df_ncro_match_all$StationName_cnra)
+df_ncro_match_all %>% 
+  filter(StationName_ncro != StationName_cnra) %>% 
+  count(StationName_ncro, StationName_cnra)
+
+# ShortStationName
+all(df_ncro_match_all$ShortStationName_ncro == df_ncro_match_all$ShortStationName_cnra)
+
+# StationNumber
+all(df_ncro_match_all$StationNumber_ncro == df_ncro_match_all$StationNumber_cnra)
+
+# DateTime
+all(df_ncro_match_all$DateTime_ncro == df_ncro_match_all$DateTime_cnra)
+
+# Result
+all(df_ncro_match_all$Result_ncro == df_ncro_match_all$Result_cnra)
+df_ncro_match_all %>% 
+  filter(Result_ncro != Result_cnra) %>% 
+  nrow()
+
+# All of these unequal Results are from duplicated SampleCode-Analyte combinations
+df_ncro_match_all %>% 
+  filter(Result_ncro != Result_cnra) %>% 
+  count(SampleCode, AnalyteAbbr, name = "NumRecords") %>% 
+  count(NumRecords)
+
+# ResultSign
+all(df_ncro_match_all$ResultSign_ncro == df_ncro_match_all$ResultSign_cnra)
+# All of these unequal ResultSign values are also from duplicated
+  # SampleCode-Analyte combinations
+df_ncro_match_all %>% 
+  filter(ResultSign_ncro != ResultSign_cnra) %>%
+  nrow()
+
+# Depth
+all(df_ncro_match_all$Depth_ncro == df_ncro_match_all$Depth_cnra)
+df_ncro_match_all %>% 
+  filter(Depth_ncro != Depth_cnra) %>%
+  count(Depth_ncro, Depth_cnra)
+```
+
+Overall, the two data sets match really well. Some duplicated SampleCode-Analyte combinations made some of the Results not match up, but the duplicated records were the same across both data sets except for one instance.
+
+# Next Steps
+
+In the short-term, we will use the data provided directly from NCRO in the `discretewq` EDI data publication after we fix a few issues. In the long-term, our goal will be to access the NCRO data from the CNRA data portal to be integrated and published in `discretewq`. In order for us to do this, we'll need to fix the errors in the NCRO data that is accessed through the CNRA data portal. This will involve multiple people and may take a while.
+
+For the data provided directly from NCRO, I would like to address the following issues before it's published:
+
+1) Up-to-date station coordinates for all active and historical stations that includes the `StationNumber` and standardized station names
+2) Resolve some of the records that have a "(UserDefined)" `StationNumber` but have very similar station names to established stations.
+3) Possibly add some historical stations that are discontinued and have a "(UserDefined)" `StationNumber`
+4) Check ambiguous Turbidity measurements with Method "EPA 180.1 [D-2]*". Were these collected in the field or were they laboratory measurements? We only want to include field measurements.
+5) Confirm that the Turbidity measurements with Method "Turbidity, Sonde [D-2]*" were truly collected with a sonde and not a turbidimeter. 
+6) Let NCRO know that there are a lot of duplicated records in the data they sent me. Hopefully this won't bring up any other issues that need to be addressed.
+
+We'll export a couple of summary tables as csv files to help communicate these issues with NCRO staff.
+
+```{r export summary tables, eval = FALSE}
+# Station names and numbers, their counts and periods of record
+df_ncro_all_c5 %>% 
+  distinct(StationNumber, StationName, ShortStationName, DateTime, Date) %>% 
+  summarize(
+    NumSamples = n(),
+    MinDate = min(Date),
+    MaxDate = max(Date),
+    .by = c(StationNumber, StationName, ShortStationName)
+  ) %>% 
+  arrange(StationNumber, StationName) %>% 
+  write_csv(here("publication/ncro/ncro_stations_all.csv"))
+
+# Turbidity measurements by Method and Station, their counts and periods of record
+df_ncro_all_c5 %>% 
+  filter(AnalyteAbbr == "Turbidity") %>% 
+  summarize(
+    NumSamples = n(),
+    MinDate = min(Date),
+    MaxDate = max(Date),
+    .by = c(StationNumber, StationName, Analyte, Method)
+  ) %>% 
+  arrange(StationNumber, StationName, Analyte) %>% 
+  write_csv(here("publication/ncro/ncro_turbidity.csv"))
+
+# Duplicates with the same DateTime
+df_ncro_all_dups %>% 
+  mutate(DateTime = as.character(DateTime)) %>% 
+  write_csv(here("publication/ncro/ncro_duplicates.csv"))
+
+# Multiple samples collected at a station on the same day - after removing
+  # duplicates with same DateTime
+df_ncro_all_c5 %>% 
+  count(StationName, Date, Analyte) %>% 
+  filter(n > 1) %>% 
+  select(-n) %>% 
+  left_join(df_ncro_all_c5, by = join_by(StationName, Date, Analyte)) %>% 
+  mutate(DateTime = as.character(DateTime)) %>% 
+  write_csv(here("publication/ncro/ncro_multiple_daily_samples.csv"))
+
+# Sampling effort summary
+df_ncro_all_se %>% 
+  arrange(Year) %>% 
+  pivot_wider(names_from = Year, values_from = NumSamples) %>% 
+  arrange(Station) %>% 
+  write_csv(here("publication/ncro/ncro_sampling_effort.csv"), na = "")
+```
+

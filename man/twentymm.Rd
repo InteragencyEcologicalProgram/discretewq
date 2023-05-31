@@ -31,7 +31,7 @@ twentymm
 Water quality data from the California Department of Fish and Wildlife 20mm survey.
 }
 \details{
-More metadata and information on methods are available \href{https://wildlife.ca.gov/Conservation/Delta/20mm-Survey}{here}.
+More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.535.4}{here}.
 }
 \seealso{
 \code{\link{wq}}
