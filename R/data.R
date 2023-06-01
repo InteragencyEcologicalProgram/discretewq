@@ -203,7 +203,7 @@
 #' Water quality data from the California Department of Fish and Wildlife Fall Midwater Trawl.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 29,244 rows and 13 variables
+#' @format a tibble with 29,246 rows and 14 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
@@ -215,6 +215,7 @@
 #'   \item{Tide}{Tidal stage.}
 #'   \item{Microcystis}{Microcystis bloom intensity on a qualitative scale from 1 to 5 where 1 = absent, 2 = low, 3 = medium, 4 = high, and 5 = very high.}
 #'   \item{Secchi}{Secchi depth (cm).}
+#'   \item{Secchi_estimated}{Was Secchi depth estimated? Y/N}
 #'   \item{Temperature}{Temperature (°C) at surface.}
 #'   \item{Temperature_bottom}{Temperature (°C) at bottom.}
 #'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}

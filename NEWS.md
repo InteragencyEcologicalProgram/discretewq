@@ -7,6 +7,7 @@
 * Added bottom conductivity to `twentymm`, `baystudy`, and `SDO`
 * Fixed timezones for `SDO` data. SDO times are reported in PST but had incorrectly been imported as local time (PST/PDT). Now, they are imported as Etc/GMT+8 and then converted to America/Los_Angeles to correspond to the other surveys.
 * Updated STN, FMWT, EDSM, DJFMP, SLS, Suisun, EMP, USGS_SFBS, USGS_CAWSC, YBFMP, SKT, 20mm, baystudy, and SDO datasets
+* Removed rows from FMWT dataset that did not contain any water quality information
 
 # discretewq 2.3.2
 
