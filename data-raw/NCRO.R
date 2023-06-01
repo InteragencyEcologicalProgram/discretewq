@@ -178,6 +178,9 @@ NCRO_all_c2 <- NCRO_all_c1 %>%
   select(-StationName) %>%
   left_join(stations_f %>% select(StationNumber, StationName), by = join_by(StationNumber)) %>%
   relocate(StationName) %>%
+  # Remove rows without station names - we're only including stations in the
+    # stations_f table
+  drop_na(StationName) %>%
   # Remove one set of samples from Old River near Head that wasn't collected by NCRO
   filter(!(StationName == "Old River near Head" & Date == "2018-09-20"))
 
