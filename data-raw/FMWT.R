@@ -56,7 +56,10 @@ FMWT <-
     Tide = recode(Tide, `1` = "High Slack", `2` = "Ebb", `3` = "Low Slack", `4` = "Flood"),
     Datetime = parse_date_time(if_else(is.na(Time), NA_character_, paste0(Date, " ", hour(Time), ":", minute(Time))), "%Y-%m-%d %H:%M", tz = "America/Los_Angeles"),
     Microcystis = if_else(Microcystis == 6, 2, Microcystis),
+    # Omit values equal to zero in Temperature_bottom and Conductivity_bottom
     across(c(Temperature_bottom, Conductivity_bottom), ~ na_if(.x, 0)),
+    # Omit one Temperature_bottom value that was likely measured in degrees F
+    Temperature_bottom = if_else(Temperature_bottom > 40, NA_real_, Temperature_bottom),
     Source = "FMWT",
     Secchi = Secchi * 100, # convert to cm
     Depth = Depth * 0.3048 # Convert to meters
