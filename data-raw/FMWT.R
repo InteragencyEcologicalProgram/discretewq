@@ -14,8 +14,7 @@ FMWT <- read_csv(file.path("data-raw", "FMWT", "Sample.csv"),
                  col_types = cols_only(StationCode="c", SampleDate="c", SampleTimeStart="c",
                                        WaterTemperature="d", Secchi="d", SecchiEstimated="l",
                                        ConductivityTop="d", TideCode="i", DepthBottom="d",
-                                       Microcystis="d", BottomTemperature="d", MethodCode = "c"))%>%
-  filter(MethodCode == "MWTR") %>%
+                                       Microcystis="d", BottomTemperature="d"))%>%
   rename(Station=StationCode, Date=SampleDate, Tide=TideCode, Time=SampleTimeStart,
          Depth=DepthBottom, Conductivity=ConductivityTop, Temperature=WaterTemperature,
          Secchi_estimated=SecchiEstimated,
@@ -33,6 +32,8 @@ FMWT <- read_csv(file.path("data-raw", "FMWT", "Sample.csv"),
   left_join(FMWT_stations, by="Station")%>%
   select(Source, Station, Latitude, Longitude, Date, Datetime, Depth, Tide, Microcystis, Secchi, Secchi_estimated,
          Temperature, Temperature_bottom, Conductivity)%>%
-  distinct(Source, Station, Date, Datetime, .keep_all=T)
+  distinct(Source, Station, Date, Datetime, .keep_all=T) %>%
+  # Remove rows where all WQ parameters have missing values
+  filter(!if_all(c(Microcystis, Secchi, Temperature, Temperature_bottom, Conductivity), is.na))
 
 usethis::use_data(FMWT, overwrite = TRUE)
