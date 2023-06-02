@@ -37,10 +37,12 @@ STN <-
       TemperatureBottom = "d",
       Secchi = "d",
       ConductivityTop = "d",
+      ConductivityBottom = "d",
       TideCode = "i",
       DepthBottom = "d",
       SampleComments = "c",
-      Microcystis = "d"
+      Microcystis = "d",
+      TurbidityTop = "d"
     )
   ) %>%
   rename(
@@ -51,7 +53,9 @@ STN <-
     Tide = TideCode,
     Depth = DepthBottom,
     Notes = SampleComments,
-    Temperature_bottom = TemperatureBottom
+    Temperature_bottom = TemperatureBottom,
+    Conductivity_bottom = ConductivityBottom,
+    TurbidityNTU = TurbidityTop
   ) %>%
   mutate(
     Source = "STN",
@@ -72,8 +76,8 @@ STN <-
   mutate(Datetime = parse_date_time(if_else(is.na(Time), NA_character_, paste0(Date, " ", hour(Time), ":", minute(Time))), "%Y-%m-%d %H:%M", tz = "America/Los_Angeles")) %>%
   mutate(
     Tide = recode(as.character(Tide), `4` = "Flood", `3` = "Low Slack", `2` = "Ebb", `1` = "High Slack"),
-    Depth = Depth * 0.3048
-  ) %>% # Convert feet to meters
+    Depth = Depth * 0.3048 # Convert feet to meters
+  ) %>%
   left_join(STN_stations, by = "Station") %>%
   select(
     Source,
@@ -89,7 +93,24 @@ STN <-
     Temperature,
     Temperature_bottom,
     Conductivity,
+    Conductivity_bottom,
+    TurbidityNTU,
     Notes
+  ) %>%
+  # Remove rows where all WQ parameters have missing values
+  filter(
+    !if_all(
+      c(
+        Microcystis,
+        Secchi,
+        Temperature,
+        Temperature_bottom,
+        Conductivity,
+        Conductivity_bottom,
+        TurbidityNTU
+      ),
+      is.na
+    )
   )
 
 usethis::use_data(STN, overwrite = TRUE)
