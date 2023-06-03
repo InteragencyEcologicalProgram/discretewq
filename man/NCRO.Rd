@@ -6,7 +6,7 @@
 \alias{NCRO}
 \title{NCRO water quality data}
 \format{
-a tibble with 10,350 rows and 49 variables
+a tibble with 10,250 rows and 49 variables
 \describe{
 \item{Source}{Name of the source dataset.}
 \item{Station}{Station where sample was collected.}

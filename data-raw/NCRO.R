@@ -178,6 +178,9 @@ NCRO_all_c2 <- NCRO_all_c1 %>%
   select(-StationName) %>%
   left_join(stations_f %>% select(StationNumber, StationName), by = join_by(StationNumber)) %>%
   relocate(StationName) %>%
+  # Remove rows without station names - we're only including stations in the
+    # stations_f table
+  drop_na(StationName) %>%
   # Remove one set of samples from Old River near Head that wasn't collected by NCRO
   filter(!(StationName == "Old River near Head" & Date == "2018-09-20"))
 
@@ -194,14 +197,14 @@ NCRO_all_c3 <- NCRO_all_c2 %>%
   select(-c(LastDate_NTU, FirstDate_FNU))
 
 # Pull out duplicate records - more than 1 sample collected at a station and same DateTime
-NCRO_all_dups <- NCRO_all_c3 %>%
+NCRO_dt_dups <- NCRO_all_c3 %>%
   count(StationName, Datetime, Analyte) %>%
   filter(n > 1) %>%
   select(-n) %>%
   left_join(NCRO_all_c3, by = join_by(StationName, Datetime, Analyte))
 
 # Clean up duplicate records
-NCRO_all_dups_c <- NCRO_all_dups %>%
+NCRO_dt_dups_c <- NCRO_dt_dups %>%
   # remove records that have "duplicate" in their Notes
   filter(!str_detect(Notes, regex("duplicate", ignore_case = TRUE)) | is.na(Notes)) %>%
   # Clean up the remaining duplicates by keeping only the first sample of the pair
@@ -213,11 +216,23 @@ NCRO_all_dups_c <- NCRO_all_dups %>%
 
 # Add the data frame with the cleaned up duplicates back to the main data frame
 NCRO_all_c4 <- NCRO_all_c3 %>%
-  anti_join(NCRO_all_dups) %>%
-  bind_rows(NCRO_all_dups_c)
+  anti_join(NCRO_dt_dups) %>%
+  bind_rows(NCRO_dt_dups_c)
+
+# There are some instances where samples were collected on the same day at a
+  # station, but with slightly different Datetimes. We'll clean these up by
+  # removing the samples not collected by NCRO-WQES identified by Tyler Salman.
+# NOTE: There are probably other samples in the data set not collected by
+  # NCRO-WQES, but these will be too difficult to remove at this point.
+same_date_dups_rm <- read_csv("data-raw/NCRO/duplicates_same_date.csv") %>%
+  filter(KeepRecord == "no") %>%
+  distinct(SampleCode) %>%
+  pull(SampleCode)
+
+NCRO_all_c5 <- NCRO_all_c4 %>% filter(!SampleCode %in% same_date_dups_rm)
 
 # Correct a few erroneous times (most likely not recorded in military time format)
-NCRO_all_c5 <- NCRO_all_c4 %>%
+NCRO_all_c6 <- NCRO_all_c5 %>%
   mutate(
     Datetime = case_when(
       hour(Datetime) %in% 0:2 ~ Datetime + hours(12),
@@ -229,29 +244,43 @@ NCRO_all_c5 <- NCRO_all_c4 %>%
     )
   )
 
-# There are some instances where the field measurements were duplicated on the
-  # same day, but with slightly different Datetimes. We'll clean these up by
-  # keeping the earliest Datetime of the two measurements.
-NCRO_field_meas_dups <- NCRO_all_c5 %>%
-  count(StationName, Date, Analyte, Result) %>%
-  filter(n > 1) %>%
-  select(-n) %>%
-  left_join(NCRO_all_c5, by = join_by(StationName, Date, Analyte, Result)) %>%
-  filter(Analyte != "TSS")
+# There are some questionable WQ measurement values based on gross ranges of
+  # each parameter. NCRO-WQES staff checked and corrected/verified these values
+  # from their field sheet records.
+corr_wq_meas <- read_csv("data-raw/NCRO/ncro_questionable_wq_meas_Verified.csv") %>%
+  select(
+    SampleCode,
+    Analyte,
+    MeasVerified = `Measurement Verified (Yes, No, or Unknown)`,
+    ResultVerified = `Verified Result`
+  )
 
-# Clean up duplicate records
-NCRO_field_meas_dups_c <- NCRO_field_meas_dups %>%
-  group_by(StationName, Date, Analyte) %>%
-  filter(Datetime == min(Datetime)) %>%
-  ungroup()
+# First, remove samples not collected by NCRO-WQES indicated in corr_wq_meas by
+  # NCRO-WQES staff
+samples_rm <- corr_wq_meas %>%
+  filter(str_detect(MeasVerified, regex("unknown", ignore_case = TRUE))) %>%
+  distinct(SampleCode) %>%
+  pull(SampleCode)
 
-# Add the data frame with the cleaned up duplicates back to the main data frame
-NCRO_all_c6 <- NCRO_all_c5 %>%
-  anti_join(NCRO_field_meas_dups) %>%
-  bind_rows(NCRO_field_meas_dups_c)
+NCRO_all_c7 <- NCRO_all_c6 %>% filter(!SampleCode %in% samples_rm)
+
+# Next, pull out WQ measurement values from main data frame, correct them, and
+  # add them back
+NCRO_corr_wq_meas <- NCRO_all_c7 %>%
+  inner_join(corr_wq_meas, by = join_by(SampleCode, Analyte)) %>%
+  select(-c(Result, MeasVerified)) %>%
+  rename(Result = ResultVerified) %>%
+  drop_na(Result)
+
+NCRO_all_c8 <- NCRO_all_c7 %>%
+  anti_join(
+    corr_wq_meas %>% select(SampleCode, Analyte),
+    by = join_by(SampleCode, Analyte)
+  ) %>%
+  bind_rows(NCRO_corr_wq_meas)
 
 # Pivot data wider by Result and Sign variables
-NCRO_all_c6_wide <- NCRO_all_c6 %>%
+NCRO_all_c8_wide <- NCRO_all_c8 %>%
   select(-c(SampleCode, Notes)) %>%
   pivot_wider(
     names_from = Analyte,
@@ -276,19 +305,10 @@ NCRO_all_c6_wide <- NCRO_all_c6 %>%
   mutate(across(ends_with("_Sign"), ~ if_else(is.na(.x), "=", .x)))
 
 # Add Secchi depth and Microcystis data and lat-long coordinates
-NCRO <- NCRO_all_c6_wide %>%
-  # There are some records in secHABs with no matches in NCRO_all_c6_wide, but
+NCRO <- NCRO_all_c8_wide %>%
+  # There are some records in secHABs with no matches in NCRO_all_c8_wide, but
     # we'll use a left join for now
   left_join(secHABs, by = join_by(StationName, StationNumber, Date)) %>%
-  # Since there are some instances where more than one sample was collected at a
-  # station in a day, we'll need to remove duplicated Secchi depth and
-  # Microcystis data. We'll clean these up by keeping the Secchi depth and
-  # Microcystis data for the earliest Datetime of the two measurements.
-  arrange(Datetime) %>%
-  group_by(StationName, Date) %>%
-  mutate(RepNum = row_number()) %>%
-  ungroup() %>%
-  mutate(across(c(Secchi, Microcystis), ~ if_else(RepNum == 2, NA_real_, .x))) %>%
   left_join(
     stations_f %>% select(StationNumber, StationName, Latitude, Longitude),
     by = join_by(StationName, StationNumber)
@@ -344,6 +364,7 @@ NCRO <- NCRO_all_c6_wide %>%
     TKN,
     TDS_Sign,
     TDS
-  )
+  ) %>%
+  arrange(Datetime)
 
 usethis::use_data(NCRO, overwrite = TRUE)
