@@ -153,13 +153,13 @@ collected by the Environmental Monitoring Program, 1975-2022 ver 9.
 Environmental Data Initiative.
 [doi:10.6073/pasta/a306956e3ebdc78348c2df8d05cd2ccb](https://portal.edirepository.org/nis/metadataviewer?packageid=edi.458.9)
 
-CDFW. 2022a. Bay Study data.
+CDFW. 2022. Bay Study data.
 <https://filelib.wildlife.ca.gov/Public/BayStudy/Access_Database/>.
 
-CDFW. 2022b. Fall Midwater Trawl data.
+CDFW. 2023a. Fall Midwater Trawl data.
 <https://filelib.wildlife.ca.gov/public/TownetFallMidwaterTrawl/FMWT%20Data/>.
 
-CDFW. 2022c. Summer Townet data.
+CDFW. 2023b. Summer Townet data.
 <https://filelib.wildlife.ca.gov/public/TownetFallMidwaterTrawl/TNS%20MS%20Access%20Data/TNS%20data/>.
 
 CDWR. 2022. Water Quality Evaluation Section, North Central Region
