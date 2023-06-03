@@ -65,13 +65,6 @@ FMWT <-
     Depth = Depth * 0.3048 # Convert to meters
   ) %>%
   left_join(FMWT_stations, by = "Station") %>%
-  # Remove rows where all WQ parameters have missing values
-  filter(
-    !if_all(
-      c(Temperature, Temperature_bottom, Secchi, TurbidityNTU, Conductivity, Conductivity_bottom, Microcystis),
-      is.na
-    )
-  ) %>%
   select(
     Source,
     Station,
@@ -89,6 +82,21 @@ FMWT <-
     Conductivity,
     Conductivity_bottom,
     TurbidityNTU
+  ) %>%
+  # Remove rows where all WQ parameters have missing values
+  filter(
+    !if_all(
+      c(
+        Microcystis,
+        Secchi,
+        Temperature,
+        Temperature_bottom,
+        Conductivity,
+        Conductivity_bottom,
+        TurbidityNTU
+      ),
+      is.na
+    )
   ) %>%
   distinct(Source, Station, Date, Datetime, .keep_all = T)
 
