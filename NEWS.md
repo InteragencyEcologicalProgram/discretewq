@@ -1,3 +1,5 @@
+# discretewq (development version)
+
 # discretewq 2.4.0
 
 * Added temperature and conductivity to `USGS_CAWSC`
