@@ -188,11 +188,12 @@ EMLassemblyline::template_geographic_coverage(
 # Once all your metadata templates are complete call this function to create
 # the EML.
 
-# Sandbox
+# Sandbox /staging environment
+# Dave, you'll probably just need to request a new id from the EDI staging environment here: https://portal-s.edirepository.org/nis/reservations.jsp
 #ID<-"edi.750.2"
 
 # EDI
-ID <- "edi.731.6"
+ID <- "edi.731.7"
 
 wq_eml <- EMLassemblyline::make_eml(
   path = path_templates,
@@ -204,8 +205,8 @@ wq_eml <- EMLassemblyline::make_eml(
   data.table = c("Delta_Integrated_WQ.csv", "Delta_Integrated_WQ_metadata.csv"),
   data.table.description = c("Integrated water quality database", "Information on each survey included in the integrated database"),
   data.table.quote.character = c('"', '"'),
-  data.table.url = c("", ""),
-  user.id = "sbashevkin",
+  data.table.url = c("", ""), # Fill this in with the URLs if you upload to box.com or similar
+  user.id = c("sbashevkin", "dbosworth"),
   user.domain = "EDI",
   package.id = ID,
   return.obj = TRUE
