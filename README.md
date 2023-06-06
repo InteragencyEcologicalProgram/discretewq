@@ -142,8 +142,8 @@ str(Data)
 The dataset is also [published on the Environmental Data
 Initiative](https://portal.edirepository.org/nis/mapbrowse?scope=edi&identifier=731),
 where you can find detailed metadata. This static version of the dataset
-corresponds to version 2.3.2 of the R package ([archived on
-zenodo](https://zenodo.org/record/6390964)).
+corresponds to version 2.4.0 of the R package ([archived on
+zenodo](https://zenodo.org/record/8008212)).
 
 ## Data sources
 
