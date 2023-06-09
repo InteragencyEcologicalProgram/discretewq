@@ -10,7 +10,7 @@
 coverage](https://codecov.io/gh/InteragencyEcologicalProgram/discretewq/branch/main/graph/badge.svg)](https://codecov.io/gh/InteragencyEcologicalProgram/discretewq?branch=main)
 [![DOI](https://zenodo.org/badge/309747392.svg)](https://zenodo.org/badge/latestdoi/309747392)
 [![Data
-DOI](https://img.shields.io/badge/Data%20publication%20DOI-10.6073/pasta/567ca1dce56cc819b1819117538bd718-blue.svg)](https://portal.edirepository.org/nis/mapbrowse?scope=edi&identifier=731)
+DOI](https://img.shields.io/badge/Data%20publication%20DOI-10.6073/pasta/8dbd29c8c22f3295bbc5d3819fb51d00-blue.svg)](https://portal.edirepository.org/nis/mapbrowse?scope=edi&identifier=731)
 <!-- badges: end -->
 
 The goal of discretewq is to integrate discrete water quality data from
