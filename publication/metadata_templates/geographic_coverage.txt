@@ -8002,8 +8002,6 @@ NCRO Paradise Cut Upstream	37.801027	37.801027	-121.373089	-121.373089
 NCRO Rock Slough @ Contra Costa WD Fish Screen	37.976192	37.976192	-121.639803	-121.639803
 NCRO Rock Slough at Delta Road Bridge	37.9768	37.9768	-121.6201	-121.6201
 NCRO Sacramento River Downstream of Isleton	38.175591	38.175591	-121.656919	-121.656919
-NCRO San Joaquin River @ Jersey Point - D15	38.052167	38.052167	-121.689556	-121.689556
-NCRO San Joaquin River @ Mossdale Bridge - C7A	37.786	37.786	-121.3067	-121.3067
 NCRO San Joaquin River at Blind Point	38.0325	38.0325	-121.719083	-121.719083
 NCRO San Joaquin River at Prisoner's Point	38.0593	38.0593	-121.5583	-121.5583
 NCRO Steamboat Slough	38.1912721	38.1912721	-121.6378941	-121.6378941

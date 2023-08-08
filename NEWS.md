@@ -4,10 +4,11 @@
 * Added DO and pH data to all surveys that collect this data. `USGS_SFBS` collects both calculated (from a sensor) and discrete DO, so we used discrete DO up to 2016 and calculated DO afterwards to mirror the methodological change that occurred in the `EMP` survey in 2016. 
 * Updated to newest EMP data with some historical data issues fixed. 
 * Added NCRO laboratory and water quality data
-* Added bottom conductivity to `twentymm`, `baystudy`, and `SDO`
+* Added bottom conductivity to `twentymm`, `baystudy`, `SDO`, `FMWT`, and `STN`
+* Added turbidity to `EMP`, `FMWT`, and `STN`
 * Fixed timezones for `SDO` data. SDO times are reported in PST but had incorrectly been imported as local time (PST/PDT). Now, they are imported as Etc/GMT+8 and then converted to America/Los_Angeles to correspond to the other surveys.
 * Updated STN, FMWT, EDSM, DJFMP, SLS, Suisun, EMP, USGS_SFBS, USGS_CAWSC, YBFMP, SKT, 20mm, baystudy, and SDO datasets
-* Removed rows from FMWT dataset that did not contain any water quality information
+* Removed rows from `FMWT` and `STN` datasets that did not contain any water quality information
 
 # discretewq 2.3.2
 

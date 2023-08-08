@@ -1,0 +1,296 @@
+StationName,StationNumber,Date,Datetime,SampleCode,Analyte,Result,Notes,"Measurement Verified (Yes, No, or Unknown) ",Verified Result,Staff Initials
+Doughty Cut near Grantline Canal,B9D74911256,6/23/2017,6/23/2017 10:30,CF0617B1291,Conductivity,97,Ingoing Sonde read 181,Yes,97,DC
+Doughty Cut near Grantline Canal,B9D74911256,6/23/2017,6/23/2017 10:30,CF0617B1291,DissolvedOxygen,8.53,,Yes,8.53,DC
+Doughty Cut near Grantline Canal,B9D74911256,6/23/2017,6/23/2017 10:30,CF0617B1291,Temperature,22.1,,Yes,22.1,DC
+Doughty Cut near Grantline Canal,B9D74911256,6/23/2017,6/23/2017 10:30,CF0617B1291,TurbidityFNU,17.4,,Yes,17.4,DC
+Doughty Cut near Grantline Canal,B9D74911256,6/23/2017,6/23/2017 10:30,CF0617B1291,pH,2.13,transcription error,Yes,7.13,DC
+Doughty Cut near Grantline Canal,B9D74911256,7/11/2017,7/11/2017 11:18,CF0717B1396,Conductivity,20.55,Temperature recorded,Yes,143,DC
+Doughty Cut near Grantline Canal,B9D74911256,7/11/2017,7/11/2017 11:18,CF0717B1396,DissolvedOxygen,8.78,,Yes,8.78,DC
+Doughty Cut near Grantline Canal,B9D74911256,7/11/2017,7/11/2017 11:18,CF0717B1396,Temperature,20.55,,Yes,20.55,DC
+Doughty Cut near Grantline Canal,B9D74911256,7/11/2017,7/11/2017 11:18,CF0717B1396,TurbidityFNU,17.3,,Yes,17.3,DC
+Doughty Cut near Grantline Canal,B9D74911256,7/11/2017,7/11/2017 11:18,CF0717B1396,pH,7.23,,Yes,7.23,DC
+Grant Line Canal East,B9D74921261,6/5/2013,6/5/2013 11:20,CFF0613B0165,Conductivity,23.5,transcription error,Yes,725,LR
+Grant Line Canal East,B9D74921261,6/5/2013,6/5/2013 11:20,CFF0613B0165,DissolvedOxygen,7.66,,Yes,7.66,LR
+Grant Line Canal East,B9D74921261,6/5/2013,6/5/2013 11:20,CFF0613B0165,Temperature,23.5,,Yes,23.5,LR
+Grant Line Canal East,B9D74921261,6/5/2013,6/5/2013 11:20,CFF0613B0165,TurbidityNTU,25.7,,Yes,25.7,LR
+Grant Line Canal East,B9D74921261,6/5/2013,6/5/2013 11:20,CFF0613B0165,pH,8,,Yes,8,LR
+Grant Line Canal East,B9D74921261,6/5/2014,6/5/2014 11:15,CF0614B0708,Conductivity,656,,Yes,656,LR
+Grant Line Canal East,B9D74921261,6/5/2014,6/5/2014 11:15,CF0614B0708,DissolvedOxygen,6.8,,Yes,6.8,LR
+Grant Line Canal East,B9D74921261,6/5/2014,6/5/2014 11:15,CF0614B0708,Temperature,23.9,,Yes,23.9,LR
+Grant Line Canal East,B9D74921261,6/5/2014,6/5/2014 11:15,CF0614B0708,TurbidityNTU,6.03,,Yes,6.03,LR
+Grant Line Canal East,B9D74921261,6/5/2014,6/5/2014 11:15,CF0614B0708,pH,80.6,transcription error,Yes,7.6,LR
+Grant Line Canal East,B9D74921261,4/10/2019,4/10/2019 12:16,CF0419B0296,Conductivity,193.2,,Yes,193.2,LR
+Grant Line Canal East,B9D74921261,4/10/2019,4/10/2019 12:16,CF0419B0296,DissolvedOxygen,95.2,%DO recorded,Yes,9.76,LR
+Grant Line Canal East,B9D74921261,4/10/2019,4/10/2019 12:16,CF0419B0296,Temperature,14.24,,Yes,14.24,LR
+Grant Line Canal East,B9D74921261,4/10/2019,4/10/2019 12:16,CF0419B0296,TurbidityFNU,12.73,,Yes,12.73,LR
+Grant Line Canal East,B9D74921261,4/10/2019,4/10/2019 12:16,CF0419B0296,pH,7.44,,Yes,7.44,LR
+Grant Line Canal East,B9D74921261,7/9/2019,7/9/2019 11:03,CF0719B0666,Conductivity,452.8,,Yes,452.8,LR
+Grant Line Canal East,B9D74921261,7/9/2019,7/9/2019 11:03,CF0719B0666,DissolvedOxygen,126.5,%DO recorded,Yes,11,LR
+Grant Line Canal East,B9D74921261,7/9/2019,7/9/2019 11:03,CF0719B0666,Temperature,22.232,,Yes,22.232,LR
+Grant Line Canal East,B9D74921261,7/9/2019,7/9/2019 11:03,CF0719B0666,TurbidityFNU,13.97,,Yes,13.97,LR
+Grant Line Canal East,B9D74921261,7/9/2019,7/9/2019 11:03,CF0719B0666,pH,8.47,,Yes,8.47,LR
+Grant Line Canal near Old River,B9D72921327,5/19/2016,5/19/2016 10:55,CF0516B0867,Conductivity,391.5,,Yes,391.5,AM
+Grant Line Canal near Old River,B9D72921327,5/19/2016,5/19/2016 10:55,CF0516B0867,DissolvedOxygen,8,,Yes,8,AM
+Grant Line Canal near Old River,B9D72921327,5/19/2016,5/19/2016 10:55,CF0516B0867,Temperature,21.7,,Yes,21.7,AM
+Grant Line Canal near Old River,B9D72921327,5/19/2016,5/19/2016 10:55,CF0516B0867,TurbidityNTU,8.89,,Yes,8.89,AM
+Grant Line Canal near Old River,B9D72921327,5/19/2016,5/19/2016 10:55,CF0516B0867,pH,91,transcription error,Yes,7.94,AM
+Grant Line Canal near Old River,B9D72921327,4/24/2019,4/24/2019 12:15,CF0419B0369,Conductivity,179.1,,Yes,179.1,AM
+Grant Line Canal near Old River,B9D72921327,4/24/2019,4/24/2019 12:15,CF0419B0369,DissolvedOxygen,94.2,%DO recorded,Yes,9.28,AM
+Grant Line Canal near Old River,B9D72921327,4/24/2019,4/24/2019 12:15,CF0419B0369,Temperature,16.087,,Yes,16.087,AM
+Grant Line Canal near Old River,B9D72921327,4/24/2019,4/24/2019 12:15,CF0419B0369,TurbidityFNU,7.51,,Yes,7.51,AM
+Grant Line Canal near Old River,B9D72921327,4/24/2019,4/24/2019 12:15,CF0419B0369,pH,7.34,,Yes,7.34,AM
+Grant Line Canal near Old River,B9D72921327,10/14/2019,10/14/2019 12:45,CF1019B0986,Conductivity,474.5,,Yes,474.5,AM
+Grant Line Canal near Old River,B9D72921327,10/14/2019,10/14/2019 12:45,CF1019B0986,DissolvedOxygen,9.25,,Yes,9.25,AM
+Grant Line Canal near Old River,B9D72921327,10/14/2019,10/14/2019 12:45,CF1019B0986,Temperature,170.26,transcription error,Yes,17.026,AM
+Grant Line Canal near Old River,B9D72921327,10/14/2019,10/14/2019 12:45,CF1019B0986,TurbidityFNU,3.99,,Yes,3.99,AM
+Grant Line Canal near Old River,B9D72921327,10/14/2019,10/14/2019 12:45,CF1019B0986,pH,7.68,,Yes,7.68,AM
+Grant Ln Can @ Tracy Rd Bdg,B9D74921269,5/19/2016,5/19/2016 10:10,CF0516B0866,Conductivity,405.8,,Yes,405.8,DC
+Grant Ln Can @ Tracy Rd Bdg,B9D74921269,5/19/2016,5/19/2016 10:10,CF0516B0866,DissolvedOxygen,6.88,,Yes,6.88,DC
+Grant Ln Can @ Tracy Rd Bdg,B9D74921269,5/19/2016,5/19/2016 10:10,CF0516B0866,Temperature,21.4,,Yes,21.4,DC
+Grant Ln Can @ Tracy Rd Bdg,B9D74921269,5/19/2016,5/19/2016 10:10,CF0516B0866,TurbidityNTU,10.04,,Yes,10.04,DC
+Grant Ln Can @ Tracy Rd Bdg,B9D74921269,5/19/2016,5/19/2016 10:10,CF0516B0866,pH,77.8,DO% was entered,Yes,7.88,DC
+Grantline Canal above Dam,B9D74921510,1/4/2013,1/4/2013 10:49,CFG0113B0023,Conductivity,684,,Yes,684,PS
+Grantline Canal above Dam,B9D74921510,1/4/2013,1/4/2013 10:49,CFG0113B0023,DissolvedOxygen,86.8,DO% was entered,Yes,10.37,PS
+Grantline Canal above Dam,B9D74921510,1/4/2013,1/4/2013 10:49,CFG0113B0023,Temperature,7.6,,Yes,7.6,PS
+Grantline Canal above Dam,B9D74921510,1/4/2013,1/4/2013 10:49,CFG0113B0023,TurbidityNTU,11.9,,Yes,11.9,PS
+Grantline Canal above Dam,B9D74921510,1/4/2013,1/4/2013 10:49,CFG0113B0023,pH,7.6,,Yes,7.6,PS
+Holland Cut at Holland Marina,B9D75841349,8/23/2001,8/23/2001 13:01,CFB0801B1999,Conductivity,718,Transcription error,Yes,781,PS
+Holland Cut at Holland Marina,B9D75841349,8/23/2001,8/23/2001 13:01,CFB0801B1999,Temperature,22.3,Transcription error,Yes,23.3,PS
+Holland Cut at Holland Marina,B9D75841349,8/23/2001,8/23/2001 13:01,CFB0801B1999,pH,804,Transcription error,Yes,8.04,PS
+Middle R @ Tracy Rd Bdg,B9D75291273,9/8/2004,9/8/2004 6:50,CFC0904B0130,Conductivity,422,No Paper Record for 9/8/2004,Unknown,,DC
+Middle R @ Tracy Rd Bdg,B9D75291273,9/8/2004,9/8/2004 6:50,CFC0904B0130,DissolvedOxygen,23.2,No Paper Record for 9/8/2004,Unknown,,DC
+Middle River @ Union Point - P10A,B9D75351292,5/15/2015,5/15/2015 13:30,CF0515B0685,Conductivity,19.4,transcription error,Yes,628,LR
+Middle River @ Union Point - P10A,B9D75351292,5/15/2015,5/15/2015 13:30,CF0515B0685,DissolvedOxygen,8.41,,Yes,8.41,LR
+Middle River @ Union Point - P10A,B9D75351292,5/15/2015,5/15/2015 13:30,CF0515B0685,Temperature,19.4,,Yes,19.4,LR
+Middle River @ Union Point - P10A,B9D75351292,5/15/2015,5/15/2015 13:30,CF0515B0685,TurbidityNTU,5.53,,Yes,5.53,LR
+Middle River @ Union Point - P10A,B9D75351292,5/15/2015,5/15/2015 13:30,CF0515B0685,pH,7.71,,Yes,7.71,LR
+Middle River @ Union Point - P10A,B9D75351292,3/3/2016,3/3/2016 9:47,CF0316B0428,Conductivity,15.9,transcription error,Yes,318,LR
+Middle River @ Union Point - P10A,B9D75351292,3/3/2016,3/3/2016 9:47,CF0316B0428,DissolvedOxygen,8.54,,Yes,8.54,LR
+Middle River @ Union Point - P10A,B9D75351292,3/3/2016,3/3/2016 9:47,CF0316B0428,Temperature,15.9,,Yes,15.9,LR
+Middle River @ Union Point - P10A,B9D75351292,3/3/2016,3/3/2016 9:47,CF0316B0428,TurbidityNTU,5.56,,Yes,5.56,LR
+Middle River @ Union Point - P10A,B9D75351292,3/3/2016,3/3/2016 9:47,CF0316B0428,pH,8.2,,Yes,8.2,LR
+Middle River at Howard Road,B9D75261230,9/30/2003,9/30/2003 10:30,CFG0903B0274,DissolvedOxygen,437,transcription error,Yes,4.66,LR
+Middle River at Howard Road,B9D75261230,9/30/2003,9/30/2003 10:30,CFG0903B0274,Temperature,7.5,transcription error,Yes,21,LR
+Middle River at Howard Road,B9D75261230,9/30/2003,9/30/2003 10:30,CFG0903B0274,TurbidityNTU,21,transcription error,Yes,21.2,LR
+Middle River at Howard Road,B9D75261230,9/30/2003,9/30/2003 10:30,CFG0903B0274,pH,4.66,transcription error,Yes,7.5,LR
+Middle River at Howard Road,B9D75261230,5/10/2016,5/10/2016 13:28,CF0516B0838,Conductivity,645,,Yes,645,LR
+Middle River at Howard Road,B9D75261230,5/10/2016,5/10/2016 13:28,CF0516B0838,DissolvedOxygen,71.8,%DO recorded,Yes,6.3,LR
+Middle River at Howard Road,B9D75261230,5/10/2016,5/10/2016 13:28,CF0516B0838,Temperature,21.6,,Yes,21.6,LR
+Middle River at Howard Road,B9D75261230,5/10/2016,5/10/2016 13:28,CF0516B0838,TurbidityNTU,4.44,,Yes,4.44,LR
+Middle River at Howard Road,B9D75261230,5/10/2016,5/10/2016 13:28,CF0516B0838,pH,7.48,,Yes,7.48,LR
+Middle River at Howard Road,B9D75261230,9/13/2016,9/13/2016 12:59,CF0916B1654,Conductivity,747,,Yes,747,LR
+Middle River at Howard Road,B9D75261230,9/13/2016,9/13/2016 12:59,CF0916B1654,DissolvedOxygen,49.6,%DO recorded,Yes,4.38,LR
+Middle River at Howard Road,B9D75261230,9/13/2016,9/13/2016 12:59,CF0916B1654,Temperature,21.5,,Yes,21.5,LR
+Middle River at Howard Road,B9D75261230,9/13/2016,9/13/2016 12:59,CF0916B1654,TurbidityNTU,5.92,,Yes,5.92,LR
+Middle River at Howard Road,B9D75261230,9/13/2016,9/13/2016 12:59,CF0916B1654,pH,7.87,,Yes,7.87,LR
+Middle River at Undine Road,B9D75011230,10/9/2015,10/9/2015 10:29,CF1015B1425,Conductivity,739,,Yes,739,LR
+Middle River at Undine Road,B9D75011230,10/9/2015,10/9/2015 10:29,CF1015B1425,DissolvedOxygen,60.2,%DO recorded,Yes,5.37,LR
+Middle River at Undine Road,B9D75011230,10/9/2015,10/9/2015 10:29,CF1015B1425,Temperature,21,,Yes,21,LR
+Middle River at Undine Road,B9D75011230,10/9/2015,10/9/2015 10:29,CF1015B1425,TurbidityNTU,13.73,,Yes,13.73,LR
+Middle River at Undine Road,B9D75011230,10/9/2015,10/9/2015 10:29,CF1015B1425,pH,7.66,,Yes,7.66,LR
+Middle River at Undine Road,B9D75011230,8/14/2018,8/14/2018 11:12,CF0818B1214,Conductivity,818,,Yes,818,LR
+Middle River at Undine Road,B9D75011230,8/14/2018,8/14/2018 11:12,CF0818B1214,DissolvedOxygen,8.04,,Yes,8.04,LR
+Middle River at Undine Road,B9D75011230,8/14/2018,8/14/2018 11:12,CF0818B1214,Temperature,24.92,,Yes,24.92,LR
+Middle River at Undine Road,B9D75011230,8/14/2018,8/14/2018 11:12,CF0818B1214,TurbidityFNU,764,transcription error,Yes,7.64,LR
+Middle River at Undine Road,B9D75011230,8/14/2018,8/14/2018 11:12,CF0818B1214,pH,7.98,,Yes,7.98,LR
+Middle River near Holt,B9D80021306,11/28/2006,11/28/2006 10:42,CFF1106B0032,Conductivity,280,No Paper Record for 11/28/2006,Unknown,,PS
+Middle River near Holt,B9D80021306,11/28/2006,11/28/2006 10:42,CFF1106B0032,DissolvedOxygen,7.47,No Paper Record for 11/28/2006,Unknown,,PS
+Middle River near Holt,B9D80021306,11/28/2006,11/28/2006 10:42,CFF1106B0032,pH,12.4,"No Paper Record for 11/28/2006, nearest results are 7.55 pH on 10/23/06 and 7.45 pH on 1/5/2007, recommend tossing this result -TS20230524",Unknown,,PS
+Middle River near Tracy Road,B9D75291280,3/21/2014,3/21/2014 10:32,CF0314B0245,Conductivity,492.5,,Yes,492.5,LR
+Middle River near Tracy Road,B9D75291280,3/21/2014,3/21/2014 10:32,CF0314B0245,DissolvedOxygen,85.3,%DO recorded,Yes,8.37,LR
+Middle River near Tracy Road,B9D75291280,3/21/2014,3/21/2014 10:32,CF0314B0245,Temperature,16.3,,Yes,16.3,LR
+Middle River near Tracy Road,B9D75291280,3/21/2014,3/21/2014 10:32,CF0314B0245,TurbidityNTU,3.29,,Yes,3.29,LR
+Middle River near Tracy Road,B9D75291280,3/21/2014,3/21/2014 10:32,CF0314B0245,pH,7.38,,Yes,7.38,LR
+Middle River near Tracy Road,B9D75291280,1/26/2016,1/26/2016 12:43,CF0116B0172,DissolvedOxygen,80.7,%DO recorded,Yes,8.62,LR
+Middle River near Tracy Road,B9D75291280,1/26/2016,1/26/2016 12:43,CF0116B0172,Temperature,12.4,,Yes,12.4,LR
+Middle River near Tracy Road,B9D75291280,1/26/2016,1/26/2016 12:43,CF0116B0172,TurbidityNTU,12.3,,Yes,12.3,LR
+Middle River near Tracy Road,B9D75291280,6/1/2016,6/1/2016 10:33,CF0616B0954,Conductivity,380.4,,Yes,380.4,LR
+Middle River near Tracy Road,B9D75291280,6/1/2016,6/1/2016 10:33,CF0616B0954,DissolvedOxygen,62.3,%DO recorded,Yes,5.25,LR
+Middle River near Tracy Road,B9D75291280,6/1/2016,6/1/2016 10:33,CF0616B0954,Temperature,24,,Yes,24,LR
+Middle River near Tracy Road,B9D75291280,6/1/2016,6/1/2016 10:33,CF0616B0954,TurbidityNTU,4.42,,Yes,4.42,LR
+Middle River near Tracy Road,B9D75291280,6/1/2016,6/1/2016 10:33,CF0616B0954,pH,7.56,,Yes,7.56,LR
+Middle River near Tracy Road,B9D75291280,9/1/2017,9/1/2017 9:03,CF0917B1768,Conductivity,282.6,,Yes,282.6,LR
+Middle River near Tracy Road,B9D75291280,9/1/2017,9/1/2017 9:03,CF0917B1768,DissolvedOxygen,4.41,,Yes,4.41,LR
+Middle River near Tracy Road,B9D75291280,9/1/2017,9/1/2017 9:03,CF0917B1768,Temperature,24.4,,Yes,24.4,LR
+Middle River near Tracy Road,B9D75291280,9/1/2017,9/1/2017 9:03,CF0917B1768,TurbidityFNU,2374,Immense vegetation overgrowth on surface and under platform caused extremely high turbidity and chlorophyll readings,Yes,2374,LR
+Middle River near Tracy Road,B9D75291280,9/1/2017,9/1/2017 9:03,CF0917B1768,pH,7.09,,Yes,7.09,LR
+Miner Slough near Sacramento River,B9S81421400,5/28/2020,5/28/2020 11:59,CF0520B0523,Conductivity,23.4,transcription error,Yes,153.1,PS
+Miner Slough near Sacramento River,B9S81421400,5/28/2020,5/28/2020 11:59,CF0520B0523,DissolvedOxygen,81.1,%DO recorded,Yes,6.9,PS
+Miner Slough near Sacramento River,B9S81421400,5/28/2020,5/28/2020 11:59,CF0520B0523,Temperature,153.1,transcription error,Yes,23.4,PS
+Miner Slough near Sacramento River,B9S81421400,5/28/2020,5/28/2020 11:59,CF0520B0523,TurbidityFNU,3.32,,Yes,3.32,PS
+Miner Slough near Sacramento River,B9S81421400,5/28/2020,5/28/2020 11:59,CF0520B0523,pH,6.9,transcription error,Yes,7.2,PS
+Mokelumne River near Highway 12,B9204500,8/17/2009,8/17/2009 10:20,CFF0809B1678,Conductivity,157.1,,Yes,157.1,PS
+Mokelumne River near Highway 12,B9204500,8/17/2009,8/17/2009 10:20,CFF0809B1678,DissolvedOxygen,7.43,,Yes,7.43,PS
+Mokelumne River near Highway 12,B9204500,8/17/2009,8/17/2009 10:20,CFF0809B1678,Temperature,22.7,,Yes,22.7,PS
+Mokelumne River near Highway 12,B9204500,8/17/2009,8/17/2009 10:20,CFF0809B1678,TurbidityNTU,5.37,,Yes,5.37,PS
+Mokelumne River near Highway 12,B9204500,8/17/2009,8/17/2009 10:20,CFF0809B1678,pH,723,transcription error,Yes,7.23,PS
+Mokelumne River near Highway 12,B9204500,6/28/2010,6/28/2010 15:15,CFF0610B2139,Conductivity,141,,Yes,141,PS
+Mokelumne River near Highway 12,B9204500,6/28/2010,6/28/2010 15:15,CFF0610B2139,Temperature,22.8,,Yes,22.8,PS
+Mokelumne River near Highway 12,B9204500,6/28/2010,6/28/2010 15:15,CFF0610B2139,TurbidityNTU,614,transcription error,Yes,6.14,PS
+Mokelumne River near Highway 12,B9204500,6/28/2010,6/28/2010 15:15,CFF0610B2128,pH,7.58,,Yes,7.58,PS
+Old River Below Clifton Court Intake,B9D74971332,4/24/2019,4/24/2019 12:46,CF0419B0376,Conductivity,212.2,,Yes,212.2,AM
+Old River Below Clifton Court Intake,B9D74971332,4/24/2019,4/24/2019 12:46,CF0419B0376,DissolvedOxygen,95.3,%DO recorded,Yes,9.34,AM
+Old River Below Clifton Court Intake,B9D74971332,4/24/2019,4/24/2019 12:46,CF0419B0376,Temperature,16.33,,Yes,16.33,AM
+Old River Below Clifton Court Intake,B9D74971332,4/24/2019,4/24/2019 12:46,CF0419B0376,TurbidityFNU,7.99,,Yes,7.99,AM
+Old River Below Clifton Court Intake,B9D74971332,4/24/2019,4/24/2019 12:46,CF0419B0376,pH,7.24,,Yes,7.24,AM
+Old River Downstream DMC Barrier,B9536500,11/25/2015,11/25/2015 10:01,CF1115B1746,Conductivity,643,,Yes,643,AM
+Old River Downstream DMC Barrier,B9536500,11/25/2015,11/25/2015 10:01,CF1115B1775,DissolvedOxygen,9.87,,Yes,9.87,AM
+Old River Downstream DMC Barrier,B9536500,11/25/2015,11/25/2015 10:01,CF1115B1775,Temperature,12.4,,Yes,12.4,AM
+Old River Downstream DMC Barrier,B9536500,11/25/2015,11/25/2015 10:01,CF1115B1746,TurbidityNTU,6.72,,Yes,6.72,AM
+Old River Downstream DMC Barrier,B9536500,11/25/2015,11/25/2015 10:01,CF1115B1746,pH,92.5,transcription error,Yes,7.91,AM
+Old River Downstream DMC Barrier,B9536500,4/24/2019,4/24/2019 10:42,CF0419B0370,Conductivity,186.4,,Yes,186.4,AM
+Old River Downstream DMC Barrier,B9536500,4/24/2019,4/24/2019 10:42,CF0419B0370,DissolvedOxygen,96.5,%DO recorded,Yes,9.46,AM
+Old River Downstream DMC Barrier,B9536500,4/24/2019,4/24/2019 10:42,CF0419B0370,Temperature,16.291,,Yes,16.291,AM
+Old River Downstream DMC Barrier,B9536500,4/24/2019,4/24/2019 10:42,CF0419B0370,TurbidityFNU,5.87,,Yes,5.87,AM
+Old River Downstream DMC Barrier,B9536500,4/24/2019,4/24/2019 10:42,CF0419B0370,pH,7.42,,Yes,7.42,AM
+Old River Upstream of Mountain House Creek,B9537000,4/24/2019,4/24/2019 11:15,CF0419B0371,Conductivity,259.2,,Yes,259.2,AM
+Old River Upstream of Mountain House Creek,B9537000,4/24/2019,4/24/2019 11:15,CF0419B0371,DissolvedOxygen,87.9,,Yes,8.26,AM
+Old River Upstream of Mountain House Creek,B9537000,4/24/2019,4/24/2019 11:15,CF0419B0371,Temperature,18.377,,Yes,18.377,AM
+Old River Upstream of Mountain House Creek,B9537000,4/24/2019,4/24/2019 11:15,CF0419B0371,TurbidityFNU,7.72,,Yes,7.72,AM
+Old River Upstream of Mountain House Creek,B9537000,4/24/2019,4/24/2019 11:15,CF0419B0371,pH,7.3,,Yes,7.3,AM
+Old River above DMC Barrier,B9536600,1/14/2009,1/14/2009 11:45,CFE0109B1408,Conductivity,699,,Yes,699,AM
+Old River above DMC Barrier,B9536600,1/14/2009,1/14/2009 11:45,CFE0109B1408,DissolvedOxygen,10.8,,Yes,10.8,AM
+Old River above DMC Barrier,B9536600,1/14/2009,1/14/2009 11:45,CFE0109B1408,Temperature,70,transcription error,Yes,10,AM
+Old River above DMC Barrier,B9536600,1/14/2009,1/14/2009 11:45,CFE0109B1408,TurbidityNTU,7.84,,Yes,7.84,AM
+Old River above DMC Barrier,B9536600,1/14/2009,1/14/2009 11:45,CFE0109B1408,pH,7.7,,Yes,7.7,AM
+Old River above DMC Barrier,B9536600,9/6/2017,9/6/2017 11:00,CF0917B1824,Conductivity,244,transcription error,Yes,196,AM
+Old River above DMC Barrier,B9536600,9/6/2017,9/6/2017 11:00,CF0917B1824,DissolvedOxygen,1,transcription error,Yes,7.84,AM
+Old River above DMC Barrier,B9536600,9/6/2017,9/6/2017 11:00,CF0917B1824,Temperature,25.28,transcription error,Yes,25.64,AM
+Old River above DMC Barrier,B9536600,9/6/2017,9/6/2017 11:00,CF0917B1824,TurbidityFNU,1253,,Yes,1253,AM
+Old River above DMC Barrier,B9536600,9/6/2017,9/6/2017 11:00,CF0917B1824,pH,6.9,,Yes,6.9,AM
+Old River at Bacon Island,B9D75811344,8/1/2002,8/1/2002 10:45,CFC0802B1155,Conductivity,683,,Yes,683,PS
+Old River at Bacon Island,B9D75811344,8/1/2002,8/1/2002 10:45,CFC0802B1155,Temperature,22.3,,Yes,22.3,PS
+Old River at Bacon Island,B9D75811344,8/1/2002,8/1/2002 10:45,CFC0802B1155,pH,827,transcription error,Yes,8.27,PS
+Old River at Bacon Island,B9D75811344,9/1/2006,9/1/2006 10:16,CFH0906B0241,Conductivity,248,,Yes,248,PS
+Old River at Bacon Island,B9D75811344,9/1/2006,9/1/2006 10:16,CFH0906B0241,Temperature,226,transcription error,Yes,22.6,PS
+Old River at Bacon Island,B9D75811344,9/1/2006,9/1/2006 10:16,CFH0906B0241,pH,8.18,,Yes,8.18,PS
+Old River at Quimby Island,B9D80161339,4/2/2014,4/2/2014 11:45,CF0414B0296,Conductivity,14.8,transcription error,Yes,371.1,PS
+Old River at Quimby Island,B9D80161339,4/2/2014,4/2/2014 11:45,CF0414B0296,Temperature,14.8,,Yes,14.8,PS
+Old River at Quimby Island,B9D80161339,4/2/2014,4/2/2014 11:45,CF0414B0296,TurbidityNTU,4.11,,Yes,4.11,PS
+Old River at Quimby Island,B9D80161339,4/2/2014,4/2/2014 11:45,CF0414B0296,pH,7.53,,Yes,7.53,PS
+Old River at Tracy Wildlife Association,B9D74821274,5/8/2003,5/8/2003 12:00,CFG0503B0697,Conductivity,6.49,transcription error,Yes,649,LR
+Old River at Tracy Wildlife Association,B9D74821274,5/8/2003,5/8/2003 12:00,CFG0503B0697,DissolvedOxygen,8.8,,Yes,8.8,LR
+Old River at Tracy Wildlife Association,B9D74821274,5/8/2003,5/8/2003 12:00,CFG0503B0697,Temperature,16.4,,Yes,16.4,LR
+Old River at Tracy Wildlife Association,B9D74821274,5/8/2003,5/8/2003 12:00,CFG0503B0697,TurbidityNTU,20,,Yes,20,LR
+Old River at Tracy Wildlife Association,B9D74821274,5/8/2003,5/8/2003 12:00,CFG0503B0697,pH,8.01,,Yes,8.01,LR
+Old River at Tracy Wildlife Association,B9D74821274,10/7/2015,10/7/2015 12:25,CF1015B1458,Conductivity,835,,Yes,835,LR
+Old River at Tracy Wildlife Association,B9D74821274,10/7/2015,10/7/2015 12:25,CF1015B1458,DissolvedOxygen,57.4,%DO recorded,Yes,5.17,LR
+Old River at Tracy Wildlife Association,B9D74821274,10/7/2015,10/7/2015 12:25,CF1015B1458,Temperature,20.4,,Yes,20.4,LR
+Old River at Tracy Wildlife Association,B9D74821274,10/7/2015,10/7/2015 12:25,CF1015B1458,TurbidityNTU,8.84,,Yes,8.84,LR
+Old River at Tracy Wildlife Association,B9D74821274,10/7/2015,10/7/2015 12:25,CF1015B1458,pH,7.43,,Yes,7.43,LR
+Old River at Tracy Wildlife Association,B9D74821274,1/8/2016,1/8/2016 10:47,CF0116B0078,Conductivity,744,,Yes,744,LR
+Old River at Tracy Wildlife Association,B9D74821274,1/8/2016,1/8/2016 10:47,CF0116B0078,DissolvedOxygen,84.3,%DO recorded,Yes,9.81,LR
+Old River at Tracy Wildlife Association,B9D74821274,1/8/2016,1/8/2016 10:47,CF0116B0078,Temperature,8.4,,Yes,8.4,LR
+Old River at Tracy Wildlife Association,B9D74821274,1/8/2016,1/8/2016 10:47,CF0116B0078,TurbidityNTU,6.97,,Yes,6.97,LR
+Old River at Tracy Wildlife Association,B9D74821274,1/8/2016,1/8/2016 10:47,CF0116B0078,pH,7.92,,Yes,7.92,LR
+Old River at Tracy Wildlife Association,B9D74821274,7/24/2019,7/24/2019 11:30,CF0719B0711,Conductivity,383.4,,Yes,383.4,LR
+Old River at Tracy Wildlife Association,B9D74821274,7/24/2019,7/24/2019 11:30,CF0719B0711,DissolvedOxygen,98.8,%DO recorded,Yes,8.22,LR
+Old River at Tracy Wildlife Association,B9D74821274,7/24/2019,7/24/2019 11:30,CF0719B0711,Temperature,24.6,,Yes,24.6,LR
+Old River at Tracy Wildlife Association,B9D74821274,7/24/2019,7/24/2019 11:30,CF0719B0711,TurbidityFNU,25.26,,Yes,25.26,LR
+Old River at Tracy Wildlife Association,B9D74821274,7/24/2019,7/24/2019 11:30,CF0719B0711,pH,7.7,,Yes,7.7,LR
+Old River at Tracy Wildlife Association,B9D74821274,7/8/2020,7/8/2020 12:02,CF0720B0690,Conductivity,23.74,transcription error,Yes,684,LR
+Old River at Tracy Wildlife Association,B9D74821274,7/8/2020,7/8/2020 12:02,CF0720B0690,DissolvedOxygen,3.64,,Yes,3.64,LR
+Old River at Tracy Wildlife Association,B9D74821274,7/8/2020,7/8/2020 12:02,CF0720B0690,Temperature,23.74,,Yes,23.74,LR
+Old River at Tracy Wildlife Association,B9D74821274,7/8/2020,7/8/2020 12:02,CF0720B0690,TurbidityFNU,3.77,,Yes,3.77,LR
+Old River at Tracy Wildlife Association,B9D74821274,7/8/2020,7/8/2020 12:02,CF0720B0690,pH,7.27,,Yes,7.27,LR
+Old River below Headwaters,B9D74851200,9/1/2015,9/1/2015 10:10,CF0915B1261,Conductivity,792,,Yes,792,DC
+Old River below Headwaters,B9D74851200,9/1/2015,9/1/2015 10:10,CF0915B1261,DissolvedOxygen,90.6,%DO recorded,Yes,7.49,DC
+Old River below Headwaters,B9D74851200,9/1/2015,9/1/2015 10:17,CF0915B1241,DissolvedOxygen,7.49,"wrong time, time should be (10:10 PDT) (and it duplicates the above record)",Yes,7.49,DC
+Old River below Headwaters,B9D74851200,9/1/2015,9/1/2015 10:10,CF0915B1261,Temperature,25,,Yes,25,DC
+Old River below Headwaters,B9D74851200,9/1/2015,9/1/2015 10:10,CF0915B1261,TurbidityNTU,9.35,,Yes,9.35,DC
+Old River below Headwaters,B9D74851200,9/1/2015,9/1/2015 10:10,CF0915B1261,pH,8.34,,Yes,8.34,DC
+Old River below Headwaters,B9D74851200,4/10/2019,4/10/2019 10:45,CF0419B0294,Conductivity,183.8,,Yes,183.8,DC
+Old River below Headwaters,B9D74851200,4/10/2019,4/10/2019 10:45,CF0419B0294,DissolvedOxygen,95.4,%DO recorded,Yes,9.84,DC
+Old River below Headwaters,B9D74851200,4/10/2019,4/10/2019 10:45,CF0419B0294,Temperature,13.947,,Yes,13.947,DC
+Old River below Headwaters,B9D74851200,4/10/2019,4/10/2019 10:45,CF0419B0294,TurbidityFNU,13.2,,Yes,13.2,DC
+Old River below Headwaters,B9D74851200,4/10/2019,4/10/2019 10:45,CF0419B0294,pH,7.39,,Yes,7.39,DC
+Old River below Headwaters,B9D74851200,7/9/2019,7/9/2019 10:00,CF0719B0664,Conductivity,444.2,,Yes,444.2,DC
+Old River below Headwaters,B9D74851200,7/9/2019,7/9/2019 10:00,CF0719B0664,DissolvedOxygen,123.6,%DO recorded,Yes,10.75,DC
+Old River below Headwaters,B9D74851200,7/9/2019,7/9/2019 10:00,CF0719B0664,Temperature,22.164,,Yes,22.164,DC
+Old River below Headwaters,B9D74851200,7/9/2019,7/9/2019 10:00,CF0719B0664,TurbidityFNU,14,,Yes,14,DC
+Old River below Headwaters,B9D74851200,7/9/2019,7/9/2019 10:00,CF0719B0664,pH,8.46,,Yes,8.46,DC
+Old River near Doughty Cut - ORX,B9D74871232,4/10/2019,4/10/2019 11:32,CF0419B0295,Conductivity,184.1,,Yes,184.1,LR
+Old River near Doughty Cut - ORX,B9D74871232,4/10/2019,4/10/2019 11:32,CF0419B0295,DissolvedOxygen,95.3,%DO recorded,Yes,9.81,LR
+Old River near Doughty Cut - ORX,B9D74871232,4/10/2019,4/10/2019 11:32,CF0419B0295,Temperature,14.043,,Yes,14.043,LR
+Old River near Doughty Cut - ORX,B9D74871232,4/10/2019,4/10/2019 11:32,CF0419B0295,TurbidityFNU,12.03,,Yes,12.03,LR
+Old River near Doughty Cut - ORX,B9D74871232,4/10/2019,4/10/2019 11:32,CF0419B0295,pH,7.4,,Yes,7.4,LR
+Old River near Doughty Cut - ORX,B9D74871232,5/29/2019,5/29/2019 11:45,CF0519B0508,Conductivity,82.3,,Yes,82.3,LR
+Old River near Doughty Cut - ORX,B9D74871232,5/29/2019,5/29/2019 11:45,CF0519B0508,DissolvedOxygen,95.7,%DO recorded,Yes,9.47,LR
+Old River near Doughty Cut - ORX,B9D74871232,5/29/2019,5/29/2019 11:45,CF0519B0508,Temperature,15.91,,Yes,15.91,LR
+Old River near Doughty Cut - ORX,B9D74871232,5/29/2019,5/29/2019 11:45,CF0519B0508,TurbidityFNU,17.4,,Yes,17.4,LR
+Old River near Doughty Cut - ORX,B9D74871232,5/29/2019,5/29/2019 11:45,CF0519B0508,pH,7.27,,Yes,7.27,LR
+Old River near Doughty Cut - ORX,B9D74871232,7/9/2019,7/9/2019 10:33,CF0719B0665,Conductivity,421.3,,Yes,421.3,LR
+Old River near Doughty Cut - ORX,B9D74871232,7/9/2019,7/9/2019 10:33,CF0719B0665,DissolvedOxygen,126.8,%DO recorded,Yes,11.02,LR
+Old River near Doughty Cut - ORX,B9D74871232,7/9/2019,7/9/2019 10:33,CF0719B0665,Temperature,22.287,,Yes,22.287,LR
+Old River near Doughty Cut - ORX,B9D74871232,7/9/2019,7/9/2019 10:33,CF0719B0665,TurbidityFNU,18.5,,Yes,18.5,LR
+Old River near Doughty Cut - ORX,B9D74871232,7/9/2019,7/9/2019 10:33,CF0719B0665,pH,8.55,,Yes,8.55,LR
+Old River near Frank's Tract,B9D80431347,5/28/2014,5/28/2014 13:15,CF0514B0615,Conductivity,554,,Yes,554,PS
+Old River near Frank's Tract,B9D80431347,5/28/2014,5/28/2014 13:15,CF0514B0615,Temperature,21,transcription error,Yes,21.8,PS
+Old River near Frank's Tract,B9D80431347,5/28/2014,5/28/2014 13:15,CF0514B0615,TurbidityNTU,5.44,,Yes,5.44,PS
+Old River near Frank's Tract,B9D80431347,5/28/2014,5/28/2014 13:15,CF0514B0615,pH,834,transcription error,Yes,8.34,PS
+Old River near Head,B9D74921216,12/13/2002,12/13/2002 10:45,CFC1202B1923,Conductivity,953,,Yes,953,LR
+Old River near Head,B9D74921216,12/13/2002,12/13/2002 10:45,CFC1202B1923,DissolvedOxygen,9.14,,Yes,9.14,LR
+Old River near Head,B9D74921216,12/13/2002,12/13/2002 10:45,CFC1202B1923,Temperature,1.1,transcription error,Yes,11.1,LR
+Old River near Head,B9D74921216,12/13/2002,12/13/2002 10:45,CFC1202B1923,TurbidityNTU,51.2,,Yes,51.2,LR
+Old River near Head,B9D74921216,12/13/2002,12/13/2002 10:45,CFC1202B1923,pH,7.88,,Yes,7.88,LR
+Paradise Cut,B9D74811247,7/9/2019,7/9/2019 11:53,CF0719B0668,Conductivity,870,,Yes,870,DC
+Paradise Cut,B9D74811247,7/9/2019,7/9/2019 11:53,CF0719B0668,DissolvedOxygen,125.3,,Yes,NA,DC
+Paradise Cut,B9D74811247,7/9/2019,7/9/2019 11:53,CF0719B0668,Temperature,22.463,,Yes,22.463,DC
+Paradise Cut,B9D74811247,7/9/2019,7/9/2019 11:53,CF0719B0668,TurbidityFNU,22.5,,Yes,22.5,DC
+Paradise Cut,B9D74811247,7/9/2019,7/9/2019 11:53,CF0719B0668,pH,8.25,,Yes,8.25,DC
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,12/1/2006,12/1/2006 11:04,CFF1206B0036,Conductivity,518,No Paper Record of 12/1/2006,unknown,,PS
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,12/1/2006,12/1/2006 11:04,CFF1206B0036,DissolvedOxygen,7.85,No Paper Record of 12/1/2006,unknown,,PS
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,12/1/2006,12/1/2006 11:04,CFF1206B0036,Temperature,11.8,No Paper Record of 12/1/2006,unknown,,PS
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,12/1/2006,12/1/2006 11:04,CFF1206B0036,pH,10.1,No Paper Record of 12/1/2006,unknown,,PS
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,3/9/2007,3/9/2007 11:25,CFF0307B0163,Conductivity,290.4,No Paper Record of 3/9/2007,unknown,,PS
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,3/9/2007,3/9/2007 11:25,CFF0307B0163,DissolvedOxygen,7.9,No Paper Record of 3/9/2007,unknown,,PS
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,3/9/2007,3/9/2007 11:25,CFF0307B0163,Temperature,10.8,No Paper Record of 3/9/2007,unknown,,PS
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,3/9/2007,3/9/2007 11:25,CFF0307B0163,pH,14.2,No Paper Record of 3/9/2007,unknown,,PS
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,5/31/2011,5/31/2011 13:10,CFK0511B0005,Conductivity,451,,Yes,451,PS
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,5/31/2011,5/31/2011 13:10,CFK0511B0005,Temperature,20.2,,Yes,20.2,PS
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,5/31/2011,5/31/2011 13:10,CFK0511B0005,pH,10.81,"as recorded. SAV in shallow channel can cause localized, dramatic increases in pH",Yes,10.81,PS
+Sacramento River Downstream of Isleton,B9D81051394,3/4/2021,3/4/2021 10:48,CF0321B0143,Conductivity,245.9,,Yes,245.9,PS
+Sacramento River Downstream of Isleton,B9D81051394,3/4/2021,3/4/2021 10:48,CF0321B0143,DissolvedOxygen,93.1,%DO recorded,Yes,10.01,PS
+Sacramento River Downstream of Isleton,B9D81051394,3/4/2021,3/4/2021 10:48,CF0321B0143,Temperature,12.082,,Yes,12.082,PS
+Sacramento River Downstream of Isleton,B9D81051394,3/4/2021,3/4/2021 10:48,CF0321B0143,TurbidityFNU,4.24,,Yes,4.24,PS
+Sacramento River Downstream of Isleton,B9D81051394,3/4/2021,3/4/2021 10:48,CF0321B0143,pH,7.69,,Yes,7.69,PS
+San Joaquin River at Blind Point,B9D80201431,9/16/2016,9/16/2016 11:49,CF0916B1671,Conductivity,20.3,Transciription error,Yes,1123,PS
+San Joaquin River at Blind Point,B9D80201431,9/16/2016,9/16/2016 11:49,CF0916B1671,DissolvedOxygen,8.76,,Yes,8.76,PS
+San Joaquin River at Blind Point,B9D80201431,9/16/2016,9/16/2016 11:49,CF0916B1686,Temperature,20.3,,Yes,20.3,PS
+San Joaquin River at Blind Point,B9D80201431,9/16/2016,9/16/2016 11:49,CF0916B1671,TurbidityNTU,7.05,,Yes,7.05,PS
+San Joaquin River at Blind Point,B9D80201431,9/16/2016,9/16/2016 11:49,CF0916B1671,pH,8.16,,Yes,8.16,PS
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,6/20/2018,6/20/2018 10:27,CF0618B0968,Conductivity,664,,Yes,664,DC
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,6/20/2018,6/20/2018 10:27,CF0618B0968,DissolvedOxygen,57,%DO recorded,Yes,4.93,DC
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,6/20/2018,6/20/2018 10:27,CF0618B0968,Temperature,22.26,,Yes,22.26,DC
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,6/20/2018,6/20/2018 10:27,CF0618B0968,TurbidityFNU,23.7,,Yes,23.7,DC
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,6/20/2018,6/20/2018 10:27,CF0618B0968,pH,7.66,,Yes,7.66,DC
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,10/31/2018,10/31/2018 10:16,CF1018B1644,Conductivity,1233,,Yes,1233,DC
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,10/31/2018,10/31/2018 10:16,CF1018B1644,DissolvedOxygen,93.2,%DO recorded,Yes,9.14,DC
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,10/31/2018,10/31/2018 10:16,CF1018B1644,Temperature,16.2,,Yes,16.2,DC
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,10/31/2018,10/31/2018 10:16,CF1018B1644,TurbidityFNU,40.3,,Yes,40.3,DC
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,10/31/2018,10/31/2018 10:16,CF1018B1644,pH,7.82,,Yes,7.82,DC
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,7/9/2019,7/9/2019 12:58,CF0719B0669,Conductivity,620,,Yes,620,DC
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,7/9/2019,7/9/2019 12:58,CF0719B0669,DissolvedOxygen,148.5,%DO recorded,Yes,12.72,DC
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,7/9/2019,7/9/2019 12:58,CF0719B0669,Temperature,23.022,,Yes,23.022,DC
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,7/9/2019,7/9/2019 12:58,CF0719B0669,TurbidityFNU,34.05,,Yes,34.05,DC
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,7/9/2019,7/9/2019 12:58,CF0719B0669,pH,8.52,,Yes,8.52,DC
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,5/4/2021,5/4/2021 12:17,CF0521B0391,Conductivity,572,,Yes,572,DC
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,5/4/2021,5/4/2021 12:17,CF0521B0391,DissolvedOxygen,7.08,,Yes,7.08,DC
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,5/4/2021,5/4/2021 12:17,CF0521B0391,Temperature,20.85,,Yes,20.85,DC
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,5/4/2021,5/4/2021 12:17,CF0521B0391,TurbidityFNU,24.5,,Yes,24.5,DC
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,5/4/2021,5/4/2021 12:17,CF0521B0391,pH,752,Conductivity recorded,Yes,7.51,DC
+Victoria Canal near Byron,B9D75231318,6/10/2015,6/10/2015 10:30,CF0615B0756,Conductivity,756,,Yes,758.8,AM
+Victoria Canal near Byron,B9D75231318,6/10/2015,6/10/2015 10:30,CF0615B0756,DissolvedOxygen,758.8,,Yes,NA,AM
+Victoria Canal near Byron,B9D75231318,6/10/2015,6/10/2015 10:30,CF0615B0756,Temperature,24.3,,Yes,24.3,AM
+Victoria Canal near Byron,B9D75231318,6/10/2015,6/10/2015 10:30,CF0615B0756,TurbidityNTU,3.83,,Yes,3.83,AM
+Victoria Canal near Byron,B9D75231318,6/10/2015,6/10/2015 10:30,CF0615B0756,pH,7.56,,Yes,7.56,AM
+Victoria Canal near Byron,B9D75231318,4/24/2019,4/24/2019 13:58,CF0419B0372,Conductivity,199,,Yes,199,AM
+Victoria Canal near Byron,B9D75231318,4/24/2019,4/24/2019 13:58,CF0419B0372,DissolvedOxygen,106,%DO recorded,Yes,9.92,AM
+Victoria Canal near Byron,B9D75231318,4/24/2019,4/24/2019 13:58,CF0419B0372,Temperature,18.562,,Yes,18.562,AM
+Victoria Canal near Byron,B9D75231318,4/24/2019,4/24/2019 13:58,CF0419B0372,TurbidityFNU,3.62,,Yes,3.62,AM
+Victoria Canal near Byron,B9D75231318,4/24/2019,4/24/2019 13:58,CF0419B0372,pH,7.65,,Yes,7.65,AM
+West Canal Above Clifton Court Intake,B9D74991332,4/24/2019,4/24/2019 13:18,CF0419B0375,Conductivity,178.9,,Yes,178.9,AM
+West Canal Above Clifton Court Intake,B9D74991332,4/24/2019,4/24/2019 13:18,CF0419B0375,DissolvedOxygen,96,%DO recorded,Yes,9.41,AM
+West Canal Above Clifton Court Intake,B9D74991332,4/24/2019,4/24/2019 13:18,CF0419B0375,Temperature,16.341,,Yes,16.341,AM
+West Canal Above Clifton Court Intake,B9D74991332,4/24/2019,4/24/2019 13:18,CF0419B0375,TurbidityFNU,7.66,,Yes,7.66,AM
+West Canal Above Clifton Court Intake,B9D74991332,4/24/2019,4/24/2019 13:18,CF0419B0375,pH,7.36,,Yes,7.36,AM
