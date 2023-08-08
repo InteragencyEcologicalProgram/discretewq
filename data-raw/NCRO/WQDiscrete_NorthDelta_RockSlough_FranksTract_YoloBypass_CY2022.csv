@@ -1,4 +1,4 @@
-DataOwner,DataStatus,LongStationName,ShortStationName,StationNumber,SampleCode,CollectionDate,Analyte,CASReg_Number,Result,RptLimit,Units,Method,Depth,Matrix,SampleType,ParentSample,Description,Notes,ResultRejected
+Data Owner,Data Status,Long Station Name,Short Station Name,Station Number,Sample Code,Collection Date,Analyte,CAS Reg Number,Result,Rpt Limit,Units,Method,Depth,Matrix,Sample Type,Parent Sample,Description,Notes,Result Rejected
 6301,"3500 - Public, Reviewed and Validated",Frank's Tract Mid Track - D19A,D19A,B9D80281359,CF0522B0613,5/12/2022 12:39,Dissolved Ammonia,7664-41-7,<0.05,0.05,mg/L as N,EPA 350.1 (D) [1]*,1 Meters,"Water, Natural",Normal Sample,0,,,N
 6301,"3500 - Public, Reviewed and Validated",Frank's Tract Mid Track - D19A,D19A,B9D80281359,CF0522B0613,5/12/2022 12:39,Chlorophyll a,479-61-8,2.41,0.5,ug/L,Std Method 10200 H [1]*,1 Meters,"Water, Natural",Normal Sample,0,,,N
 6301,"3500 - Public, Reviewed and Validated",Frank's Tract Mid Track - D19A,D19A,B9D80281359,CF0522B0613,5/12/2022 12:39,Dissolved Nitrate + Nitrite,NO3+NO2,0.103,0.05,mg/L as N,Std Method 4500-NO3-F [1]*,1 Meters,"Water, Natural",Normal Sample,0,,,N

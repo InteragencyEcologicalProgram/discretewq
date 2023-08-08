@@ -8,15 +8,30 @@ require(stringr)
 require(purrr)
 
 # Import data field and laboratory provided by NCRO-WQES
-NCRO_all <-
+NCRO_allold <-
   map(
     dir("data-raw/NCRO", pattern = "^WQES.+\\.xlsx", full.names = TRUE),
     read_excel
   ) %>%
   list_rbind()
 
+NCRO_all2022 <-
+  map(
+    dir("data-raw/NCRO", pattern = "^WQES.+\\.xlsx", full.names = TRUE),
+    read_excel
+  ) %>%
+  list_rbind()
+
+northdelta = read_csv("data-raw/NCRO/WQDiscrete_NorthDelta_RockSlough_FranksTract_YoloBypass_CY2022.csv")%>%
+  mutate(`Parent Sample` = as.character(`Parent Sample`))%>%
+  mutate(`Rpt Limit` = as.character(`Rpt Limit`))
+
+NCRO_all = bind_rows(NCRO_allold,NCRO_all2022, northdelta)
+
 # Import Secchi depth and Microcystis data, which were in a different Excel file
-NCRO_secchi_mvi <- read_excel("data-raw/NCRO/All WQES Station HAB Obs and Secchi 2017-2021.xlsx")
+# It looks like the data file they sent for 2022 included all the older data too.
+#NCRO_secchi_mviold <- read_excel("data-raw/NCRO/All WQES Station HAB Obs and Secchi 2017-2021.xlsx")
+NCRO_secchi_mvi <- read_excel("data-raw/NCRO/qry_HabObs_StationNameStationCode_DeployEnd.xlsx")
 
 # Import station metadata and coordinates
 stations <- read_csv("data-raw/NCRO/Stations.csv")
@@ -125,12 +140,13 @@ NCRO_all_c1 <- NCRO_all %>%
     Datetime = with_tz(mdy_hm(`Collection Date`, tz = "Etc/GMT+8"), tzone = "America/Los_Angeles"),
     Date = date(Datetime),
     Analyte = AnalyteStd,
-    Result,
+    Result = Result,
     # add Sign variable which indicates <RL values
     Sign = if_else(str_detect(Result, "^<"), "<", "="),
     RL = `Rpt Limit`,
     Units,
     Notes
+
   ) %>%
   # convert Result to numeric making <RL values equal to their RL
   mutate(
@@ -152,7 +168,7 @@ NCRO_all_c1 <- NCRO_all %>%
   # (UserDefined) or (NONE) and substituting them with their proper number.
   # We worked with Tyler Salman from NCRO-WQES to determine these.
 NCRO_unk_sta <- NCRO_all_c1 %>%
-  filter(StationNumber %in% c("(UserDefined)", "(NONE)")) %>%
+  dplyr::filter(StationNumber %in% c("(UserDefined)", "(NONE)")) %>%
   mutate(
     StationNumber = case_when(
       StationName == "Holland Cut at Holland Marina" ~ "B9D75841349",
@@ -168,7 +184,7 @@ NCRO_unk_sta <- NCRO_all_c1 %>%
     )
   ) %>%
   # Remove remaining records with StationNumber as (UserDefined) or (NONE)
-  filter(!StationNumber %in% c("(UserDefined)", "(NONE)"))
+  dplyr::filter(!StationNumber %in% c("(UserDefined)", "(NONE)"))
 
 # Add data with corrected station names and numbers back to the main data frame
 NCRO_all_c2 <- NCRO_all_c1 %>%
@@ -368,3 +384,4 @@ NCRO <- NCRO_all_c8_wide %>%
   arrange(Datetime)
 
 usethis::use_data(NCRO, overwrite = TRUE)
+
