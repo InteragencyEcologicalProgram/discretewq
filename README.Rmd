@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/InteragencyEcologicalProgram/discretewq/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/InteragencyEcologicalProgram/discretewq/actions/workflows/R-CMD-check.yaml)
 [![Codecov test coverage](https://codecov.io/gh/InteragencyEcologicalProgram/discretewq/branch/main/graph/badge.svg)](https://codecov.io/gh/InteragencyEcologicalProgram/discretewq?branch=main)
 [![DOI](https://zenodo.org/badge/309747392.svg)](https://zenodo.org/badge/latestdoi/309747392)
-[![Data DOI](https://img.shields.io/badge/Data%20publication%20DOI-10.6073/pasta/567ca1dce56cc819b1819117538bd718-blue.svg)](https://portal.edirepository.org/nis/mapbrowse?scope=edi&identifier=731)
+[![Data DOI](https://img.shields.io/badge/Data%20publication%20DOI-10.6073/pasta/8dbd29c8c22f3295bbc5d3819fb51d00-blue.svg)](https://portal.edirepository.org/nis/mapbrowse?scope=edi&identifier=731)
 <!-- badges: end -->
 
 
@@ -68,7 +68,7 @@ str(Data)
 
 ## Data publication
 
-The dataset is also [published on the Environmental Data Initiative](https://portal.edirepository.org/nis/mapbrowse?scope=edi&identifier=731), where you can find detailed metadata. This static version of the dataset corresponds to version 2.3.2 of the R package ([archived on zenodo](https://zenodo.org/record/6390964)). 
+The dataset is also [published on the Environmental Data Initiative](https://portal.edirepository.org/nis/mapbrowse?scope=edi&identifier=731), where you can find detailed metadata. This static version of the dataset corresponds to version 2.4.0 of the R package ([archived on zenodo](https://zenodo.org/record/8008212)). 
 
 
 ## Data sources

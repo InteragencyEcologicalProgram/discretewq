@@ -11,9 +11,10 @@ library(EML)
 library(dplyr)
 library(readr)
 library(stringr)
+library(lubridate)
+library(EDIutils)
 
 # Define paths for your metadata templates, data, and EML
-
 root <- "publication"
 
 path_templates <- file.path(root, "metadata_templates")
@@ -141,38 +142,35 @@ write_csv(data, file.path(path_data, "Delta_Integrated_WQ.csv"))
 # E.g. ?template_core_metadata
 
 # Create core templates (required for all data packages)
-
-EMLassemblyline::template_core_metadata(
-  path = path_templates,
-  license = "CCBY",
-  file.type = ".docx"
-)
+# EMLassemblyline::template_core_metadata(
+#   path = path_templates,
+#   license = "CCBY",
+#   file.type = ".docx"
+# )
 
 # Create provenance template
-
-EMLassemblyline::template_provenance(
-  path = path_templates,
-)
+# EMLassemblyline::template_provenance(
+#   path = path_templates,
+# )
 
 # Create table attributes template (required when data tables are present)
-
-EMLassemblyline::template_table_attributes(
-  path = path_templates,
-  data.path = path_data,
-  data.table = c("Delta_Integrated_WQ.csv", "Delta_Integrated_WQ_metadata.csv")
-)
+# EMLassemblyline::template_table_attributes(
+#   path = path_templates,
+#   data.path = path_data,
+#   data.table = c("Delta_Integrated_WQ.csv", "Delta_Integrated_WQ_metadata.csv")
+# )
 
 # Create categorical variables template (required when attributes templates
 # contains variables with a "categorical" class)
-
-EMLassemblyline::template_categorical_variables(
-  path = path_templates,
-  data.path = path_data
-)
+# EMLassemblyline::template_categorical_variables(
+#   path = path_templates,
+#   data.path = path_data
+# )
 
 # Create geographic coverage (required when more than one geographic location
 # is to be reported in the metadata).
-
+# >>> When stations are modified, added, or deleted, delete the
+  # geographic_coverage.txt file, and run this function to re-generate it
 EMLassemblyline::template_geographic_coverage(
   path = path_templates,
   data.path = path_data,
@@ -188,29 +186,43 @@ EMLassemblyline::template_geographic_coverage(
 # Once all your metadata templates are complete call this function to create
 # the EML.
 
-# Sandbox
-#ID<-"edi.750.2"
+# Custom function to create EML file for discretewq:
+discretewq_eml <- function(edi_id, df_raw, chng_log) {
+  # Create initial EML file
+  eml_init <- EMLassemblyline::make_eml(
+    path = path_templates,
+    data.path = path_data,
+    eml.path = path_eml,
+    dataset.title = str_glue(
+      "Six decades (1959-{end_yr}) of water quality in the upper San Francisco Estuary: an integrated database of 16 discrete monitoring surveys in the Sacramento San Joaquin Delta, Suisun Bay, Suisun Marsh, and San Francisco Bay",
+      end_yr = as.character(max(year(df_raw$Date)))
+    ),
+    temporal.coverage = range(format(df_raw$Date, "%Y-%m-%d")),
+    maintenance.description = "ongoing",
+    data.table = c("Delta_Integrated_WQ.csv", "Delta_Integrated_WQ_metadata.csv"),
+    data.table.description = c("Integrated water quality database", "Information on each survey included in the integrated database"),
+    data.table.quote.character = c('"', '"'),
+    # Fill this in with the URLs if you upload to box.com or similar - need a static link
+    # Possibly add these URL's as function inputs if able to figure out the static link
+    # data.table.url = c(
+    #   "",
+    #   ""
+    # ),
+    user.id = c("sbashevkin", "dbosworth"),
+    user.domain = c("EDI", "EDI"),
+    package.id = edi_id,
+    return.obj = TRUE
+  )
 
-# EDI
-ID <- "edi.731.6"
+  # Convert changelog to class "emld" if it isn't already
+  if (!all(class(chng_log) == c("emld", "list"))) class(chng_log) <- c("emld", "list")
 
-wq_eml <- EMLassemblyline::make_eml(
-  path = path_templates,
-  data.path = path_data,
-  eml.path = path_eml,
-  dataset.title = "Six decades (1959-2022) of water quality in the upper San Francisco Estuary: an integrated database of 16 discrete monitoring surveys in the Sacramento San Joaquin Delta, Suisun Bay, Suisun Marsh, and San Francisco Bay",
-  temporal.coverage = range(format(data_raw$Date, "%Y-%m-%d")),
-  maintenance.description = "ongoing",
-  data.table = c("Delta_Integrated_WQ.csv", "Delta_Integrated_WQ_metadata.csv"),
-  data.table.description = c("Integrated water quality database", "Information on each survey included in the integrated database"),
-  data.table.quote.character = c('"', '"'),
-  data.table.url = c("", ""),
-  user.id = "sbashevkin",
-  user.domain = "EDI",
-  package.id = ID,
-  return.obj = TRUE
-)
+  # Append changelog to EML file and rewrite
+  eml_init$dataset$maintenance$changeHistory <- chng_log
+  write_eml(eml_init, file.path(path_eml, paste0(edi_id, ".xml")))
+}
 
+# Create changelog file
 changelog <- list(
   list(
     changeScope = "Metadata and data",
@@ -246,12 +258,41 @@ changelog <- list(
     changeScope = "Metadata and data",
     oldValue = "See previous version (5)",
     changeDate = Sys.Date(),
-    comment = "1) "
+    comment = "1) Added temperature and conductivity to USGS_CAWSC.
+                2) Added DO and pH data to all surveys that collect this data. USGS_SFBS collects both calculated (from a sensor) and discrete DO, so we used discrete DO up to 2016 and calculated DO afterwards to mirror the methodological change that occurred in the EMP survey in 2016.
+                3) Fixed some historical data issues in EMP dataset.
+                4) Added NCRO laboratory and water quality data.
+                5) Added bottom conductivity to to 20mm, Baystudy, SDO, FMWT, and STN surveys.
+                6) Added turbidity to EMP, FMWT, and STN surveys.
+                7) Fixed timezones for SDO data. SDO times are reported in PST but had incorrectly been imported as local time (PST/PDT). Now, they are imported as Etc/GMT+8 and then converted to America/Los_Angeles to correspond to the other surveys.
+                8) Updated STN, FMWT, EDSM, DJFMP, SLS, Suisun, EMP, USGS_SFBS, USGS_CAWSC, YBFMP, SKT, 20mm, baystudy, and SDO datasets.
+                9) Removed rows from FMWT and STN datasets that did not contain any water quality information."
   )
 )
 
-class(changelog) <- c("emld", "list")
+# EDI Staging environment
+# Request a new id from the EDI staging environment here:
+# https://portal-s.edirepository.org/nis/reservations.jsp, OR
+# use EDIutils functions below to create one programatically
+ID_staging <- "" # enter EDI staging ID here manually if not using EDIutils to create one
 
-wq_eml$dataset$maintenance$changeHistory <- changelog
-write_eml(wq_eml, file.path(path_eml, paste0(ID, ".xml")))
-eml_validate(file.path(path_eml, paste0(ID, ".xml")))
+EDIutils::login()
+ID_staging <- create_reservation(scope = "edi", env = "staging")
+EDIutils::logout()
+
+# Create EML file for staging environment
+discretewq_eml(ID_staging, data_raw, changelog)
+
+# Validate EML file
+eml_validate(file.path(path_eml, paste0(ID_staging, ".xml")))
+
+
+# EDI Production environment
+ID_prod <- "edi.731.7"
+
+# Create EML file for production environment
+discretewq_eml(ID_prod, data_raw, changelog)
+
+# Validate EML file
+eml_validate(file.path(path_eml, paste0(ID_prod, ".xml")))
+
