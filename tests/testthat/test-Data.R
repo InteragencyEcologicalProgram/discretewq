@@ -4,10 +4,10 @@ require(dplyr)
 require(lubridate)
 
 All_rows<-sum(map_dbl(list(baystudy, DJFMP, EDSM, EMP, FMWT, SDO, SKT, NCRO,
-                           SLS, STN, suisun, twentymm, USBR, USGS_SFBS, YBFMP, USGS_CAWSC), nrow))
-tzs<-map_chr(list(baystudy, DJFMP, EDSM, EMP, FMWT, SDO, SKT, SLS, STN, suisun, twentymm, USBR, USGS_SFBS, YBFMP, USGS_CAWSC, NCRO), ~tz(.x$Datetime))
+                           SLS, STN, suisun, twentymm, USBR, USGS_SFBS, YBFMP, USGS_CAWSC, DOP), nrow))
+tzs<-map_chr(list(baystudy, DJFMP, EDSM, EMP, FMWT, SDO, SKT, SLS, STN, suisun, twentymm, USBR, USGS_SFBS, YBFMP, USGS_CAWSC, NCRO, DOP), ~tz(.x$Datetime))
 Data<-wq(Sources=c("EMP", "STN", "FMWT", "EDSM", "DJFMP", "SDO", "SKT", "SLS", "NCRO",
-                   "20mm", "Suisun", "Baystudy", "USBR", "USGS_SFBS", "YBFMP", "USGS_CAWSC"))%>%
+                   "20mm", "Suisun", "Baystudy", "USBR", "USGS_SFBS", "YBFMP", "USGS_CAWSC", "DOP"))%>%
   mutate(ID=paste(Source, Station, Date, Datetime, Latitude, Longitude))
 
 
@@ -35,6 +35,6 @@ test_that("No zeros in environmental variables that shouldn't have them", {
 
 test_that("Errors work correctly", {
   expect_error(wq(Sources="USGS"), 'The "USGS" data source has been renamed to "USGS_SFBS" because of the inclusion of an additional USGS dataset, "USGS_CAWSC".', fixed=TRUE)
-  expect_error(wq(Sources="SFBS"), 'You must specify the data sources you wish to include. Choices include:\n 20mm, Baystudy, DJFMP, EDSM, EMP, FMWT, NCRO, SDO, SKT, SLS, STN, Suisun, USBR, USGS_CAWSC, USGS_SFBS, YBFMP', fixed=TRUE)
+  expect_error(wq(Sources="SFBS"), 'You must specify the data sources you wish to include. Choices include:\n 20mm, Baystudy, DJFMP, DOP, EDSM, EMP, FMWT, NCRO, SDO, SKT, SLS, STN, Suisun, USBR, USGS_CAWSC, USGS_SFBS, YBFMP', fixed=TRUE)
 })
 

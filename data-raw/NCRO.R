@@ -15,18 +15,16 @@ NCRO_allold <-
   ) %>%
   list_rbind()
 
-NCRO_all2022 <-
-  map(
-    dir("data-raw/NCRO", pattern = "^WQES.+\\.xlsx", full.names = TRUE),
-    read_excel
-  ) %>%
-  list_rbind()
 
+south = read_excel("data-raw/NCRO/WQDiscrete_SouthDelta_CY2022.xlsx") %>%
+  mutate(`Collection Date` = as.character(format(`Collection Date`, "%m/%d/%Y %H:%M")))
+central = read_excel("data-raw/NCRO/WQDiscrete_CentralDelta_CY2022.xlsx")
+trukee = read_excel("data-raw/NCRO/WQDiscrete_Truckee_CY2022.xlsx")
 northdelta = read_csv("data-raw/NCRO/WQDiscrete_NorthDelta_RockSlough_FranksTract_YoloBypass_CY2022.csv")%>%
   mutate(`Parent Sample` = as.character(`Parent Sample`))%>%
   mutate(`Rpt Limit` = as.character(`Rpt Limit`))
 
-NCRO_all = bind_rows(NCRO_allold,NCRO_all2022, northdelta)
+NCRO_all = bind_rows(NCRO_allold,south, central, trukee, northdelta)
 
 
 

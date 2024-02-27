@@ -571,6 +571,43 @@
 "YBFMP"
 
 
+
+# DOP -------------------------------------------------------------------
+
+#' Directed Outflow Project water quality data
+#'
+#' Water quality data from the ICF/USBR Directed Outflow Project.
+#'
+#' @encoding UTF-8
+#' @format a tibble with 5491 rows and 18 variables
+#' \describe{
+#'   \item{Source}{Name of the source dataset.}
+#'   \item{Station}{Station where sample was collected.}
+#'   \item{Latitude}{Latitude at start of zooplankton tow in decimal degrees.}
+#'   \item{Longitude}{Longitude at start of zooplankton tow in decimal degrees.}
+#'   \item{Field_coords}{Flag indicating GPS coordinates were taken in the field, rather than at pre-determined stations.}
+#'   \item{Date}{Date sample was collected.}
+#'   \item{Datetime}{Date and time sample was collected.}
+#'   \item{Depth}{Depth at start of trawl (m)}
+#'   \item{Salinity}{Salinity at depth of trawl in PSU}
+#'   \item{Secchi}{Secchi depth (cm).}
+#'   \item{Turbidity}{Turbidity at depth of tow in FNU}
+#'   \item{Temperature}{Temperature (°C) at depth of tow.}
+#'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at depth of tow.}
+#'   \item{DissolvedOxygen}{Dissolved oxygen (mg/L) at depth of two.}
+#'   \item{pH}{pH (dimensionless) at depth of tow.}
+#'   \item{DOC}{Dissolved Organic Carbon (mg/L)}
+#'   \item{Chlorophyll}{Chlorophyll-a concentration (\eqn{\mu}g \ifelse{html}{\out{L<sup>-1</sup>}}{\eqn{L^{-1}}})}
+#'   \item{DissNitrateNitrite}{Dissolved Nitrate and Nitrite (mg/L).}
+#'   \item{DissAmmonia}{Dissolved Ammonia (mg/L).}
+#'   \item{DissOrthophos}{Dissolved Ortho-phosphate (mg/L).}
+#'   }
+#'
+#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.494.2}{here} and \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.233.3}{here}.
+#' @seealso \code{\link{wq}}
+"DOP"
+
+
 # Internal Documentation --------------------------------------------------
 
 #' @title Sign Variables

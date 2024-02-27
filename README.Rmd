@@ -46,6 +46,7 @@ Data <- wq(
     "20mm",
     "Baystudy",
     "DJFMP",
+    "DOP",
     "EDSM",
     "EMP",
     "FMWT",
@@ -102,6 +103,8 @@ Interagency Ecological Program (IEP), C. Pien, and N. Kwan. 2022b. Interagency E
 O’Rear, T., J. Durand, and P. Moyle. 2022. Suisun Marsh Fish Study. [https://watershed.ucdavis.edu/project/suisun-marsh-fish-study](https://watershed.ucdavis.edu/project/suisun-marsh-fish-study).
 
 Schraga, T. S., E. S. Nejad, C. A. Martin, and J. E. Cloern. 2020. USGS measurements of water quality in San Francisco Bay (CA), beginning in 2016 (ver. 3.0, March 2020). U. S. Geological Survey data release. [doi:https://doi.org/10.5066/F7D21WGF](https://doi.org/10.5066/F7D21WGF)
+
+Schultz, A.A. and A.J. Kalmbach. 2023. Directed Outflow Project Lower Trophic Study ver 4. Environmental Data Initiative. [https://doi.org/10.6073/pasta/86a01140eb3bb756ee9f7f8dab8aefc4](https://doi.org/10.6073/pasta/86a01140eb3bb756ee9f7f8dab8aefc4).
 
 United States Fish and Wildlife Service, T. Senegal, R. Mckenzie, J. Speegle, B. Perales, D. Bridgman, K. Erly, S. Staiger, A. Arrambide, and M. Gilbert. 2022. Interagency Ecological Program and US Fish and Wildlife Service: San Francisco Estuary Enhanced Delta Smelt Monitoring Program data, 2016-2021 ver 8. Environmental Data Initiative. [doi:10.6073/pasta/e1a540c161b7be56b941df50fd7b44c5](https://portal.edirepository.org/nis/metadataviewer?packageid=edi.415.8)
 

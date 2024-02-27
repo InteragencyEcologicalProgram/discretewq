@@ -16,8 +16,9 @@
 #'   "Suisun" (Suisun Marsh Fish Study, \code{\link{suisun}}),
 #'   "USBR" (United States Bureau of Reclamation Sacramento Deepwater Ship Channel data, \code{\link{USBR}}),
 #'   "USGS_CAWSC" (USGS California Water Science Center monitoring data, \code{\link{USGS_CAWSC}}),
-#'   "USGS_SFBS" (USGS San Francisco Bay Surveys, \code{\link{USGS_SFBS}}), and
-#'   "YBFMP" (Yolo Bypass Fish Monitoring Program, \code{\link{YBFMP}}).
+#'   "USGS_SFBS" (USGS San Francisco Bay Surveys, \code{\link{USGS_SFBS}})
+#'   "YBFMP" (Yolo Bypass Fish Monitoring Program, \code{\link{YBFMP}}), and
+#'   "DOP" (Directed Outflow Proejct \code{\link{DOP}})).
 #' @param Start_year Earliest year you would like included in the dataset. Must be an integer. Defaults to year \code{0}.
 #' @param End_year Latest year you would like included in the dataset. Must be an integer. Defaults to the current year.
 #' @importFrom magrittr %>%
@@ -29,6 +30,7 @@
 #'     "20mm",
 #'     "Baystudy",
 #'     "DJFMP",
+#'     "DOP",
 #'     "EDSM",
 #'     "EMP",
 #'     "FMWT",
@@ -60,6 +62,7 @@ wq <- function(Sources = NULL,
     "20mm",
     "Baystudy",
     "DJFMP",
+    "DOP",
     "EDSM",
     "EMP",
     "FMWT",
@@ -107,6 +110,10 @@ wq <- function(Sources = NULL,
 
   if ("EDSM" %in% Sources) {
     WQ_list[["EDSM"]] <- discretewq::EDSM
+  }
+
+  if ("DOP" %in% Sources) {
+    WQ_list[["DOP"]] <- discretewq::DOP
   }
 
   if ("EMP" %in% Sources) {
