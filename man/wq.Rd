@@ -22,8 +22,9 @@ Choices include "20mm" (20mm Survey, \code{\link{twentymm}}),
 "Suisun" (Suisun Marsh Fish Study, \code{\link{suisun}}),
 "USBR" (United States Bureau of Reclamation Sacramento Deepwater Ship Channel data, \code{\link{USBR}}),
 "USGS_CAWSC" (USGS California Water Science Center monitoring data, \code{\link{USGS_CAWSC}}),
-"USGS_SFBS" (USGS San Francisco Bay Surveys, \code{\link{USGS_SFBS}}), and
-"YBFMP" (Yolo Bypass Fish Monitoring Program, \code{\link{YBFMP}}).}
+"USGS_SFBS" (USGS San Francisco Bay Surveys, \code{\link{USGS_SFBS}})
+"YBFMP" (Yolo Bypass Fish Monitoring Program, \code{\link{YBFMP}}), and
+"DOP" (Directed Outflow Proejct \code{\link{DOP}})).}
 
 \item{Start_year}{Earliest year you would like included in the dataset. Must be an integer. Defaults to year \code{0}.}
 
@@ -41,6 +42,7 @@ Data <- wq(
     "20mm",
     "Baystudy",
     "DJFMP",
+    "DOP",
     "EDSM",
     "EMP",
     "FMWT",
