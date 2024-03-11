@@ -596,11 +596,7 @@
 #'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at depth of tow.}
 #'   \item{DissolvedOxygen}{Dissolved oxygen (mg/L) at depth of two.}
 #'   \item{pH}{pH (dimensionless) at depth of tow.}
-#'   \item{DOC}{Dissolved Organic Carbon (mg/L)}
 #'   \item{Chlorophyll}{Chlorophyll-a concentration (\eqn{\mu}g \ifelse{html}{\out{L<sup>-1</sup>}}{\eqn{L^{-1}}})}
-#'   \item{DissNitrateNitrite}{Dissolved Nitrate and Nitrite (mg/L).}
-#'   \item{DissAmmonia}{Dissolved Ammonia (mg/L).}
-#'   \item{DissOrthophos}{Dissolved Ortho-phosphate (mg/L).}
 #'   }
 #'
 #' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.494.2}{here} and \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.233.3}{here}.

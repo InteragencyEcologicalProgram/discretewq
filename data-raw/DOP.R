@@ -21,15 +21,11 @@ DOPx <- read_csv(
     Temperature = "d",
     Secchi = "d",
     Start_Time = "c",
-    NO3 = "d",
-    NH4 = "d",
     pH = "d",
     Chl_a = "d",
-    PO4 = "d",
     Start_Depth = "d",
     Salinity = "d",
     Turbidity = "d",
-    DOC = "d",
     DO = "d"
   )
 )
@@ -41,10 +37,7 @@ DOP <- DOPx %>%
     Depth = Start_Depth,
     Station = Station_Code,
     Chlorophyll = Chl_a,
-    DissolvedOxygen = DO,
-    DissNitrateNitrite = NO3,
-    DissAmmonia = NH4,
-    DissOrthophos = PO4
+    DissolvedOxygen = DO
   ) %>%
   # make a date-time column, convert feet to meters
   mutate(
@@ -72,11 +65,7 @@ DOP <- DOPx %>%
     pH,
     Chlorophyll,
     DissolvedOxygen,
-    Secchi,
-    DOC,
-    DissNitrateNitrite,
-    DissAmmonia,
-    DissOrthophos
+    Secchi
   )
 
 usethis::use_data(DOP, overwrite = TRUE)
