@@ -1,5 +1,7 @@
 # discretewq (development version)
 
+* Added `DOP` water quality data.
+
 # discretewq 2.4.0
 
 * Added temperature and conductivity to `USGS_CAWSC`

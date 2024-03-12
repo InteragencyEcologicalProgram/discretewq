@@ -2,6 +2,7 @@ Survey,Abbreviation,Agency,Survey_focus,Start_year,Season,Frequency,Data_source,
 20-mm Survey,20mm,CDFW,Fish,1995,Mar-Jul,2X monthly,https://portal.edirepository.org/nis/metadataviewer?packageid=edi.535.4,Surface bucket,NA
 San Francisco Bay Study,Baystudy,CDFW,Fish,1980,All year,Monthly,https://filelib.wildlife.ca.gov/Public/BayStudy/Access_Database/,0 - 1 m,0.5 m
 Delta Juvenile Fish Monitoring Program,DJFMP,USFWS,Fish,1976,All year,3X weekly,https://portal.edirepository.org/nis/metadataviewer?packageid=edi.244.9,0.3 m or bucket if choppy,NA
+Directed Outflow Project Lower Trophic Study,DOP,USBR/ICF,Zooplankton,2017,"Sep-Nov in 2017-2018, Apr-Nov in 2019-present","Every 2 weeks in 2017, Weekly in 2018-present",https://portal.edirepository.org/nis/metadataviewer?packageid=edi.1187.4,1 m,NA
 Enhanced Delta Smelt Monitoring,EDSM,USFWS,Fish,2016,Jan-Mar & Jul-Dec,Weekly,https://portal.edirepository.org/nis/metadataviewer?packageid=edi.415.8,0.3 m or bucket if choppy,0.3 ? 0.6 m
 Environmental Monitoring Program,EMP,DWR,Water quality,1975,All year,Monthly,https://portal.edirepository.org/nis/metadataviewer?packageid=edi.458.9,0.9 m,0.9 m
 Fall Midwater Trawl,FMWT,CDFW,Fish,1967,Sep-Dec,Monthly,https://filelib.wildlife.ca.gov/Public/TownetFallMidwaterTrawl/FMWT%20Data/,Surface bucket,0.3 m

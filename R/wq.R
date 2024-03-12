@@ -5,6 +5,7 @@
 #'   Choices include "20mm" (20mm Survey, \code{\link{twentymm}}),
 #'   "Baystudy" (Bay Study, \code{\link{baystudy}}),
 #'   "DJFMP" (Delta Juvenile Fish Monitoring Program, \code{\link{DJFMP}}),
+#'   "DOP" (Directed Outflow Project \code{\link{DOP}})),
 #'   "EDSM" (Enhanced Delta Smelt Monitoring, \code{\link{EDSM}}),
 #'   "EMP" (Environmental Monitoring Program, \code{\link{EMP}}),
 #'   "FMWT" (Fall Midwater Trawl, \code{\link{FMWT}}),
@@ -29,6 +30,7 @@
 #'     "20mm",
 #'     "Baystudy",
 #'     "DJFMP",
+#'     "DOP",
 #'     "EDSM",
 #'     "EMP",
 #'     "FMWT",
@@ -60,6 +62,7 @@ wq <- function(Sources = NULL,
     "20mm",
     "Baystudy",
     "DJFMP",
+    "DOP",
     "EDSM",
     "EMP",
     "FMWT",
@@ -103,6 +106,10 @@ wq <- function(Sources = NULL,
 
   if ("DJFMP" %in% Sources) {
     WQ_list[["DJFMP"]] <- discretewq::DJFMP
+  }
+
+  if ("DOP" %in% Sources) {
+    WQ_list[["DOP"]] <- discretewq::DOP
   }
 
   if ("EDSM" %in% Sources) {
