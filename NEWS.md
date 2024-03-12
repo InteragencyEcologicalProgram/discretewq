@@ -1,9 +1,6 @@
 # discretewq (development version)
 
-# discretewq 2.4.1
-
-* Added DOP water quality data. 
-
+* Added `DOP` water quality data.
 
 # discretewq 2.4.0
 
