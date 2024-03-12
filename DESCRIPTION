@@ -1,49 +1,22 @@
 Package: discretewq
-Title: Integrated Dataset of Discrete Water Quality in the San Francisco Estuary
+Title: Integrated Dataset of Discrete Water Quality in the San Francisco
+    Estuary
 Version: 2.4.0.9000
-Authors@R: 
-   c(person(given = "Samuel M",
-           family = "Bashevkin",
-           role = c("aut", "cre"),
-           email = "sam.bashevkin@waterboards.ca.gov",
+Authors@R: c(
+    person("Samuel M", "Bashevkin", , "sam.bashevkin@waterboards.ca.gov", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-7406-7089")),
-     person(given = "Dave",
-           family = "Bosworth",
-           role = c("aut"),
-           email = "David.Bosworth@water.ca.gov",
+    person("Dave", "Bosworth", , "David.Bosworth@water.ca.gov", role = "aut",
            comment = c(ORCID = "0000-0003-0740-3390")),
-     person(given = "Sarah",
-           family = "Perry",
-           role = c("aut"),
-           email = "Sarah.Perry@water.ca.gov",
+    person("Sarah", "Perry", , "Sarah.Perry@water.ca.gov", role = "aut",
            comment = c(ORCID = "0000-0002-2561-8195")),
-     person(given = "Elizabeth B",
-           family = "Stumpner",
-           role = c("aut"),
-           email = "Elizabeth.Stumpner@water.ca.gov",
+    person("Elizabeth B", "Stumpner", , "Elizabeth.Stumpner@water.ca.gov", role = "aut",
            comment = c(ORCID = "0000-0003-2356-2244")),
-     person(given = "Rosemary",
-           family = "Hartman",
-           role = c("ctb"),
-           email = "Rosemary.Hartman@water.ca.gov",
-           comment = c(ORCID = "0000-0002-0642-183X")))
-Description: Produce an integrated dataset of discrete water quality measurements using any combination of the 16 source datasets included. 
+    person("Rosemary", "Hartman", , "Rosemary.Hartman@water.ca.gov", role = "ctb",
+           comment = c(ORCID = "0000-0002-0642-183X"))
+  )
+Description: Produce an integrated dataset of discrete water quality
+    measurements using any combination of the 17 source datasets included.
 License: GPL-3
-Encoding: UTF-8
-LazyData: true
-LazyDataCompression: xz
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
-Suggests: 
-    readr,
-    purrr,
-    spelling,
-    testthat,
-    covr,
-    tibble,
-    readxl,
-    hms,
-    dataRetrieval
 Depends: 
     R (>= 2.10)
 Imports: 
@@ -53,6 +26,22 @@ Imports:
     stringr,
     tidyr,
     wql
+Suggests: 
+    conflicted,
+    covr,
+    dataRetrieval,
+    hms,
+    purrr,
+    readr,
+    readxl,
+    spelling,
+    testthat,
+    tibble
 Remotes: 
     InteragencyEcologicalProgram/deltamapr
+Encoding: UTF-8
 Language: en-US
+LazyData: true
+LazyDataCompression: xz
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
