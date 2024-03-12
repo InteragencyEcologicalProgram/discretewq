@@ -5,6 +5,7 @@
 #'   Choices include "20mm" (20mm Survey, \code{\link{twentymm}}),
 #'   "Baystudy" (Bay Study, \code{\link{baystudy}}),
 #'   "DJFMP" (Delta Juvenile Fish Monitoring Program, \code{\link{DJFMP}}),
+#'   "DOP" (Directed Outflow Project \code{\link{DOP}})),
 #'   "EDSM" (Enhanced Delta Smelt Monitoring, \code{\link{EDSM}}),
 #'   "EMP" (Environmental Monitoring Program, \code{\link{EMP}}),
 #'   "FMWT" (Fall Midwater Trawl, \code{\link{FMWT}}),
@@ -16,9 +17,8 @@
 #'   "Suisun" (Suisun Marsh Fish Study, \code{\link{suisun}}),
 #'   "USBR" (United States Bureau of Reclamation Sacramento Deepwater Ship Channel data, \code{\link{USBR}}),
 #'   "USGS_CAWSC" (USGS California Water Science Center monitoring data, \code{\link{USGS_CAWSC}}),
-#'   "USGS_SFBS" (USGS San Francisco Bay Surveys, \code{\link{USGS_SFBS}})
-#'   "YBFMP" (Yolo Bypass Fish Monitoring Program, \code{\link{YBFMP}}), and
-#'   "DOP" (Directed Outflow Proejct \code{\link{DOP}})).
+#'   "USGS_SFBS" (USGS San Francisco Bay Surveys, \code{\link{USGS_SFBS}}), and
+#'   "YBFMP" (Yolo Bypass Fish Monitoring Program, \code{\link{YBFMP}}).
 #' @param Start_year Earliest year you would like included in the dataset. Must be an integer. Defaults to year \code{0}.
 #' @param End_year Latest year you would like included in the dataset. Must be an integer. Defaults to the current year.
 #' @importFrom magrittr %>%
@@ -108,12 +108,12 @@ wq <- function(Sources = NULL,
     WQ_list[["DJFMP"]] <- discretewq::DJFMP
   }
 
-  if ("EDSM" %in% Sources) {
-    WQ_list[["EDSM"]] <- discretewq::EDSM
-  }
-
   if ("DOP" %in% Sources) {
     WQ_list[["DOP"]] <- discretewq::DOP
+  }
+
+  if ("EDSM" %in% Sources) {
+    WQ_list[["EDSM"]] <- discretewq::EDSM
   }
 
   if ("EMP" %in% Sources) {
