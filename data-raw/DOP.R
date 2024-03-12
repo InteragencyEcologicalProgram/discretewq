@@ -1,5 +1,11 @@
 # Code to prepare DOP data goes here
-library(tidyverse)
+require(readr)
+require(dplyr)
+require(lubridate)
+require(conflicted)
+
+# Declare package conflict preferences
+conflicts_prefer(dplyr::filter())
 
 # read in dataset
 download.file(
@@ -9,7 +15,7 @@ download.file(
   method = "libcurl"
 )
 
-DOPx <- read_csv(
+DOP_orig <- read_csv(
   file.path(tempdir(), "DOP_ICF_TowData_2017-2022.csv"),
   col_types = cols_only(
     Date = "c",
@@ -31,42 +37,55 @@ DOPx <- read_csv(
 )
 
 # Clean up data
-DOP <- DOPx %>%
-  # standardize column names
-  rename(
-    Depth = Start_Depth,
-    Station = Station_Code,
-    Chlorophyll = Chl_a,
-    DissolvedOxygen = DO
-  ) %>%
-  # make a date-time column, convert feet to meters
-  mutate(
-    Date = parse_date_time(Date, c("%Y-%m-%d", "%m/%d/%Y"), tz = "America/Los_Angeles"),
-    Datetime = parse_date_time(if_else(is.na(Start_Time), NA_character_, paste(Date, Start_Time)), "%Y-%m-%d %H:%M:%S", tz = "America/Los_Angeles"),
-    Field_coords = TRUE,
+# Note - We're not including Microcystis because they use a different method
+DOP <- DOP_orig %>%
+  transmute(
     Source = "DOP",
-    Depth = Depth * 0.3048
-  ) %>%
-  # select relevant columns
-  # note - I'm not including Microcystis because they use a different method
-  select(
-    Source,
-    Station,
+    # Combine Station_Code and Habitat columns to make the Station column to
+    # preserve habitat info for each station
+    Station = paste(Station_Code, Habitat),
+    Habitat,
     Latitude,
     Longitude,
-    Field_coords,
-    Date,
-    Datetime,
-    Depth,
-    Salinity,
+    Field_coords = TRUE,
+    Date = ymd(Date, tz = "America/Los_Angeles"),
+    # Make a date-time column
+    Datetime = ymd_hms(if_else(is.na(Start_Time), NA_character_, paste(Date, Start_Time)), tz = "America/Los_Angeles"),
+    # Convert feet to meters
+    Depth = Start_Depth * 0.3048,
+    Secchi,
     Temperature,
-    Turbidity,
+    Salinity,
     Conductivity,
+    DissolvedOxygen = DO,
     pH,
-    Chlorophyll,
+    # Turbidity is measured with a YSI EXO2 sonde according to the DOP methods - units are FNU
+    TurbidityFNU = Turbidity,
+    Chlorophyll = Chl_a
+  ) %>%
+  # Remove Channel Deep and Oblique samples. Channel Deep measurements are taken
+  # at the bottom third to half of the water column and therefore aren't
+  # comparable to bottom samples from other surveys. The WQ measurements for the
+  # Oblique tows are either all NA or they are identical to either the Channel
+  # Surface or Channel Deep samples collected at the same location.
+  filter(!Habitat %in% c("Channel Deep", "Oblique")) %>%
+  select(-Habitat) %>%
+  # Remove replicate tows with identical WQ values - select earliest Datetime
+  arrange(Datetime) %>%
+  distinct(
+    Station,
+    Date,
+    Secchi,
+    Temperature,
+    Salinity,
+    Conductivity,
     DissolvedOxygen,
-    Secchi
-  )
+    pH,
+    TurbidityFNU,
+    Chlorophyll,
+    .keep_all = TRUE
+  ) %>%
+  arrange(Date, Station)
 
 usethis::use_data(DOP, overwrite = TRUE)
 
