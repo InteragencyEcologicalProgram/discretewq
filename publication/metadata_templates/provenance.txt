@@ -8,6 +8,7 @@ edi.494.2	EDI
 edi.233.3	EDI									
 edi.535.4	EDI									
 edi.534.4	EDI									
+edi.1187.4	EDI									
 		"USGS Measurements of Water Quality in San Francisco Bay (CA), 1969-2015 (ver. 3.0 June 2017)"	Cloern	E	J	creator	United States Geological Survey		This online link references a USGS data publication	https://doi.org/10.5066/F7TQ5ZPR
 		"USGS Measurements of Water Quality in San Francisco Bay (CA), 1969-2015 (ver. 3.0 June 2017)"	Schraga	S	T	creator	United States Geological Survey	tschraga@usgs.gov	This online link references a USGS data publication	https://doi.org/10.5066/F7TQ5ZPR
 		"USGS Measurements of Water Quality in San Francisco Bay (CA), 1969-2015 (ver. 3.0 June 2017)"	Schraga	S	T	contact	United States Geological Survey	tschraga@usgs.gov	This online link references a USGS data publication	https://doi.org/10.5066/F7TQ5ZPR
