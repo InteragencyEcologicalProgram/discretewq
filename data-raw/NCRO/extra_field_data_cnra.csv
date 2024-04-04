@@ -1,0 +1,914 @@
+LongStationName,StationNumber,SampleCode,CollectionDate,Analyte,Result,SampleType
+West Canal Above Clifton Court Intake,B9D74991332,CF0122B0160,2022-01-11 10:56:00,Field Dissolved Oxygen,9.18,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0122B0160,2022-01-11 10:56:00,Field Specific Conductance,499.4,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0122B0160,2022-01-11 10:56:00,Field Turbidity,4.75,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0122B0160,2022-01-11 10:56:00,Field Water Temperature,9.307,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0122B0160,2022-01-11 10:56:00,Field pH,8.13,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0222B0255,2022-02-08 10:26:00,Field Dissolved Oxygen,10.76,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0222B0255,2022-02-08 10:26:00,Field Specific Conductance,386.4,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0222B0255,2022-02-08 10:26:00,Field Turbidity,4.13,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0222B0255,2022-02-08 10:26:00,Field Water Temperature,10.182,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0222B0255,2022-02-08 10:26:00,Field pH,7.54,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0322B0333,2022-03-08 10:58:00,Field Dissolved Oxygen,9.89,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0322B0333,2022-03-08 10:58:00,Field Specific Conductance,454.3,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0322B0333,2022-03-08 10:58:00,Field Turbidity,2.58,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0322B0333,2022-03-08 10:58:00,Field Water Temperature,12.899,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0322B0333,2022-03-08 10:58:00,Field pH,7.65,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0422B0453,2022-04-12 09:26:00,Field Dissolved Oxygen,8.84,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0422B0453,2022-04-12 09:26:00,Field Specific Conductance,431.4,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0422B0453,2022-04-12 09:26:00,Field Turbidity,3.63,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0422B0453,2022-04-12 09:26:00,Field Water Temperature,16.667,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0422B0453,2022-04-12 09:26:00,Field pH,7.81,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0522B0595,2022-05-10 10:16:00,Field Dissolved Oxygen,9.31,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0522B0595,2022-05-10 10:16:00,Field Specific Conductance,402.8,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0522B0595,2022-05-10 10:16:00,Field Turbidity,3.05,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0522B0595,2022-05-10 10:16:00,Field Water Temperature,18.023,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0522B0595,2022-05-10 10:16:00,Field pH,8.07,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0622B0656,2022-06-06 09:40:00,Field Dissolved Oxygen,6.75,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0622B0656,2022-06-06 09:40:00,Field Specific Conductance,405,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0622B0656,2022-06-06 09:40:00,Field Turbidity,2.87,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0622B0656,2022-06-06 09:40:00,Field Water Temperature,22.208,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0622B0656,2022-06-06 09:40:00,Field pH,7.37,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0722B0759,2022-07-12 10:00:00,Field Dissolved Oxygen,7.02,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0722B0759,2022-07-12 10:00:00,Field Specific Conductance,596,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0722B0759,2022-07-12 10:00:00,Field Turbidity,3.11,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0722B0759,2022-07-12 10:00:00,Field Water Temperature,25.751,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0722B0759,2022-07-12 10:00:00,Field pH,7.52,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0822B0839,2022-08-09 10:02:00,Field Dissolved Oxygen,7.07,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0822B0839,2022-08-09 10:02:00,Field Specific Conductance,445.5,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0822B0839,2022-08-09 10:02:00,Field Turbidity,3.3,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0822B0839,2022-08-09 10:02:00,Field Water Temperature,24.718,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0822B0839,2022-08-09 10:02:00,Field pH,7.33,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0922B0952,2022-09-13 12:41:00,Field Dissolved Oxygen,7.02,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0922B0952,2022-09-13 12:41:00,Field Specific Conductance,454.7,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0922B0952,2022-09-13 12:41:00,Field Turbidity,3.61,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0922B0952,2022-09-13 12:41:00,Field Water Temperature,24.273,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF0922B0952,2022-09-13 12:41:00,Field pH,7.52,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF1122B1193,2022-11-08 11:01:00,Field Dissolved Oxygen,9.07,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF1122B1193,2022-11-08 11:01:00,Field Specific Conductance,568,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF1122B1193,2022-11-08 11:01:00,Field Turbidity,2.28,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF1122B1193,2022-11-08 11:01:00,Field Water Temperature,14.46,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF1122B1193,2022-11-08 11:01:00,Field pH,7.65,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF1222B1610,2022-12-13 11:05:00,Field Dissolved Oxygen,10.06,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF1222B1610,2022-12-13 11:05:00,Field Specific Conductance,661,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF1222B1610,2022-12-13 11:05:00,Field Turbidity,3.05,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF1222B1610,2022-12-13 11:05:00,Field Water Temperature,9.999,Normal Sample
+West Canal Above Clifton Court Intake,B9D74991332,CF1222B1610,2022-12-13 11:05:00,Field pH,7.57,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0122B0232,2022-01-26 09:15:00,Field Dissolved Oxygen,9.8,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0122B0232,2022-01-26 09:15:00,Field Specific Conductance,358.8,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0122B0232,2022-01-26 09:15:00,Field Turbidity,10.57,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0122B0232,2022-01-26 09:15:00,Field Water Temperature,9.925,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0122B0232,2022-01-26 09:15:00,Field pH,7.65,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0222B0291,2022-02-16 08:21:00,Field Dissolved Oxygen,10.33,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0222B0291,2022-02-16 08:21:00,Field Specific Conductance,339.6,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0222B0291,2022-02-16 08:21:00,Field Turbidity,4.99,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0222B0291,2022-02-16 08:21:00,Field Water Temperature,11.202,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0222B0291,2022-02-16 08:21:00,Field pH,7.72,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0322B0414,2022-03-23 07:18:00,Field Dissolved Oxygen,8.95,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0322B0414,2022-03-23 07:18:00,Field Specific Conductance,340.3,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0322B0414,2022-03-23 07:18:00,Field Turbidity,5.8,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0322B0414,2022-03-23 07:18:00,Field Water Temperature,15.67,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0322B0414,2022-03-23 07:18:00,Field pH,7.66,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0422B0514,2022-04-25 08:10:00,Field Dissolved Oxygen,9.46,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0422B0514,2022-04-25 08:10:00,Field Specific Conductance,339,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0422B0514,2022-04-25 08:10:00,Field Turbidity,3.9,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0422B0514,2022-04-25 08:10:00,Field Water Temperature,17.899,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0422B0514,2022-04-25 08:10:00,Field pH,7.99,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0622B0694,2022-06-16 10:17:00,Field Dissolved Oxygen,7.01,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0622B0694,2022-06-16 10:17:00,Field Specific Conductance,444.3,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0622B0694,2022-06-16 10:17:00,Field Turbidity,2.73,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0622B0694,2022-06-16 10:17:00,Field Water Temperature,23.088,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0622B0694,2022-06-16 10:17:00,Field pH,7.51,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0722B0783,2022-07-13 08:12:00,Field Dissolved Oxygen,6.82,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0722B0783,2022-07-13 08:12:00,Field Specific Conductance,597,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0722B0783,2022-07-13 08:12:00,Field Turbidity,1.92,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0722B0783,2022-07-13 08:12:00,Field Water Temperature,24.302,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0722B0783,2022-07-13 08:12:00,Field pH,7.6,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0822B0888,2022-08-16 09:19:00,Field Dissolved Oxygen,6.69,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0822B0888,2022-08-16 09:19:00,Field Specific Conductance,437.3,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0822B0888,2022-08-16 09:19:00,Field Turbidity,2.53,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0822B0888,2022-08-16 09:19:00,Field Water Temperature,24.58,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0822B0888,2022-08-16 09:19:00,Field pH,7.42,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0922B0971,2022-09-20 08:37:00,Field Specific Conductance,486.2,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0922B0971,2022-09-20 08:37:00,Field Turbidity,2.27,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0922B0971,2022-09-20 08:37:00,Field Water Temperature,21.808,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF0922B0971,2022-09-20 08:37:00,Field pH,7.5,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF1022B1120,2022-10-13 09:27:00,Field Dissolved Oxygen,7.84,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF1022B1120,2022-10-13 09:27:00,Field Specific Conductance,598,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF1022B1120,2022-10-13 09:27:00,Field Turbidity,1.56,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF1022B1120,2022-10-13 09:27:00,Field Water Temperature,20.927,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF1022B1120,2022-10-13 09:27:00,Field pH,7.4,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF1122B1236,2022-11-22 10:55:00,Field Dissolved Oxygen,10.57,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF1122B1236,2022-11-22 10:55:00,Field Specific Conductance,685,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF1122B1236,2022-11-22 10:55:00,Field Turbidity,0.98,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF1122B1236,2022-11-22 10:55:00,Field Water Temperature,11.34,Normal Sample
+Werner Dredger Cut near Palm Tract,B9D75781357,CF1122B1236,2022-11-22 10:55:00,Field pH,7.74,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0122B0231,2022-01-26 11:12:00,Field Dissolved Oxygen,9.51,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0122B0231,2022-01-26 11:12:00,Field Specific Conductance,335.9,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0122B0231,2022-01-26 11:12:00,Field Turbidity,7.99,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0122B0231,2022-01-26 11:12:00,Field Water Temperature,9.898,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0122B0231,2022-01-26 11:12:00,Field pH,7.46,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0222B0290,2022-02-16 09:50:00,Field Dissolved Oxygen,10.18,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0222B0290,2022-02-16 09:50:00,Field Specific Conductance,334.8,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0222B0290,2022-02-16 09:50:00,Field Turbidity,4.47,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0222B0290,2022-02-16 09:50:00,Field Water Temperature,11.359,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0222B0290,2022-02-16 09:50:00,Field pH,7.62,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0322B0413,2022-03-23 08:57:00,Field Dissolved Oxygen,9.72,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0322B0413,2022-03-23 08:57:00,Field Specific Conductance,315.1,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0322B0413,2022-03-23 08:57:00,Field Turbidity,4.16,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0322B0413,2022-03-23 08:57:00,Field Water Temperature,15.826,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0322B0413,2022-03-23 08:57:00,Field pH,7.85,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0422B0513,2022-04-25 10:22:00,Field Dissolved Oxygen,8.72,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0422B0513,2022-04-25 10:22:00,Field Specific Conductance,310.6,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0422B0513,2022-04-25 10:22:00,Field Turbidity,3.21,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0422B0513,2022-04-25 10:22:00,Field Water Temperature,17.757,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0622B0693,2022-06-16 11:52:00,Field Dissolved Oxygen,6.85,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0622B0693,2022-06-16 11:52:00,Field Specific Conductance,458.1,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0622B0693,2022-06-16 11:52:00,Field Turbidity,2.62,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0622B0693,2022-06-16 11:52:00,Field Water Temperature,23.134,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0622B0693,2022-06-16 11:52:00,Field pH,7.48,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0722B0782,2022-07-13 10:01:00,Field Dissolved Oxygen,6.59,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0722B0782,2022-07-13 10:01:00,Field Specific Conductance,596,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0722B0782,2022-07-13 10:01:00,Field Turbidity,2.51,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0722B0782,2022-07-13 10:01:00,Field Water Temperature,24.368,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0722B0782,2022-07-13 10:01:00,Field pH,7.55,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0822B0887,2022-08-16 10:40:00,Field Dissolved Oxygen,6.86,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0822B0887,2022-08-16 10:40:00,Field Specific Conductance,437.7,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0822B0887,2022-08-16 10:40:00,Field Turbidity,3.3,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0822B0887,2022-08-16 10:40:00,Field Water Temperature,24.508,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0822B0887,2022-08-16 10:40:00,Field pH,7.53,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0922B0970,2022-09-20 10:17:00,Field Dissolved Oxygen,7.05,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0922B0970,2022-09-20 10:17:00,Field Specific Conductance,481.6,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0922B0970,2022-09-20 10:17:00,Field Turbidity,1.36,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0922B0970,2022-09-20 10:17:00,Field Water Temperature,22.025,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF0922B0970,2022-09-20 10:17:00,Field pH,7.45,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF1022B1119,2022-10-13 11:06:00,Field Dissolved Oxygen,8,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF1022B1119,2022-10-13 11:06:00,Field Specific Conductance,604,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF1022B1119,2022-10-13 11:06:00,Field Turbidity,19.69,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF1022B1119,2022-10-13 11:06:00,Field Water Temperature,20.89,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF1022B1119,2022-10-13 11:06:00,Field pH,7.59,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF1122B1235,2022-11-22 10:27:00,Field Dissolved Oxygen,9.87,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF1122B1235,2022-11-22 10:27:00,Field Specific Conductance,699,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF1122B1235,2022-11-22 10:27:00,Field Turbidity,1.43,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF1122B1235,2022-11-22 10:27:00,Field Water Temperature,11.401,Normal Sample
+Holland Cut at Holland Marina,B9D75841349,CF1122B1235,2022-11-22 10:27:00,Field pH,7.58,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0122B0229,2022-01-26 10:47:00,Field Dissolved Oxygen,10.42,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0122B0229,2022-01-26 10:47:00,Field Specific Conductance,374.7,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0122B0229,2022-01-26 10:47:00,Field Turbidity,2.24,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0122B0229,2022-01-26 10:47:00,Field Water Temperature,9.971,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0122B0229,2022-01-26 10:47:00,Field pH,7.55,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0222B0288,2022-02-16 09:26:00,Field Dissolved Oxygen,10.68,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0222B0288,2022-02-16 09:26:00,Field Specific Conductance,352.9,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0222B0288,2022-02-16 09:26:00,Field Turbidity,1.7,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0222B0288,2022-02-16 09:26:00,Field Water Temperature,11.061,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0222B0288,2022-02-16 09:26:00,Field pH,7.73,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0322B0411,2022-03-23 08:33:00,Field Dissolved Oxygen,8.82,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0322B0411,2022-03-23 08:33:00,Field Specific Conductance,356.4,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0322B0411,2022-03-23 08:33:00,Field Turbidity,1.34,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0322B0411,2022-03-23 08:33:00,Field Water Temperature,16.287,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0322B0411,2022-03-23 08:33:00,Field pH,7.64,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0422B0511,2022-04-25 09:46:00,Field Dissolved Oxygen,9.21,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0422B0511,2022-04-25 09:46:00,Field Specific Conductance,330.9,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0422B0511,2022-04-25 09:46:00,Field Water Temperature,17.903,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0422B0511,2022-04-25 09:46:00,Field pH,7.99,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0622B0691,2022-06-16 11:27:00,Field Dissolved Oxygen,5.73,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0622B0691,2022-06-16 11:27:00,Field Specific Conductance,415.1,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0622B0691,2022-06-16 11:27:00,Field Turbidity,0.99,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0622B0691,2022-06-16 11:27:00,Field Water Temperature,23.471,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0622B0691,2022-06-16 11:27:00,Field pH,7.3,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0722B0780,2022-07-13 09:25:00,Field Dissolved Oxygen,5.85,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0722B0780,2022-07-13 09:25:00,Field Specific Conductance,628,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0722B0780,2022-07-13 09:25:00,Field Turbidity,1.04,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0722B0780,2022-07-13 09:25:00,Field Water Temperature,25.115,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0722B0780,2022-07-13 09:25:00,Field pH,7.36,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0822B0885,2022-08-16 10:14:00,Field Dissolved Oxygen,3.99,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0822B0885,2022-08-16 10:14:00,Field Specific Conductance,475.4,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0822B0885,2022-08-16 10:14:00,Field Turbidity,1.77,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0822B0885,2022-08-16 10:14:00,Field Water Temperature,25.408,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0822B0885,2022-08-16 10:14:00,Field pH,7.02,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0922B0968,2022-09-20 09:52:00,Field Dissolved Oxygen,6.21,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0922B0968,2022-09-20 09:52:00,Field Specific Conductance,494.3,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0922B0968,2022-09-20 09:52:00,Field Turbidity,1.58,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0922B0968,2022-09-20 09:52:00,Field Water Temperature,21.525,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF0922B0968,2022-09-20 09:52:00,Field pH,7.27,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF1022B1117,2022-10-13 10:35:00,Field Dissolved Oxygen,7.96,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF1022B1117,2022-10-13 10:35:00,Field Specific Conductance,601,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF1022B1117,2022-10-13 10:35:00,Field Turbidity,12.31,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF1022B1117,2022-10-13 10:35:00,Field Water Temperature,21.147,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF1022B1117,2022-10-13 10:35:00,Field pH,7.58,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF1122B1233,2022-11-22 11:32:00,Field Dissolved Oxygen,11.04,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF1122B1233,2022-11-22 11:32:00,Field Specific Conductance,674,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF1122B1233,2022-11-22 11:32:00,Field Turbidity,0.53,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF1122B1233,2022-11-22 11:32:00,Field Water Temperature,10.764,Normal Sample
+Rock Slough at Delta Road Bridge,B9D75861372,CF1122B1233,2022-11-22 11:32:00,Field pH,7.86,Normal Sample
+Frank's Tract Mid Track - D19A,B9D80281359,CF0522B0613,2022-05-12 12:39:00,Field Dissolved Oxygen,10.02,Normal Sample
+Frank's Tract Mid Track - D19A,B9D80281359,CF0522B0613,2022-05-12 12:39:00,Field Specific Conductance,297.6,Normal Sample
+Frank's Tract Mid Track - D19A,B9D80281359,CF0522B0613,2022-05-12 12:39:00,Field Turbidity,4.22,Normal Sample
+Frank's Tract Mid Track - D19A,B9D80281359,CF0522B0613,2022-05-12 12:39:00,Field Water Temperature,16.92,Normal Sample
+Frank's Tract Mid Track - D19A,B9D80281359,CF0522B0613,2022-05-12 12:39:00,Field pH,8.2,Normal Sample
+Frank's Tract Mid Track - D19A,B9D80281359,CF0622B0660,2022-06-07 11:30:00,Field Dissolved Oxygen,9.83,Normal Sample
+Frank's Tract Mid Track - D19A,B9D80281359,CF0622B0660,2022-06-07 11:30:00,Field Specific Conductance,472.4,Normal Sample
+Frank's Tract Mid Track - D19A,B9D80281359,CF0622B0660,2022-06-07 11:30:00,Field Turbidity,2.65,Normal Sample
+Frank's Tract Mid Track - D19A,B9D80281359,CF0622B0660,2022-06-07 11:30:00,Field Water Temperature,21.39,Normal Sample
+Frank's Tract Mid Track - D19A,B9D80281359,CF0622B0660,2022-06-07 11:30:00,Field pH,8.61,Normal Sample
+Frank's Tract Mid Track - D19A,B9D80281359,CF0722B0770,2022-07-13 11:14:00,Field Dissolved Oxygen,9.27,Normal Sample
+Frank's Tract Mid Track - D19A,B9D80281359,CF0722B0770,2022-07-13 11:14:00,Field Specific Conductance,698,Normal Sample
+Frank's Tract Mid Track - D19A,B9D80281359,CF0722B0770,2022-07-13 11:14:00,Field Turbidity,1.07,Normal Sample
+Frank's Tract Mid Track - D19A,B9D80281359,CF0722B0770,2022-07-13 11:14:00,Field Water Temperature,22.84,Normal Sample
+Frank's Tract Mid Track - D19A,B9D80281359,CF0722B0770,2022-07-13 11:14:00,Field pH,9.35,Normal Sample
+Frank's Tract Mid Track - D19A,B9D80281359,CF0822B0876,2022-08-10 14:00:00,Field Dissolved Oxygen,11.52,Normal Sample
+Frank's Tract Mid Track - D19A,B9D80281359,CF0822B0876,2022-08-10 14:00:00,Field Specific Conductance,542,Normal Sample
+Frank's Tract Mid Track - D19A,B9D80281359,CF0822B0876,2022-08-10 14:00:00,Field Turbidity,0.61,Normal Sample
+Frank's Tract Mid Track - D19A,B9D80281359,CF0822B0876,2022-08-10 14:00:00,Field Water Temperature,22.99,Normal Sample
+Frank's Tract Mid Track - D19A,B9D80281359,CF0822B0876,2022-08-10 14:00:00,Field pH,9.35,Normal Sample
+Frank's Tract Mid Track - D19A,B9D80281359,CF0922B0933,2022-09-08 08:46:00,Field Dissolved Oxygen,10.75,Normal Sample
+Frank's Tract Mid Track - D19A,B9D80281359,CF0922B0933,2022-09-08 08:46:00,Field Specific Conductance,622,Normal Sample
+Frank's Tract Mid Track - D19A,B9D80281359,CF0922B0933,2022-09-08 08:46:00,Field Turbidity,0.13,Normal Sample
+Frank's Tract Mid Track - D19A,B9D80281359,CF0922B0933,2022-09-08 08:46:00,Field Water Temperature,25.09,Normal Sample
+Frank's Tract Mid Track - D19A,B9D80281359,CF0922B0933,2022-09-08 08:46:00,Field pH,9.66,Normal Sample
+Frank's Tract Mid Track - D19A,B9D80281359,CF1022B1133,2022-10-13 10:20:00,Field Dissolved Oxygen,9.65,Normal Sample
+Frank's Tract Mid Track - D19A,B9D80281359,CF1022B1133,2022-10-13 10:20:00,Field Specific Conductance,830,Normal Sample
+Frank's Tract Mid Track - D19A,B9D80281359,CF1022B1133,2022-10-13 10:20:00,Field Turbidity,0.35,Normal Sample
+Frank's Tract Mid Track - D19A,B9D80281359,CF1022B1133,2022-10-13 10:20:00,Field Water Temperature,19.32,Normal Sample
+Frank's Tract Mid Track - D19A,B9D80281359,CF1022B1133,2022-10-13 10:20:00,Field pH,8.43,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0122B0230,2022-01-26 09:58:00,Field Dissolved Oxygen,11.01,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0122B0230,2022-01-26 09:58:00,Field Specific Conductance,395.3,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0122B0230,2022-01-26 09:58:00,Field Turbidity,1.51,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0122B0230,2022-01-26 09:58:00,Field Water Temperature,9.65,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0122B0230,2022-01-26 09:58:00,Field pH,7.73,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0222B0289,2022-02-16 08:55:00,Field Dissolved Oxygen,10.36,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0222B0289,2022-02-16 08:55:00,Field Specific Conductance,357.6,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0222B0289,2022-02-16 08:55:00,Field Turbidity,1.88,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0222B0289,2022-02-16 08:55:00,Field Water Temperature,10.9,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0222B0289,2022-02-16 08:55:00,Field pH,7.69,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0322B0412,2022-03-23 08:00:00,Field Dissolved Oxygen,8.81,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0322B0412,2022-03-23 08:00:00,Field Specific Conductance,358.4,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0322B0412,2022-03-23 08:00:00,Field Turbidity,2.77,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0322B0412,2022-03-23 08:00:00,Field Water Temperature,16.517,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0322B0412,2022-03-23 08:00:00,Field pH,7.73,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0422B0512,2022-04-25 09:05:00,Field Dissolved Oxygen,9.46,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0422B0512,2022-04-25 09:05:00,Field Specific Conductance,328.1,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0422B0512,2022-04-25 09:05:00,Field Turbidity,0.5,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0422B0512,2022-04-25 09:05:00,Field Water Temperature,17.837,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0422B0512,2022-04-25 09:05:00,Field pH,8.22,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0622B0692,2022-06-16 11:00:00,Field Dissolved Oxygen,5.58,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0622B0692,2022-06-16 11:00:00,Field Specific Conductance,410.6,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0622B0692,2022-06-16 11:00:00,Field Turbidity,3.11,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0622B0692,2022-06-16 11:00:00,Field Water Temperature,23.379,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0622B0692,2022-06-16 11:00:00,Field pH,7.25,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0722B0781,2022-07-13 08:57:00,Field Dissolved Oxygen,5.14,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0722B0781,2022-07-13 08:57:00,Field Specific Conductance,632,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0722B0781,2022-07-13 08:57:00,Field Turbidity,0.44,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0722B0781,2022-07-13 08:57:00,Field Water Temperature,25.078,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0722B0781,2022-07-13 08:57:00,Field pH,7.35,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0822B0886,2022-08-16 09:49:00,Field Dissolved Oxygen,4.58,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0822B0886,2022-08-16 09:49:00,Field Specific Conductance,527,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0822B0886,2022-08-16 09:49:00,Field Turbidity,1.84,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0822B0886,2022-08-16 09:49:00,Field Water Temperature,25.671,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0822B0886,2022-08-16 09:49:00,Field pH,7.17,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0922B0969,2022-09-20 09:24:00,Field Dissolved Oxygen,5.8,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0922B0969,2022-09-20 09:24:00,Field Specific Conductance,509,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0922B0969,2022-09-20 09:24:00,Field Turbidity,1.44,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0922B0969,2022-09-20 09:24:00,Field Water Temperature,21.244,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF0922B0969,2022-09-20 09:24:00,Field pH,7.26,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF1022B1118,2022-10-13 10:08:00,Field Dissolved Oxygen,7.9,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF1022B1118,2022-10-13 10:08:00,Field Specific Conductance,600,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF1022B1118,2022-10-13 10:08:00,Field Turbidity,3.26,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF1022B1118,2022-10-13 10:08:00,Field Water Temperature,21.146,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF1022B1118,2022-10-13 10:08:00,Field pH,7.55,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF1122B1234,2022-11-22 11:55:00,Field Dissolved Oxygen,10.1,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF1122B1234,2022-11-22 11:55:00,Field Specific Conductance,703,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF1122B1234,2022-11-22 11:55:00,Field Turbidity,6.12,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF1122B1234,2022-11-22 11:55:00,Field Water Temperature,12.25,Normal Sample
+Rock Slough @ Contra Costa WD Fish Screen,B9522200,CF1122B1234,2022-11-22 11:55:00,Field pH,7.57,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0122B0161,2022-01-11 10:25:00,Field Dissolved Oxygen,9.12,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0122B0161,2022-01-11 10:25:00,Field Specific Conductance,481.1,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0122B0161,2022-01-11 10:25:00,Field Turbidity,5.53,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0122B0161,2022-01-11 10:25:00,Field Water Temperature,9.276,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0122B0161,2022-01-11 10:25:00,Field pH,7.49,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0222B0256,2022-02-08 10:04:00,Field Dissolved Oxygen,10.85,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0222B0256,2022-02-08 10:04:00,Field Specific Conductance,387.2,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0222B0256,2022-02-08 10:04:00,Field Turbidity,3.93,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0222B0256,2022-02-08 10:04:00,Field Water Temperature,10.228,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0222B0256,2022-02-08 10:04:00,Field pH,7.65,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0322B0334,2022-03-08 10:29:00,Field Dissolved Oxygen,9.96,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0322B0334,2022-03-08 10:29:00,Field Specific Conductance,458,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0322B0334,2022-03-08 10:29:00,Field Turbidity,2.63,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0322B0334,2022-03-08 10:29:00,Field Water Temperature,12.922,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0322B0334,2022-03-08 10:29:00,Field pH,7.7,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0422B0454,2022-04-12 10:35:00,Field Dissolved Oxygen,9.16,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0422B0454,2022-04-12 10:35:00,Field Specific Conductance,652,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0422B0454,2022-04-12 10:35:00,Field Turbidity,3.05,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0422B0454,2022-04-12 10:35:00,Field Water Temperature,16.695,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0422B0454,2022-04-12 10:35:00,Field pH,8.02,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0522B0596,2022-05-10 09:45:00,Field Dissolved Oxygen,9.37,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0522B0596,2022-05-10 09:45:00,Field Specific Conductance,409.4,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0522B0596,2022-05-10 09:45:00,Field Turbidity,1.71,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0522B0596,2022-05-10 09:45:00,Field Water Temperature,18.008,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0522B0596,2022-05-10 09:45:00,Field pH,8.15,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0622B0657,2022-06-06 09:17:00,Field Dissolved Oxygen,6.8,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0622B0657,2022-06-06 09:17:00,Field Specific Conductance,403.6,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0622B0657,2022-06-06 09:17:00,Field Turbidity,2.95,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0622B0657,2022-06-06 09:17:00,Field Water Temperature,22.14,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0622B0657,2022-06-06 09:17:00,Field pH,7.42,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0722B0760,2022-07-12 09:14:00,Field Dissolved Oxygen,6.58,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0722B0760,2022-07-12 09:14:00,Field Specific Conductance,583,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0722B0760,2022-07-12 09:14:00,Field Turbidity,3.92,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0722B0760,2022-07-12 09:14:00,Field Water Temperature,25.595,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0722B0760,2022-07-12 09:14:00,Field pH,7.43,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0822B0840,2022-08-09 10:35:00,Field Dissolved Oxygen,6.92,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0822B0840,2022-08-09 10:35:00,Field Specific Conductance,438.2,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0822B0840,2022-08-09 10:35:00,Field Turbidity,3.9,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0822B0840,2022-08-09 10:35:00,Field Water Temperature,24.56,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0822B0840,2022-08-09 10:35:00,Field pH,7.27,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0922B0953,2022-09-13 12:12:00,Field Dissolved Oxygen,7.07,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0922B0953,2022-09-13 12:12:00,Field Specific Conductance,439.9,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0922B0953,2022-09-13 12:12:00,Field Turbidity,5.38,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0922B0953,2022-09-13 12:12:00,Field Water Temperature,24.376,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF0922B0953,2022-09-13 12:12:00,Field pH,7.54,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF1122B1194,2022-11-08 11:27:00,Field Dissolved Oxygen,9.14,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF1122B1194,2022-11-08 11:27:00,Field Specific Conductance,512,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF1122B1194,2022-11-08 11:27:00,Field Turbidity,4.13,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF1122B1194,2022-11-08 11:27:00,Field Water Temperature,14.24,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF1122B1194,2022-11-08 11:27:00,Field pH,7.65,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF1222B1611,2022-12-13 10:41:00,Field Dissolved Oxygen,9.98,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF1222B1611,2022-12-13 10:41:00,Field Specific Conductance,635,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF1222B1611,2022-12-13 10:41:00,Field Turbidity,2.02,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF1222B1611,2022-12-13 10:41:00,Field Water Temperature,10.001,Normal Sample
+Old River Below Clifton Court Intake,B9D74971332,CF1222B1611,2022-12-13 10:41:00,Field pH,7.58,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0122B0180,2022-01-13 10:30:00,Field Dissolved Oxygen,10.62,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0122B0180,2022-01-13 10:30:00,Field Specific Conductance,176.8,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0122B0180,2022-01-13 10:30:00,Field Turbidity,6.75,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0122B0180,2022-01-13 10:30:00,Field Water Temperature,9.523,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0122B0180,2022-01-13 10:30:00,Field pH,7.63,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0222B0307,2022-02-17 10:27:00,Field Dissolved Oxygen,10.05,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0222B0307,2022-02-17 10:27:00,Field Specific Conductance,186.3,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0222B0307,2022-02-17 10:27:00,Field Turbidity,4.62,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0222B0307,2022-02-17 10:27:00,Field Water Temperature,12.35,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0222B0307,2022-02-17 10:27:00,Field pH,7.4,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0322B0403,2022-03-17 09:33:00,Field Dissolved Oxygen,9.85,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0322B0403,2022-03-17 09:33:00,Field Specific Conductance,159.1,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0322B0403,2022-03-17 09:33:00,Field Turbidity,2.99,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0322B0403,2022-03-17 09:33:00,Field Water Temperature,14.044,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0322B0403,2022-03-17 09:33:00,Field pH,7.5,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0422B0527,2022-04-28 09:50:00,Field Dissolved Oxygen,9.02,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0422B0527,2022-04-28 09:50:00,Field Specific Conductance,156.6,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0422B0527,2022-04-28 09:50:00,Field Turbidity,3.39,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0422B0527,2022-04-28 09:50:00,Field Water Temperature,17.318,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0422B0527,2022-04-28 09:50:00,Field pH,7.44,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0622B0677,2022-06-10 09:27:00,Field Dissolved Oxygen,8.1,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0622B0677,2022-06-10 09:27:00,Field Specific Conductance,131.5,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0622B0677,2022-06-10 09:27:00,Field Turbidity,2.71,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0622B0677,2022-06-10 09:27:00,Field Water Temperature,23.182,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0622B0677,2022-06-10 09:27:00,Field pH,7.48,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0722B0815,2022-07-28 09:58:00,Field Dissolved Oxygen,8.29,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0722B0815,2022-07-28 09:58:00,Field Specific Conductance,116.7,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0722B0815,2022-07-28 09:58:00,Field Turbidity,3.4,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0722B0815,2022-07-28 09:58:00,Field Water Temperature,23.105,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0722B0815,2022-07-28 09:58:00,Field pH,7.5,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0822B0898,2022-08-18 09:58:00,Field Dissolved Oxygen,8.09,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0822B0898,2022-08-18 09:58:00,Field Specific Conductance,149.6,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0822B0898,2022-08-18 09:58:00,Field Turbidity,2.47,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0822B0898,2022-08-18 09:58:00,Field Water Temperature,23.679,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0822B0898,2022-08-18 09:58:00,Field pH,7.69,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0922B0977,2022-09-20 09:28:00,Field Dissolved Oxygen,8.29,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0922B0977,2022-09-20 09:28:00,Field Specific Conductance,133.8,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0922B0977,2022-09-20 09:28:00,Field Turbidity,1.67,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0922B0977,2022-09-20 09:28:00,Field Water Temperature,21.082,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF0922B0977,2022-09-20 09:28:00,Field pH,7.57,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF1022B1164,2022-10-20 09:18:00,Field Dissolved Oxygen,8.54,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF1022B1164,2022-10-20 09:18:00,Field Specific Conductance,136.6,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF1022B1164,2022-10-20 09:18:00,Field Turbidity,1.05,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF1022B1164,2022-10-20 09:18:00,Field Water Temperature,19.69,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF1022B1164,2022-10-20 09:18:00,Field pH,7.66,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF1122B1230,2022-11-17 11:00:00,Field Dissolved Oxygen,10.42,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF1122B1230,2022-11-17 11:00:00,Field Specific Conductance,159.4,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF1122B1230,2022-11-17 11:00:00,Field Turbidity,1.64,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF1122B1230,2022-11-17 11:00:00,Field Water Temperature,11.627,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF1122B1230,2022-11-17 11:00:00,Field pH,7.74,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF1222B1621,2022-12-20 11:13:00,Field Dissolved Oxygen,9.79,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF1222B1621,2022-12-20 11:13:00,Field Specific Conductance,171.1,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF1222B1621,2022-12-20 11:13:00,Field Turbidity,10.69,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF1222B1621,2022-12-20 11:13:00,Field Water Temperature,8.465,Normal Sample
+Sacramento River Downstream of Isleton,B9D81051394,CF1222B1621,2022-12-20 11:13:00,Field pH,7.36,Normal Sample
+Steamboat Slough,B9S81131386,CF0122B0179,2022-01-13 09:58:00,Field Dissolved Oxygen,10.54,Normal Sample
+Steamboat Slough,B9S81131386,CF0122B0179,2022-01-13 09:58:00,Field Specific Conductance,193.9,Normal Sample
+Steamboat Slough,B9S81131386,CF0122B0179,2022-01-13 09:58:00,Field Turbidity,7.69,Normal Sample
+Steamboat Slough,B9S81131386,CF0122B0179,2022-01-13 09:58:00,Field Water Temperature,9.55,Normal Sample
+Steamboat Slough,B9S81131386,CF0122B0179,2022-01-13 09:58:00,Field pH,7.5,Normal Sample
+Steamboat Slough,B9S81131386,CF0222B0306,2022-02-17 09:57:00,Field Dissolved Oxygen,10.08,Normal Sample
+Steamboat Slough,B9S81131386,CF0222B0306,2022-02-17 09:57:00,Field Specific Conductance,190.3,Normal Sample
+Steamboat Slough,B9S81131386,CF0222B0306,2022-02-17 09:57:00,Field Turbidity,3.98,Normal Sample
+Steamboat Slough,B9S81131386,CF0222B0306,2022-02-17 09:57:00,Field Water Temperature,12.141,Normal Sample
+Steamboat Slough,B9S81131386,CF0222B0306,2022-02-17 09:57:00,Field pH,7.49,Normal Sample
+Steamboat Slough,B9S81131386,CF0322B0402,2022-03-17 09:05:00,Field Dissolved Oxygen,9.81,Normal Sample
+Steamboat Slough,B9S81131386,CF0322B0402,2022-03-17 09:05:00,Field Specific Conductance,173,Normal Sample
+Steamboat Slough,B9S81131386,CF0322B0402,2022-03-17 09:05:00,Field Turbidity,2.93,Normal Sample
+Steamboat Slough,B9S81131386,CF0322B0402,2022-03-17 09:05:00,Field Water Temperature,14.235,Normal Sample
+Steamboat Slough,B9S81131386,CF0322B0402,2022-03-17 09:05:00,Field pH,7.63,Normal Sample
+Steamboat Slough,B9S81131386,CF0422B0526,2022-04-28 10:19:00,Field Dissolved Oxygen,9.04,Normal Sample
+Steamboat Slough,B9S81131386,CF0422B0526,2022-04-28 10:19:00,Field Specific Conductance,162.7,Normal Sample
+Steamboat Slough,B9S81131386,CF0422B0526,2022-04-28 10:19:00,Field Turbidity,3.06,Normal Sample
+Steamboat Slough,B9S81131386,CF0422B0526,2022-04-28 10:19:00,Field Water Temperature,17.23,Normal Sample
+Steamboat Slough,B9S81131386,CF0422B0526,2022-04-28 10:19:00,Field pH,7.54,Normal Sample
+Steamboat Slough,B9S81131386,CF0622B0676,2022-06-10 08:56:00,Field Dissolved Oxygen,8.05,Normal Sample
+Steamboat Slough,B9S81131386,CF0622B0676,2022-06-10 08:56:00,Field Specific Conductance,142.9,Normal Sample
+Steamboat Slough,B9S81131386,CF0622B0676,2022-06-10 08:56:00,Field Turbidity,2.71,Normal Sample
+Steamboat Slough,B9S81131386,CF0622B0676,2022-06-10 08:56:00,Field Water Temperature,23.382,Normal Sample
+Steamboat Slough,B9S81131386,CF0622B0676,2022-06-10 08:56:00,Field pH,7.46,Normal Sample
+Steamboat Slough,B9S81131386,CF0722B0814,2022-07-28 09:27:00,Field Dissolved Oxygen,8.24,Normal Sample
+Steamboat Slough,B9S81131386,CF0722B0814,2022-07-28 09:27:00,Field Specific Conductance,114.8,Normal Sample
+Steamboat Slough,B9S81131386,CF0722B0814,2022-07-28 09:27:00,Field Turbidity,1.82,Normal Sample
+Steamboat Slough,B9S81131386,CF0722B0814,2022-07-28 09:27:00,Field Water Temperature,23.032,Normal Sample
+Steamboat Slough,B9S81131386,CF0722B0814,2022-07-28 09:27:00,Field pH,7.52,Normal Sample
+Steamboat Slough,B9S81131386,CF0822B0897,2022-08-18 09:14:00,Field Dissolved Oxygen,7.97,Normal Sample
+Steamboat Slough,B9S81131386,CF0822B0897,2022-08-18 09:14:00,Field Specific Conductance,123.7,Normal Sample
+Steamboat Slough,B9S81131386,CF0822B0897,2022-08-18 09:14:00,Field Turbidity,1.41,Normal Sample
+Steamboat Slough,B9S81131386,CF0822B0897,2022-08-18 09:14:00,Field Water Temperature,23.723,Normal Sample
+Steamboat Slough,B9S81131386,CF0822B0897,2022-08-18 09:14:00,Field pH,7.57,Normal Sample
+Steamboat Slough,B9S81131386,CF0922B0976,2022-09-20 09:01:00,Field Dissolved Oxygen,8.1,Normal Sample
+Steamboat Slough,B9S81131386,CF0922B0976,2022-09-20 09:01:00,Field Specific Conductance,123.6,Normal Sample
+Steamboat Slough,B9S81131386,CF0922B0976,2022-09-20 09:01:00,Field Turbidity,1.02,Normal Sample
+Steamboat Slough,B9S81131386,CF0922B0976,2022-09-20 09:01:00,Field Water Temperature,20.788,Normal Sample
+Steamboat Slough,B9S81131386,CF0922B0976,2022-09-20 09:01:00,Field pH,7.54,Normal Sample
+Steamboat Slough,B9S81131386,CF1022B1163,2022-10-20 08:45:00,Field Dissolved Oxygen,8.37,Normal Sample
+Steamboat Slough,B9S81131386,CF1022B1163,2022-10-20 08:45:00,Field Specific Conductance,141.2,Normal Sample
+Steamboat Slough,B9S81131386,CF1022B1163,2022-10-20 08:45:00,Field Turbidity,0.88,Normal Sample
+Steamboat Slough,B9S81131386,CF1022B1163,2022-10-20 08:45:00,Field Water Temperature,19.622,Normal Sample
+Steamboat Slough,B9S81131386,CF1022B1163,2022-10-20 08:45:00,Field pH,7.63,Normal Sample
+Steamboat Slough,B9S81131386,CF1122B1229,2022-11-17 10:30:00,Field Dissolved Oxygen,10.48,Normal Sample
+Steamboat Slough,B9S81131386,CF1122B1229,2022-11-17 10:30:00,Field Specific Conductance,157.2,Normal Sample
+Steamboat Slough,B9S81131386,CF1122B1229,2022-11-17 10:30:00,Field Turbidity,1.26,Normal Sample
+Steamboat Slough,B9S81131386,CF1122B1229,2022-11-17 10:30:00,Field Water Temperature,11.549,Normal Sample
+Steamboat Slough,B9S81131386,CF1122B1229,2022-11-17 10:30:00,Field pH,7.76,Normal Sample
+Steamboat Slough,B9S81131386,CF1222B1620,2022-12-20 10:29:00,Field Dissolved Oxygen,9.98,Normal Sample
+Steamboat Slough,B9S81131386,CF1222B1620,2022-12-20 10:29:00,Field Specific Conductance,177.3,Normal Sample
+Steamboat Slough,B9S81131386,CF1222B1620,2022-12-20 10:29:00,Field Turbidity,6.72,Normal Sample
+Steamboat Slough,B9S81131386,CF1222B1620,2022-12-20 10:29:00,Field Water Temperature,8.06,Normal Sample
+Steamboat Slough,B9S81131386,CF1222B1620,2022-12-20 10:29:00,Field pH,7.29,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0222B0237,2022-02-02 10:45:00,Field Dissolved Oxygen,10.9,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0222B0237,2022-02-02 10:45:00,Field Specific Conductance,601,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0222B0237,2022-02-02 10:45:00,Field Turbidity,3.46,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0222B0237,2022-02-02 10:45:00,Field Water Temperature,9.915,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0222B0237,2022-02-02 10:45:00,Field pH,7.82,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0322B0328,2022-03-08 12:50:00,Field Dissolved Oxygen,10.28,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0322B0328,2022-03-08 12:50:00,Field Specific Conductance,465.6,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0322B0328,2022-03-08 12:50:00,Field Turbidity,2.04,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0322B0328,2022-03-08 12:50:00,Field Water Temperature,13.515,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0322B0328,2022-03-08 12:50:00,Field pH,7.84,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0422B0429,2022-04-05 10:05:00,Field Dissolved Oxygen,8.85,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0422B0429,2022-04-05 10:05:00,Field Specific Conductance,435.9,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0422B0429,2022-04-05 10:05:00,Field Turbidity,2.64,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0422B0429,2022-04-05 10:05:00,Field Water Temperature,17.689,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0422B0429,2022-04-05 10:05:00,Field pH,7.6,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0522B0577,2022-05-04 10:17:00,Field Dissolved Oxygen,9.29,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0522B0577,2022-05-04 10:17:00,Field Specific Conductance,393.8,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0522B0577,2022-05-04 10:17:00,Field Turbidity,1.89,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0522B0577,2022-05-04 10:17:00,Field Water Temperature,18.655,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0522B0577,2022-05-04 10:17:00,Field pH,8.05,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0622B0642,2022-06-02 09:12:00,Field Dissolved Oxygen,7.41,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0622B0642,2022-06-02 09:12:00,Field Specific Conductance,386.1,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0622B0642,2022-06-02 09:12:00,Field Turbidity,2.64,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0622B0642,2022-06-02 09:12:00,Field Water Temperature,22.092,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0622B0642,2022-06-02 09:12:00,Field pH,7.57,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0722B0748,2022-07-05 11:46:00,Field Dissolved Oxygen,7.53,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0722B0748,2022-07-05 11:46:00,Field Specific Conductance,532,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0722B0748,2022-07-05 11:46:00,Field Turbidity,3.17,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0722B0748,2022-07-05 11:46:00,Field Water Temperature,23.911,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0722B0748,2022-07-05 11:46:00,Field pH,7.57,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0822B0825,2022-08-03 09:33:00,Field Dissolved Oxygen,6.63,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0822B0825,2022-08-03 09:33:00,Field Specific Conductance,476.6,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0822B0825,2022-08-03 09:33:00,Field Turbidity,3.41,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0822B0825,2022-08-03 09:33:00,Field Water Temperature,24.83,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0822B0825,2022-08-03 09:33:00,Field pH,7.26,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0922B0949,2022-09-13 11:43:00,Field Dissolved Oxygen,6.95,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0922B0949,2022-09-13 11:43:00,Field Specific Conductance,440.6,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0922B0949,2022-09-13 11:43:00,Field Turbidity,3.34,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0922B0949,2022-09-13 11:43:00,Field Water Temperature,24.057,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF0922B0949,2022-09-13 11:43:00,Field pH,7.5,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF1022B1010,2022-10-05 09:46:00,Field Dissolved Oxygen,7.16,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF1022B1010,2022-10-05 09:46:00,Field Specific Conductance,479.6,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF1022B1010,2022-10-05 09:46:00,Field Turbidity,1.99,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF1022B1010,2022-10-05 09:46:00,Field Water Temperature,21.969,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF1022B1010,2022-10-05 09:46:00,Field pH,7.49,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF1122B1175,2022-11-02 10:20:00,Field Dissolved Oxygen,8.99,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF1122B1175,2022-11-02 10:20:00,Field Specific Conductance,814,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF1122B1175,2022-11-02 10:20:00,Field Turbidity,0.61,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF1122B1175,2022-11-02 10:20:00,Field Water Temperature,15.485,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF1122B1175,2022-11-02 10:20:00,Field pH,7.85,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF1222B1607,2022-12-13 12:13:00,Field Dissolved Oxygen,9.82,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF1222B1607,2022-12-13 12:13:00,Field Specific Conductance,580,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF1222B1607,2022-12-13 12:13:00,Field Turbidity,1.27,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF1222B1607,2022-12-13 12:13:00,Field Water Temperature,10.24,Normal Sample
+Old River Downstream DMC Barrier,B9536500,CF1222B1607,2022-12-13 12:13:00,Field pH,7.59,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0122B0080,2022-01-05 13:05:00,Field Dissolved Oxygen,9.98,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0122B0080,2022-01-05 13:05:00,Field Specific Conductance,552,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0122B0080,2022-01-05 13:05:00,Field Turbidity,6.44,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0122B0080,2022-01-05 13:05:00,Field Water Temperature,9.003,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0122B0080,2022-01-05 13:05:00,Field pH,7.71,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0222B0236,2022-02-02 11:28:00,Field Dissolved Oxygen,10.89,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0222B0236,2022-02-02 11:28:00,Field Specific Conductance,572,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0222B0236,2022-02-02 11:28:00,Field Turbidity,4.07,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0222B0236,2022-02-02 11:28:00,Field Water Temperature,9.981,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0222B0236,2022-02-02 11:28:00,Field pH,7.69,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0322B0327,2022-03-08 09:58:00,Field Dissolved Oxygen,10.13,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0322B0327,2022-03-08 09:58:00,Field Specific Conductance,455.7,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0322B0327,2022-03-08 09:58:00,Field Turbidity,2.54,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0322B0327,2022-03-08 09:58:00,Field Water Temperature,12.97,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0322B0327,2022-03-08 09:58:00,Field pH,7.81,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0422B0428,2022-04-05 09:32:00,Field Dissolved Oxygen,8.67,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0422B0428,2022-04-05 09:32:00,Field Specific Conductance,432.3,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0422B0428,2022-04-05 09:32:00,Field Turbidity,2.97,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0422B0428,2022-04-05 09:32:00,Field Water Temperature,17.537,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0422B0428,2022-04-05 09:32:00,Field pH,7.72,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0522B0576,2022-05-04 08:15:00,Field Dissolved Oxygen,9.03,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0522B0576,2022-05-04 08:15:00,Field Specific Conductance,394.8,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0522B0576,2022-05-04 08:15:00,Field Turbidity,4.85,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0522B0576,2022-05-04 08:15:00,Field Water Temperature,18.292,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0522B0576,2022-05-04 08:15:00,Field pH,7.99,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0622B0641,2022-06-02 09:49:00,Field Dissolved Oxygen,7.27,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0622B0641,2022-06-02 09:49:00,Field Specific Conductance,384.5,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0622B0641,2022-06-02 09:49:00,Field Turbidity,2.79,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0622B0641,2022-06-02 09:49:00,Field Water Temperature,22.128,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0622B0641,2022-06-02 09:49:00,Field pH,7.51,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0722B0747,2022-07-05 12:20:00,Field Dissolved Oxygen,7.13,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0722B0747,2022-07-05 12:20:00,Field Specific Conductance,532,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0722B0747,2022-07-05 12:20:00,Field Turbidity,4.42,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0722B0747,2022-07-05 12:20:00,Field Water Temperature,23.987,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0722B0747,2022-07-05 12:20:00,Field pH,7.47,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0822B0824,2022-08-03 09:03:00,Field Dissolved Oxygen,6.83,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0822B0824,2022-08-03 09:03:00,Field Specific Conductance,456.5,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0822B0824,2022-08-03 09:03:00,Field Turbidity,5.1,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0822B0824,2022-08-03 09:03:00,Field Water Temperature,25.136,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0822B0824,2022-08-03 09:03:00,Field pH,7.24,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0922B0948,2022-09-13 10:10:00,Field Dissolved Oxygen,6.91,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0922B0948,2022-09-13 10:10:00,Field Specific Conductance,442.5,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0922B0948,2022-09-13 10:10:00,Field Turbidity,3.3,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0922B0948,2022-09-13 10:10:00,Field Water Temperature,24.115,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF0922B0948,2022-09-13 10:10:00,Field pH,7.52,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF1022B1009,2022-10-05 09:12:00,Field Dissolved Oxygen,7.62,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF1022B1009,2022-10-05 09:12:00,Field Specific Conductance,558,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF1022B1009,2022-10-05 09:12:00,Field Turbidity,2.37,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF1022B1009,2022-10-05 09:12:00,Field Water Temperature,21.876,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF1022B1009,2022-10-05 09:12:00,Field pH,7.63,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF1122B1174,2022-11-02 10:58:00,Field Dissolved Oxygen,9.24,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF1122B1174,2022-11-02 10:58:00,Field Specific Conductance,288.5,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF1122B1174,2022-11-02 10:58:00,Field Turbidity,1.2,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF1122B1174,2022-11-02 10:58:00,Field Water Temperature,14.889,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF1122B1174,2022-11-02 10:58:00,Field pH,7.71,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF1222B1606,2022-12-13 10:13:00,Field Dissolved Oxygen,9.76,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF1222B1606,2022-12-13 10:13:00,Field Specific Conductance,548,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF1222B1606,2022-12-13 10:13:00,Field Turbidity,2.88,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF1222B1606,2022-12-13 10:13:00,Field Water Temperature,10.148,Normal Sample
+Grant Line Canal near Old River,B9D72921327,CF1222B1606,2022-12-13 10:13:00,Field pH,7.58,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0122B0157,2022-01-11 11:40:00,Field Dissolved Oxygen,8.92,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0122B0157,2022-01-11 11:40:00,Field Specific Conductance,478.1,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0122B0157,2022-01-11 11:40:00,Field Turbidity,5.46,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0122B0157,2022-01-11 11:40:00,Field Water Temperature,9.434,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0122B0157,2022-01-11 11:40:00,Field pH,7.71,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0222B0252,2022-02-08 11:11:00,Field Dissolved Oxygen,10.62,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0222B0252,2022-02-08 11:11:00,Field Specific Conductance,380.9,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0222B0252,2022-02-08 11:11:00,Field Turbidity,3.97,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0222B0252,2022-02-08 11:11:00,Field Water Temperature,10.419,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0222B0252,2022-02-08 11:11:00,Field pH,7.49,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0322B0330,2022-03-08 11:29:00,Field Dissolved Oxygen,10.21,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0322B0330,2022-03-08 11:29:00,Field Specific Conductance,432.3,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0322B0330,2022-03-08 11:29:00,Field Turbidity,2.15,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0322B0330,2022-03-08 11:29:00,Field Water Temperature,12.98,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0322B0330,2022-03-08 11:29:00,Field pH,7.74,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0422B0450,2022-04-12 10:05:00,Field Dissolved Oxygen,9.35,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0422B0450,2022-04-12 10:05:00,Field Specific Conductance,432.6,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0422B0450,2022-04-12 10:05:00,Field Turbidity,2.72,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0422B0450,2022-04-12 10:05:00,Field Water Temperature,16.219,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0422B0450,2022-04-12 10:05:00,Field pH,7.88,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0522B0594,2022-05-10 11:12:00,Field Dissolved Oxygen,9.73,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0522B0594,2022-05-10 11:12:00,Field Specific Conductance,416.6,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0522B0594,2022-05-10 11:12:00,Field Turbidity,1.5,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0522B0594,2022-05-10 11:12:00,Field Water Temperature,17.492,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0522B0594,2022-05-10 11:12:00,Field pH,7.99,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0622B0655,2022-06-06 10:19:00,Field Dissolved Oxygen,7.42,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0622B0655,2022-06-06 10:19:00,Field Specific Conductance,379.7,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0622B0655,2022-06-06 10:19:00,Field Turbidity,2.08,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0622B0655,2022-06-06 10:19:00,Field Water Temperature,22.527,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0622B0655,2022-06-06 10:19:00,Field pH,7.49,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0722B0758,2022-07-12 10:30:00,Field Dissolved Oxygen,6.6,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0722B0758,2022-07-12 10:30:00,Field Specific Conductance,545,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0722B0758,2022-07-12 10:30:00,Field Turbidity,3.11,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0722B0758,2022-07-12 10:30:00,Field Water Temperature,25.624,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0722B0758,2022-07-12 10:30:00,Field pH,7.42,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0822B0838,2022-08-09 09:25:00,Field Dissolved Oxygen,7.26,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0822B0838,2022-08-09 09:25:00,Field Specific Conductance,390.4,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0822B0838,2022-08-09 09:25:00,Field Turbidity,3.9,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0822B0838,2022-08-09 09:25:00,Field Water Temperature,24.137,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0822B0838,2022-08-09 09:25:00,Field pH,7.3,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0922B0951,2022-09-13 13:17:00,Field Dissolved Oxygen,7.61,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0922B0951,2022-09-13 13:17:00,Field Specific Conductance,394.5,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0922B0951,2022-09-13 13:17:00,Field Turbidity,3.56,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0922B0951,2022-09-13 13:17:00,Field Water Temperature,23.962,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF0922B0951,2022-09-13 13:17:00,Field pH,7.65,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF1122B1192,2022-11-08 10:33:00,Field Dissolved Oxygen,9.33,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF1122B1192,2022-11-08 10:33:00,Field Specific Conductance,558,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF1122B1192,2022-11-08 10:33:00,Field Turbidity,1.54,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF1122B1192,2022-11-08 10:33:00,Field Water Temperature,14.209,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF1122B1192,2022-11-08 10:33:00,Field pH,7.7,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF1222B1609,2022-12-13 11:36:00,Field Dissolved Oxygen,10.5,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF1222B1609,2022-12-13 11:36:00,Field Specific Conductance,611,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF1222B1609,2022-12-13 11:36:00,Field Turbidity,2.14,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF1222B1609,2022-12-13 11:36:00,Field Water Temperature,9.87,Normal Sample
+Victoria Canal near Byron,B9D75231318,CF1222B1609,2022-12-13 11:36:00,Field pH,7.66,Normal Sample
+Middle River at Howard Road,B9D75261230,CFG0903B0274,2003-09-30 09:30:00,Field Specific Conductance,437.1,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0122B0167,2022-01-12 12:02:00,Field Dissolved Oxygen,9.81,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0122B0167,2022-01-12 12:02:00,Field Specific Conductance,1667,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0122B0167,2022-01-12 12:02:00,Field Turbidity,14,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0122B0167,2022-01-12 12:02:00,Field Water Temperature,10.448,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0122B0167,2022-01-12 12:02:00,Field pH,8,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0122B0223,2022-01-25 10:34:00,Field Dissolved Oxygen,12.88,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0122B0223,2022-01-25 10:34:00,Field Specific Conductance,1500,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0122B0223,2022-01-25 10:34:00,Field Turbidity,8.52,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0122B0223,2022-01-25 10:34:00,Field Water Temperature,10.326,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0122B0223,2022-01-25 10:34:00,Field pH,8.34,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0222B0299,2022-02-16 14:03:00,Field Dissolved Oxygen,9.51,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0222B0299,2022-02-16 14:03:00,Field Specific Conductance,750,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0222B0299,2022-02-16 14:03:00,Field Turbidity,14.99,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0222B0299,2022-02-16 14:03:00,Field Water Temperature,12.637,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0222B0299,2022-02-16 14:03:00,Field pH,7.71,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0322B0395,2022-03-16 11:18:00,Field Dissolved Oxygen,7.33,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0322B0395,2022-03-16 11:18:00,Field Specific Conductance,978,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0322B0395,2022-03-16 11:18:00,Field Turbidity,22.42,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0322B0395,2022-03-16 11:18:00,Field Water Temperature,15.6,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0322B0395,2022-03-16 11:18:00,Field pH,7.51,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0422B0507,2022-04-20 09:46:00,Field Dissolved Oxygen,8.42,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0422B0507,2022-04-20 09:46:00,Field Specific Conductance,701,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0422B0507,2022-04-20 09:46:00,Field Turbidity,1.79,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0422B0507,2022-04-20 09:46:00,Field Water Temperature,18.343,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0422B0507,2022-04-20 09:46:00,Field pH,7.77,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0522B0621,2022-05-18 11:20:00,Field Dissolved Oxygen,8.71,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0522B0621,2022-05-18 11:20:00,Field Specific Conductance,459.8,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0522B0621,2022-05-18 11:20:00,Field Turbidity,4.58,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0522B0621,2022-05-18 11:20:00,Field Water Temperature,21.277,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0522B0621,2022-05-18 11:20:00,Field pH,7.83,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0622B0688,2022-06-15 13:35:00,Field Dissolved Oxygen,8.84,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0622B0688,2022-06-15 13:35:00,Field Specific Conductance,436.3,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0622B0688,2022-06-15 13:35:00,Field Turbidity,19,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0622B0688,2022-06-15 13:35:00,Field Water Temperature,24.115,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0622B0688,2022-06-15 13:35:00,Field pH,8,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0722B0793,2022-07-21 12:15:00,Field Dissolved Oxygen,7.14,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0722B0793,2022-07-21 12:15:00,Field Specific Conductance,957,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0722B0793,2022-07-21 12:15:00,Field Turbidity,5.05,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0722B0793,2022-07-21 12:15:00,Field Water Temperature,25.475,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0722B0793,2022-07-21 12:15:00,Field pH,7.56,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0822B0893,2022-08-17 09:41:00,Field Dissolved Oxygen,7.14,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0822B0893,2022-08-17 09:41:00,Field Specific Conductance,1041,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0822B0893,2022-08-17 09:41:00,Field Turbidity,20.4,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0822B0893,2022-08-17 09:41:00,Field Water Temperature,25.93,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0822B0893,2022-08-17 09:41:00,Field pH,7.69,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0922B0981,2022-09-21 09:45:00,Field Dissolved Oxygen,6.55,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0922B0981,2022-09-21 09:45:00,Field Specific Conductance,1204,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0922B0981,2022-09-21 09:45:00,Field Turbidity,6.8,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0922B0981,2022-09-21 09:45:00,Field Water Temperature,21.657,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF0922B0981,2022-09-21 09:45:00,Field pH,7.59,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF1022B1159,2022-10-19 09:35:00,Field Dissolved Oxygen,7.08,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF1022B1159,2022-10-19 09:35:00,Field Specific Conductance,1168,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF1022B1159,2022-10-19 09:35:00,Field Turbidity,11.1,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF1022B1159,2022-10-19 09:35:00,Field Water Temperature,19.47,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF1022B1159,2022-10-19 09:35:00,Field pH,7.79,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF1122B1225,2022-11-16 10:47:00,Field Dissolved Oxygen,9.58,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF1122B1225,2022-11-16 10:47:00,Field Specific Conductance,1476,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF1122B1225,2022-11-16 10:47:00,Field Turbidity,5.16,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF1122B1225,2022-11-16 10:47:00,Field Water Temperature,10.75,Normal Sample
+Sugar Cut downstream of Tom Paine Slough,B9D74761253,CF1122B1225,2022-11-16 10:47:00,Field pH,7.69,Normal Sample
+Paradise Cut,B9D74811247,CF0122B0166,2022-01-12 11:43:00,Field Dissolved Oxygen,9.89,Normal Sample
+Paradise Cut,B9D74811247,CF0122B0166,2022-01-12 11:43:00,Field Specific Conductance,821,Normal Sample
+Paradise Cut,B9D74811247,CF0122B0166,2022-01-12 11:43:00,Field Turbidity,2.79,Normal Sample
+Paradise Cut,B9D74811247,CF0122B0166,2022-01-12 11:43:00,Field Water Temperature,10.45,Normal Sample
+Paradise Cut,B9D74811247,CF0122B0166,2022-01-12 11:43:00,Field pH,7.93,Normal Sample
+Paradise Cut,B9D74811247,CF0122B0222,2022-01-25 11:20:00,Field Dissolved Oxygen,11.22,Normal Sample
+Paradise Cut,B9D74811247,CF0122B0222,2022-01-25 11:20:00,Field Specific Conductance,778,Normal Sample
+Paradise Cut,B9D74811247,CF0122B0222,2022-01-25 11:20:00,Field Turbidity,2.14,Normal Sample
+Paradise Cut,B9D74811247,CF0122B0222,2022-01-25 11:20:00,Field Water Temperature,10.93,Normal Sample
+Paradise Cut,B9D74811247,CF0122B0222,2022-01-25 11:20:00,Field pH,7.96,Normal Sample
+Paradise Cut,B9D74811247,CF0222B0298,2022-02-16 12:48:00,Field Dissolved Oxygen,10.07,Normal Sample
+Paradise Cut,B9D74811247,CF0222B0298,2022-02-16 12:48:00,Field Specific Conductance,648,Normal Sample
+Paradise Cut,B9D74811247,CF0222B0298,2022-02-16 12:48:00,Field Turbidity,3.05,Normal Sample
+Paradise Cut,B9D74811247,CF0222B0298,2022-02-16 12:48:00,Field Water Temperature,12.056,Normal Sample
+Paradise Cut,B9D74811247,CF0222B0298,2022-02-16 12:48:00,Field pH,7.66,Normal Sample
+Paradise Cut,B9D74811247,CF0322B0394,2022-03-16 10:46:00,Field Dissolved Oxygen,7.97,Normal Sample
+Paradise Cut,B9D74811247,CF0322B0394,2022-03-16 10:46:00,Field Specific Conductance,993,Normal Sample
+Paradise Cut,B9D74811247,CF0322B0394,2022-03-16 10:46:00,Field Turbidity,3.24,Normal Sample
+Paradise Cut,B9D74811247,CF0322B0394,2022-03-16 10:46:00,Field Water Temperature,15.69,Normal Sample
+Paradise Cut,B9D74811247,CF0322B0394,2022-03-16 10:46:00,Field pH,7.54,Normal Sample
+Paradise Cut,B9D74811247,CF0422B0506,2022-04-20 10:14:00,Field Dissolved Oxygen,8.23,Normal Sample
+Paradise Cut,B9D74811247,CF0422B0506,2022-04-20 10:14:00,Field Specific Conductance,662,Normal Sample
+Paradise Cut,B9D74811247,CF0422B0506,2022-04-20 10:14:00,Field Turbidity,1.61,Normal Sample
+Paradise Cut,B9D74811247,CF0422B0506,2022-04-20 10:14:00,Field Water Temperature,18.76,Normal Sample
+Paradise Cut,B9D74811247,CF0422B0506,2022-04-20 10:14:00,Field pH,7.7,Normal Sample
+Paradise Cut,B9D74811247,CF0522B0620,2022-05-18 10:31:00,Field Dissolved Oxygen,8.4,Normal Sample
+Paradise Cut,B9D74811247,CF0522B0620,2022-05-18 10:31:00,Field Specific Conductance,455.7,Normal Sample
+Paradise Cut,B9D74811247,CF0522B0620,2022-05-18 10:31:00,Field Turbidity,1.89,Normal Sample
+Paradise Cut,B9D74811247,CF0522B0620,2022-05-18 10:31:00,Field Water Temperature,20.87,Normal Sample
+Paradise Cut,B9D74811247,CF0522B0620,2022-05-18 10:31:00,Field pH,7.76,Normal Sample
+Paradise Cut,B9D74811247,CF0622B0687,2022-06-15 12:45:00,Field Dissolved Oxygen,7.11,Normal Sample
+Paradise Cut,B9D74811247,CF0622B0687,2022-06-15 12:45:00,Field Specific Conductance,532,Normal Sample
+Paradise Cut,B9D74811247,CF0622B0687,2022-06-15 12:45:00,Field Turbidity,4.24,Normal Sample
+Paradise Cut,B9D74811247,CF0622B0687,2022-06-15 12:45:00,Field Water Temperature,24.19,Normal Sample
+Paradise Cut,B9D74811247,CF0622B0687,2022-06-15 12:45:00,Field pH,7.5,Normal Sample
+Paradise Cut,B9D74811247,CF0722B0792,2022-07-21 13:58:00,Field Dissolved Oxygen,7.25,Normal Sample
+Paradise Cut,B9D74811247,CF0722B0792,2022-07-21 13:58:00,Field Specific Conductance,1153,Normal Sample
+Paradise Cut,B9D74811247,CF0722B0792,2022-07-21 13:58:00,Field Turbidity,2.38,Normal Sample
+Paradise Cut,B9D74811247,CF0722B0792,2022-07-21 13:58:00,Field Water Temperature,27.315,Normal Sample
+Paradise Cut,B9D74811247,CF0722B0792,2022-07-21 13:58:00,Field pH,7.61,Normal Sample
+Paradise Cut,B9D74811247,CF0822B0892,2022-08-17 10:05:00,Field Dissolved Oxygen,9.22,Normal Sample
+Paradise Cut,B9D74811247,CF0822B0892,2022-08-17 10:05:00,Field Specific Conductance,1533,Normal Sample
+Paradise Cut,B9D74811247,CF0822B0892,2022-08-17 10:05:00,Field Turbidity,10.16,Normal Sample
+Paradise Cut,B9D74811247,CF0822B0892,2022-08-17 10:05:00,Field Water Temperature,25.81,Normal Sample
+Paradise Cut,B9D74811247,CF0822B0892,2022-08-17 10:05:00,Field pH,7.89,Normal Sample
+Paradise Cut,B9D74811247,CF0922B0980,2022-09-21 10:28:00,Field Dissolved Oxygen,7.19,Normal Sample
+Paradise Cut,B9D74811247,CF0922B0980,2022-09-21 10:28:00,Field Specific Conductance,1549,Normal Sample
+Paradise Cut,B9D74811247,CF0922B0980,2022-09-21 10:28:00,Field Turbidity,10.02,Normal Sample
+Paradise Cut,B9D74811247,CF0922B0980,2022-09-21 10:28:00,Field Water Temperature,21.31,Normal Sample
+Paradise Cut,B9D74811247,CF0922B0980,2022-09-21 10:28:00,Field pH,7.74,Normal Sample
+Paradise Cut,B9D74811247,CF1022B1158,2022-10-19 10:03:00,Field Dissolved Oxygen,7.46,Normal Sample
+Paradise Cut,B9D74811247,CF1022B1158,2022-10-19 10:03:00,Field Specific Conductance,1382,Normal Sample
+Paradise Cut,B9D74811247,CF1022B1158,2022-10-19 10:03:00,Field Turbidity,7.53,Normal Sample
+Paradise Cut,B9D74811247,CF1022B1158,2022-10-19 10:03:00,Field Water Temperature,19.62,Normal Sample
+Paradise Cut,B9D74811247,CF1022B1158,2022-10-19 10:03:00,Field pH,7.74,Normal Sample
+Paradise Cut,B9D74811247,CF1122B1224,2022-11-16 11:30:00,Field Dissolved Oxygen,8.75,Normal Sample
+Paradise Cut,B9D74811247,CF1122B1224,2022-11-16 11:30:00,Field Specific Conductance,1281,Normal Sample
+Paradise Cut,B9D74811247,CF1122B1224,2022-11-16 11:30:00,Field Turbidity,13.3,Normal Sample
+Paradise Cut,B9D74811247,CF1122B1224,2022-11-16 11:30:00,Field Water Temperature,11.14,Normal Sample
+Paradise Cut,B9D74811247,CF1122B1224,2022-11-16 11:30:00,Field pH,7.67,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0122B0082,2022-01-05 10:55:00,Field Dissolved Oxygen,8.6,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0122B0082,2022-01-05 10:55:00,Field Specific Conductance,817,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0122B0082,2022-01-05 10:55:00,Field Turbidity,7.12,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0122B0082,2022-01-05 10:55:00,Field Water Temperature,8.925,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0122B0082,2022-01-05 10:55:00,Field pH,7.85,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0222B0238,2022-02-02 10:16:00,Field Dissolved Oxygen,11.45,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0222B0238,2022-02-02 10:16:00,Field Specific Conductance,967,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0222B0238,2022-02-02 10:16:00,Field Turbidity,3.05,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0222B0238,2022-02-02 10:16:00,Field Water Temperature,9.585,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0222B0238,2022-02-02 10:16:00,Field pH,8.18,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0322B0329,2022-03-08 12:20:00,Field Dissolved Oxygen,10.75,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0322B0329,2022-03-08 12:20:00,Field Specific Conductance,585,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0322B0329,2022-03-08 12:20:00,Field Turbidity,1.16,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0322B0329,2022-03-08 12:20:00,Field Water Temperature,13.856,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0322B0329,2022-03-08 12:20:00,Field pH,8.01,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0422B0430,2022-04-05 10:32:00,Field Dissolved Oxygen,8.98,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0422B0430,2022-04-05 10:32:00,Field Specific Conductance,734,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0422B0430,2022-04-05 10:32:00,Field Turbidity,1.9,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0422B0430,2022-04-05 10:32:00,Field Water Temperature,17.643,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0422B0430,2022-04-05 10:32:00,Field pH,7.88,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0522B0578,2022-05-04 09:41:00,Field Dissolved Oxygen,9.18,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0522B0578,2022-05-04 09:41:00,Field Specific Conductance,383.7,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0522B0578,2022-05-04 09:41:00,Field Turbidity,2.1,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0522B0578,2022-05-04 09:41:00,Field Water Temperature,18.347,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0522B0578,2022-05-04 09:41:00,Field pH,8.03,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0622B0643,2022-06-02 08:31:00,Field Dissolved Oxygen,7.4,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0622B0643,2022-06-02 08:31:00,Field Specific Conductance,441,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0622B0643,2022-06-02 08:31:00,Field Turbidity,2.19,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0622B0643,2022-06-02 08:31:00,Field Water Temperature,21.285,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0622B0643,2022-06-02 08:31:00,Field pH,7.66,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0722B0749,2022-07-05 11:02:00,Field Dissolved Oxygen,8.03,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0722B0749,2022-07-05 11:02:00,Field Specific Conductance,528,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0722B0749,2022-07-05 11:02:00,Field Turbidity,3.85,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0722B0749,2022-07-05 11:02:00,Field Water Temperature,22.813,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0722B0749,2022-07-05 11:02:00,Field pH,7.91,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0822B0826,2022-08-03 10:05:00,Field Dissolved Oxygen,6.35,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0822B0826,2022-08-03 10:05:00,Field Specific Conductance,498.9,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0822B0826,2022-08-03 10:05:00,Field Turbidity,3.33,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0822B0826,2022-08-03 10:05:00,Field Water Temperature,24.337,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0822B0826,2022-08-03 10:05:00,Field pH,7.33,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0922B0950,2022-09-13 11:03:00,Field Dissolved Oxygen,7.18,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0922B0950,2022-09-13 11:03:00,Field Specific Conductance,469,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0922B0950,2022-09-13 11:03:00,Field Turbidity,5.63,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0922B0950,2022-09-13 11:03:00,Field Water Temperature,23.07,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF0922B0950,2022-09-13 11:03:00,Field pH,7.59,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF1022B1011,2022-10-05 10:18:00,Field Dissolved Oxygen,6.98,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF1022B1011,2022-10-05 10:18:00,Field Specific Conductance,523,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF1022B1011,2022-10-05 10:18:00,Field Turbidity,2.74,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF1022B1011,2022-10-05 10:18:00,Field Water Temperature,21.575,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF1022B1011,2022-10-05 10:18:00,Field pH,7.48,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF1122B1176,2022-11-02 09:50:00,Field Dissolved Oxygen,8.55,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF1122B1176,2022-11-02 09:50:00,Field Specific Conductance,987,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF1122B1176,2022-11-02 09:50:00,Field Turbidity,1.04,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF1122B1176,2022-11-02 09:50:00,Field Water Temperature,14.949,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF1122B1176,2022-11-02 09:50:00,Field pH,7.76,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF1222B1608,2022-12-13 12:41:00,Field Dissolved Oxygen,9.65,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF1222B1608,2022-12-13 12:41:00,Field Specific Conductance,846,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF1222B1608,2022-12-13 12:41:00,Field Turbidity,1.5,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF1222B1608,2022-12-13 12:41:00,Field Water Temperature,10.04,Normal Sample
+Old River Upstream of Mountain House Creek,B9537000,CF1222B1608,2022-12-13 12:41:00,Field pH,7.71,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0122B0178,2022-01-13 11:02:00,Field Dissolved Oxygen,10.68,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0122B0178,2022-01-13 11:02:00,Field Specific Conductance,189.5,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0122B0178,2022-01-13 11:02:00,Field Turbidity,6.62,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0122B0178,2022-01-13 11:02:00,Field Water Temperature,9.74,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0122B0178,2022-01-13 11:02:00,Field pH,7.65,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0222B0305,2022-02-17 11:01:00,Field Dissolved Oxygen,9.95,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0222B0305,2022-02-17 11:01:00,Field Specific Conductance,175,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0222B0305,2022-02-17 11:01:00,Field Turbidity,4.91,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0222B0305,2022-02-17 11:01:00,Field Water Temperature,12.146,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0222B0305,2022-02-17 11:01:00,Field pH,7.33,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0322B0401,2022-03-17 10:04:00,Field Dissolved Oxygen,9.63,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0322B0401,2022-03-17 10:04:00,Field Specific Conductance,150.4,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0322B0401,2022-03-17 10:04:00,Field Turbidity,3.46,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0322B0401,2022-03-17 10:04:00,Field Water Temperature,14.22,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0322B0401,2022-03-17 10:04:00,Field pH,7.51,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0422B0525,2022-04-28 09:19:00,Field Dissolved Oxygen,8.94,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0422B0525,2022-04-28 09:19:00,Field Specific Conductance,159.5,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0422B0525,2022-04-28 09:19:00,Field Turbidity,3.37,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0422B0525,2022-04-28 09:19:00,Field Water Temperature,17.465,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0422B0525,2022-04-28 09:19:00,Field pH,7.51,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0622B0675,2022-06-10 09:59:00,Field Dissolved Oxygen,8.1,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0622B0675,2022-06-10 09:59:00,Field Specific Conductance,135.2,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0622B0675,2022-06-10 09:59:00,Field Turbidity,2.72,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0622B0675,2022-06-10 09:59:00,Field Water Temperature,23.48,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0622B0675,2022-06-10 09:59:00,Field pH,7.53,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0722B0813,2022-07-28 10:32:00,Field Dissolved Oxygen,7.94,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0722B0813,2022-07-28 10:32:00,Field Specific Conductance,109.2,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0722B0813,2022-07-28 10:32:00,Field Turbidity,1.81,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0722B0813,2022-07-28 10:32:00,Field Water Temperature,22.966,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0722B0813,2022-07-28 10:32:00,Field pH,7.4,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0822B0896,2022-08-18 10:42:00,Field Dissolved Oxygen,8.19,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0822B0896,2022-08-18 10:42:00,Field Specific Conductance,123.3,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0822B0896,2022-08-18 10:42:00,Field Turbidity,1.84,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0822B0896,2022-08-18 10:42:00,Field Water Temperature,23.792,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0822B0896,2022-08-18 10:42:00,Field pH,7.66,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0922B0975,2022-09-20 10:10:00,Field Dissolved Oxygen,8.1,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0922B0975,2022-09-20 10:10:00,Field Specific Conductance,124.1,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0922B0975,2022-09-20 10:10:00,Field Turbidity,1.78,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0922B0975,2022-09-20 10:10:00,Field Water Temperature,20.821,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF0922B0975,2022-09-20 10:10:00,Field pH,7.46,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF1022B1162,2022-10-20 09:57:00,Field Dissolved Oxygen,8.39,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF1022B1162,2022-10-20 09:57:00,Field Specific Conductance,139.1,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF1022B1162,2022-10-20 09:57:00,Field Turbidity,0.92,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF1022B1162,2022-10-20 09:57:00,Field Water Temperature,19.641,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF1022B1162,2022-10-20 09:57:00,Field pH,7.6,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF1122B1228,2022-11-17 11:46:00,Field Dissolved Oxygen,10.89,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF1122B1228,2022-11-17 11:46:00,Field Specific Conductance,162.5,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF1122B1228,2022-11-17 11:46:00,Field Turbidity,1.4,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF1122B1228,2022-11-17 11:46:00,Field Water Temperature,11.84,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF1122B1228,2022-11-17 11:46:00,Field pH,7.95,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF1222B1619,2022-12-20 11:55:00,Field Dissolved Oxygen,9.91,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF1222B1619,2022-12-20 11:55:00,Field Specific Conductance,180.7,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF1222B1619,2022-12-20 11:55:00,Field Turbidity,10.64,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF1222B1619,2022-12-20 11:55:00,Field Water Temperature,8.42,Normal Sample
+Miner Slough near Sacramento River,B9S81421400,CF1222B1619,2022-12-20 11:55:00,Field pH,7.38,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0122B0110,2022-01-03 13:31:00,Field Dissolved Oxygen,7.75,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0122B0110,2022-01-03 13:31:00,Field Specific Conductance,583,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0122B0110,2022-01-03 13:31:00,Field Turbidity,30.71,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0122B0110,2022-01-03 13:31:00,Field Water Temperature,6.902,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0122B0110,2022-01-03 13:31:00,Field pH,7.71,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0222B0276,2022-02-14 12:34:00,Field Dissolved Oxygen,6.77,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0222B0276,2022-02-14 12:34:00,Field Specific Conductance,709,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0222B0276,2022-02-14 12:34:00,Field Turbidity,20.93,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0222B0276,2022-02-14 12:34:00,Field Water Temperature,14.012,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0222B0276,2022-02-14 12:34:00,Field pH,7.62,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0322B0350,2022-03-14 14:57:00,Field Dissolved Oxygen,10.96,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0322B0350,2022-03-14 14:57:00,Field Specific Conductance,853,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0322B0350,2022-03-14 14:57:00,Field Turbidity,16.35,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0322B0350,2022-03-14 14:57:00,Field Water Temperature,16.054,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0322B0350,2022-03-14 14:57:00,Field pH,8.17,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0422B0425,2022-04-04 10:43:00,Field Dissolved Oxygen,5.66,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0422B0425,2022-04-04 10:43:00,Field Specific Conductance,734,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0422B0425,2022-04-04 10:43:00,Field Turbidity,9.24,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0422B0425,2022-04-04 10:43:00,Field Water Temperature,17.034,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0422B0425,2022-04-04 10:43:00,Field pH,7.67,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0522B0551,2022-05-02 10:25:00,Field Dissolved Oxygen,6.4,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0522B0551,2022-05-02 10:25:00,Field Specific Conductance,601,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0522B0551,2022-05-02 10:25:00,Field Turbidity,26.29,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0522B0551,2022-05-02 10:25:00,Field Water Temperature,19.108,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0522B0551,2022-05-02 10:25:00,Field pH,7.83,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0622B0649,2022-06-06 10:44:00,Field Dissolved Oxygen,6.41,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0622B0649,2022-06-06 10:44:00,Field Specific Conductance,317.2,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0622B0649,2022-06-06 10:44:00,Field Turbidity,26.4,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0622B0649,2022-06-06 10:44:00,Field Water Temperature,22.079,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0622B0649,2022-06-06 10:44:00,Field pH,7.8,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0722B0744,2022-07-05 12:56:00,Field Dissolved Oxygen,7.88,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0722B0744,2022-07-05 12:56:00,Field Specific Conductance,251.8,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0722B0744,2022-07-05 12:56:00,Field Turbidity,21.51,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0722B0744,2022-07-05 12:56:00,Field Water Temperature,24.435,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0722B0744,2022-07-05 12:56:00,Field pH,8.09,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0822B0832,2022-08-08 11:52:00,Field Dissolved Oxygen,7.07,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0822B0832,2022-08-08 11:52:00,Field Specific Conductance,195.9,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0822B0832,2022-08-08 11:52:00,Field Turbidity,15.26,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0822B0832,2022-08-08 11:52:00,Field Water Temperature,23.593,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0822B0832,2022-08-08 11:52:00,Field pH,7.69,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0922B0921,2022-09-06 08:28:00,Field Dissolved Oxygen,6.68,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0922B0921,2022-09-06 08:28:00,Field Specific Conductance,221.3,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0922B0921,2022-09-06 08:28:00,Field Turbidity,14.46,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0922B0921,2022-09-06 08:28:00,Field Water Temperature,25.099,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF0922B0921,2022-09-06 08:28:00,Field pH,7.56,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF1022B0998,2022-10-03 11:17:00,Field Dissolved Oxygen,7.12,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF1022B0998,2022-10-03 11:17:00,Field Specific Conductance,236.8,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF1022B0998,2022-10-03 11:17:00,Field Turbidity,21.08,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF1022B0998,2022-10-03 11:17:00,Field Water Temperature,20.683,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF1022B0998,2022-10-03 11:17:00,Field pH,7.57,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF1122B1186,2022-11-07 11:17:00,Field Dissolved Oxygen,7.68,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF1122B1186,2022-11-07 11:17:00,Field Specific Conductance,321.2,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF1122B1186,2022-11-07 11:17:00,Field Turbidity,19.04,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF1122B1186,2022-11-07 11:17:00,Field Water Temperature,13.376,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF1122B1186,2022-11-07 11:17:00,Field pH,7.46,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF1122B1240,2022-11-28 14:13:00,Field Dissolved Oxygen,9.84,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF1122B1240,2022-11-28 14:13:00,Field Specific Conductance,436.8,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF1122B1240,2022-11-28 14:13:00,Field Turbidity,4.67,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF1122B1240,2022-11-28 14:13:00,Field Water Temperature,10.245,Normal Sample
+Yolo Bypass Toe Drain Below Lisbon Weir,B9D82851352,CF1122B1240,2022-11-28 14:13:00,Field pH,7.56,Normal Sample

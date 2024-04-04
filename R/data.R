@@ -82,6 +82,40 @@
 "DJFMP"
 
 
+# DOP -------------------------------------------------------------------
+
+#' Directed Outflow Project water quality data
+#'
+#' Water quality data from the ICF/USBR Directed Outflow Project.
+#'
+#' @encoding UTF-8
+#' @format a tibble with 3,473 rows and 16 variables
+#' \describe{
+#'   \item{Source}{Name of the source dataset.}
+#'   \item{Station}{Station where sample was collected. Includes Station_Code
+#'   and Habitat from the source dataset because multiple habitats are collected
+#'   at each station.}
+#'   \item{Latitude}{Latitude at start of zooplankton tow in decimal degrees.}
+#'   \item{Longitude}{Longitude at start of zooplankton tow in decimal degrees.}
+#'   \item{Field_coords}{Were lat/long coordinates collected in the field (TRUE), or do they represent the location of a fixed station (FALSE)?}
+#'   \item{Date}{Date sample was collected.}
+#'   \item{Datetime}{Date and time of sample collection.}
+#'   \item{Depth}{Bottom depth at start of trawl (m).}
+#'   \item{Secchi}{Secchi depth (cm).}
+#'   \item{Temperature}{Temperature (°C) at surface.}
+#'   \item{Salinity}{Salinity at surface.}
+#'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
+#'   \item{DissolvedOxygen}{Dissolved oxygen (mg/L) at surface.}
+#'   \item{pH}{pH (dimensionless) at surface.}
+#'   \item{TurbidityFNU}{Turbidity (FNU) at surface.}
+#'   \item{Chlorophyll}{Chlorophyll-a concentration (\eqn{\mu}g \ifelse{html}{\out{L<sup>-1</sup>}}{\eqn{L^{-1}}}) at surface.}
+#'   }
+#'
+#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.1187.4}{here}.
+#' @seealso \code{\link{wq}}
+"DOP"
+
+
 # EDSM --------------------------------------------------------------------
 
 #' EDSM water quality data
@@ -234,7 +268,7 @@
 #' Water quality data from the California Department of Water Resources North Central Region Office.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 10,250 rows and 49 variables
+#' @format a tibble with 10,652 rows and 49 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
