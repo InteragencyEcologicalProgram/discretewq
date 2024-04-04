@@ -6,35 +6,48 @@ require(tidyr)
 require(lubridate)
 require(stringr)
 require(purrr)
+require(conflicted)
+
+# Declare package conflict preferences
+conflicts_prefer(dplyr::filter())
+
+# Define file path to data-raw/NCRO folder
+fp_ncro_data <- "data-raw/NCRO"
+
+# Create vectors of file paths of Excel and csv files within data-raw/NCRO folder
+fp_ncro_xlsx <- dir(fp_ncro_data, pattern = "\\.xlsx$", full.names = TRUE)
+fp_ncro_csv <- dir(fp_ncro_data, pattern = "\\.csv$", full.names = TRUE)
 
 # Import data field and laboratory provided by NCRO-WQES
-NCRO_allold <-
-  map(
-    dir("data-raw/NCRO", pattern = "^WQES.+\\.xlsx", full.names = TRUE),
-    read_excel
-  ) %>%
+# Data from Excel files:
+NCRO_all_xlsx <-
+  map(str_subset(fp_ncro_xlsx, "/(WQDiscrete|WQES)"), read_excel) %>%
+  map(~ mutate(.x, `Collection Date` = as.character(`Collection Date`))) %>%
   list_rbind()
 
+# Data from csv files
+NCRO_all_csv <-
+  c(str_subset(fp_ncro_csv, "/(WQDiscrete|LIS_|extra_field)")) %>%
+  set_names(~ str_sub(.x, start = 15)) %>%
+  map(~ read_csv(.x, col_types = cols(.default = "c")))
 
-south = read_excel("data-raw/NCRO/WQDiscrete_SouthDelta_CY2022.xlsx") %>%
-  mutate(`Collection Date` = as.character(format(`Collection Date`, "%m/%d/%Y %H:%M")))
-central = read_excel("data-raw/NCRO/WQDiscrete_CentralDelta_CY2022.xlsx")
-trukee = read_excel("data-raw/NCRO/WQDiscrete_Truckee_CY2022.xlsx")
-northdelta = read_csv("data-raw/NCRO/WQDiscrete_NorthDelta_RockSlough_FranksTract_YoloBypass_CY2022.csv")%>%
-  mutate(`Parent Sample` = as.character(`Parent Sample`))%>%
-  mutate(`Rpt Limit` = as.character(`Rpt Limit`))
-
-NCRO_all = bind_rows(NCRO_allold,south, central, trukee, northdelta)
-
-
+# Combine field and laboratory data
+NCRO_all <-
+  list(
+    NCRO_all_xlsx,
+    NCRO_all_csv$WQDiscrete_NorthDelta_RockSlough_FranksTract_YoloBypass_CY2022.csv
+  ) %>%
+  map(~ rename_with(.x, ~ str_remove_all(., " "))) %>%
+  bind_rows(
+    NCRO_all_csv$LIS_2019_2021.csv,
+    NCRO_all_csv$extra_field_data_cnra.csv
+  )
 
 # Import Secchi depth and Microcystis data, which were in a different Excel file
-# It looks like the data file they sent for 2022 included all the older data too.
-#NCRO_secchi_mviold <- read_excel("data-raw/NCRO/All WQES Station HAB Obs and Secchi 2017-2021.xlsx")
-NCRO_secchi_mvi <- read_excel("data-raw/NCRO/qry_HabObs_StationNameStationCode_DeployEnd.xlsx")
+NCRO_secchi_mvi <- read_excel(str_subset(fp_ncro_xlsx, "qry_HabObs"))
 
 # Import station metadata and coordinates
-stations <- read_csv("data-raw/NCRO/Stations.csv")
+stations <- read_csv(str_subset(fp_ncro_csv, "/Stations"))
 
 # Import station coordinates from CNRA Data Portal to fill in missing coordinates
 stations_cnra <- read_csv("https://data.cnra.ca.gov/dataset/3f96977e-2597-4baa-8c9b-c433cea0685e/resource/24fc759a-ff0b-479a-a72a-c91a9384540f/download/stations.csv")
@@ -115,8 +128,7 @@ secHABs <- NCRO_secchi_mvi %>%
   left_join(stations_f, by = join_by(StationCode == WQES_StationCode)) %>%
   select(StationNumber, StationName, Date, Secchi, Microcystis) %>%
   # Remove Stations and Dates that are NA and records without Secchi and Microcystis values
-  drop_na(StationName) %>%
-  drop_na(Date) %>%
+  drop_na(StationName, Date) %>%
   filter(!if_all(c(Secchi, Microcystis), is.na)) %>%
   # Remove a few duplicated records
   distinct()
@@ -126,33 +138,35 @@ NCRO_all_c1 <- NCRO_all %>%
   # Only include Normal Samples and analytes listed in the analytes table.
   # Remove stations with no station name or number.
   filter(
-    `Sample Type` == "Normal Sample",
+    SampleType == "Normal Sample",
     Analyte %in% analytes$Analyte,
-    !str_detect(`Long Station Name`, "^\\(")
+    !str_detect(LongStationName, "^\\(")
   ) %>%
   # Add standardized analyte abbreviations
   left_join(analytes, by = join_by(Analyte)) %>%
   transmute(
-    StationName = `Long Station Name`,
-    StationNumber = `Station Number`,
-    SampleCode = `Sample Code`,
+    StationName = LongStationName,
+    StationNumber,
+    SampleCode,
     # Since NCRO records only in PST, convert to local time to correspond with the other surveys
-    Datetime = with_tz(mdy_hm(`Collection Date`, tz = "Etc/GMT+8"), tzone = "America/Los_Angeles"),
+    Datetime = with_tz(
+      parse_date_time(CollectionDate, c("mdY HM", "Ymd HMS"), tz = "Etc/GMT+8"),
+      tzone = "America/Los_Angeles"
+    ),
     Date = date(Datetime),
     Analyte = AnalyteStd,
-    Result = Result,
+    Result,
     # add Sign variable which indicates <RL values
     Sign = if_else(str_detect(Result, "^<"), "<", "="),
-    RL = `Rpt Limit`,
+    RL = RptLimit,
     Units,
     Notes
-
   ) %>%
   # convert Result to numeric making <RL values equal to their RL
   mutate(
     Result = case_when(
-      Result %in% c("N.S.", "D1") ~ NA_character_,
       Sign == "<" ~ RL,
+      str_detect(Result, "[:alpha:]") ~ NA_character_,
       TRUE ~ Result
     ),
     Result = as.numeric(Result)
@@ -168,7 +182,7 @@ NCRO_all_c1 <- NCRO_all %>%
   # (UserDefined) or (NONE) and substituting them with their proper number.
   # We worked with Tyler Salman from NCRO-WQES to determine these.
 NCRO_unk_sta <- NCRO_all_c1 %>%
-  dplyr::filter(StationNumber %in% c("(UserDefined)", "(NONE)")) %>%
+  filter(StationNumber %in% c("(UserDefined)", "(NONE)")) %>%
   mutate(
     StationNumber = case_when(
       StationName == "Holland Cut at Holland Marina" ~ "B9D75841349",
@@ -184,7 +198,7 @@ NCRO_unk_sta <- NCRO_all_c1 %>%
     )
   ) %>%
   # Remove remaining records with StationNumber as (UserDefined) or (NONE)
-  dplyr::filter(!StationNumber %in% c("(UserDefined)", "(NONE)"))
+  filter(!StationNumber %in% c("(UserDefined)", "(NONE)"))
 
 # Add data with corrected station names and numbers back to the main data frame
 NCRO_all_c2 <- NCRO_all_c1 %>%
@@ -202,7 +216,10 @@ NCRO_all_c2 <- NCRO_all_c1 %>%
 
 # Define Turbidity measurement methods - NTU vs FNU
 NCRO_all_c3 <- NCRO_all_c2 %>%
-  left_join(stations_f %>% select(StationNumber, contains("Date")), by = join_by(StationNumber)) %>%
+  left_join(
+    stations_f %>% select(StationNumber, contains("Date")),
+    by = join_by(StationNumber)
+  ) %>%
   mutate(
     Analyte = case_when(
       Analyte == "Turbidity" & Date <= LastDate_NTU ~ "TurbidityNTU",
@@ -214,25 +231,24 @@ NCRO_all_c3 <- NCRO_all_c2 %>%
 
 # Pull out duplicate records - more than 1 sample collected at a station and same DateTime
 NCRO_dt_dups <- NCRO_all_c3 %>%
-  count(StationName, Datetime, Analyte) %>%
+  group_by(StationName, Datetime, Analyte) %>%
+  mutate(n = n()) %>%
+  ungroup() %>%
   filter(n > 1) %>%
-  select(-n) %>%
-  left_join(NCRO_all_c3, by = join_by(StationName, Datetime, Analyte))
+  select(-n)
 
 # Clean up duplicate records
 NCRO_dt_dups_c <- NCRO_dt_dups %>%
   # remove records that have "duplicate" in their Notes
   filter(!str_detect(Notes, regex("duplicate", ignore_case = TRUE)) | is.na(Notes)) %>%
-  # Clean up the remaining duplicates by keeping only the first sample of the pair
-  group_by(StationName, Datetime, Analyte) %>%
-  mutate(RepNum = row_number()) %>%
-  ungroup() %>%
-  filter(RepNum == 1) %>%
-  select(-RepNum)
+  # Clean up the remaining duplicates by keeping only the first sample of the
+    # pair sorted by SampleCode
+  arrange(SampleCode) %>%
+  distinct(StationName, Datetime, Analyte, .keep_all = TRUE)
 
 # Add the data frame with the cleaned up duplicates back to the main data frame
 NCRO_all_c4 <- NCRO_all_c3 %>%
-  anti_join(NCRO_dt_dups) %>%
+  anti_join(NCRO_dt_dups, by = join_by(StationName, Datetime, Analyte)) %>%
   bind_rows(NCRO_dt_dups_c)
 
 # There are some instances where samples were collected on the same day at a
@@ -240,7 +256,7 @@ NCRO_all_c4 <- NCRO_all_c3 %>%
   # removing the samples not collected by NCRO-WQES identified by Tyler Salman.
 # NOTE: There are probably other samples in the data set not collected by
   # NCRO-WQES, but these will be too difficult to remove at this point.
-same_date_dups_rm <- read_csv("data-raw/NCRO/duplicates_same_date.csv") %>%
+same_date_dups_rm <- read_csv(str_subset(fp_ncro_csv, "/duplicates_")) %>%
   filter(KeepRecord == "no") %>%
   distinct(SampleCode) %>%
   pull(SampleCode)
@@ -263,7 +279,7 @@ NCRO_all_c6 <- NCRO_all_c5 %>%
 # There are some questionable WQ measurement values based on gross ranges of
   # each parameter. NCRO-WQES staff checked and corrected/verified these values
   # from their field sheet records.
-corr_wq_meas <- read_csv("data-raw/NCRO/ncro_questionable_wq_meas_Verified.csv") %>%
+corr_wq_meas <- read_csv(str_subset(fp_ncro_csv, "/ncro_questionable")) %>%
   select(
     SampleCode,
     Analyte,
@@ -289,10 +305,7 @@ NCRO_corr_wq_meas <- NCRO_all_c7 %>%
   drop_na(Result)
 
 NCRO_all_c8 <- NCRO_all_c7 %>%
-  anti_join(
-    corr_wq_meas %>% select(SampleCode, Analyte),
-    by = join_by(SampleCode, Analyte)
-  ) %>%
+  anti_join(corr_wq_meas, by = join_by(SampleCode, Analyte)) %>%
   bind_rows(NCRO_corr_wq_meas)
 
 # Pivot data wider by Result and Sign variables
