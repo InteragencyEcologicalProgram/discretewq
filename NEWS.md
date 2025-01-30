@@ -1,6 +1,7 @@
 # discretewq (development version)
 
 * Added `DOP` water quality data.
+* Updated baystudy dataset.
 
 # discretewq 2.4.0
 
