@@ -96,8 +96,6 @@ Interagency Ecological Program (IEP), L. Damon, T. Tempel, and A. Chorazyczewski
 
 Interagency Ecological Program (IEP), C. Pien, J. Adams, and N. Kwan. 2021d. Interagency Ecological Program: Zooplankton catch and water quality data from the Sacramento River floodplain and tidal slough, collected by the Yolo Bypass Fish Monitoring Program, 1998-2018. ver 2. Environmental Data Initiative. [doi:10.6073/pasta/baad532af96cba1d58d43b89c08ca081](https://portal.edirepository.org/nis/metadataviewer?packageid=edi.494.2)
 
-Interagency Ecological Program (IEP), R. McKenzie, J. Speegle, A. Nanninga, J.R. Cook, J. Hagen, and B. Mahardja. 2022a. Interagency Ecological Program: Over four decades of juvenile fish monitoring data from the San Francisco Estuary, collected by the Delta Juvenile Fish Monitoring Program, 1976-2021. ver 9. Environmental Data Initiative. [doi:10.6073/pasta/30a3232084be9c936c976fbb6b31c5a2](https://portal.edirepository.org/nis/metadataviewer?packageid=edi.244.9)
-
 Interagency Ecological Program (IEP), C. Pien, and N. Kwan. 2022b. Interagency Ecological Program: Fish catch and water quality data from the Sacramento River floodplain and tidal slough, collected by the Yolo Bypass Fish Monitoring Program, 1998-2021. ver 3. Environmental Data Initiative. [doi:10.6073/pasta/f5c4362f4a1f370723e2b9113432909f](https://portal.edirepository.org/nis/metadataviewer?packageid=edi.233.3)
 
 O’Rear, T., J. Durand, and P. Moyle. 2022. Suisun Marsh Fish Study. [https://watershed.ucdavis.edu/project/suisun-marsh-fish-study](https://watershed.ucdavis.edu/project/suisun-marsh-fish-study).
@@ -107,6 +105,8 @@ Schraga, T. S., E. S. Nejad, C. A. Martin, and J. E. Cloern. 2020. USGS measurem
 Schultz, A. A. and A. J. Kalmbach. 2023. Directed Outflow Project Lower Trophic Study ver 4. Environmental Data Initiative. [doi:10.6073/pasta/86a01140eb3bb756ee9f7f8dab8aefc4](https://portal.edirepository.org/nis/metadataviewer?packageid=edi.1187.4).
 
 United States Fish and Wildlife Service, T. Senegal, R. Mckenzie, J. Speegle, B. Perales, D. Bridgman, K. Erly, S. Staiger, A. Arrambide, and M. Gilbert. 2022. Interagency Ecological Program and US Fish and Wildlife Service: San Francisco Estuary Enhanced Delta Smelt Monitoring Program data, 2016-2021 ver 8. Environmental Data Initiative. [doi:10.6073/pasta/e1a540c161b7be56b941df50fd7b44c5](https://portal.edirepository.org/nis/metadataviewer?packageid=edi.415.8)
+
+United States Fish and Wildlife Service, J. Speegle, C. Macfarlane, E. Huber, D. Goodman, K. Erly, and R. Cook. 2024. Interagency Ecological Program: Over four decades of juvenile fish monitoring data from the San Francisco Estuary, collected by the Delta Juvenile Fish Monitoring Program, 1976-2024 ver 13. Environmental Data Initiative. [doi:10.6073/pasta/33aaab795387fd067a10108bacd88e53](https://portal.edirepository.org/nis/metadataviewer?packageid=edi.244.13)
 
 U.S. Geological Survey. 2022. USGS water data for the Nation: U.S. Geological Survey National Water Information System database, accessed October 21, 2022, at
 [doi:10.5066/F7P55KJN](https://doi.org/10.5066/F7P55KJN)

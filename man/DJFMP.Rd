@@ -6,7 +6,7 @@
 \alias{DJFMP}
 \title{DJFMP water quality data}
 \format{
-a tibble with 150,488 rows and 9 variables
+a tibble with 163,490 rows and 10 variables
 \describe{
 \item{Source}{Name of the source dataset.}
 \item{Station}{Station where sample was collected.}
@@ -27,7 +27,7 @@ DJFMP
 Water quality data from the United States Fish and Wildlife Service Delta Juvenile Fish Monitoring Program.
 }
 \details{
-More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.244.9}{here}.
+More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.244.13}{here}.
 }
 \seealso{
 \code{\link{wq}}

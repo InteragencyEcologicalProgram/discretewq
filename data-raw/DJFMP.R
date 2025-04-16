@@ -5,38 +5,65 @@ require(dplyr)
 require(lubridate)
 require(hms)
 
-download.file("https://portal.edirepository.org/nis/dataviewer?packageid=edi.244.9&entityid=71c16ead9b8ffa4da7a52da180f601f4",
-              file.path(tempdir(), "1976-2001_DJFMP_trawl_fish_and_water_quality_data.csv"), mode="wb",method="libcurl")
-download.file("https://portal.edirepository.org/nis/dataviewer?packageid=edi.244.9&entityid=4cf98db173a16731bcbb2d37ad656538",
-              file.path(tempdir(), "2002-2021_DJFMP_trawl_fish_and_water_quality_data.csv"), mode="wb",method="libcurl")
-download.file("https://portal.edirepository.org/nis/dataviewer?packageid=edi.244.9&entityid=99a038d691f27cd306ff93fdcbc03b77",
-              file.path(tempdir(), "DJFMP_Site_Locations.csv"), mode="wb")
+source("data-raw/01_Global/data_raw_helpers.R")
 
+# Define previous EDI ID used for this data set
+edi_id_prev <- 244.9
 
-#Methods in  metadata say they do not know if their data were corrected for temperature before May 3 or 17 2019 so I will not use conductivity data before June 2019
+# Check if there is a more recent EDI update
+edi_id_curr <- get_latest_edi_id(edi_id_prev)
 
-DJFMP_stations <- read_csv(file.path(tempdir(), "DJFMP_Site_Locations.csv"),
-                  col_types=cols_only(StationCode="c", Latitude ="d", Longitude="d"))%>%
-  rename(Station=StationCode)
+# Compile and subset data entities for EDI data package
+edi_data_ent_all <- get_edi_data_entities(edi_id_curr)
+edi_data_ent_sub <- grep("DJFMP_(trawl|Site)", edi_data_ent_all, value = TRUE)
 
-DJFMP <- read_csv(file.path(tempdir(), "1976-2001_DJFMP_trawl_fish_and_water_quality_data.csv"),
-                     col_types = cols_only(StationCode = "c", SampleDate="c", SampleTime="c",
-                                           SpecificConductance="d", WaterTemp="d", Secchi="d",
-                                           DO="d"))%>%
-  bind_rows(read_csv(file.path(tempdir(), "2002-2021_DJFMP_trawl_fish_and_water_quality_data.csv"),
-                     col_types = cols_only(StationCode = "c", SampleDate="c", SampleTime="c",
-                                           SpecificConductance="d", WaterTemp="d", Secchi="d",
-                                           DO="d")))%>%
-  rename(Station=StationCode, Date=SampleDate, Temperature=WaterTemp, Conductivity=SpecificConductance,
-         DissolvedOxygen=DO)%>%
-  mutate(Secchi=Secchi*100)%>% # convert Secchi to cm
-  mutate(Source="DJFMP",
-         Date=parse_date_time(Date, "%Y-%m-%d", tz="America/Los_Angeles"),
-         Datetime = parse_date_time(if_else(is.na(SampleTime), NA_character_, paste(Date, SampleTime)), "%Y-%m-%d %H:%M:%S", tz="America/Los_Angeles"),
-         Conductivity=if_else(Date<parse_date_time("2019-06-01", "%Y-%m-%d", tz="America/Los_Angeles"), NA_real_, Conductivity))%>% # Removing conductivity data from dates before it was standardized
-  select(-SampleTime)%>%
-  distinct(Station, Datetime, .keep_all = TRUE)%>%
-  left_join(DJFMP_stations, by="Station")%>%
-  select(Source, Station, Latitude, Longitude, Date, Datetime, Secchi, Temperature, Conductivity, DissolvedOxygen)
+# Download data entities to temporary directory
+get_edi_data(edi_id_curr, edi_data_ent_sub)
+
+# Determine file paths for data entities on temporary directory
+temp_files <- list.files(tempdir(), full.names = TRUE)
+file_data_1976_2001 <- grep("1976.+DJFMP_trawl", temp_files, value = TRUE)
+file_data_2002_curr <- grep("2002.+DJFMP_trawl", temp_files, value = TRUE)
+file_stations <- grep("DJFMP_Site_Locations", temp_files, value = TRUE)
+
+# Import data and perform checks and minor processing
+DJFMP_stations <- import_raw_data(file_stations, "DJFMP", "Stations")
+DJFMP_1976_2001 <- import_raw_data(file_data_1976_2001, "DJFMP", "Data_1976-2001")
+DJFMP_2002_curr <- import_raw_data(file_data_2002_curr, "DJFMP", "Data_2002-curr")
+
+# Combine and finish cleaning data
+DJFMP <- bind_rows(DJFMP_1976_2001, DJFMP_2002_curr) %>%
+  mutate(
+    # Convert Secchi to cm
+    Secchi = Secchi * 100,
+    Source = "DJFMP",
+    Date = parse_date_time(Date, "mdy", tz="America/Los_Angeles"),
+    Datetime = ymd_hms(
+      if_else(is.na(SampleTime), NA_character_, paste(Date, SampleTime)),
+      tz = "America/Los_Angeles"
+    ),
+    # Removing conductivity data from dates before it was standardized >
+    # Methods in  metadata say they do not know if their data were corrected for
+    # temperature before May 3 or 17 2019 so we will not use conductivity data before
+    # June 2019
+    Conductivity = if_else(Date < "2019-06-01", NA_real_, Conductivity),
+    .keep = "unused"
+  ) %>%
+  distinct(Station, Datetime, .keep_all = TRUE) %>%
+  left_join(DJFMP_stations, by = join_by(Station)) %>%
+  select(
+    Source,
+    Station,
+    Latitude,
+    Longitude,
+    Date,
+    Datetime,
+    Secchi,
+    Temperature,
+    Conductivity,
+    DissolvedOxygen
+  )
 
 usethis::use_data(DJFMP, overwrite = TRUE)
+
+get_edi_update_info(edi_id_curr, DJFMP)
