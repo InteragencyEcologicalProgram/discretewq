@@ -18,7 +18,7 @@ Description: Produce an integrated dataset of discrete water quality
     measurements using any combination of the 17 source datasets included.
 License: GPL-3
 Depends: 
-    R (>= 2.10)
+    R (>= 3.5)
 Imports: 
     dplyr,
     lubridate,
