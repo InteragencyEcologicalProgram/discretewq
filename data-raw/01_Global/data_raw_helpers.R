@@ -89,6 +89,7 @@ import_raw_data <- function(file, survey, entity) {
     mutate(col_name_check = map_lgl(Col_name_exp, \(x) any(names(df_data_raw) == x)))
 
   # Generate message for results of check
+  message("Attempting to import: ", str_extract(file, "(?<=/).+\\.bin$"))
   if (all(df_col_check$col_name_check)) {
     message("All column names are correct. Proceeding with import.")
   } else {
@@ -149,12 +150,12 @@ get_edi_update_info <- function(edi_rev_id, data_clean) {
     str_remove(edi_cit_raw, '(?<=Environmental Data Initiative\\.\\s)https.+'),
     "[", edi_doi, "](", edi_url, ")"
   )
-  message("Update citation in README:\n", edi_cit_README, "\n")
+  message("Update citation in 'README.Rmd':\n", edi_cit_README, "\n")
 
   # Data documentation:
   message(
-    "Update data documentation:\n",
-    "@ format ", glue("a tibble with {nrow(data_clean)} rows and {ncol(data_clean)} variables"),
+    "Update data documentation in 'R/data.R':\n",
+    "@format ", glue("a tibble with {nrow(data_clean)} rows and {ncol(data_clean)} variables"),
     "\nURL: ", edi_url, "\n"
   )
 
