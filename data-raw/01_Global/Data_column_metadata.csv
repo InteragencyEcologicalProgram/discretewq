@@ -73,6 +73,7 @@ DJFMP,Data_1976-2001,SampleDate,Date,character
 DJFMP,Data_1976-2001,SampleTime,SampleTime,character
 DJFMP,Data_1976-2001,SpecificConductance,Conductivity,numeric
 DJFMP,Data_1976-2001,WaterTemp,Temperature,numeric
+DJFMP,Data_1976-2001,Turbidity,TurbidityNTU,numeric
 DJFMP,Data_1976-2001,Secchi,Secchi,numeric
 DJFMP,Data_1976-2001,DO,DissolvedOxygen,numeric
 DJFMP,Data_2002-curr,StationCode,Station,character
@@ -80,5 +81,6 @@ DJFMP,Data_2002-curr,SampleDate,Date,character
 DJFMP,Data_2002-curr,SampleTime,SampleTime,character
 DJFMP,Data_2002-curr,SpecificConductance,Conductivity,numeric
 DJFMP,Data_2002-curr,WaterTemp,Temperature,numeric
+DJFMP,Data_2002-curr,Turbidity,TurbidityNTU,numeric
 DJFMP,Data_2002-curr,Secchi,Secchi,numeric
 DJFMP,Data_2002-curr,DO,DissolvedOxygen,numeric

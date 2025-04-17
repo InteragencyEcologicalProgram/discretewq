@@ -8,7 +8,7 @@ require(hms)
 source("data-raw/01_Global/data_raw_helpers.R")
 
 # Define previous EDI ID used for this data set
-edi_id_prev <- 244.9
+edi_id_prev <- 244.13
 
 # Check if there is a more recent EDI update
 edi_id_curr <- get_latest_edi_id(edi_id_prev)
@@ -37,7 +37,7 @@ DJFMP <- bind_rows(DJFMP_1976_2001, DJFMP_2002_curr) %>%
     # Convert Secchi to cm
     Secchi = Secchi * 100,
     Source = "DJFMP",
-    Date = parse_date_time(Date, "mdy", tz="America/Los_Angeles"),
+    Date = parse_date_time(Date, "mdy", tz = "America/Los_Angeles"),
     Datetime = ymd_hms(
       if_else(is.na(SampleTime), NA_character_, paste(Date, SampleTime)),
       tz = "America/Los_Angeles"
@@ -61,7 +61,8 @@ DJFMP <- bind_rows(DJFMP_1976_2001, DJFMP_2002_curr) %>%
     Secchi,
     Temperature,
     Conductivity,
-    DissolvedOxygen
+    DissolvedOxygen,
+    TurbidityNTU
   )
 
 usethis::use_data(DJFMP, overwrite = TRUE)

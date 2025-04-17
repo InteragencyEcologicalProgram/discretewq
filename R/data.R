@@ -64,7 +64,7 @@
 #' Water quality data from the United States Fish and Wildlife Service Delta Juvenile Fish Monitoring Program.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 163,490 rows and 10 variables
+#' @format a tibble with 163,490 rows and 11 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
@@ -76,6 +76,7 @@
 #'   \item{Temperature}{Temperature in °C.}
 #'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
 #'   \item{DissolvedOxygen}{Dissolved oxygen (mg/L) at surface.}
+#'   \item{TurbidityNTU}{Turbidity (NTU) at surface measured with a turbidimeter.}
 #'   }
 #' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.244.13}{here}.
 #' @seealso \code{\link{wq}}
