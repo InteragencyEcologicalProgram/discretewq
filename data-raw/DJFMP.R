@@ -1,17 +1,16 @@
 ## code to prepare `DJFMP` dataset goes here
 
-require(readr)
-require(dplyr)
-require(lubridate)
-require(hms)
+library(readr)
+library(dplyr)
+library(lubridate)
+library(hms)
 
 source("data-raw/01_Global/data_raw_helpers.R")
 
-# Define previous EDI ID used for this data set
-edi_id_prev <- 244.13
+survey <- "DJFMP"
 
 # Check if there is a more recent EDI update
-edi_id_curr <- get_latest_edi_id(edi_id_prev)
+edi_id_curr <- get_latest_edi_id(survey)
 
 # Compile and subset data entities for EDI data package
 edi_data_ent_all <- get_edi_data_entities(edi_id_curr)
@@ -67,4 +66,5 @@ DJFMP <- bind_rows(DJFMP_1976_2001, DJFMP_2002_curr) %>%
 
 usethis::use_data(DJFMP, overwrite = TRUE)
 
-get_edi_update_info(edi_id_curr, DJFMP)
+document_helper_edi(edi_id_curr, DJFMP)
+update_edi_metadata(survey, edi_id_curr)
