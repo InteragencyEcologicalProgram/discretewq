@@ -84,3 +84,16 @@ DJFMP,Data_2002-curr,WaterTemp,Temperature,numeric
 DJFMP,Data_2002-curr,Turbidity,TurbidityNTU,numeric
 DJFMP,Data_2002-curr,Secchi,Secchi,numeric
 DJFMP,Data_2002-curr,DO,DissolvedOxygen,numeric
+NCRO,Data_lab,station_number,StationNumber,character
+NCRO,Data_lab,sample_code,SampleCode,character
+NCRO,Data_lab,sample_date,Datetime,character
+NCRO,Data_lab,parameter,Analyte,character
+NCRO,Data_lab,result,Result,character
+NCRO,Data_lab,reporting_limit,RL,character
+NCRO,Data_lab,units,Units,character
+NCRO,Data_field,station_number,StationNumber,character
+NCRO,Data_field,sample_code,SampleCode,character
+NCRO,Data_field,sample_date,Datetime,character
+NCRO,Data_field,parameter,Analyte,character
+NCRO,Data_field,fdr_result,Result,numeric
+NCRO,Data_field,uns_name,Units,character

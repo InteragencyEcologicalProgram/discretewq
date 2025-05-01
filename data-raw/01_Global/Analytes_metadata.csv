@@ -1,0 +1,24 @@
+Survey,Type,Analyte_exp,Analyte_std,Units_exp
+NCRO,Field,DissolvedOxygen,DissolvedOxygen,mg/L
+NCRO,Field,SpecificConductance,Conductivity,uS/cm@25 °C
+NCRO,Field,Turbidity,TurbidityFNU,N.T.U.
+NCRO,Field,Turbidity,TurbidityFNU,F.N.U.
+NCRO,Field,WaterTemperature,Temperature,°C
+NCRO,Field,pH,pH,pH Units
+NCRO,Lab,Chlorophyll a,Chlorophyll,ug/L
+NCRO,Lab,Dissolved Ammonia,DissAmmonia,mg/L as N
+NCRO,Lab,Dissolved Bromide,DissBromide,mg/L
+NCRO,Lab,Dissolved Calcium,DissCalcium,mg/L
+NCRO,Lab,Dissolved Chloride,DissChloride,mg/L
+NCRO,Lab,Dissolved Nitrate + Nitrite,DissNitrateNitrite,mg/L as N
+NCRO,Lab,Dissolved Organic Carbon,DOC,mg/L as C
+NCRO,Lab,Dissolved Organic Nitrogen,DON,mg/L as N
+NCRO,Lab,Dissolved ortho-Phosphate,DissOrthophos,mg/L as P
+NCRO,Lab,Pheophytin a,Pheophytin,ug/L
+NCRO,Lab,Total Alkalinity,TotAlkalinity,mg/L as CaCO3
+NCRO,Lab,Total Dissolved Solids,TDS,mg/L
+NCRO,Lab,Total Kjeldahl Nitrogen,TKN,mg/L as N
+NCRO,Lab,Total Organic Carbon,TOC,mg/L as C
+NCRO,Lab,Total Phosphorus,TotPhos,mg/L as P
+NCRO,Lab,Total Suspended Solids,TSS,mg/L
+NCRO,Lab,Volatile Suspended Solids,VSS,mg/L
