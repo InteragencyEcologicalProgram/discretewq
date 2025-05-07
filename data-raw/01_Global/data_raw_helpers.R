@@ -60,7 +60,7 @@ get_latest_edi_id <- function(survey) {
         "The EDI data package has been updated since the last discretewq update (",
         df_edi_meta$Data_pack_id_full_last, ")"
       ),
-      "*" = "Proceeding with updating this data set"
+      "*" = "Proceeding with updating this data set\n"
     ))
   }
 
@@ -71,9 +71,9 @@ get_latest_edi_id <- function(survey) {
 get_edi_data_entities <- function(edi_id) {
   df_data_ent <- read_data_entity_names(edi_id)
   inform(c(
-    "i" = paste(
-      "Data entities for", edi_id, "include:",
-      paste(df_data_ent$entityName, collapse = ", ")
+    "i" = paste0(
+      "Data entities for ", edi_id, " include:\n",
+      paste(df_data_ent$entityName, collapse = "\n"), "\n"
     ))
   )
   return(df_data_ent$entityName)
@@ -212,12 +212,15 @@ import_raw_data <- function(file, survey, entity) {
       inform(c("v" = "All numeric columns parsed correctly"))
     } else {
       df_parse_check_F <- df_parse_check %>% dplyr::filter(!parse_check)
-      print(df_parse_check_F, n = 100)
-      abort(c(
+      inform(c(
         "x" = paste(
           "The following columns did NOT parse as numeric correctly:",
           paste(df_parse_check_F$col_name, collapse = ", ")
         ),
+        "i" = "Results of parsing check:"
+      ))
+      print(df_parse_check_F, n = 100)
+      abort(c(
         "x" = "Data NOT imported",
         "i" = "Fix problem underlying parsing error before proceeding"
       ))
@@ -226,7 +229,7 @@ import_raw_data <- function(file, survey, entity) {
 
   # Rename columns according to new names in data column metadata table
   names(df_data_c) <- df_col_meta$Col_name_new
-  inform(c("v" = "Data import complete"))
+  inform(c("v" = "Data import complete\n"))
   return(df_data_c)
 }
 
@@ -274,9 +277,9 @@ standardize_analytes <- function(df, survey, type = c("Field", "Lab")) {
       mutate(Analyte = if_else(is.na(Units), Analyte, paste0(Analyte, " (", Units, ")")))
 
     inform(c(
-      "i" = paste(
-        "The following analytes were removed from the dataset:",
-        paste(df_analytes_rm$Analyte, collapse = ", ")
+      "i" = paste0(
+        "The following analytes were removed from the dataset:\n",
+        paste(df_analytes_rm$Analyte, collapse = "\n")
       )
     ))
   } else {
@@ -302,13 +305,13 @@ convert_datetime <- function(df_data,
   # Skip if data doesn't have a Date format specified
   if (is.na(date_format)) return(df_data)
 
-  datetime_format <- paste(date_format, time_format)
+  # datetime_format <- paste(date_format, time_format)
   df_data_c <- df_data %>%
     mutate(
       Date = date(parse_date_time(Date, date_format, tz = timezone)),
       Datetime = parse_date_time(
         if_else(is.na(Time), NA_character_, paste(Date, Time)),
-        datetime_format,
+        paste("Ymd", time_format),
         tz = timezone
       ),
       # Make sure Datetime is in local time (America/Los_Angeles) for all surveys
@@ -346,11 +349,14 @@ convert_datetime <- function(df_data,
     } else {
       parse_msg <- paste("Datetime columns did NOT parse correctly in", entity_name)
     }
-    print(df_parse_check, n = 100)
-    abort(c(
+    inform(c(
       "x" = parse_msg,
-      "i" = "Fix problem underlying parsing error before proceeding"
+      "i" = "Results of parsing check:"
     ))
+    print(df_parse_check, n = 100)
+    inform(c("i" = "Date and Time columns from dataset:"))
+    print(df_data %>% select(all_of(col_datetime_orig)) %>% slice_head(n = 5))
+    abort(c("i" = "Fix problem underlying parsing error before proceeding"))
   }
 
   return(df_data_c)
@@ -477,9 +483,9 @@ import_proc_edi_data <- function(survey) {
     ))
   } else {
     inform(c(
-      "i" = paste(
-        "Downloading data entities:",
-        paste(df_edi_ent_sub$Data_entity_edi_name, collapse = ", ")
+      "i" = paste0(
+        "Downloading data entities:\n",
+        paste(df_edi_ent_sub$Data_entity_edi_name, collapse = "\n"), "\n"
       )
     ))
   }
