@@ -1,7 +1,5 @@
 # Code to prepare `EDSM` dataset
-library(readr)
 library(dplyr)
-library(lubridate)
 
 source("data-raw/01_Global/data_raw_helpers.R")
 
