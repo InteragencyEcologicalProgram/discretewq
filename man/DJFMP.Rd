@@ -6,7 +6,7 @@
 \alias{DJFMP}
 \title{DJFMP water quality data}
 \format{
-a tibble with 163,490 rows and 11 variables
+a tibble with 161,753 rows and 11 variables
 \describe{
 \item{Source}{Name of the source dataset.}
 \item{Station}{Station where sample was collected.}

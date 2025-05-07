@@ -1,5 +1,7 @@
 ﻿Survey,Data_entity,Data_entity_regex,Date_format,Time_format,Time_zone,Depth_unit,Secchi_unit
-DJFMP,,,,,,,
+DJFMP,df_stations,Site_Locations,,,,,
+DJFMP,df_data_1976_2001,1976.+DJFMP_trawl,mdY,HMS,America/Los_Angeles,,meters
+DJFMP,df_data_2002_curr,2002.+DJFMP_trawl,mdY,HMS,America/Los_Angeles,,meters
 DOP,,,,,,,
 EDSM,df_data_20mm,EDSM_20mm,Ymd,HMS,America/Los_Angeles,feet,meters
 EDSM,df_data_KDTR,EDSM_KDTR,Ymd,HMS,America/Los_Angeles,meters,meters

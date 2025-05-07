@@ -1,59 +1,30 @@
 # Code to prepare `DJFMP` dataset
-library(readr)
 library(dplyr)
-library(lubridate)
-library(hms)
 
 source("data-raw/01_Global/data_raw_helpers.R")
 
 survey <- "DJFMP"
 
-# Check if there is a more recent EDI update
-edi_id_curr <- get_latest_edi_id(survey)
-
-# Compile and subset data entities for EDI data package
-edi_data_ent_all <- get_edi_data_entities(edi_id_curr)
-edi_data_ent_sub <- grep("DJFMP_(trawl|Site)", edi_data_ent_all, value = TRUE)
-
-# Download data entities to temporary directory
-get_edi_data(edi_id_curr, edi_data_ent_sub)
-
-# Determine file paths for data entities on temporary directory
-temp_files <- list.files(tempdir(), full.names = TRUE)
-file_data_1976_2001 <- grep("1976.+DJFMP_trawl", temp_files, value = TRUE)
-file_data_2002_curr <- grep("2002.+DJFMP_trawl", temp_files, value = TRUE)
-file_stations <- grep("DJFMP_Site_Locations", temp_files, value = TRUE)
-
-# Import data and perform checks and minor processing
-DJFMP_stations <- import_raw_data(file_stations, "DJFMP", "Stations")
-DJFMP_1976_2001 <- import_raw_data(file_data_1976_2001, "DJFMP", "Data_1976-2001")
-DJFMP_2002_curr <- import_raw_data(file_data_2002_curr, "DJFMP", "Data_2002-curr")
+# Run standardized workflow to import data from EDI and process it
+ls_DJFMP <- import_proc_edi_data(survey)
 
 # Combine and finish cleaning data
-DJFMP <- bind_rows(DJFMP_1976_2001, DJFMP_2002_curr) %>%
-  mutate(Source = "DJFMP", .before = 1) %>%
-  mutate(
-    Date = parse_date_time(Date, "mdy", tz = "America/Los_Angeles"),
-    Datetime = ymd_hms(
-      if_else(is.na(SampleTime), NA_character_, paste(Date, SampleTime)),
-      tz = "America/Los_Angeles"
-    ),
-    .keep = "unused", .after = Date
-  ) %>%
-  mutate(
-    # Convert Secchi to cm
-    Secchi = Secchi * 100,
-    # Remove conductivity data from dates before it was standardized >
-    # Methods in  metadata say they do not know if their data were corrected for
-    # temperature before May 3 or 17 2019 so we will not use conductivity data before
-    # June 2019
-    Conductivity = if_else(Date < "2019-06-01", NA_real_, Conductivity)
-  ) %>%
+DJFMP <-
+  bind_rows(ls_DJFMP$df_data_1976_2001, ls_DJFMP$df_data_2002_curr) %>%
+  # Remove conductivity data from dates before it was standardized >
+  # Methods in  metadata say they do not know if their data were corrected for temperature before
+  # May 3 or 17 2019 so we will not use conductivity data before June 2019
+  mutate(Conductivity = if_else(Date < "2019-06-01", NA_real_, Conductivity)) %>%
+  # Remove replicated rows
   distinct(Station, Datetime, .keep_all = TRUE) %>%
-  left_join(DJFMP_stations, by = join_by(Station)) %>%
-  relocate(c(Latitude, Longitude), .after = Station)
+  left_join(ls_DJFMP$df_stations, by = join_by(Station)) %>%
+  # Remove rows where all measurements are NA
+  rm_rows_all_miss_data() %>%
+  add_source_col(survey) %>%
+  standardize_col_order() %>%
+  arrange(Datetime)
 
 usethis::use_data(DJFMP, overwrite = TRUE)
 
-document_helper_edi(edi_id_curr, DJFMP)
-update_edi_metadata(survey, edi_id_curr)
+document_helper_edi(ls_DJFMP$edi_id, DJFMP)
+update_edi_metadata(survey, ls_DJFMP$edi_id)
