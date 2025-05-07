@@ -6,7 +6,7 @@
 \alias{EDSM}
 \title{EDSM water quality data}
 \format{
-a tibble with 30,957 rows and 14 variables
+a tibble with 41,582 rows and 20 variables
 \describe{
 \item{Source}{Name of the source dataset.}
 \item{Station}{Station where sample was collected. This represents an identifier for the unique EDSM target location. Multiple tows (and water quality samples) were often collected at each target location on a day.}
@@ -21,8 +21,12 @@ a tibble with 30,957 rows and 14 variables
 \item{Temperature}{Temperature in °C.}
 \item{Temperature_bottom}{Temperature (°C) at bottom.}
 \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
+\item{Conductivity_bottom}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at bottom.}
 \item{DissolvedOxygen}{Dissolved oxygen (mg/L) at surface.}
 \item{DissolvedOxygen_bottom}{Dissolved oxygen (mg/L) at bottom.}
+\item{TurbidityNTU}{Turbidity (NTU) at surface measured with a turbidimeter.}
+\item{TurbidityNTU_bottom}{Turbidity (NTU) at bottom measured with a turbidimeter.}
+\item{TurbidityFNU}{Turbidity (FNU) at surface measured with a water quality sonde.}
 \item{Notes}{Comments.}
 }
 }
@@ -30,10 +34,11 @@ a tibble with 30,957 rows and 14 variables
 EDSM
 }
 \description{
-Water quality data from the United States Fish and Wildlife Service Enhanced Delta Smelt Monitoring Program.
+Water quality data from the United States Fish and Wildlife Service Enhanced Delta Smelt
+Monitoring Program.
 }
 \details{
-More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.415.8}{here}.
+More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.415.11}{here}.
 }
 \seealso{
 \code{\link{wq}}

@@ -1,7 +1,7 @@
 ﻿"Survey","Data_pack_id","Revision_last","Data_pack_id_full_last","Citation","DOI","URL"
 "DJFMP",244,13,"edi.244.13","United States Fish and Wildlife Service, J. Speegle, C. Macfarlane, E. Huber, D. Goodman, K. Erly, and R. Cook. 2024. Interagency Ecological Program: Over four decades of juvenile fish monitoring data from the San Francisco Estuary, collected by the Delta Juvenile Fish Monitoring Program, 1976-2024 ver 13. Environmental Data Initiative. https://doi.org/10.6073/pasta/33aaab795387fd067a10108bacd88e53.","doi:10.6073/pasta/33aaab795387fd067a10108bacd88e53","https://portal.edirepository.org/nis/metadataviewer?packageid=edi.244.13"
 "DOP",1187,4,"edi.1187.4","Schultz, A.A. and A.J. Kalmbach. 2023. Directed Outflow Project Lower Trophic Study ver 4. Environmental Data Initiative. https://doi.org/10.6073/pasta/86a01140eb3bb756ee9f7f8dab8aefc4.","doi:10.6073/pasta/86a01140eb3bb756ee9f7f8dab8aefc4","https://portal.edirepository.org/nis/metadataviewer?packageid=edi.1187.4"
-"EDSM",415,8,NA,NA,NA,NA
-"EMP",458,9,NA,NA,NA,NA
-"YBFMP_fish",233,3,NA,NA,NA,NA
-"YBFMP_zoop",494,2,NA,NA,NA,NA
+"EDSM",415,11,"edi.415.11","United States Fish and Wildlife Service, C. Macfarlane, D. Goodman, K. Erly, R. Cook, P. Higginson, G. Bigham, T. Rohlin, T. Hope, G. Garcia, J. Speegle, E. Huber, and A. Arrambide. 2024. Interagency Ecological Program and US Fish and Wildlife Service: San Francisco Estuary Enhanced Delta Smelt Monitoring Program data, 2016-2023 ver 11. Environmental Data Initiative. https://doi.org/10.6073/pasta/3e290f60357f34b88c42135aabeefdf7.","doi:10.6073/pasta/3e290f60357f34b88c42135aabeefdf7","https://portal.edirepository.org/nis/metadataviewer?packageid=edi.415.11"
+"EMP",458,9,"edi.458.9",NA,NA,NA
+"YBFMP_fish",233,3,"edi.233.3",NA,NA,NA
+"YBFMP_zoop",494,2,"edi.494.2",NA,NA,NA

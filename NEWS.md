@@ -1,9 +1,10 @@
 # discretewq (development version)
 
 * Added `DOP` water quality data.
-* Updated baystudy and DJFMP datasets.
-* Added turbidity to `DJFMP`
-* Improving backend of data processing to add automation and data checks
+* Updated baystudy, DJFMP, and EDSM datasets.
+* Added bottom conductivity to `EDSM`
+* Added turbidity to `DJFMP` and `EDSM`
+* Improved backend of data processing to add automation and data checks
 
 # discretewq 2.4.0
 

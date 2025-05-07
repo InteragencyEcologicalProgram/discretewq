@@ -1,0 +1,8 @@
+﻿Survey,Data_entity,Data_entity_regex,Date_format,Time_format,Time_zone,Depth_unit,Secchi_unit
+DJFMP,,,,,,,
+DOP,,,,,,,
+EDSM,df_data_20mm,EDSM_20mm,Ymd,HMS,America/Los_Angeles,feet,meters
+EDSM,df_data_KDTR,EDSM_KDTR,Ymd,HMS,America/Los_Angeles,meters,meters
+EMP,,,,,,,
+YBFMP_fish,,,,,,,
+YBFMP_zoop,,,,,,,
