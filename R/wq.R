@@ -48,122 +48,74 @@
 #' )
 #' @export
 
-wq <- function(Sources = NULL,
-               Start_year = NULL,
-               End_year = NULL) {
+wq <- function(Sources = NULL, Start_year = NULL, End_year = NULL) {
 
   # Check arguments ---------------------------------------------------------
 
   if("USGS" %in% Sources) {
-    stop('The "USGS" data source has been renamed to "USGS_SFBS" because of the inclusion of an additional USGS dataset, "USGS_CAWSC".')
+    stop(
+      'The "USGS" data source has been renamed to "USGS_SFBS" because of the inclusion of an ',
+      'additional USGS dataset, "USGS_CAWSC".'
+    )
   }
 
   sources_expect <- c(
-    "20mm",
-    "Baystudy",
-    "DJFMP",
-    "DOP",
-    "EDSM",
-    "EMP",
-    "FMWT",
-    "NCRO",
-    "SDO",
-    "SKT",
-    "SLS",
-    "STN",
-    "Suisun",
-    "USBR",
-    "USGS_CAWSC",
-    "USGS_SFBS",
-    "YBFMP"
+    "20mm", "Baystudy", "DJFMP", "DOP", "EDSM", "EMP", "FMWT", "NCRO", "SDO", "SKT", "SLS", "STN",
+    "Suisun", "USBR", "USGS_CAWSC", "USGS_SFBS", "YBFMP"
   )
 
   if(is.null(Sources) | !all(Sources %in% sources_expect)) {
-    stop(paste0("You must specify the data sources you wish to include. Choices include:\n ", stringr::str_c(sources_expect, collapse = ", ")))
+    stop(paste0(
+      "You must specify the data sources you wish to include. Choices include:\n ",
+      stringr::str_c(sources_expect, collapse = ", ")
+    ))
   }
 
   # Set end year to current year if blank
-  if(is.null(End_year)) {
-    End_year <- as.numeric(format(Sys.Date(), "%Y"))
-  }
+  if(is.null(End_year)) End_year <- as.numeric(format(Sys.Date(), "%Y"))
 
   # Set start year to 0 if blank
-  if(is.null(Start_year)) {
-    Start_year <- 0
-  }
+  if(is.null(Start_year)) Start_year <- 0
 
   # Load and combine data ---------------------------------------------------
 
   WQ_list <- list()
 
-  if ("20mm" %in% Sources) {
-    WQ_list[["twentymm"]] <- discretewq::twentymm
-  }
+  if ("20mm" %in% Sources) WQ_list[["twentymm"]] <- discretewq::twentymm
+  if ("Baystudy" %in% Sources) WQ_list[["Baystudy"]] <- discretewq::baystudy
+  if ("DJFMP" %in% Sources) WQ_list[["DJFMP"]] <- discretewq::DJFMP
+  if ("DOP" %in% Sources) WQ_list[["DOP"]] <- discretewq::DOP
+  if ("EDSM" %in% Sources) WQ_list[["EDSM"]] <- discretewq::EDSM
+  if ("EMP" %in% Sources) WQ_list[["EMP"]] <- discretewq::EMP
+  if ("FMWT" %in% Sources) WQ_list[["FMWT"]] <- discretewq::FMWT
+  if ("NCRO" %in% Sources) WQ_list[["NCRO"]] <- discretewq::NCRO
+  if ("SDO" %in% Sources) WQ_list[["SDO"]] <- discretewq::SDO
+  if ("SKT" %in% Sources) WQ_list[["SKT"]] <- discretewq::SKT
+  if ("SLS" %in% Sources) WQ_list[["SLS"]] <- discretewq::SLS
+  if ("STN" %in% Sources) WQ_list[["STN"]] <- discretewq::STN
+  if ("Suisun" %in% Sources) WQ_list[["Suisun"]] <- discretewq::suisun
+  if ("USBR" %in% Sources) WQ_list[["USBR"]] <- discretewq::USBR
+  if ("USGS_CAWSC" %in% Sources) WQ_list[["USGS_CAWSC"]] <- discretewq::USGS_CAWSC
+  if ("USGS_SFBS" %in% Sources) WQ_list[["USGS_SFBS"]] <- discretewq::USGS_SFBS
+  if ("YBFMP" %in% Sources) WQ_list[["YBFMP"]] <- discretewq::YBFMP
 
-  if ("Baystudy" %in% Sources) {
-    WQ_list[["Baystudy"]] <- discretewq::baystudy
-  }
-
-  if ("DJFMP" %in% Sources) {
-    WQ_list[["DJFMP"]] <- discretewq::DJFMP
-  }
-
-  if ("DOP" %in% Sources) {
-    WQ_list[["DOP"]] <- discretewq::DOP
-  }
-
-  if ("EDSM" %in% Sources) {
-    WQ_list[["EDSM"]] <- discretewq::EDSM
-  }
-
-  if ("EMP" %in% Sources) {
-    WQ_list[["EMP"]] <- discretewq::EMP
-  }
-
-  if ("FMWT" %in% Sources) {
-    WQ_list[["FMWT"]] <- discretewq::FMWT
-  }
-
-  if ("NCRO" %in% Sources) {
-    WQ_list[["NCRO"]] <- discretewq::NCRO
-  }
-
-  if ("SDO" %in% Sources) {
-    WQ_list[["SDO"]] <- discretewq::SDO
-  }
-
-  if ("SKT" %in% Sources) {
-    WQ_list[["SKT"]] <- discretewq::SKT
-  }
-
-  if ("SLS" %in% Sources) {
-    WQ_list[["SLS"]] <- discretewq::SLS
-  }
-
-  if ("STN" %in% Sources) {
-    WQ_list[["STN"]] <- discretewq::STN
-  }
-
-  if ("Suisun" %in% Sources) {
-    WQ_list[["Suisun"]] <- discretewq::suisun
-  }
-
-  if ("USBR" %in% Sources) {
-    WQ_list[["USBR"]] <- discretewq::USBR
-  }
-
-  if ("USGS_CAWSC" %in% Sources) {
-    WQ_list[["USGS_CAWSC"]] <- discretewq::USGS_CAWSC
-  }
-
-  if ("USGS_SFBS" %in% Sources) {
-    WQ_list[["USGS_SFBS"]] <- discretewq::USGS_SFBS
-  }
-
-  if ("YBFMP" %in% Sources) {
-    WQ_list[["YBFMP"]] <- discretewq::YBFMP
-  }
-
+  # Define standardized column order for all possible columns
+  all_cols_order <- c(
+    "Source", "Station", "Latitude", "Longitude", "Field_coords", "StationID", "Date", "Datetime",
+    "Year", "Month", "MonthYear", "Season", "Depth", "Sample_depth_surface",
+    "Sample_depth_nutr_surface", "Sample_depth_bottom", "Tide", "Microcystis", "Secchi",
+    "Secchi_estimated", "Temperature", "Temperature_bottom", "Conductivity", "Conductivity_bottom",
+    "Salinity", "Salinity_bottom", "DissolvedOxygen", "DissolvedOxygen_bottom",
+    "DissolvedOxygenPercent", "DissolvedOxygenPercent_bottom", "pH", "pH_bottom", "TurbidityNTU",
+    "TurbidityNTU_bottom", "TurbidityFNU", "TurbidityFNU_bottom", "Chlorophyll_Sign", "Chlorophyll",
+    "Pheophytin_Sign", "Pheophytin", "TotAmmonia_Sign", "TotAmmonia", "DissAmmonia_Sign",
+    "DissAmmonia", "DissNitrateNitrite_Sign", "DissNitrateNitrite", "TotPhos_Sign", "TotPhos",
+    "DissOrthophos_Sign", "DissOrthophos", "TON_Sign", "TON", "DON_Sign", "DON", "TKN_Sign", "TKN",
+    "DissSilica_Sign", "DissSilica", "TDS_Sign", "TDS", "DissBromide_Sign", "DissBromide",
+    "DissCalcium_Sign", "DissCalcium", "TotChloride_Sign", "TotChloride", "DissChloride_Sign",
+    "DissChloride", "TotAlkalinity_Sign", "TotAlkalinity", "DOC_Sign", "DOC", "TOC_Sign", "TOC",
+    "TSS_Sign", "TSS", "VSS_Sign", "VSS", "Notes"
+  )
 
   out <- dplyr::bind_rows(WQ_list) %>%
     dplyr::mutate(
@@ -191,7 +143,13 @@ wq <- function(Sources = NULL,
     {
       if ("Conductivity" %in% names(.)) {
         if ("Salinity" %in% names(.)) {
-          dplyr::mutate(., Salinity = dplyr::if_else(is.na(.data$Salinity), wql::ec2pss(.data$Conductivity / 1000, t = 25), .data$Salinity))
+          dplyr::mutate(.,
+            Salinity = dplyr::if_else(
+              is.na(.data$Salinity),
+              wql::ec2pss(.data$Conductivity / 1000, t = 25),
+              .data$Salinity
+            )
+          )
         } else {
           dplyr::mutate(., Salinity = wql::ec2pss(.data$Conductivity / 1000, t = 25))
         }
@@ -206,7 +164,13 @@ wq <- function(Sources = NULL,
     {
       if ("Conductivity_bottom" %in% names(.)) {
         if ("Salinity_bottom" %in% names(.)) {
-          dplyr::mutate(., Salinity_bottom = dplyr::if_else(is.na(.data$Salinity_bottom), wql::ec2pss(.data$Conductivity_bottom / 1000, t = 25), .data$Salinity_bottom))
+          dplyr::mutate(.,
+            Salinity_bottom = dplyr::if_else(
+              is.na(.data$Salinity_bottom),
+              wql::ec2pss(.data$Conductivity_bottom / 1000, t = 25),
+              .data$Salinity_bottom
+            )
+          )
         } else {
           dplyr::mutate(., Salinity_bottom = wql::ec2pss(.data$Conductivity_bottom / 1000, t = 25))
         }
@@ -217,7 +181,8 @@ wq <- function(Sources = NULL,
           dplyr::mutate(., Salinity_bottom = NA_real_)
         }
       }
-    }
+    } %>%
+    dplyr::select(dplyr::any_of(all_cols_order))
 
   # Return ------------------------------------------------------------------
 
