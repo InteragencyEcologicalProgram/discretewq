@@ -90,7 +90,7 @@
 #' Water quality data from the ICF/USBR Directed Outflow Project.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 3,473 rows and 16 variables
+#' @format a tibble with 3,465 rows and 16 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected. Includes Station_Code
@@ -104,8 +104,8 @@
 #'   \item{Depth}{Bottom depth at start of trawl (m).}
 #'   \item{Secchi}{Secchi depth (cm).}
 #'   \item{Temperature}{Temperature (°C) at surface.}
-#'   \item{Salinity}{Salinity at surface.}
 #'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
+#'   \item{Salinity}{Salinity at surface.}
 #'   \item{DissolvedOxygen}{Dissolved oxygen (mg/L) at surface.}
 #'   \item{pH}{pH (dimensionless) at surface.}
 #'   \item{TurbidityFNU}{Turbidity (FNU) at surface.}
