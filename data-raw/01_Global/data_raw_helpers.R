@@ -296,32 +296,56 @@ standardize_analytes <- function(df, survey, type = c("Field", "Lab")) {
 # Parse Datetime columns
 # If the data has separate Date and Time columns, combine them into a Datetime column and parse the
   # Date column
-# If the data has a Datetime column, parse it, and create a Date column > still need to do this
+# If the data has a Datetime column, parse it, and create a Date column
 convert_datetime <- function(df_data,
                              date_format,
                              time_format,
                              timezone,
                              entity_name = NULL) {
-  # Skip if data doesn't have a Date format specified
+  # Skip if data doesn't have a Date format specified - for EDI automated workflow
   if (is.na(date_format)) return(df_data)
 
-  # datetime_format <- paste(date_format, time_format)
-  df_data_c <- df_data %>%
-    mutate(
-      Date = date(parse_date_time(Date, date_format, tz = timezone)),
-      Datetime = parse_date_time(
-        if_else(is.na(Time), NA_character_, paste(Date, Time)),
-        paste("Ymd", time_format),
-        tz = timezone
-      ),
-      # Make sure Datetime is in local time (America/Los_Angeles) for all surveys
-      Datetime = with_tz(Datetime, tzone = "America/Los_Angeles"),
-      .keep = "unused", .after = Date
-    )
+  # Skip if data doesn't have a Datetime column or Date and Time columns
+  if (!(any(names(df_data) == "Datetime") | (any(names(df_data) == "Date") & any(names(df_data) == "Time")))) {
+    warn(c(
+      "Data does NOT have either a Datetime column or Date and Time columns",
+      "i" = "Returning data without changes"
+    ))
+    return(df_data)
+  }
 
-  # Define Datetime columns before and after conversion for parsing check
-  col_datetime_orig <- c("Date", "Time")
-  col_datetime_conv <- c("Date", "Datetime")
+  # Proceed with parsing depending on which date/time columns df_data contains
+  if (any(names(df_data) == "Datetime")) {
+    df_data_c <- df_data %>%
+      mutate(
+        Datetime = parse_date_time(Datetime, paste(date_format, time_format), tz = timezone),
+        # Make sure Datetime is in local time (America/Los_Angeles) for all surveys
+        Datetime = with_tz(Datetime, tzone = "America/Los_Angeles"),
+        Date = date(Datetime),
+        .before = Datetime
+      )
+
+    # Define Datetime columns before and after conversion for parsing check
+    col_datetime_orig <- "Datetime"
+    col_datetime_conv <- "Datetime"
+  } else if (any(names(df_data) == "Date") & any(names(df_data) == "Time")) {
+    df_data_c <- df_data %>%
+      mutate(
+        Date = date(parse_date_time(Date, date_format, tz = timezone)),
+        Datetime = parse_date_time(
+          if_else(is.na(Time), NA_character_, paste(Date, Time)),
+          paste("Ymd", time_format),
+          tz = timezone
+        ),
+        # Make sure Datetime is in local time (America/Los_Angeles) for all surveys
+        Datetime = with_tz(Datetime, tzone = "America/Los_Angeles"),
+        .keep = "unused", .after = Date
+      )
+
+    # Define Datetime columns before and after conversion for parsing check
+    col_datetime_orig <- c("Date", "Time")
+    col_datetime_conv <- c("Date", "Datetime")
+  }
 
   # Check for parsing errors when converting columns to datetime
   df_parse_check <-
@@ -654,6 +678,6 @@ update_edi_metadata <- function(survey, edi_id) {
     anti_join(df_edi_meta_surv, by = "Survey") %>%
     bind_rows(df_edi_meta_surv) %>%
     arrange(Survey) %>%
-    write_excel_csv(fp_edi_meta)
+    write_csv(fp_edi_meta)
 }
 
