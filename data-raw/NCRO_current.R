@@ -12,8 +12,8 @@ library(conflicted)
 # Declare package conflict preferences
 conflicts_prefer(dplyr::filter())
 
-# Define start date for data update - starting earlier than 2023 to get some
-  # data not in the original 1999-2022 dataset
+# Define start date for data update - starting earlier than 2023 to get some data not in the
+  # original 1999-2022 dataset
 start_date <- "2021-09-28"
 
 # Source helper functions
@@ -53,16 +53,16 @@ df_data_lab_c1 <-
   map(files_data_lab, \(x) import_raw_data(x, "NCRO", "Data_lab")) %>%
   list_rbind() %>%
   standardize_analytes("NCRO", "Lab") %>%
-  # Add Sign variable which indicates <RL values, and convert Result to numeric
-    # making <RL values equal to their RL
+  # Add Sign variable which indicates <RL values, and convert Result to numeric making <RL values
+    # equal to their RL
   mutate(
     Sign = if_else(str_detect(Result, "^<"), "<", "="),
     Result = as.numeric(if_else(Sign == "<", RL, Result)),
     .keep = "unused"
   )
 
-# Before restructuring lab data to wide format, remove laboratory duplicates by
-  # removing one at random
+# Before restructuring lab data to wide format, remove laboratory duplicates by removing one at
+  # random
 # Define grouping variables for each unique duplicate pair
 grp_lab_dups <- c("StationNumber", "SampleCode", "Datetime", "Analyte_std")
 
@@ -97,8 +97,7 @@ df_secchi_mvi <- bind_rows(
   )
 )
 
-# Prepare Secchi depth and Microcystis data to be joined with field and
-  # laboratory data
+# Prepare Secchi depth and Microcystis data to be joined with field and laboratory data
 df_secchi_mvi_c <- df_secchi_mvi %>%
   mutate(
     # Use the numeric codes for Microcystis
@@ -111,11 +110,12 @@ df_secchi_mvi_c <- df_secchi_mvi %>%
     ),
     # convert secchi depth to cm
     Secchi = FldObsSecchi * 100,
-    # Use just the Date since the DateTimes don't completely match with the
-      # field/lab data
+    # Use just the Date since the DateTimes don't completely match with the field/lab data
     Date = date(DeploymentEnd),
     .keep = "unused"
   ) %>%
+  # Standardize the Paradise Cut upstream station to PDU (code is PDUP before 2024)
+  mutate(StationCode = if_else(StationCode == "PDUP", "PDU", StationCode)) %>%
   # Join standardized station numbers
   left_join(
     df_stations %>% select(StationNumber, WQES_StationCode),
@@ -135,36 +135,29 @@ df_data_curr <-
     df_data_field, df_data_lab_c2,
     by = join_by(StationNumber, SampleCode, Datetime)
   ) %>%
-  # Remove samples not collected by NCRO at YB below Lisbon station (Sample Code
-    # prefix 'ES')
+  # Remove samples not collected by NCRO at YB below Lisbon station (Sample Code prefix 'ES')
   filter(!str_detect(SampleCode, "^ES")) %>%
-  # Since NCRO records only in PST, convert to local time to correspond with the
-    # other surveys
-  mutate(
-    Datetime = with_tz(ymd_hms(Datetime, tz = "Etc/GMT+8"), tzone = "America/Los_Angeles"),
-    Date = date(Datetime),
-    .after = Datetime
-  ) %>%
-  # Add Secchi depth and Microcystis data - there a few records without matches
-    # in the field/lab data, but we'll use a left join for now
+  convert_datetime(date_format = "Ymd", time_format = "HMS", timezone = "Etc/GMT+8") %>%
+  # Add Secchi depth and Microcystis data - there a few records without matches in the field/lab
+    # data, but we'll use a left join for now
   left_join(df_secchi_mvi_c, by = join_by(StationNumber, Date)) %>%
   # Add standardized station names and lat-long coordinates
   left_join(
     df_stations %>% select(StationNumber, Station, Latitude, Longitude),
     by = join_by(StationNumber)
   ) %>%
-  select(-c(StationNumber, SampleCode)) %>%
-  mutate(
-    # Fill in "=" for NA values within the _Sign variables
-    across(ends_with("_Sign"), \(x) if_else(is.na(x), "=", x)),
-    # Add source variable
-    Source = "NCRO"
-  )
+  # Fill in "=" for NA values within the _Sign variables
+  mutate(across(ends_with("_Sign"), \(x) if_else(is.na(x), "=", x))) %>%
+  # Add source variable
+  add_source_col("NCRO")
 
 # Add current data to 1999-2022 data
 NCRO <- bind_rows(df_data_1999_2022, df_data_curr) %>%
   # Remove overlapping data - this won't be an issue in the future
   distinct(Station, Datetime, .keep_all = TRUE) %>%
+  # Remove rows where all measurements are NA, if they exist
+  rm_rows_all_miss_data() %>%
+  standardize_col_order() %>%
   arrange(Datetime)
 
 usethis::use_data(NCRO, overwrite = TRUE)
@@ -173,28 +166,3 @@ usethis::use_data(NCRO, overwrite = TRUE)
 NCRO %>% saveRDS(file.path(fp_ncro_data, "ncro_data_1999-curr.rds"))
 
 document_helper_other(NCRO)
-
-
-# Investigate the Secchi depth and Microcystis data without matching field/lab data
-df_secchi_mvi_unmatch <-
-  anti_join(
-    df_secchi_mvi_c %>% left_join(select(df_stations, StationNumber, Station, WQES_StationCode)),
-    NCRO
-  ) %>%
-  select(WQES_StationCode, Station, Date, Secchi, Microcystis)
-
-NCRO_no_secchi_mvi <- NCRO %>%
-  filter(if_all(c(Secchi, Microcystis), is.na)) %>%
-  mutate(Date_min = Date - days(7), Date_max = Date + days(7))
-
-
-inner_join(
-  df_secchi_mvi_unmatch,
-  NCRO_no_secchi_mvi %>% select(Station, Date, Date_min, Date_max),
-  by = join_by(Station, between(Date, Date_min, Date_max)),
-  suffix = c("", "_lab_field")
-) %>%
-  select(-c(Date_min, Date_max)) %>%
-  mutate(Days_diff = Date_lab_field - Date)
-
-
