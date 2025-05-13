@@ -1,4 +1,8 @@
 ﻿Survey,Data_entity,Data_entity_regex,Date_format,Time_format,Time_zone,Depth_unit,Secchi_unit
+20mm,df_stations,20mmStations,,,,,
+20mm,df_data,(?<!m)Station,,,,,centimeters
+20mm,df_survey,Survey,,,,,
+20mm,df_tow,Tow,,,,feet,
 DJFMP,df_stations,Site_Locations,,,,,
 DJFMP,df_data_1976_2001,1976.+DJFMP_trawl,mdY,HMS,America/Los_Angeles,,meters
 DJFMP,df_data_2002_curr,2002.+DJFMP_trawl,mdY,HMS,America/Los_Angeles,,meters

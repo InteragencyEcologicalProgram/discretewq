@@ -6,7 +6,7 @@
 #' Water quality data from the California Department of Fish and Wildlife 20mm survey.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 10,469 rows and 14 variables
+#' @format a tibble with 11,533 rows and 16 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
@@ -21,6 +21,8 @@
 #'   \item{Temperature}{Temperature (°C) at surface.}
 #'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
 #'   \item{Conductivity_bottom}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at bottom.}
+#'   \item{TurbidityNTU}{Turbidity (NTU) at surface measured with a turbidimeter.}
+#'   \item{TurbidityFNU}{Turbidity (FNU) at surface measured with a water quality sonde.}
 #'   \item{Notes}{Comments.}
 #'   }
 #' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.535.4}{here}.

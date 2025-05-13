@@ -88,7 +88,7 @@ Cloern, J. E., and T. S. Schraga. 2016. USGS Measurements of Water Quality in Sa
 
 Interagency Ecological Program (IEP), S. Lesmeister, and J. Rinde. 2020. Interagency Ecological Program: Discrete dissolved oxygen monitoring in the Stockton Deep Water Ship Channel, collected by the Environmental Monitoring Program, 1997-2018. ver2. Environmental Data Initiative. [doi:10.6073/PASTA/3268530C683726CD430C81894FFAD768](https://portal.edirepository.org/nis/metadataviewer?packageid=edi.276.2)
 
-Interagency Ecological Program (IEP), L. Damon, and A. Chorazyczewski. 2021a. Interagency Ecological Program San Francisco Estuary 20mm Survey 1995 - 2021. ver 4. Environmental Data Initiative. [doi:10.6073/pasta/32de8b7ffbe674bc6e79dbcd29ac1cc2](https://portal.edirepository.org/nis/metadataviewer?packageid=edi.535.4)
+Interagency Ecological Program (IEP), C. Brennan, V. Mora, J. Oceguera Zavala, and J.A. Jimenez. 2024. Interagency Ecological Program San Francisco Estuary 20-mm Survey 1995 - 2024 ver 5. Environmental Data Initiative. [doi:10.6073/pasta/7b4dd8c7a63cf1b1ba345ad4b8f2f6f0](https://portal.edirepository.org/nis/metadataviewer?packageid=edi.535.5)
 
 Interagency Ecological Program (IEP), L. Damon, and A. Chorazyczewski. 2021b. Interagency Ecological Program San Francisco Estuary Spring Kodiak Trawl Survey 2002 - 2021. ver 4. Environmental Data Initiative. [doi:10.6073/pasta/f0e2916f4a026f3f812a0855cee74a8d](https://portal.edirepository.org/nis/metadataviewer?packageid=edi.527.4)
 

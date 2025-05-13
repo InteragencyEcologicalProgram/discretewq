@@ -5,6 +5,7 @@ library(readr)
 library(tidyr)
 library(purrr)
 library(lubridate)
+library(stringr)
 library(rlang)
 
 # Install EDIutils if its not installed already
@@ -166,12 +167,7 @@ import_raw_data <- function(file, survey, entity) {
     mutate(col_name_check = map_lgl(Col_name_exp, \(x) any(names(df_data_raw) == x)))
 
   # Generate message for results of check
-  inform(c(
-    "i" = paste(
-      "Attempting to import:",
-      stringr::str_extract(file, "(?<=/).+\\.(bin|csv)$")
-    )
-  ))
+  inform(c("i" = paste("Attempting to import:", str_extract(file, "(?<=/).+\\.(bin|csv)$"))))
 
   if (all(df_col_check$col_name_check)) {
     inform(c("v" = "All column names are correct"))
@@ -490,7 +486,7 @@ import_proc_edi_data <- function(survey) {
   # Subset to desired data entities
   df_edi_ent_sub <- df_edi_ent %>%
     mutate(
-      Data_entity_edi_name = map(Data_entity_regex, \(x) grep(x, edi_data_ent_all, value = TRUE)),
+      Data_entity_edi_name = map(Data_entity_regex, \(x) str_subset(edi_data_ent_all, x)),
       Data_entity_empty = map_lgl(Data_entity_edi_name, is_empty),
       .keep = "used"
     )
@@ -522,9 +518,9 @@ import_proc_edi_data <- function(survey) {
   ndf_edi_ent <- df_edi_ent %>%
     mutate(
       # Determine file paths for data entities on temporary directory
-      Data_entity_fp = map_chr(Data_entity_regex, \(x) grep(x, temp_files, value = TRUE)),
+      Data_entity_fp = map_chr(Data_entity_regex, \(x) str_subset(temp_files, x)),
       # Add data entity name
-      Data_entity_name = map_chr(Data_entity_regex, \(x) grep(x, edi_data_ent_all, value = TRUE)),
+      Data_entity_name = map_chr(Data_entity_regex, \(x) str_subset(edi_data_ent_all, x)),
       # Import data
       df_data = map2(Data_entity_fp, Data_entity, \(x, y) import_raw_data(x, survey, y)),
       # Parse Datetime columns
@@ -579,7 +575,7 @@ document_helper_edi <- function(edi_id, data_clean) {
 
   # Citation for README:
   edi_cit_README <- paste0(
-    stringr::str_remove(ls_edi_info$edi_cit_raw, '(?<=Environmental Data Initiative\\.\\s)https.+'),
+    str_remove(ls_edi_info$edi_cit_raw, '(?<=Environmental Data Initiative\\.\\s)https.+'),
     "[", ls_edi_info$edi_doi, "](", ls_edi_info$edi_url, ")"
   )
   inform(c(
@@ -666,7 +662,7 @@ update_edi_metadata <- function(survey, edi_id) {
 
   df_edi_meta_surv <- df_edi_meta %>% dplyr::filter(Survey == survey)
 
-  df_edi_meta_surv$Revision_last <- as.numeric(stringr::str_extract(edi_id, "(?<=\\.)\\d+$"))
+  df_edi_meta_surv$Revision_last <- as.numeric(str_extract(edi_id, "(?<=\\.)\\d+$"))
   df_edi_meta_surv$Data_pack_id_full_last <- edi_id
   df_edi_meta_surv$Citation <- ls_edi_info$edi_cit_raw
   df_edi_meta_surv$DOI <- ls_edi_info$edi_doi
