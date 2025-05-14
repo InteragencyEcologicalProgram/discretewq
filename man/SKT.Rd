@@ -6,7 +6,7 @@
 \alias{SKT}
 \title{SKT water quality data}
 \format{
-a tibble with 4,505 rows and 13 variables
+a tibble with 4,643 rows and 15 variables
 \describe{
 \item{Source}{Name of the source dataset.}
 \item{Station}{Station where sample was collected.}
@@ -20,6 +20,8 @@ a tibble with 4,505 rows and 13 variables
 \item{Secchi}{Secchi depth (cm).}
 \item{Temperature}{Temperature (°C) at surface.}
 \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
+\item{TurbidityNTU}{Turbidity (NTU) at surface measured with a turbidimeter.}
+\item{TurbidityFNU}{Turbidity (FNU) at surface measured with a water quality sonde.}
 \item{Notes}{Comments.}
 }
 }
