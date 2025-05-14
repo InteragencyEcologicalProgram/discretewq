@@ -24,7 +24,9 @@ if (!requireNamespace("jsonlite", quietly = TRUE)) {
 
 # Get ID for most current revision of EDI publication and check if it differs from the revision used
   # in the last discretewq update
-get_latest_edi_id <- function(survey) {
+# Set static argument to TRUE if you want to proceed with data import from EDI even if its the same
+  # revision that was used in the last discretewq update
+get_latest_edi_id <- function(survey, static) {
   # Import EDI data package metadata table and filter to survey
   df_edi_meta <-
     read_csv("data-raw/01_Global/EDI_data_package_metadata.csv", show_col_types = FALSE) %>%
@@ -41,7 +43,9 @@ get_latest_edi_id <- function(survey) {
   latest_id <- paste(edi_scope, edi_package_id, latest_rev, sep = ".")
   inform(c("i" = paste("The latest revision for data package", edi_package_id, "is", latest_id)))
 
-  if (latest_rev == df_edi_meta$Revision_last) {
+  if (static == TRUE) {
+    return(latest_id)
+  } else if (latest_rev == df_edi_meta$Revision_last) {
     withr::with_options(
       list(show.error.messages = FALSE),
       {
@@ -63,9 +67,8 @@ get_latest_edi_id <- function(survey) {
       ),
       "*" = "Proceeding with updating this data set\n"
     ))
+    return(latest_id)
   }
-
-  return(latest_id)
 }
 
 # Get data entity names for specified EDI ID
@@ -167,7 +170,7 @@ import_raw_data <- function(file, survey, entity) {
     mutate(col_name_check = map_lgl(Col_name_exp, \(x) any(names(df_data_raw) == x)))
 
   # Generate message for results of check
-  inform(c("i" = paste("Attempting to import:", str_extract(file, "(?<=/).+\\.(bin|csv)$"))))
+  inform(c("i" = paste("Attempting to import:", basename(file))))
 
   if (all(df_col_check$col_name_check)) {
     inform(c("v" = "All column names are correct"))
@@ -470,10 +473,10 @@ standardize_col_order <- function(df_data) {
 # Import and process data derived from an EDI package
 # This is a generalized workflow to be used across all EDI data packages
 # Returns a list of processed data entities and the EDI ID
-import_proc_edi_data <- function(survey) {
+import_proc_edi_data <- function(survey, static = FALSE) {
   # Obtain EDI data package ID for most recent revision
-  # Stops if its the same as the last discretewq update
-  edi_id_curr <- get_latest_edi_id(survey)
+  # Stops if its the same as the last discretewq update and if static = FALSE
+  edi_id_curr <- get_latest_edi_id(survey, static)
 
   # Compile all data entities for EDI data package
   edi_data_ent_all <- get_edi_data_entities(edi_id_curr)
