@@ -28,23 +28,15 @@ DOP <- ls_DOP$df_data %>%
     Station = paste(Station_Code, Habitat),
     Field_coords = TRUE
   ) %>%
+  # Remove rows where all measurements are NA
+  rm_rows_all_miss_data() %>%
   # Remove replicate tows with identical WQ values - select earliest Datetime
   arrange(Datetime) %>%
   distinct(
-    Station,
-    Date,
-    Secchi,
-    Temperature,
-    Salinity,
-    Conductivity,
-    DissolvedOxygen,
-    pH,
-    TurbidityFNU,
-    Chlorophyll,
+    Station, Date, Secchi, Temperature, Salinity, Conductivity, DissolvedOxygen, pH,
+    TurbidityFNU, Chlorophyll,
     .keep_all = TRUE
   ) %>%
-  # Remove rows where all measurements are NA
-  rm_rows_all_miss_data() %>%
   add_source_col(survey) %>%
   standardize_col_order() %>%
   arrange(Date, Station)

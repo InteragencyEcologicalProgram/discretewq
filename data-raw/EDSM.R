@@ -21,12 +21,10 @@ EDSM <-
     # May 3 or 17 2019 so we will not use conductivity data before June 2019
     Conductivity = if_else(Date < "2019-06-01", NA_real_, Conductivity)
   ) %>%
-  # Remove replicate samples with the same Datetime and location. This keeps the first row. This
-  # results in no more NA values in water quality variables than if we had used summarize(mean(.x,
-  # na.rm = T))
-  distinct(Station, Latitude, Longitude, Date, Datetime, .keep_all = TRUE) %>%
   # Remove rows where all measurements are NA
   rm_rows_all_miss_data() %>%
+  # Remove replicate samples with the same Datetime and location
+  distinct(Station, Date, Datetime, Latitude, Longitude, .keep_all = TRUE) %>%
   add_source_col(survey) %>%
   standardize_col_order() %>%
   arrange(Datetime)
