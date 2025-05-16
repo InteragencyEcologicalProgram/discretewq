@@ -110,11 +110,12 @@ baystudy <- df_boat_tow_c %>%
       TRUE ~ FALSE
     ),
     Latitude = if_else(is.na(Latitude), Latitude_field, Latitude),
-    Longitude = if_else(is.na(Longitude), Longitude_field, Longitude)
+    Longitude = if_else(is.na(Longitude), Longitude_field, Longitude),
+    .keep = "unused"
   ) %>%
   # If tide data were not collected at the time of the tow, use the value from the overall station
     # visit
-  mutate(Tide = if_else(is.na(Tide_tow), Tide_station, Tide_tow)) %>%
+  mutate(Tide = if_else(is.na(Tide_tow), Tide_station, Tide_tow), .keep = "unused") %>%
   # Remove rows where all measurements are NA
   rm_rows_all_miss_data() %>%
   # Remove a few duplicated records

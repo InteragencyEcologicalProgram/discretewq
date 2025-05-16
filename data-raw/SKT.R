@@ -17,7 +17,7 @@ df_stations <- import_raw_data("data-raw/SKT/StationsSKT.csv", survey, "df_stati
 df_data <- import_raw_data("data-raw/SKT/tblSample.csv", survey, "df_data")
 
 # Prepare station table before joining it to data table
-SKT_stations <- df_stations %>%
+df_stations_c <- df_stations %>%
   mutate(
     Latitude = LatDeg + LatMin / 60 + LatSec / 3600,
     Longitude = (LongDec + LongMin / 60 + LongSec / 3600) * -1,
@@ -42,16 +42,12 @@ SKT <- df_data %>%
     across(c(Latitude, Longitude), \(x) str_remove(x, "'.*")),
     across(c(Latitude, Longitude), \(x) str_remove(x, "[:alpha:]"))
   ) %>%
-  separate_wider_delim(
-    Latitude, delim = "-", names = c("LatD", "LatM", "LatS"), cols_remove = TRUE
-  ) %>%
-  separate_wider_delim(
-    Longitude, delim = "-", names = c("LonD", "LonM", "LonS"), cols_remove = TRUE
-  ) %>%
-  mutate(across(c("LatD", "LatM", "LatS", "LonD", "LonM", "LonS"), as.numeric)) %>%
+  separate_wider_delim(Latitude, delim = "-", names = c("Lat_Deg", "Lat_Min", "Lat_Sec")) %>%
+  separate_wider_delim(Longitude, delim = "-", names = c("Long_Deg", "Long_Min", "Long_Sec")) %>%
+  mutate(across(starts_with(c("Lat_", "Long_")), as.numeric)) %>%
   mutate(
-    Latitude_field = LatD + LatM / 60 + LatS / 3600,
-    Longitude_field = (LonD + LonM / 60 + LonS / 3600) * -1,
+    Latitude = Lat_Deg + Lat_Min / 60 + Lat_Sec / 3600,
+    Longitude = (Long_Deg + Long_Min / 60 + Long_Sec / 3600) * -1,
     .keep = "unused"
   ) %>%
   # Parse Date and Time columns
@@ -76,7 +72,7 @@ SKT <- df_data %>%
   ) %>%
   # Convert Depth from feet to meters
   convert_depth(depth_unit = "feet") %>%
-  left_join(SKT_stations, by = join_by(Station)) %>%
+  left_join(df_stations_c, by = join_by(Station), suffix = c("_field", "")) %>%
   mutate(
     Field_coords = case_when(
       is.na(Latitude) & !is.na(Latitude_field) ~ TRUE,
