@@ -156,9 +156,23 @@ get_cnra_data_field <- function(station_num, start_date, end_date = today()) {
 
 # Import raw data while running checks for column names and types, then apply standardized
   # formatting
-import_raw_data <- function(file, survey, entity) {
-  # Import data with all columns as character
-  df_data_raw <- read_csv(file, col_types = list(.default = "c"))
+import_raw_data <- function(file, survey, entity, import_fun, ...) {
+  inform(c("i" = paste("Attempting to import:", basename(file))))
+
+  # Check import function and import data - default import function is readr::read_csv()
+  if (missing(import_fun)) {
+    if (!requireNamespace("readr")) {
+      abort("No import function provided, package \"readr\" is not available")
+    } else {
+      inform(c("i" = "Using \"readr::read_csv()\" to import file"))
+      # Import data with all columns as character
+      df_data_raw <- readr::read_csv(file, col_types = list(.default = "c"))
+    }
+  } else if (!is.function(import_fun)) {
+    abort("Argument \"import_fun\" must be a function")
+  } else {
+    df_data_raw <- import_fun(file, ...)
+  }
 
   # Import data column metadata table and filter to survey and entity
   df_col_meta <-
@@ -170,8 +184,6 @@ import_raw_data <- function(file, survey, entity) {
     mutate(col_name_check = map_lgl(Col_name_exp, \(x) any(names(df_data_raw) == x)))
 
   # Generate message for results of check
-  inform(c("i" = paste("Attempting to import:", basename(file))))
-
   if (all(df_col_check$col_name_check)) {
     inform(c("v" = "All column names are correct"))
   } else {
