@@ -3,8 +3,8 @@ library(dplyr)
 library(readxl)
 library(tidyr)
 library(lubridate)
-library(conflicted)
 library(stringr)
+library(conflicted)
 
 # Declare package conflict preferences
 conflicts_prefer(dplyr::filter())
@@ -44,7 +44,7 @@ df_stations_c <- df_stations %>%
     .keep = "unused"
   ) %>%
   filter(Station != "211E")%>%
-  mutate(Station = recode(Station, `211W` = "211"))
+  mutate(Station = if_else(Station == "211W", "211", Station))
 
 df_boat_tow_c <- df_boat_tow %>%
   # Just keep tide and time-of-day records at the time of the first tow
@@ -116,7 +116,7 @@ baystudy <- df_boat_tow_c %>%
   # If tide data were not collected at the time of the tow, use the value from the overall station
     # visit
   mutate(Tide = if_else(is.na(Tide_tow), Tide_station, Tide_tow), .keep = "unused") %>%
-  # Remove rows where all measurements are NA
+  # Remove rows where all measurements are NA, if they exist
   rm_rows_all_miss_data() %>%
   # Remove a few duplicated records
   distinct(Station, Datetime, .keep_all = TRUE) %>%

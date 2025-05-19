@@ -30,10 +30,8 @@ df_tow <- ls_20mm$df_tow %>%
     Time = ymd_hms(Time, tz = "America/Los_Angeles"),
     # Correct a few erroneous times (most likely not recorded in military time format)
     Time = if_else(hour(Time) %in% 1:2, Time + hours(12), Time),
-    Tide = recode(
-      as.character(Tide),
-      `4` = "Flood", `3` = "Low Slack", `2` = "Ebb", `1` = "High Slack"
-    )
+    # Standardize tide codes
+    Tide = case_match(Tide, 4 ~ "Flood", 3 ~ "Low Slack", 2 ~ "Ebb", 1 ~ "High Slack")
   )
 
 # Join data entities and finish cleaning data
@@ -57,6 +55,7 @@ twentymm <- df_data %>%
     Latitude = if_else(is.na(Latitude), Latitude_field, Latitude),
     Longitude = if_else(is.na(Longitude), Longitude_field, Longitude)
   ) %>%
+  # Remove rows where all measurements are NA, if they exist
   rm_rows_all_miss_data() %>%
   add_source_col(survey) %>%
   standardize_col_order() %>%

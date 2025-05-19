@@ -31,9 +31,10 @@ SLS <- ls_SLS$df_water_info %>%
     Time = format(Time, "%H:%M:%S")
   ) %>%
   convert_datetime(date_format = "Ymd", time_format = "HMS", timezone = "America/Los_Angeles") %>%
+  # Standardize tide codes
   mutate(Tide = case_match(Tide, 4 ~ "Flood", 3 ~ "Low Slack", 2 ~ "Ebb", 1 ~ "High Slack")) %>%
   left_join(df_stations, by = join_by(Station)) %>%
-  # Remove rows where all measurements are NA, if there are any
+  # Remove rows where all measurements are NA, if they exist
   rm_rows_all_miss_data() %>%
   add_source_col(survey) %>%
   standardize_col_order()

@@ -13,7 +13,7 @@ EDSM <-
   bind_rows(ls_EDSM$df_data_20mm, ls_EDSM$df_data_KDTR) %>%
   mutate(
     # Standardize tide codes
-    Tide = recode(Tide, HS = "High Slack", LS = "Low Slack"),
+    Tide = case_match(Tide, "HS" ~ "High Slack", "LS" ~ "Low Slack", .default = Tide),
     Station = paste(Station, Date),
     Field_coords = TRUE,
     # Remove conductivity data from dates before it was standardized >
@@ -21,7 +21,7 @@ EDSM <-
     # May 3 or 17 2019 so we will not use conductivity data before June 2019
     Conductivity = if_else(Date < "2019-06-01", NA_real_, Conductivity)
   ) %>%
-  # Remove rows where all measurements are NA
+  # Remove rows where all measurements are NA, if they exist
   rm_rows_all_miss_data() %>%
   # Remove replicate samples with the same Datetime and location
   distinct(Station, Date, Datetime, Latitude, Longitude, .keep_all = TRUE) %>%

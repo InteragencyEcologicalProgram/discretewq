@@ -53,7 +53,7 @@ SKT <- df_data %>%
   # Parse Date and Time columns
   mutate(
     Date = str_extract(Date, ".+(?=\\s)"),
-    Time = str_extract(Time, "(?<=12/30/1899\\s).+")
+    Time = str_extract(Time, "(?<=\\s).+")
   ) %>%
   convert_datetime(date_format = "mdY", time_format = "HMS", timezone = "America/Los_Angeles") %>%
   # Convert one time stamp from midnight to noon
@@ -64,12 +64,8 @@ SKT <- df_data %>%
       Datetime
     )
   ) %>%
-  mutate(
-    Tide = recode(
-      as.character(Tide),
-      `4` = "Flood", `3` = "Low Slack", `2` = "Ebb", `1` = "High Slack", `0` = NA_character_
-    )
-  ) %>%
+  # Standardize tide codes
+  mutate(Tide = case_match(Tide, 4 ~ "Flood", 3 ~ "Low Slack", 2 ~ "Ebb", 1 ~ "High Slack")) %>%
   # Convert Depth from feet to meters
   convert_depth(depth_unit = "feet") %>%
   left_join(df_stations_c, by = join_by(Station), suffix = c("_field", "")) %>%
@@ -83,7 +79,7 @@ SKT <- df_data %>%
     Longitude = if_else(is.na(Longitude), Longitude_field, Longitude),
     .keep = "unused"
   ) %>%
-  # Remove rows where all measurements are NA
+  # Remove rows where all measurements are NA, if they exist
   rm_rows_all_miss_data() %>%
   # Remove replicate tows with identical WQ values - select earliest Datetime
   arrange(Datetime) %>%

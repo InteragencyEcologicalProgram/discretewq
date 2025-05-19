@@ -28,7 +28,7 @@ DOP <- ls_DOP$df_data %>%
     Station = paste(Station_Code, Habitat),
     Field_coords = TRUE
   ) %>%
-  # Remove rows where all measurements are NA
+  # Remove rows where all measurements are NA, if they exist
   rm_rows_all_miss_data() %>%
   # Remove replicate tows with identical WQ values - select earliest Datetime
   arrange(Datetime) %>%
