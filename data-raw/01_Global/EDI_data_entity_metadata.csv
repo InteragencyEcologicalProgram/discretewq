@@ -12,3 +12,6 @@ EDSM,df_data_KDTR,EDSM_KDTR,Ymd,HMS,America/Los_Angeles,meters,meters
 EMP,,,,,,,
 YBFMP_fish,,,,,,,
 YBFMP_zoop,,,,,,,
+SLS,df_stations,Station,,,,,
+SLS,df_tow,TowInfo,,,,feet,
+SLS,df_water_info,WaterInfo,,,,,centimeters

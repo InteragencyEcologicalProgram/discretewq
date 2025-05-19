@@ -402,7 +402,7 @@
 #' Water quality data from the California Department of Fish and Wildlife Smelt Larva Survey.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 2,889 rows and 12 variables
+#' @format a tibble with 4,139 rows and 15 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
@@ -415,9 +415,12 @@
 #'   \item{Secchi}{Secchi depth (cm).}
 #'   \item{Temperature}{Temperature (°C) at surface.}
 #'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
+#'   \item{Conductivity_bottom}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at bottom.}
+#'   \item{TurbidityNTU}{Turbidity (NTU) at surface measured with a turbidimeter.}
+#'   \item{TurbidityFNU}{Turbidity (FNU) at surface measured with a water quality sonde.}
 #'   \item{Notes}{Comments.}
 #'   }
-#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.534.4}{here}.
+#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.534.9}{here}.
 #' @seealso \code{\link{wq}}
 "SLS"
 

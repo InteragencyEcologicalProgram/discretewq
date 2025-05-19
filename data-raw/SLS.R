@@ -1,38 +1,44 @@
-## code to prepare `SLS` dataset goes here
+# Code to prepare `SLS` dataset
+library(dplyr)
+library(tidyr)
+library(lubridate)
 
-require(readr)
-require(dplyr)
-require(lubridate)
-require(tidyr)
-require(stringr)
+source("data-raw/01_Global/data_raw_helpers.R")
 
-SLS_stations<-read_csv(file.path("data-raw", "SLS", "20mm Stations.csv"),
-                       col_types=cols_only(Station="c", LatD="d", LatM="d",
-                                           LatS="d", LonD="d", LonM="d", LonS="d"))%>%
-  mutate(Latitude=LatD+LatM/60+LatS/3600,
-         Longitude=(LonD+LonM/60+LonS/3600)*-1)%>%
-  select(Station, Latitude, Longitude)%>%
-  drop_na()
+survey <- "SLS"
 
-SLS<-read_csv(file.path("data-raw", "SLS", "Water Info.csv"),
-              col_types=cols_only(Date="c", Station="c", Temp="d",
-                                  TopEC="d", Secchi="d", Comments="c"))%>%
-  left_join(SLS_stations, by="Station")%>%
-  left_join(read_csv(file.path("data-raw", "SLS", "Tow Info.csv"),
-                     col_types=cols_only(Date="c", Station="c",
-                                         Time="c", Tide="d", BottomDepth="d")),
-            by=c("Date", "Station"))%>%
-  rename(Temperature=Temp, Conductivity=TopEC, Depth=BottomDepth, Notes=Comments)%>%
-  mutate(Date=parse_date_time(Date, orders="%m/%d/%Y %H:%M:%S", tz="America/Los_Angeles"),
-         Time=parse_date_time(Time, orders="%m/%d/%Y %H:%M:%S", tz="America/Los_Angeles"),
-         Datetime=parse_date_time(if_else(is.na(Time), NA_character_, paste(year(Date), month(Date), day(Date), hour(Time), minute(Time), sep="/")),
-                                  orders="%Y/%m/%d/%H/%M", tz="America/Los_Angeles"))%>%
-  mutate(Source="SLS",
-         Conductivity=if_else(str_detect(Notes, "CDEC"), NA_real_, Conductivity), # Remove any conductivity values that may have come from CDEC
-         Tide=recode(as.character(Tide), `4`="Flood", `3`="Low Slack", `2`="Ebb", `1`="High Slack"),
-         Depth = Depth*0.3048)%>% # Convert feet to meters
-  select(Source, Station, Latitude, Longitude, Date, Datetime, Depth, Tide, Secchi, Temperature, Conductivity, Notes)
+# Run standardized workflow to import data from EDI and process it
+ls_SLS <- import_proc_edi_data(survey)
 
+# Prepare station table before joining it to data tables
+df_stations <- ls_SLS$df_stations %>%
+  separate_wider_delim(Latitude, delim = " ", names = c("Lat_Deg", "Lat_Min", "Lat_Sec")) %>%
+  separate_wider_delim(Longitude, delim = " ", names = c("Long_Deg", "Long_Min", "Long_Sec")) %>%
+  mutate(across(starts_with(c("Lat_", "Long_")), as.numeric)) %>%
+  mutate(
+    Latitude = Lat_Deg + Lat_Min / 60 + Lat_Sec / 3600,
+    Longitude = (Long_Deg + Long_Min / 60 + Long_Sec / 3600) * -1,
+    .keep = "unused"
+  )
 
+# Join data entities and finish cleaning data
+SLS <- ls_SLS$df_water_info %>%
+  left_join(ls_SLS$df_tow, by = join_by(Date, Station)) %>%
+  # Parse Date and Time columns - time is consistently shifted 8 hours early, so need this
+    # workaround for now
+  mutate(
+    Time = with_tz(ymd_hms(Time, tz = "America/Los_Angeles"), tzone = "UTC"),
+    Time = format(Time, "%H:%M:%S")
+  ) %>%
+  convert_datetime(date_format = "Ymd", time_format = "HMS", timezone = "America/Los_Angeles") %>%
+  mutate(Tide = case_match(Tide, 4 ~ "Flood", 3 ~ "Low Slack", 2 ~ "Ebb", 1 ~ "High Slack")) %>%
+  left_join(df_stations, by = join_by(Station)) %>%
+  # Remove rows where all measurements are NA, if there are any
+  rm_rows_all_miss_data() %>%
+  add_source_col(survey) %>%
+  standardize_col_order()
 
 usethis::use_data(SLS, overwrite = TRUE)
+
+document_helper_edi(ls_SLS$edi_id, SLS)
+update_edi_metadata(survey, ls_SLS$edi_id)
