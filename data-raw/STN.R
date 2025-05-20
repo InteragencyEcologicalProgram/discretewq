@@ -1,116 +1,74 @@
-## code to prepare `STN` dataset goes here
+# Code to prepare `STN` dataset
+library(dplyr)
+library(lubridate)
+library(tidyr)
+library(conflicted)
 
-require(readr)
-require(dplyr)
-require(lubridate)
-require(tidyr)
+# Declare package conflict preferences
+conflicts_prefer(dplyr::filter())
 
-STN_stations <-
-  read_csv(
-    file.path("data-raw", "STN", "luStation.csv"),
-    col_types = cols_only(
-      StationCodeSTN = "c",
-      LatD = "d",
-      LatM = "d",
-      LatS = "d",
-      LonD = "d",
-      LonM = "d",
-      LonS = "d"
-    )
-  ) %>%
-  rename(Station = StationCodeSTN) %>%
+# Source helper functions
+source("data-raw/01_Global/data_raw_helpers.R")
+
+survey <- "STN"
+
+# Import data tables
+fp_stn <- "data-raw/STN"
+
+df_stations <- import_raw_data(file.path(fp_stn, "luStation.csv"), survey, "df_stations")
+df_sample <- import_raw_data(file.path(fp_stn, "Sample.csv"), survey, "df_sample")
+df_tow <- import_raw_data(file.path(fp_stn, "TowEffort.csv"), survey, "df_tow")
+
+# Prepare tables before joining them together
+df_stations_c <- df_stations %>%
   mutate(
-    Latitude = LatD + LatM / 60 + LatS / 3600,
-    Longitude = (LonD + LonM / 60 + LonS / 3600) * -1
+    Latitude = Lat_Deg + Lat_Min / 60 + Lat_Sec / 3600,
+    Longitude = (Long_Deg + Long_Min / 60 + Long_Sec / 3600) * -1,
+    .keep = "unused"
   ) %>%
-  select(Station, Latitude, Longitude) %>%
   drop_na()
 
-STN <-
-  read_csv(
-    file.path("data-raw", "STN", "Sample.csv"),
-    col_types = cols_only(
-      SampleRowID = "i",
-      SampleDate = "c",
-      StationCode = "c",
-      TemperatureTop = "d",
-      TemperatureBottom = "d",
-      Secchi = "d",
-      ConductivityTop = "d",
-      ConductivityBottom = "d",
-      TideCode = "i",
-      DepthBottom = "d",
-      SampleComments = "c",
-      Microcystis = "d",
-      TurbidityTop = "d"
-    )
-  ) %>%
-  rename(
-    Date = SampleDate,
-    Station = StationCode,
-    Temperature = TemperatureTop,
-    Conductivity = ConductivityTop,
-    Tide = TideCode,
-    Depth = DepthBottom,
-    Notes = SampleComments,
-    Temperature_bottom = TemperatureBottom,
-    Conductivity_bottom = ConductivityBottom,
-    TurbidityNTU = TurbidityTop
-  ) %>%
+df_tow_c <- df_tow %>%
+  # Use the time of the first tow
+  mutate(Time = mdy_hms(Time)) %>%
+  drop_na() %>%
+  summarize(Time = min(Time), .by = SampleRowID)
+
+# Join tables together and finish cleaning data
+STN <- df_sample %>%
   mutate(
-    Source = "STN",
-    Date = parse_date_time(Date, "%m/%d/%Y %H:%M:%S", tz = "America/Los_Angeles")
+    Latitude = Lat_Deg + Lat_Min / 60 + Lat_Sec / 3600,
+    Longitude = (Long_Deg + Long_Min / 60 + Long_Sec / 3600) * -1,
+    .keep = "unused"
   ) %>%
-  left_join(
-    read_csv(
-      file.path("data-raw", "STN", "TowEffort.csv"),
-      col_types = cols_only(SampleRowID = "i", TimeStart = "c")
-    ) %>%
-      select(SampleRowID, Time = TimeStart) %>%
-      mutate(Time = parse_date_time(Time, "%m/%d/%Y %H:%M:%S", tz = "America/Los_Angeles")) %>%
-      drop_na() %>%
-      group_by(SampleRowID) %>%
-      summarise(Time = min(Time), .groups = "drop"), # Use the time of the first tow
-    by = "SampleRowID"
-  ) %>%
-  mutate(Datetime = parse_date_time(if_else(is.na(Time), NA_character_, paste0(Date, " ", hour(Time), ":", minute(Time))), "%Y-%m-%d %H:%M", tz = "America/Los_Angeles")) %>%
+  left_join(df_tow_c, by = join_by(SampleRowID)) %>%
   mutate(
-    Tide = recode(as.character(Tide), `4` = "Flood", `3` = "Low Slack", `2` = "Ebb", `1` = "High Slack"),
-    Depth = Depth * 0.3048 # Convert feet to meters
+    Time = format(Time, "%H:%M:%S"),
+    Date = str_extract(Date, ".+(?=\\s)")
   ) %>%
-  left_join(STN_stations, by = "Station") %>%
-  select(
-    Source,
-    Station,
-    Latitude,
-    Longitude,
-    Date,
-    Datetime,
-    Depth,
-    Tide,
-    Microcystis,
-    Secchi,
-    Temperature,
-    Temperature_bottom,
-    Conductivity,
-    Conductivity_bottom,
-    TurbidityNTU,
-    Notes
+  convert_datetime(date_format = "mdY", time_format = "HMS", timezone = "America/Los_Angeles") %>%
+  # Standardize tide codes
+  mutate(Tide = case_match(Tide, 4 ~ "Flood", 3 ~ "Low Slack", 2 ~ "Ebb", 1 ~ "High Slack")) %>%
+  # Convert Depth from feet to meters
+  convert_depth(depth_unit = "feet") %>%
+  left_join(df_stations_c, by = join_by(Station), suffix = c("_field", "")) %>%
+  mutate(
+    Field_coords = case_when(
+      is.na(Latitude) & !is.na(Latitude_field) ~ TRUE,
+      is.na(Longitude) & !is.na(Longitude_field) ~ TRUE,
+      TRUE ~ FALSE
+    ),
+    Latitude = if_else(is.na(Latitude), Latitude_field, Latitude),
+    Longitude = if_else(is.na(Longitude), Longitude_field, Longitude),
+    .keep = "unused"
   ) %>%
-  # Remove rows where all WQ parameters have missing values
-  filter(
-    !if_all(
-      c(
-        Microcystis,
-        Secchi,
-        Temperature,
-        Temperature_bottom,
-        Conductivity,
-        Conductivity_bottom,
-        TurbidityNTU
-      ),
-      is.na
-    )
-  )
+  # Remove Field_coords column because they are all FALSE - this will be automated
+  select(-Field_coords) %>%
+  # Remove rows where all measurements are NA, if they exist
+  rm_rows_all_miss_data() %>%
+  add_source_col(survey) %>%
+  standardize_col_order()
 
 usethis::use_data(STN, overwrite = TRUE)
+
+document_helper_other(STN)

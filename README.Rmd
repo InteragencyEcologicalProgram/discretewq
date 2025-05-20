@@ -80,8 +80,6 @@ CDFW. 2024. Bay Study data. [https://filelib.wildlife.ca.gov/Public/BayStudy/Acc
 
 CDFW. 2023a. Fall Midwater Trawl data. [https://filelib.wildlife.ca.gov/public/TownetFallMidwaterTrawl/FMWT%20Data/](https://filelib.wildlife.ca.gov/public/TownetFallMidwaterTrawl/FMWT%20Data/).
 
-CDFW. 2023b. Summer Townet data. [https://filelib.wildlife.ca.gov/public/TownetFallMidwaterTrawl/TNS%20MS%20Access%20Data/TNS%20data/](https://filelib.wildlife.ca.gov/public/TownetFallMidwaterTrawl/TNS%20MS%20Access%20Data/TNS%20data/).
-
 CDWR. 2024. Water Quality Evaluation Section, North Central Region Office. [https://wdl.water.ca.gov/waterdatalibrary/WaterQualityDataLib.aspx](https://wdl.water.ca.gov/waterdatalibrary/WaterQualityDataLib.aspx). 
 
 Cloern, J. E., and T. S. Schraga. 2016. USGS Measurements of Water Quality in San Francisco Bay (CA), 1969-2015 (ver. 3.0 June 2017). U. S. Geological Survey data release. [doi:https://doi.org/10.5066/F7TQ5ZPR](https://doi.org/10.5066/F7TQ5ZPR)
@@ -97,6 +95,8 @@ Interagency Ecological Program (IEP), C. Brennan, V.G. Mora, J. Oceguera Zavala,
 Interagency Ecological Program (IEP), C. Pien, J. Adams, and N. Kwan. 2021d. Interagency Ecological Program: Zooplankton catch and water quality data from the Sacramento River floodplain and tidal slough, collected by the Yolo Bypass Fish Monitoring Program, 1998-2018. ver 2. Environmental Data Initiative. [doi:10.6073/pasta/baad532af96cba1d58d43b89c08ca081](https://portal.edirepository.org/nis/metadataviewer?packageid=edi.494.2)
 
 Interagency Ecological Program (IEP), C. Pien, and N. Kwan. 2022b. Interagency Ecological Program: Fish catch and water quality data from the Sacramento River floodplain and tidal slough, collected by the Yolo Bypass Fish Monitoring Program, 1998-2021. ver 3. Environmental Data Initiative. [doi:10.6073/pasta/f5c4362f4a1f370723e2b9113432909f](https://portal.edirepository.org/nis/metadataviewer?packageid=edi.233.3)
+
+Malinich, T.D., J.R. White, S.B. Slater, S.D. Breining-Aday, and N.K. Ugbah. 2023. Interagency Ecological Program: Summer Townet Survey for Young Pelagic Fishes in the San Francisco Estuary ver 1. Environmental Data Initiative. [doi:10.6073/pasta/6850f6af662454a49b71463a61e06791](https://portal.edirepository.org/nis/metadataviewer?packageid=edi.1413.1)
 
 O’Rear, T., J. Durand, and P. Moyle. 2022. Suisun Marsh Fish Study. [https://watershed.ucdavis.edu/project/suisun-marsh-fish-study](https://watershed.ucdavis.edu/project/suisun-marsh-fish-study).
 

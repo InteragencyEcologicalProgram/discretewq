@@ -6,7 +6,7 @@
 \alias{STN}
 \title{STN water quality data}
 \format{
-a tibble with 8,074 rows and 16 variables
+a tibble with 8,554 rows and 16 variables
 \describe{
 \item{Source}{Name of the source dataset.}
 \item{Station}{Station where sample was collected.}
@@ -22,7 +22,7 @@ a tibble with 8,074 rows and 16 variables
 \item{Temperature_bottom}{Temperature (°C) at bottom.}
 \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
 \item{Conductivity_bottom}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at bottom.}
-\item{TurbidityNTU}{Turbidity (NTU) at surface.}
+\item{TurbidityNTU}{Turbidity (NTU) at surface measured with a turbidimeter.}
 \item{Notes}{Comments.}
 }
 }
@@ -33,7 +33,7 @@ STN
 Water quality data from the California Department of Fish and Wildlife Summer Townet Survey.
 }
 \details{
-More metadata and information on methods are available \href{https://wildlife.ca.gov/Conservation/Delta/Townet-Survey}{here}.
+More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.1413.1}{here}.
 }
 \seealso{
 \code{\link{wq}}
