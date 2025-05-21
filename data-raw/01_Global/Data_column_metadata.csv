@@ -298,3 +298,13 @@ FMWT,df_data,Microcystis,Microcystis,numeric
 FMWT,df_sample,StationCode,Station,character
 FMWT,df_sample,SecchiEstimated,Secchi_estimated,numeric
 FMWT,df_sample,SampleDate,Date,character
+USBR,df_stations,Station,Station,character
+USBR,df_stations,Lat,Latitude,numeric
+USBR,df_stations,Long,Longitude,numeric
+USBR,df_stations,Depth (m),Depth,numeric
+USBR,df_data,Station,Station,character
+USBR,df_data,DateTime.PT,Datetime,character
+USBR,df_data,Depth.feet,Sample_depth,numeric
+USBR,df_data,Temp.C,Temperature,numeric
+USBR,df_data,SpCond.uS,Conductivity,numeric
+USBR,df_data,Chl.ug.L,Chlorophyll,numeric

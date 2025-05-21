@@ -1,46 +1,60 @@
-## code to prepare `USBR` dataset goes here
+# Code to prepare `USBR` dataset
+library(dplyr)
+library(stringr)
+library(tidyr)
 
-require(readr)
-require(dplyr)
-require(lubridate)
-require(tidyr)
-require(stringr)
+# Source helper functions
+source("data-raw/01_Global/data_raw_helpers.R")
 
-USBR_stations <- read_csv(file.path("data-raw", "USBR", "USBRSiteLocations.csv"),
-                          col_types=cols_only(Station="c", Lat="d", Long="d"))%>%
-  rename(Latitude=Lat, Longitude=Long)%>%
-  mutate(Station=str_remove(Station, "NL "),
-         Station=recode(Station, PS="Pro"))
+survey <- "USBR"
 
-USBR <- read_csv(file.path("data-raw", "USBR", "YSILongTermSites_AllDepths.csv"),
-                 col_types=cols_only(Station="c", DateTime.PT="c", Depth.feet="d",
-                                     Temp.C="d", SpCond.uS="d", Chl.ug.L="d", Date="c"))%>%
-  rename(Datetime=DateTime.PT, Sample_depth=Depth.feet, Temperature=Temp.C, Conductivity=SpCond.uS, Chlorophyll=Chl.ug.L)%>%
-  mutate(Datetime=parse_date_time(Datetime, orders="%Y-%m-%d %H:%M:%S", tz="America/Los_Angeles"),
-         Date=parse_date_time(Date, orders="%Y-%m-%d", tz="America/Los_Angeles"))%>%
-  group_by(Station, Date)%>%
+# Import data tables
+fp_usbr <- "data-raw/USBR"
+
+df_stations <- import_raw_data(file.path(fp_usbr, "USBRSiteLocations.csv"), survey, "df_stations")
+df_data <- import_raw_data(file.path(fp_usbr, "YSILongTermSites_AllDepths.csv"), survey, "df_data")
+
+# Prepare station table before joining it to data table
+df_stations_c <- df_stations %>%
   mutate(
-    Depth_bin=case_when(
-      Sample_depth==min(Sample_depth) & Sample_depth<3 ~ "surface",
-      Sample_depth==max(Sample_depth) & Sample_depth>3 ~ "bottom",
-      TRUE ~ "Middle"),
-    Datetime=min(Datetime)+(max(Datetime)-min(Datetime))/2)%>% # Keep average sample time across all depths
-  ungroup()%>%
-  filter(Depth_bin%in%c("surface", "bottom"))%>%
-  pivot_wider(names_from=Depth_bin, values_from=c(Sample_depth, Conductivity, Chlorophyll, Temperature),
-              values_fn=list(Sample_depth=mean, Conductivity=mean, Chlorophyll=mean, Temperature=mean))%>% # There are 2 duplicated rows this should take care of
-  left_join(read_csv(file.path("data-raw", "USBR", "USBRSiteLocations.csv"),
-                     col_types=cols_only(Station="c", `Depth (m)`="d"))%>%
-              mutate(Station=str_remove(Station, "NL "))%>%
-              mutate(Station=recode(Station, PS="Pro"))%>%
-              rename(Depth="Depth (m)"),
-            by="Station")%>%
-  mutate(Source="USBR",
-         Sample_depth_surface = Sample_depth_surface*0.3048,
-         Sample_depth_bottom = Sample_depth_bottom*0.3048)%>% # Convert to meters
-  left_join(USBR_stations, by="Station")%>%
-  select(Source, Station, Latitude, Longitude, Date, Datetime, Depth, Sample_depth_surface, Sample_depth_bottom, Chlorophyll=Chlorophyll_surface,
-         Temperature=Temperature_surface, Temperature_bottom, Conductivity=Conductivity_surface)
+    Station = str_remove(Station, "NL "),
+    Station = if_else(Station == "PS", "Pro", Station)
+  )
 
+# Join data entities and finish cleaning data
+USBR <- df_data %>%
+  convert_datetime(date_format = "Ymd", time_format = "HMS", timezone = "America/Los_Angeles") %>%
+  group_by(Station, Date) %>%
+  mutate(
+    # Categorize sample depths
+    Depth_bin = case_when(
+      Sample_depth == min(Sample_depth) & Sample_depth < 3 ~ "surface",
+      Sample_depth == max(Sample_depth) & Sample_depth > 3 ~ "bottom",
+      TRUE ~ NA_character_
+    ),
+    # Keep average sample time across all depths
+    Datetime = mean(Datetime)
+  ) %>%
+  ungroup() %>%
+  # Remove samples not collected at either the surface or bottom
+  drop_na(Depth_bin) %>%
+  # Remove a couple of duplicate rows before pivoting data wider on sample depth
+  distinct() %>%
+  pivot_wider(
+    names_from = Depth_bin,
+    values_from = c(Sample_depth, Conductivity, Chlorophyll, Temperature)
+  ) %>%
+  # Rename surface columns to standardized names
+  rename_with(\(x) str_remove(x, "_surface$"), ends_with("_surface") & !starts_with("Sample")) %>%
+  # Convert sample depths to meters
+  mutate(across(starts_with("Sample_depth"), \(x) x * 0.3048)) %>%
+  left_join(df_stations_c, by = join_by(Station)) %>%
+  # Remove rows where all measurements are NA, if they exist
+  rm_rows_all_miss_data() %>%
+  add_source_col(survey) %>%
+  standardize_col_order() %>%
+  arrange(Datetime)
 
 usethis::use_data(USBR, overwrite = TRUE)
+
+document_helper_other(USBR)
