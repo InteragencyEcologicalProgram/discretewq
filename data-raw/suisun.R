@@ -1,57 +1,93 @@
-## code to prepare `suisun` dataset goes here
+# Code to prepare `suisun` dataset
+library(dplyr)
+library(tidyr)
+library(stringr)
 
-# Issues
-# 1) Some water quality measurements may be copied and pasted if 2 fish samples were close in time and space
-
-require(readr)
-require(dplyr)
-require(lubridate)
-require(tidyr)
-
-# Function to calculate mode
-# Modified from https://stackoverflow.com/questions/2547402/how-to-find-the-statistical-mode to remove NAs
+# Function to calculate mode of Tide values
+# Modified from https://stackoverflow.com/questions/2547402/how-to-find-the-statistical-mode to
+  # remove missing values
 Mode <- function(x) {
-  x<-na.omit(x)
+  x <- na.omit(x)
   ux <- unique(x)
   ux[which.max(tabulate(match(x, ux)))]
 }
 
-Suisun_stations<-read_csv(file.path("data-raw", "Suisun", "StationsLookUp.csv"),
-                          col_types=cols_only(StationCode="c", x_WGS84="d", y_WGS84="d"))%>%
-  rename(Longitude=x_WGS84, Latitude=y_WGS84, Station=StationCode)%>%
-  drop_na()
+source("data-raw/01_Global/data_raw_helpers.R")
 
-#Removing salinity because data do not correspond well with conductivity
-suisun<-read_csv(file.path("data-raw", "Suisun", "Sample.csv"),
-                 col_types = cols_only(SampleRowID="c", StationCode="c", SampleDate="c", SampleTime="c",
-                                       WaterTemperature="d", Secchi="d",
-                                       SpecificConductance="d", ElecCond="d", TideCode="c",
-                                       DO="d", PctSaturation="d", Salinity="d"))%>%
-  rename(Station=StationCode, Date=SampleDate, Time=SampleTime,
-         Temperature=WaterTemperature, Tide=TideCode,
-         DissolvedOxygen=DO, DissolvedOxygenPercent=PctSaturation)%>%
-  mutate(Date=parse_date_time(Date, "%m/%d/%Y %H:%M:%S", tz="America/Los_Angeles"),
-         Time=parse_date_time(Time, "%m/%d/%Y %H:%M:%S", tz="America/Los_Angeles"),
-         Conductivity=if_else(is.na(SpecificConductance), ElecCond / (1 + 0.019 * (Temperature - 25)), SpecificConductance),
-         # specific conductivity calculated from electrical conductivity Using formula from https://pubs.usgs.gov/tm/09/a6.3/tm9-a6_3.pdf
-         # and alpha constant from https://www.mt.com/dam/MT-NA/pHCareCenter/Conductivity_Linear_Temp_Comensation_APN.pdf
-         Datetime=parse_date_time(if_else(is.na(Time), NA_character_, paste0(Date, " ", hour(Time), ":", minute(Time))), "%Y-%m-%d %H:%M", tz="America/Los_Angeles"),
-         Tide=recode(Tide, flood="Flood", ebb="Ebb", low="Low Slack", high="High Slack", outgoing="Ebb", incoming="Flood"),
-         Source="Suisun")%>%
-  select(-Time, -SpecificConductance, -ElecCond)%>%
-  left_join(read_csv(file.path("data-raw", "Suisun", "Depth.csv"),
-                     col_types=cols_only(SampleRowID="c", Depth="d"))%>%
-              group_by(SampleRowID)%>%
-              summarise(Depth=mean(Depth, na.rm=T), .groups="drop"), # Use the average depth for each sample
-            by="SampleRowID")%>%
-  mutate(ID=paste(Date, Station, Temperature, Salinity, DissolvedOxygen, DissolvedOxygenPercent, Secchi, Conductivity))%>% # Following steps to remove duplicated WQ data from multiple fish samples that were nearby in space and time
-  group_by(Source, Date, Station, ID)%>%
-  summarise(across(c(Temperature, Secchi, Conductivity, DissolvedOxygen, DissolvedOxygenPercent, Depth, Datetime), ~mean(.x, na.rm=T)),
-            Tide=Mode(Tide),
-            .groups="drop")%>%
-  mutate(across(where(is.numeric), ~if_else(is.nan(.x), NA_real_, .x)))%>% # Replace NaN values with NAs
-  left_join(Suisun_stations, by="Station")%>%
-  select(Source, Station, Latitude, Longitude, Date, Datetime, Depth, Tide, Secchi, Temperature, Conductivity, DissolvedOxygen, DissolvedOxygenPercent)%>%
-  distinct(Source, Station, Date, Datetime, .keep_all=T)
+survey <- "Suisun"
+
+# Run standardized workflow to import data from EDI and process it
+ls_suisun <- import_proc_edi_data(survey)
+
+# Prepare tables before joining them together
+df_stations <- ls_suisun$df_stations %>% drop_na()
+
+df_depth <- ls_suisun$df_depth %>%
+  # Use the average depth for each sample
+  summarize(Depth = mean(Depth, na.rm = TRUE), .by = SampleRowID)
+
+# Join tables together and finish cleaning data
+# Notes:
+  # 1) Not including salinity because data do not correspond well with conductivity
+  # 2) Some water quality measurements may be copied and pasted if 2 fish samples were close in time
+    # and space
+suisun <- ls_suisun$df_sample %>%
+  # Parse Date and Time columns
+  mutate(
+    Date = str_extract(Date, ".+(?=\\s)"),
+    Time = str_extract(Time, "(?<=\\s).+")
+  ) %>%
+  convert_datetime(date_format = "mdY", time_format = "HMS", timezone = "America/Los_Angeles") %>%
+  # Specific conductivity calculated from electrical conductivity using formula from
+    # https://pubs.usgs.gov/tm/09/a6.3/tm9-a6_3.pdf and alpha constant from
+    # https://www.mt.com/dam/MT-NA/pHCareCenter/Conductivity_Linear_Temp_Comensation_APN.pdf
+  # Electrical conductivity values less than 100 are excluded based on range of specific
+    # conductance values
+  mutate(
+    ElecCond = if_else(ElecCond < 100, NA_real_, ElecCond),
+    Conductivity = if_else(
+      is.na(Conductivity),
+      ElecCond / (1 + 0.019 * (Temperature - 25)),
+      Conductivity
+    )
+  ) %>%
+  # Standardize tide codes
+  mutate(
+    Tide = case_match(
+      Tide,
+      c("flood", "incoming") ~ "Flood",
+      c("ebb", "outgoing") ~ "Ebb",
+      "low" ~ "Low Slack",
+      "high" ~ "High Slack"
+    )
+  ) %>%
+  # Add depth values
+  left_join(df_depth, by = join_by(SampleRowID)) %>%
+  # Remove rows where all measurements are NA, if they exist
+  rm_rows_all_miss_data() %>%
+  # Remove replicate tows with identical WQ values - select earliest Datetime and most common Tide
+    # value. Average the depth values for each group - most of the time there is only one value per
+    # group.
+  summarize(
+    Datetime = min(Datetime),
+    Depth = mean(Depth, na.rm = TRUE),
+    Tide = Mode(Tide),
+    .by = c(
+      Station, Date, Temperature, DissolvedOxygen, DissolvedOxygenPercent, Secchi, Conductivity
+    )
+  ) %>%
+  # Replace NaN values in Depth column with NA
+  mutate(Depth = na_if(Depth, NaN)) %>%
+  # Remove replicate tows with the same Station and Datetime, but different WQ values - keep rows
+    # with Depth and Tide values
+  arrange(Depth) %>%
+  distinct(Station, Datetime, .keep_all = TRUE) %>%
+  left_join(df_stations, by = join_by(Station)) %>%
+  add_source_col(survey) %>%
+  standardize_col_order() %>%
+  arrange(Datetime)
 
 usethis::use_data(suisun, overwrite = TRUE)
+
+document_helper_edi(ls_suisun$edi_id, suisun)
+update_edi_metadata(survey, ls_suisun$edi_id)

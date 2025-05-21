@@ -463,7 +463,7 @@
 #' Water quality data from the UC Davis Suisun Marsh Fish Study.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 14,206 rows and 11 variables
+#' @format a tibble with 15,525 rows and 13 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
@@ -479,7 +479,7 @@
 #'   \item{DissolvedOxygen}{Dissolved oxygen (mg/L) at surface.}
 #'   \item{DissolvedOxygenPercent}{Dissolved oxygen percent (dimensionless) at surface.}
 #'   }
-#' @details More metadata and information on methods are available \href{https://watershed.ucdavis.edu/project/suisun-marsh-fish-study}{here}.
+#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.1947.1}{here}.
 #' @seealso \code{\link{wq}}
 "suisun"
 

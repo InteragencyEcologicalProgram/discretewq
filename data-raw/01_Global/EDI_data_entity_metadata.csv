@@ -15,3 +15,6 @@ YBFMP_zoop,,,,,,,
 SLS,df_stations,Station,,,,,
 SLS,df_tow,TowInfo,,,,feet,
 SLS,df_water_info,WaterInfo,,,,,centimeters
+Suisun,df_stations,Stations,,,,,
+Suisun,df_sample,Sample,,,,,centimeters
+Suisun,df_depth,Depth,,,,meters,
