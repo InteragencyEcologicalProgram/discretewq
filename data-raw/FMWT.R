@@ -1,103 +1,59 @@
-## code to prepare `FMWT` dataset goes here
-
-library(readr)
+# Code to prepare `FMWT` dataset
 library(dplyr)
 library(lubridate)
-require(tidyr)
+library(stringr)
 
-FMWT_stations <-
-  read_csv(
-    file.path("data-raw", "FMWT", "StationsLookUp.csv"),
-    col_types = cols_only(StationCode = "c", DD_Latitude = "d", DD_Longitude = "d")
-  ) %>%
-  rename(
-    Station = StationCode,
-    Latitude = DD_Latitude,
-    Longitude = DD_Longitude
-  ) %>%
-  drop_na()
+source("data-raw/01_Global/data_raw_helpers.R")
 
-FMWT <-
-  read_csv(
-    file.path("data-raw", "FMWT", "Sample.csv"),
-    col_types = cols_only(
-      StationCode = "c",
-      SampleDate = "c",
-      SampleTimeStart = "c",
-      WaterTemperature = "d",
-      Turbidity = "d",
-      Secchi = "d",
-      SecchiEstimated = "l",
-      ConductivityTop = "d",
-      ConductivityBottom = "d",
-      TideCode = "i",
-      DepthBottom = "d",
-      Microcystis = "d",
-      BottomTemperature = "d"
-    )
-  ) %>%
-  rename(
-    Station = StationCode,
-    Date = SampleDate,
-    Tide = TideCode,
-    Time = SampleTimeStart,
-    Depth = DepthBottom,
-    Conductivity = ConductivityTop,
-    Conductivity_bottom = ConductivityBottom,
-    Temperature = WaterTemperature,
-    Secchi_estimated = SecchiEstimated,
-    TurbidityNTU = Turbidity,
-    Temperature_bottom = BottomTemperature
-  ) %>%
+survey <- "FMWT"
+
+# Run standardized workflow to import data from EDI and process it
+ls_FMWT <- import_proc_edi_data(survey)
+
+# Import sample table from FMWT database hosted on FTP site to add in Secchi_estimated info
+# This info isn't in the EDI data publication
+df_sample <- import_raw_data("data-raw/FMWT/Sample.csv", survey, "df_sample")
+
+# Prepare sample table to be joined with data table
+df_sample_c <- df_sample %>%
   mutate(
-    Date = parse_date_time(Date, "%m/%d/%Y %H:%M:%S", tz = "America/Los_Angeles"),
-    Time = parse_date_time(Time, "%m/%d/%Y %H:%M:%S", tz = "America/Los_Angeles"),
-    Time = if_else(hour(Time) == 0, parse_date_time(NA_character_, tz = "America/Los_Angeles"), Time),
-    Tide = recode(Tide, `1` = "High Slack", `2` = "Ebb", `3` = "Low Slack", `4` = "Flood"),
-    Datetime = parse_date_time(if_else(is.na(Time), NA_character_, paste0(Date, " ", hour(Time), ":", minute(Time))), "%Y-%m-%d %H:%M", tz = "America/Los_Angeles"),
-    Microcystis = if_else(Microcystis == 6, 2, Microcystis),
-    # Omit values equal to zero in Temperature_bottom and Conductivity_bottom
-    across(c(Temperature_bottom, Conductivity_bottom), ~ na_if(.x, 0)),
-    # Omit one Temperature_bottom value that was likely measured in degrees F
-    Temperature_bottom = if_else(Temperature_bottom > 40, NA_real_, Temperature_bottom),
-    Source = "FMWT",
-    Secchi = Secchi * 100, # convert to cm
-    Depth = Depth * 0.3048 # Convert to meters
+    Date = mdy(str_extract(Date, ".+(?=\\s)")),
+    Secchi_estimated = case_match(Secchi_estimated, 0 ~ FALSE, 1 ~ TRUE)
   ) %>%
-  left_join(FMWT_stations, by = "Station") %>%
-  select(
-    Source,
-    Station,
-    Latitude,
-    Longitude,
-    Date,
-    Datetime,
-    Depth,
-    Tide,
-    Microcystis,
-    Secchi,
-    Secchi_estimated,
-    Temperature,
-    Temperature_bottom,
-    Conductivity,
-    Conductivity_bottom,
-    TurbidityNTU
-  ) %>%
-  # Remove rows where all WQ parameters have missing values
-  filter(
-    !if_all(
-      c(
-        Microcystis,
-        Secchi,
-        Temperature,
-        Temperature_bottom,
-        Conductivity,
-        Conductivity_bottom,
-        TurbidityNTU
-      ),
-      is.na
+  # Remove duplicates
+  distinct() %>%
+  arrange(desc(Secchi_estimated)) %>%
+  distinct(Station, Date, .keep_all = TRUE) %>%
+  arrange(Date, Station) %>%
+  # Adjust dates to one day later for a couple samples to match with data table correctly
+  # Visually confirmed these have the same WQ measurements
+  mutate(
+    Date = if_else(
+      Date == "2021-09-13" & Station %in% c("913", "915"),
+      Date + days(1),
+      Date
     )
+  )
+
+# Finish cleaning up data
+FMWT <- ls_FMWT$df_data %>%
+  mutate(
+    # Standardize stations to 3 digit codes
+    Station = if_else(str_length(Station) == 2, paste0("0", Station), Station),
+    # Standardize tide codes
+    Tide = case_match(Tide, 4 ~ "Flood", 3 ~ "Low Slack", 2 ~ "Ebb", 1 ~ "High Slack"),
+    # Reassign some Microcystis values
+    Microcystis = if_else(Microcystis == 6, 2, Microcystis)
   ) %>%
-  distinct(Source, Station, Date, Datetime, .keep_all = T)
+  # Add Secchi_estimated
+  left_join(df_sample_c, by = join_by(Station, Date)) %>%
+  # Remove rows where all measurements are NA, if they exist
+  rm_rows_all_miss_data() %>%
+  add_source_col(survey) %>%
+  standardize_col_order() %>%
+  arrange(Date, Station)
 
 usethis::use_data(FMWT, overwrite = TRUE)
+
+document_helper_edi(ls_FMWT$edi_id, FMWT)
+update_edi_metadata(survey, ls_FMWT$edi_id)

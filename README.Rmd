@@ -78,8 +78,6 @@ Battey, M. and S. Perry. 2023. Interagency Ecological Program: Discrete water qu
 
 CDFW. 2024. Bay Study data. [https://filelib.wildlife.ca.gov/Public/BayStudy/Access_Database/](https://filelib.wildlife.ca.gov/Public/BayStudy/Access_Database/).
 
-CDFW. 2023a. Fall Midwater Trawl data. [https://filelib.wildlife.ca.gov/public/TownetFallMidwaterTrawl/FMWT%20Data/](https://filelib.wildlife.ca.gov/public/TownetFallMidwaterTrawl/FMWT%20Data/).
-
 CDWR. 2024. Water Quality Evaluation Section, North Central Region Office. [https://wdl.water.ca.gov/waterdatalibrary/WaterQualityDataLib.aspx](https://wdl.water.ca.gov/waterdatalibrary/WaterQualityDataLib.aspx). 
 
 Cloern, J. E., and T. S. Schraga. 2016. USGS Measurements of Water Quality in San Francisco Bay (CA), 1969-2015 (ver. 3.0 June 2017). U. S. Geological Survey data release. [doi:https://doi.org/10.5066/F7TQ5ZPR](https://doi.org/10.5066/F7TQ5ZPR)
@@ -99,6 +97,8 @@ Interagency Ecological Program (IEP), C. Pien, J. Adams, and N. Kwan. 2021d. Int
 Interagency Ecological Program (IEP), C. Pien, and N. Kwan. 2022b. Interagency Ecological Program: Fish catch and water quality data from the Sacramento River floodplain and tidal slough, collected by the Yolo Bypass Fish Monitoring Program, 1998-2021. ver 3. Environmental Data Initiative. [doi:10.6073/pasta/f5c4362f4a1f370723e2b9113432909f](https://portal.edirepository.org/nis/metadataviewer?packageid=edi.233.3)
 
 Malinich, T.D., J.R. White, S.B. Slater, S.D. Breining-Aday, and N.K. Ugbah. 2023. Interagency Ecological Program: Summer Townet Survey for Young Pelagic Fishes in the San Francisco Estuary ver 1. Environmental Data Initiative. [doi:10.6073/pasta/6850f6af662454a49b71463a61e06791](https://portal.edirepository.org/nis/metadataviewer?packageid=edi.1413.1)
+
+Rohlin, T.D., M. Johnson, S. Breining-Aday, N. Ugbah, A. Rocha, J. White, T. Malinich, and S.B. Slater. 2025. Interagency Ecological Program: Fish catch and associated water quality for the Fall Midwater Trawl Survey, Sacramento-San Joaquin Delta, 1967-2024 ver 1. Environmental Data Initiative. [doi:10.6073/pasta/fed40f5af0a5d5a6e54402cf78d3cbc6](https://portal.edirepository.org/nis/metadataviewer?packageid=edi.1951.1)
 
 Schraga, T. S., E. S. Nejad, C. A. Martin, and J. E. Cloern. 2020. USGS measurements of water quality in San Francisco Bay (CA), beginning in 2016 (ver. 3.0, March 2020). U. S. Geological Survey data release. [doi:https://doi.org/10.5066/F7D21WGF](https://doi.org/10.5066/F7D21WGF)
 
