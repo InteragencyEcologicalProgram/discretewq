@@ -6,7 +6,7 @@
 \alias{SDO}
 \title{SDO water quality data}
 \format{
-a tibble with 3,112 rows and 16 variables
+a tibble with 3,157 rows and 20 variables
 \describe{
 \item{Source}{Name of the source dataset.}
 \item{Station}{Station where sample was collected.}
@@ -14,6 +14,7 @@ a tibble with 3,112 rows and 16 variables
 \item{Longitude}{Longitude in decimal degrees.}
 \item{Date}{Date sample was collected.}
 \item{Datetime}{Date and time of sample collection.}
+\item{Depth}{Bottom depth (m).}
 \item{Microcystis}{Microcystis bloom intensity on a qualitative scale from 1 to 5 where 1 = absent, 2 = low, 3 = medium, 4 = high, and 5 = very high.}
 \item{Secchi}{Secchi depth (cm).}
 \item{Temperature}{Temperature (°C) at surface.}
@@ -24,6 +25,9 @@ a tibble with 3,112 rows and 16 variables
 \item{DissolvedOxygen_bottom}{Dissolved oxygen (mg/L) at bottom.}
 \item{pH}{pH (dimensionless) at surface.}
 \item{pH_bottom}{pH (dimensionless) at bottom.}
+\item{TurbidityNTU}{Turbidity (NTU) at surface measured with a turbidimeter.}
+\item{TurbidityFNU}{Turbidity (FNU) at surface measured with a water quality sonde.}
+\item{TurbidityFNU_bottom}{Turbidity (FNU) at bottom measured with a water quality sonde.}
 }
 }
 \usage{

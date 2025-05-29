@@ -19,3 +19,5 @@ Suisun,df_stations,Stations,,,,,
 Suisun,df_sample,Sample,,,,,centimeters
 Suisun,df_depth,Depth,,,,meters,
 FMWT,df_data,Catch Matrix\.csv,Ymd,HM,America/Los_Angeles,feet,meters
+SDO,df_stations,IEP_DOSDWSC_site_locations,,,,,
+SDO,df_data_1997_2018,IEP_DOSDWSC_1997_2018,,,,,
