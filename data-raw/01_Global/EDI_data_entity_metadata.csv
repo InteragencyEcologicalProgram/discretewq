@@ -10,8 +10,10 @@ DOP,df_data,TowData,Ymd,HMS,America/Los_Angeles,feet,centimeters
 EDSM,df_data_20mm,EDSM_20mm,Ymd,HMS,America/Los_Angeles,feet,meters
 EDSM,df_data_KDTR,EDSM_KDTR,Ymd,HMS,America/Los_Angeles,meters,meters
 EMP,,,,,,,
-YBFMP_fish,,,,,,,
-YBFMP_zoop,,,,,,,
+YBFMP_fish,df_stations,Stations,,,,,
+YBFMP_fish,df_data,Water Quality and Environmental Data,,,,,
+YBFMP_zoop,df_stations,Stations,,,,,
+YBFMP_zoop,df_data,Zooplankton Data,,,,,
 SLS,df_stations,Station,,,,,
 SLS,df_tow,TowInfo,,,,feet,
 SLS,df_water_info,WaterInfo,,,,,centimeters

@@ -600,7 +600,7 @@
 #' Water quality data from the California Department of Water Resources Yolo Bypass Fish Monitoring Program.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 8,883 rows and 14 variables
+#' @format a tibble with 10,133 rows and 16 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
@@ -615,10 +615,12 @@
 #'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
 #'   \item{DissolvedOxygen}{Dissolved oxygen (mg/L) at surface.}
 #'   \item{pH}{pH (dimensionless) at surface.}
+#'   \item{TurbidityNTU}{Turbidity (NTU) at surface measured with a turbidimeter.}
+#'   \item{TurbidityFNU}{Turbidity (FNU) at surface measured with a water quality sonde.}
 #'   \item{Notes}{Notes or comments.}
 #'   }
 #'
-#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.494.2}{here} and \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.233.3}{here}.
+#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.494.2}{here} and \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.233.5}{here}.
 #' @seealso \code{\link{wq}}
 "YBFMP"
 
