@@ -24,12 +24,8 @@ df_stations <- ls_SLS$df_stations %>%
 # Join data entities and finish cleaning data
 SLS <- ls_SLS$df_water_info %>%
   left_join(ls_SLS$df_tow, by = join_by(Date, Station)) %>%
-  # Parse Date and Time columns - time is consistently shifted 8 hours early, so need this
-    # workaround for now
-  mutate(
-    Time = with_tz(ymd_hms(Time, tz = "America/Los_Angeles"), tzone = "UTC"),
-    Time = format(Time, "%H:%M:%S")
-  ) %>%
+  # Parse Date and Time columns
+  mutate(Time = str_extract(Time, "(?<=\\s).+")) %>%
   convert_datetime(date_format = "Ymd", time_format = "HMS", timezone = "America/Los_Angeles") %>%
   # Standardize tide codes
   mutate(Tide = case_match(Tide, 4 ~ "Flood", 3 ~ "Low Slack", 2 ~ "Ebb", 1 ~ "High Slack")) %>%

@@ -188,10 +188,10 @@ Kodiak Trawl Survey 2002 - 2021. ver 4. Environmental Data Initiative.
 [doi:10.6073/pasta/f0e2916f4a026f3f812a0855cee74a8d](https://portal.edirepository.org/nis/metadataviewer?packageid=edi.527.4)
 
 Interagency Ecological Program (IEP), C. Brennan, V.G. Mora, J. Oceguera
-Zavala, and J.A. Jimenez. 2024. Interagency Ecological Program San
-Francisco Estuary Smelt Larva Survey 2009 – 2024 ver 9. Environmental
+Zavala, and J.A. Jimenez. 2025. Interagency Ecological Program San
+Francisco Estuary Smelt Larva Survey 2009 – 2024 ver 10. Environmental
 Data Initiative.
-[doi:10.6073/pasta/3cf5b4b396a1374d9142e3507ae084d2](https://portal.edirepository.org/nis/metadataviewer?packageid=edi.534.9)
+[doi:10.6073/pasta/551794874d92db1b7f4336ef8236b779](https://portal.edirepository.org/nis/metadataviewer?packageid=edi.534.10)
 
 Interagency Ecological Program (IEP), C. Pien, J. Adams, and N. Kwan.
 2021d. Interagency Ecological Program: Zooplankton catch and water
