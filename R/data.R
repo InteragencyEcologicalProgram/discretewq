@@ -600,7 +600,7 @@
 #' Water quality data from the California Department of Water Resources Yolo Bypass Fish Monitoring Program.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 10,133 rows and 16 variables
+#' @format a tibble with 10,128 rows and 16 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
