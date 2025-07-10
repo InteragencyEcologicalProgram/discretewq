@@ -368,3 +368,48 @@ YBFMP_zoop,df_data,DO,DissolvedOxygen,numeric
 YBFMP_zoop,df_data,Turbidity,Turbidity,numeric
 YBFMP_zoop,df_data,MicrocystisVisualRank,Microcystis,numeric
 YBFMP_zoop,df_data,FieldComments,Notes,character
+USGS_SFBS,df_stations_1969_2015,Station_Number,Station,character
+USGS_SFBS,df_stations_1969_2015,Latitude_degree,Latitude,numeric
+USGS_SFBS,df_stations_1969_2015,Longitude_degree,Longitude,numeric
+USGS_SFBS,df_data_1969_2015,Date,Date,character
+USGS_SFBS,df_data_1969_2015,Time,Time,character
+USGS_SFBS,df_data_1969_2015,Station_Number,Station,character
+USGS_SFBS,df_data_1969_2015,Depth,Sample_depth,numeric
+USGS_SFBS,df_data_1969_2015,Calculated_Chlorophyll,Chlorophyll,numeric
+USGS_SFBS,df_data_1969_2015,Discrete_Oxygen,DissolvedOxygen,numeric
+USGS_SFBS,df_data_1969_2015,Salinity,Salinity,numeric
+USGS_SFBS,df_data_1969_2015,Temperature,Temperature,numeric
+USGS_SFBS,df_data_1969_2015,Nitrate_Nitrite,DissNitrateNitrite,numeric
+USGS_SFBS,df_data_1969_2015,Ammonium,DissAmmonia,numeric
+USGS_SFBS,df_data_1969_2015,Phosphate,DissOrthophos,numeric
+USGS_SFBS,df_data_1969_2015,Silicate,DissSilica,numeric
+USGS_SFBS,df_stations_2016_2021,Station_Number,Station,character
+USGS_SFBS,df_stations_2016_2021,Latitude_degree,Latitude,numeric
+USGS_SFBS,df_stations_2016_2021,Longitude_degree,Longitude,numeric
+USGS_SFBS,df_stations_2016_2021,Comments,Comments,character
+USGS_SFBS,df_data_2016_2021,Date,Date,character
+USGS_SFBS,df_data_2016_2021,Time,Time,character
+USGS_SFBS,df_data_2016_2021,Station_Number,Station,character
+USGS_SFBS,df_data_2016_2021,Depth,Sample_depth,numeric
+USGS_SFBS,df_data_2016_2021,Calculated_Chlorophyll,Chlorophyll,numeric
+USGS_SFBS,df_data_2016_2021,Oxygen,DissolvedOxygen,numeric
+USGS_SFBS,df_data_2016_2021,Oxygen_Percent_Saturation,DissolvedOxygenPercent,numeric
+USGS_SFBS,df_data_2016_2021,Salinity,Salinity,numeric
+USGS_SFBS,df_data_2016_2021,Temperature,Temperature,numeric
+USGS_SFBS,df_data_2016_2021,Nitrate_Nitrite,DissNitrateNitrite,numeric
+USGS_SFBS,df_data_2016_2021,Ammonium,DissAmmonia,numeric
+USGS_SFBS,df_data_2016_2021,Phosphate,DissOrthophos,numeric
+USGS_SFBS,df_data_2016_2021,Silicate,DissSilica,numeric
+USGS_SFBS,df_data_website,Date,Date,character
+USGS_SFBS,df_data_website,Time,Time,character
+USGS_SFBS,df_data_website,Station,Station,character
+USGS_SFBS,df_data_website,Depth (m),Sample_depth,numeric
+USGS_SFBS,df_data_website,Calculated Chlorophyll-a (micrograms/L),Chlorophyll,numeric
+USGS_SFBS,df_data_website,Oxygen (mg/L),DissolvedOxygen,numeric
+USGS_SFBS,df_data_website,Oxygen % Saturation,DissolvedOxygenPercent,numeric
+USGS_SFBS,df_data_website,Salinity,Salinity,numeric
+USGS_SFBS,df_data_website,Temperature (Degrees Celsius),Temperature,numeric
+USGS_SFBS,df_data_website,NO32 (Micromolar),DissNitrateNitrite,numeric
+USGS_SFBS,df_data_website,NH4 (Micromolar),DissAmmonia,numeric
+USGS_SFBS,df_data_website,PO4 (Micromolar),DissOrthophos,numeric
+USGS_SFBS,df_data_website,Si (Micromolar),DissSilica,numeric

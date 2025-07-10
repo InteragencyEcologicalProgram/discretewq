@@ -6,7 +6,7 @@
 \alias{USGS_SFBS}
 \title{USGS SFBS water quality data}
 \format{
-a tibble with 23,923 rows and 22 variables
+a tibble with 25,668 rows and 22 variables
 \describe{
 \item{Source}{Name of the source dataset.}
 \item{Station}{Station where sample was collected.}
@@ -18,22 +18,22 @@ when the collection times varied among the the surface and bottom WQ and
 nutrient parameters.}
 \item{Sample_depth_surface}{Depth (m) of surface sample. Reported as an
 average when surface depths varied among the WQ parameters.}
+\item{Sample_depth_nutr_surface}{Depth (m) paired w/ nutrient sampling
+(range: 0-5 m). Reported as an average when surface depths varied among the
+nutrient parameters.}
 \item{Sample_depth_bottom}{Depth (m) of bottom sample. Reported as an
 average when bottom depths varied among the WQ parameters.}
 \item{Temperature}{Temperature (°C) at surface.}
 \item{Temperature_bottom}{Temperature (°C) at bottom.}
 \item{Salinity}{Salinity at surface.}
 \item{Salinity_bottom}{Salinity at bottom.}
-\item{Chlorophyll}{Chlorophyll concentration (\eqn{\mu}g \ifelse{html}{\out{L<sup>-1</sup>}}{\eqn{L^{-1}}}) at surface.}
 \item{DissolvedOxygen}{Dissolved oxygen (mg/L) at surface.}
 \item{DissolvedOxygen_bottom}{Dissolved oxygen (mg/L) at bottom.}
 \item{DissolvedOxygenPercent}{Dissolved oxygen percent (dimensionless) at surface.}
 \item{DissolvedOxygenPercent_bottom}{Dissolved oxygen percent (dimensionless) at bottom.}
-\item{Sample_depth_nutr_surface}{Depth (m) paired w/ nutrient sampling
-(range: 0-5 m). Reported as an average when surface depths varied among the
-nutrient parameters.}
-\item{DissNitrateNitrite}{Dissolved Nitrate and Nitrite (mg/L).}
+\item{Chlorophyll}{Chlorophyll concentration (\eqn{\mu}g \ifelse{html}{\out{L<sup>-1</sup>}}{\eqn{L^{-1}}}) at surface.}
 \item{DissAmmonia}{Dissolved Ammonia (mg/L).}
+\item{DissNitrateNitrite}{Dissolved Nitrate and Nitrite (mg/L).}
 \item{DissOrthophos}{Dissolved Ortho-phosphate (mg/L).}
 \item{DissSilica}{Dissolved Silica (mg/L).}
 }

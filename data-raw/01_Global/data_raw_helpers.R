@@ -19,6 +19,10 @@ if (!requireNamespace("jsonlite", quietly = TRUE)) {
   install.packages("jsonlite")
 }
 
+# Install sbtools if its not installed already
+if (!requireNamespace("sbtools", quietly = TRUE)) {
+  install.packages("sbtools")
+}
 
 # Data download -----------------------------------------------------------
 
@@ -121,7 +125,7 @@ get_cnra_data_lab <- function(station_num, start_date, end_date = today()) {
     select(!any_of("_full_text"))
 
   # Save data to temporary directory
-  df_data_lab %>% write_excel_csv(
+  df_data_lab %>% write_csv(
     file = file.path(tempdir(), paste0(station_num, "_lab_data.csv"))
   )
 }
@@ -146,8 +150,34 @@ get_cnra_data_field <- function(station_num, start_date, end_date = today()) {
     select(!any_of("_full_text"))
 
   # Save data to temporary directory
-  df_data_field %>% write_excel_csv(
+  df_data_field %>% write_csv(
     file = file.path(tempdir(), paste0(station_num, "_field_data.csv"))
+  )
+}
+
+# Get data entity names for specified Science Base item ID
+get_scibase_data_entities <- function(item_id) {
+  df_sb_files <- sbtools::item_list_files(item_id)
+  inform(c(
+    "i" = paste0(
+      "Data entities for ", item_id, " include:\n",
+      paste(df_sb_files$fname, collapse = "\n"), "\n"
+    ))
+  )
+  return(df_sb_files$fname)
+}
+
+# Download specified data entities from a Science Base item and save files to a temporary
+  # directory
+get_scibase_data <- function(item_id, entity_names) {
+  ls_data_raw <- map(
+    entity_names,
+    \(x) sbtools::item_file_download(
+      sb_id = item_id,
+      names = x,
+      destinations = file.path(tempdir(), x),
+      overwrite_file = TRUE
+    )
   )
 }
 
@@ -553,6 +583,60 @@ import_proc_edi_data <- function(survey, static = FALSE) {
   ndf_edi_ent$df_data %>%
     set_names(ndf_edi_ent$Data_entity) %>%
     append(list("edi_id" = edi_id_curr), after = 0)
+}
+
+# Import and process data derived from a specified Science Base item ID
+# This is a generalized workflow to be used across all Science Base items
+# Returns a list of processed data entities
+import_proc_scibase_data <- function(survey, item_id, entity_regex) {
+  # Compile all data entities for specified Science Base item ID
+  sb_data_ent_all <- get_scibase_data_entities(item_id)
+
+  # Subset to desired data entities
+  df_sb_ent_sub <-
+    tibble(
+      Data_entity = names(entity_regex),
+      Data_entity_regex = unname(entity_regex)
+    ) %>%
+    mutate(
+      Data_entity_sb_name = map(Data_entity_regex, \(x) str_subset(sb_data_ent_all, x)),
+      Data_entity_empty = map_lgl(Data_entity_sb_name, is_empty)
+    )
+
+  # Check if regex patterns for desired data entities return expected results
+  if (any(df_sb_ent_sub$Data_entity_empty)) {
+    df_sb_ent_fail <- df_sb_ent_sub %>% dplyr::filter(Data_entity_empty)
+    abort(c(
+      "x" = paste(
+        "The following data entity regex patterns did not find a data entity:",
+        paste(df_sb_ent_fail$Data_entity_regex, collapse = ", ")
+      ),
+      "i" = "Update data entity regex patterns in EDI_data_entity_metadata.csv before proceeding"
+    ))
+  } else {
+    inform(c(
+      "i" = paste0(
+        "Downloading data entities:\n",
+        paste(df_sb_ent_sub$Data_entity_sb_name, collapse = "\n"), "\n"
+      )
+    ))
+  }
+
+  # Download data entities to temporary directory
+  get_scibase_data(item_id, df_sb_ent_sub$Data_entity_sb_name)
+  temp_files <- list.files(tempdir(), full.names = TRUE)
+
+  # Import data and perform checks and minor processing
+  ndf_sb_ent_sub <- df_sb_ent_sub %>%
+    mutate(
+      # Determine file paths for data entities on temporary directory
+      Data_entity_fp = map_chr(Data_entity_regex, \(x) str_subset(temp_files, x)),
+      # Import data
+      df_data = map2(Data_entity_fp, Data_entity, \(x, y) import_raw_data(x, survey, y))
+    )
+
+  # Return a list of processed data entities
+  ndf_sb_ent_sub$df_data %>% set_names(ndf_sb_ent_sub$Data_entity)
 }
 
 

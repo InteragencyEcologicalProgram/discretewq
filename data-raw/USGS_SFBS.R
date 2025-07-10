@@ -1,125 +1,89 @@
-## code to prepare `USGS_SFBS` dataset goes here
+# Code to prepare `USGS_SFBS` dataset
+library(dplyr)
+library(purrr)
+library(stringr)
+library(tidyr)
+library(conflicted)
 
-require(readr)
-require(dplyr)
-require(tidyr)
-require(lubridate)
-require(purrr)
-require(readxl)
-require(stringr)
+# Declare package conflict preferences
+conflicts_prefer(dplyr::filter())
 
-#Latest USGS_SFBS data from: https://sfbay.wr.usgs.gov/water-quality-database/
+# Source helper functions
+source("data-raw/01_Global/data_raw_helpers.R")
 
-USGS_SFBS_stations <- read_excel(file.path("data-raw", "USGS_SFBS", "USGSSFBayStations.xlsx"))%>%
-  select(Station, Latitude="Latitude degree", Longitude="Longitude degree")%>%
-  mutate(Station=as.character(Station))
+# Define settings for datasets
+survey <- "USGS_SFBS"
+date_fmt_pub <- "mdy"
+date_fmt_web <- "Ymd"
+time_fmt <- "HM"
+tzone <- "America/Los_Angeles"
 
-# 1969 to 2015 data: https://www.sciencebase.gov/catalog/item/5841f97ee4b04fc80e518d9f
-USGS_SFBS_1969_2015 <-
-  read_csv(
-    file = "data-raw/USGS_SFBS/1969_2015USGS_SFBAY_22APR20.csv",
-    col_types = cols_only(
-      Date = "c",
-      Time = "c",
-      Station = "d",
-      Depth = "d",
-      `Discrete DO` = "d", # Use discrete DO from 1969-2015
-      `Calculated Chl-a` = "d",
-      Salinity = "d",
-      Temperature = "d",
-      NO32 = "d",
-      NH4 = "d",
-      PO4 = "d",
-      Si = "d"
-    )
-  ) %>%
-  rename(
-    DissolvedOxygen = `Discrete DO`,
-    Chlorophyll = `Calculated Chl-a`,
-    DissNitrateNitrite = NO32,
-    DissAmmonia = NH4,
-    DissOrthophos = PO4,
-    DissSilica = Si
-  )
+# 1969 to 2015 data: https://www.sciencebase.gov/catalog/item/64248ee5d34e370832fe343d
+# Notes: Using discrete DO from 1969-2015
+sb_id_1969_2015 <- "64248ee5d34e370832fe343d"
+ent_regex_1969_2015 <- c(
+  "df_stations_1969_2015" = "station_locations1969",
+  "df_data_1969_2015"= "WaterQualityData1969"
+)
 
-# 2016-2019 published data: https://www.sciencebase.gov/catalog/item/5966abe6e4b0d1f9f05cf551
-USGS_SFBSfiles_pub <- list.files(path = file.path("data-raw", "USGS_SFBS"), full.names = T, pattern="SanFranciscoBayWaterQualityData.csv")
-USGS_SFBS_pub <-
-  map(
-    USGS_SFBSfiles_pub,
-    ~ read_csv(.x, col_types = cols(.default = "c")) %>%
-      select(
-        Date,
-        Time,
-        Station = Station_Number,
-        Depth,
-        Chlorophyll = Calculated_Chlorophyll,
-        DissolvedOxygen = matches("^Oxygen|Calculated_Oxygen"), # Use DO from CTD sensor from 2016-onward
-        Salinity,
-        Temperature,
-        DissNitrateNitrite = `Nitrate_+_Nitrite`,
-        DissAmmonia = Ammonium,
-        DissOrthophos = Phosphate,
-        DissSilica = Silicate
-      )
-  ) %>%
-  bind_rows() %>%
-  mutate(
-    Time = paste0(str_sub(Time, end = -3), ":", str_sub(Time, start = -2)),
-    across(-c("Date", "Time"), as.numeric)
-  )
+ls_USGS_SFBS_1969_2015 <- import_proc_scibase_data(survey, sb_id_1969_2015, ent_regex_1969_2015)
 
-# 2020-2022 data downloaded from website: https://sfbay.wr.usgs.gov/water-quality-database/
-USGS_SFBSfiles_web<-list.files(path = file.path("data-raw", "USGS_SFBS"), full.names = T, pattern="wqdata")
-USGS_SFBS_web <-
-  map_dfr(
-    USGS_SFBSfiles_web,
-    ~ read_csv(
-      .x,
-      col_types = cols_only(
-        Date = "c",
-        Time = "c",
-        Station = "d",
-        `Depth (m)` = "d",
-        `Calculated Chlorophyll-a (micrograms/L)` = "d",
-        `Oxygen (mg/L)` = "d",
-        `Oxygen % Saturation` = "d",
-        Salinity = "d",
-        `Temperature (Degrees Celsius)` = "d",
-        `NO32 (Micromolar)` = "d",
-        `NH4 (Micromolar)` = "d",
-        `PO4 (Micromolar)` = "d",
-        `Si (Micromolar)` = "d"
-      )
-    )
-  ) %>%
-  rename(
-    Depth = `Depth (m)`,
-    Chlorophyll = `Calculated Chlorophyll-a (micrograms/L)`,
-    DissolvedOxygen = `Oxygen (mg/L)`,
-    DissolvedOxygenPercent = `Oxygen % Saturation`,
-    Temperature = `Temperature (Degrees Celsius)`,
-    DissNitrateNitrite = `NO32 (Micromolar)`,
-    DissAmmonia = `NH4 (Micromolar)`,
-    DissOrthophos = `PO4 (Micromolar)`,
-    DissSilica = `Si (Micromolar)`
-  )
+# Add coordinates to data and create Datetime column
+df_USGS_SFBS_1969_2015 <- ls_USGS_SFBS_1969_2015$df_data_1969_2015 %>%
+  left_join(ls_USGS_SFBS_1969_2015$df_stations_1969_2015, by = join_by(Station)) %>%
+  convert_datetime(date_fmt_pub, time_fmt, tzone)
 
-# Combine data and start with general clean up
-USGS_SFBS_c <-
-  bind_rows(USGS_SFBS_1969_2015, USGS_SFBS_pub, USGS_SFBS_web) %>%
-  filter(!is.na(Date)) %>%
-  mutate(
-    Date = parse_date_time(Date, orders = c("%m/%d/%Y", "%m/%d/%y", "%Y-%m-%d"), tz = "America/Los_Angeles"),
-    Time = hm(Time),
-    Station = as.character(Station)
-  ) %>%
-  mutate(
-    Datetime = parse_date_time(paste0(Date, " ", hour(Time), ":", minute(Time)), "%Y-%m-%d %H:%M", tz = "America/Los_Angeles"),
-    Source = "USGS_SFBS"
-  ) %>%
-  select(-Time) %>%
-  rename(Sample_depth = Depth)
+# 2016-2021 published data: https://www.sciencebase.gov/catalog/item/5966abe6e4b0d1f9f05cf551
+# Notes: Using DO from CTD sensor from 2016-onward
+sb_id_2016_2021 <- "5966abe6e4b0d1f9f05cf551"
+ent_regex_2016_2021 <- c(
+  "df_stations_2016_2021" = "TableofStationLocations",
+  "df_data_2016_2021"= "2016.+WaterQualityData"
+)
+
+ls_USGS_SFBS_2016_2021 <- import_proc_scibase_data(survey, sb_id_2016_2021, ent_regex_2016_2021)
+
+# Add coordinates to data and create Datetime column
+# Station 34 had a change in coordinates after the 1/21/2016 sampling event
+df_stations_Jan2016 <- ls_USGS_SFBS_2016_2021$df_stations_2016_2021 %>%
+  filter(is.na(Comments) | Comments == "location 1/21/2016") %>%
+  select(-Comments)
+
+df_stations_after_Jan2016 <- ls_USGS_SFBS_2016_2021$df_stations_2016_2021 %>%
+  filter(is.na(Comments) | Comments == "location 2/2/2016 and after") %>%
+  select(-Comments)
+
+df_USGS_SFBS_2016_2021 <- ls_USGS_SFBS_2016_2021$df_data_2016_2021 %>%
+  convert_datetime(date_fmt_pub, time_fmt, tzone)
+
+df_USGS_SFBS_2016_2021_c <- bind_rows(
+  df_USGS_SFBS_2016_2021 %>%
+    filter(Date <= "2016-01-21") %>%
+    left_join(df_stations_Jan2016, by = join_by(Station)),
+  df_USGS_SFBS_2016_2021 %>%
+    filter(Date > "2016-01-21") %>%
+    left_join(df_stations_after_Jan2016, by = join_by(Station))
+)
+
+# 2022-2025 data downloaded from website: https://sfbay.wr.usgs.gov/water-quality-database/
+# Nutrient data available through 9/10/2024, all other data available through 3/20/2025
+USGS_SFBS_files_web <- list.files(
+  path = "data-raw/USGS_SFBS", full.names = TRUE, pattern = "wqdata"
+)
+
+df_USGS_SFBS_web <-
+  map(USGS_SFBS_files_web, \(x) import_raw_data(x, survey, "df_data_website")) %>%
+  list_rbind()
+
+# Add coordinates to data and create Datetime column
+# Use coordinates from latest publication (df_stations_after_Jan2016)
+df_USGS_SFBS_web_c <- df_USGS_SFBS_web %>%
+  mutate(Station = str_remove(Station, "\\.0$")) %>%
+  left_join(df_stations_after_Jan2016, by = join_by(Station)) %>%
+  convert_datetime(date_fmt_web, time_fmt, tzone)
+
+# Combine data
+df_USGS_SFBS_c <- bind_rows(df_USGS_SFBS_1969_2015, df_USGS_SFBS_2016_2021_c, df_USGS_SFBS_web_c)
 
 # Define thresholds for minimum surface sample depths
 wq_surf_depth <- 2
@@ -143,16 +107,23 @@ nutr_param <- c(
 )
 
 # Select surface and bottom WQ samples and nutrient samples
-USGS_SFBS_c1 <- USGS_SFBS_c %>%
-  pivot_longer(cols = all_of(c(wq_param, nutr_param)), names_to = "Parameter", values_to = "Value") %>%
+df_USGS_SFBS_c1 <- df_USGS_SFBS_c %>%
+  pivot_longer(
+    cols = all_of(c(wq_param, nutr_param)),
+    names_to = "Parameter",
+    values_to = "Value"
+  ) %>%
   drop_na(Value) %>%
   group_by(Date, Station, Parameter) %>%
   mutate(
     Depth_bin = case_when(
-      Parameter %in% wq_param & Sample_depth < wq_surf_depth & Sample_depth == min(Sample_depth) ~ "surface",
-      Parameter %in% nutr_param & Sample_depth < nutr_surf_depth & Sample_depth == min(Sample_depth) ~ "nutrient",
-      Parameter %in% wq_param & Sample_depth > wq_surf_depth & Sample_depth == max(Sample_depth) ~ "bottom",
-      TRUE ~"other"
+      Parameter %in% wq_param & Sample_depth < wq_surf_depth &
+        Sample_depth == min(Sample_depth) ~ "surface",
+      Parameter %in% nutr_param & Sample_depth < nutr_surf_depth &
+        Sample_depth == min(Sample_depth) ~ "nutrient",
+      Parameter %in% wq_param & Sample_depth > wq_surf_depth &
+        Sample_depth == max(Sample_depth) ~ "bottom",
+      .default = "other"
     )
   ) %>%
   ungroup() %>%
@@ -161,24 +132,9 @@ USGS_SFBS_c1 <- USGS_SFBS_c %>%
     !(Parameter == "Chlorophyll" & Depth_bin == "bottom") # exclude Chlorophyll bottom samples
   )
 
-# Pull out duplicated records collected at the same station on the same day
-USGS_SFBS_c1_dups <- USGS_SFBS_c1 %>%
-  count(Date, Station, Parameter, Depth_bin) %>%
-  filter(n > 1) %>%
-  select(-n) %>%
-  left_join(USGS_SFBS_c1)
-
-# Clean up the duplicated records by keeping the first sample of the day
-USGS_SFBS_c1_dups_c <- USGS_SFBS_c1_dups %>%
-  group_by(Date, Station, Parameter, Depth_bin) %>%
-  filter(Datetime == min(Datetime)) %>%
-  ungroup()
-
-# Add the cleaned up duplicate data to the original data set
-USGS_SFBS_c2 <- USGS_SFBS_c1 %>%
-  anti_join(USGS_SFBS_c1_dups) %>%
-  bind_rows(USGS_SFBS_c1_dups_c) %>%
-  # Average sample depths among each Depth_bin so they match correctly when pivoted wider
+# Average sample depths among each Depth_bin and DateTimes for each sample so they match correctly
+  # when pivoted wider
+df_USGS_SFBS_c2 <- df_USGS_SFBS_c1 %>%
   group_by(Date, Station, Depth_bin) %>%
   mutate(Sample_depth = mean(Sample_depth)) %>%
   # Average Datetimes for each sample so that they match correctly as well
@@ -187,50 +143,35 @@ USGS_SFBS_c2 <- USGS_SFBS_c1 %>%
   ungroup()
 
 # Pull out WQ parameters and restructure data frame to wide format
-USGS_SFBS_c2_wq <- USGS_SFBS_c2 %>%
+df_USGS_SFBS_c2_wq <- df_USGS_SFBS_c2 %>%
   filter(Depth_bin != "nutrient") %>%
   pivot_wider(names_from = Parameter, values_from = Value) %>%
-  pivot_wider(names_from = Depth_bin, values_from = where(is.numeric)) %>%
-  select(
-    Source,
-    Station,
-    Date,
-    Datetime,
-    Sample_depth_surface,
-    Sample_depth_bottom,
-    Temperature = Temperature_surface,
-    Temperature_bottom,
-    Salinity = Salinity_surface,
-    Salinity_bottom,
-    Chlorophyll = Chlorophyll_surface,
-    DissolvedOxygen = DissolvedOxygen_surface,
-    DissolvedOxygen_bottom,
-    DissolvedOxygenPercent = DissolvedOxygenPercent_surface,
-    DissolvedOxygenPercent_bottom
-  )
+  pivot_wider(names_from = Depth_bin, values_from = all_of(c(wq_param, "Sample_depth"))) %>%
+  rename_with(\(x) str_remove(x, "_surface$"), ends_with("_surface") & !starts_with("Sample")) %>%
+  select(-Chlorophyll_bottom)
 
 # Pull out nutrient parameters and restructure data frame to wide format
-USGS_SFBS_c2_nutr <- USGS_SFBS_c2 %>%
+df_USGS_SFBS_c2_nutr <- df_USGS_SFBS_c2 %>%
   filter(Depth_bin == "nutrient") %>%
   pivot_wider(id_cols = -Depth_bin, names_from = Parameter, values_from = Value) %>%
-  transmute(
-    Source,
-    Station,
-    Date,
-    Datetime,
-    Sample_depth_nutr_surface = Sample_depth,
-    # convert units
+  rename(Sample_depth_nutr_surface = Sample_depth) %>%
+  # Convert units
+  mutate(
     DissNitrateNitrite = DissNitrateNitrite * (14.007 / (10^3)), # molar mass of N
     DissAmmonia = DissAmmonia * (14.007 / (10^3)), # molar mass of N
     DissOrthophos = DissOrthophos * (30.974 / (10^3)), # molar mass of P
     DissSilica = DissSilica * (60.084 / (10^3)) # molar mass of SiO2
   )
 
-# Join WQ and nutrient data back together
+# Join WQ and nutrient data back together and finish cleaning data
 USGS_SFBS <-
-  full_join(USGS_SFBS_c2_wq, USGS_SFBS_c2_nutr) %>%
-  left_join(USGS_SFBS_stations, by = "Station") %>%
-  relocate(Latitude, Longitude, .after = Station) %>%
+  full_join(df_USGS_SFBS_c2_wq, df_USGS_SFBS_c2_nutr) %>%
+  # Remove rows where all measurements are NA, if they exist
+  rm_rows_all_miss_data() %>%
+  add_source_col(survey) %>%
+  standardize_col_order() %>%
   arrange(Date, Station)
 
 usethis::use_data(USGS_SFBS, overwrite = TRUE)
+
+document_helper_other(USGS_SFBS)
