@@ -1,5 +1,7 @@
 # Code to prepare `USGS_CAWSC` dataset
 library(dplyr)
+library(purrr)
+library(tidyr)
 library(conflicted)
 
 # Declare package conflict preferences
@@ -124,6 +126,8 @@ USGS_CAWSC <- df_data %>%
     Result = as.numeric(if_else(Sign == "<", RL, Result))
   ) %>%
   convert_datetime(date_fmt, time_fmt, tzone) %>%
+  # Remove three Results equal to zero
+  filter(Result != 0) %>%
   # Restructure data to wide format
   select(-c(Result_Type, Detection_Condition, RL)) %>%
   distinct() %>%
