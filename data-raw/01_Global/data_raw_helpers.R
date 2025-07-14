@@ -132,7 +132,7 @@ get_cnra_data_lab <- function(station_num, start_date, end_date = today()) {
 
   # Save data to temporary directory
   df_data_lab %>% write_csv(
-    file = file.path(tempdir(), paste0(station_num, "_lab_data.csv"))
+    file = file.path(tempdir(), paste0(station_num, "_cnra_lab_data.csv"))
   )
 }
 
@@ -157,7 +157,7 @@ get_cnra_data_field <- function(station_num, start_date, end_date = today()) {
 
   # Save data to temporary directory
   df_data_field %>% write_csv(
-    file = file.path(tempdir(), paste0(station_num, "_field_data.csv"))
+    file = file.path(tempdir(), paste0(station_num, "_cnra_field_data.csv"))
   )
 }
 
