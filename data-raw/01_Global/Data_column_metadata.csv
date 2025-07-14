@@ -413,3 +413,14 @@ USGS_SFBS,df_data_website,NO32 (Micromolar),DissNitrateNitrite,numeric
 USGS_SFBS,df_data_website,NH4 (Micromolar),DissAmmonia,numeric
 USGS_SFBS,df_data_website,PO4 (Micromolar),DissOrthophos,numeric
 USGS_SFBS,df_data_website,Si (Micromolar),DissSilica,numeric
+USGS_CAWSC,df_data,Location_Identifier,Station,character
+USGS_CAWSC,df_data,Location_Latitude,Latitude,numeric
+USGS_CAWSC,df_data,Location_Longitude,Longitude,numeric
+USGS_CAWSC,df_data,Activity_StartDate,Date,character
+USGS_CAWSC,df_data,Activity_StartTime,Time,character
+USGS_CAWSC,df_data,Result_Characteristic,Parameter,character
+USGS_CAWSC,df_data,Result_Measure,Result,numeric
+USGS_CAWSC,df_data,Result_MeasureUnit,Units,character
+USGS_CAWSC,df_data,Result_MeasureType,Result_Type,character
+USGS_CAWSC,df_data,Result_ResultDetectionCondition,Detection_Condition,character
+USGS_CAWSC,df_data,DetectionLimit_MeasureA,RL,numeric

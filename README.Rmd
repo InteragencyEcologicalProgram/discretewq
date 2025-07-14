@@ -108,7 +108,6 @@ United States Fish and Wildlife Service, C. Macfarlane, D. Goodman, K. Erly, R. 
 
 United States Fish and Wildlife Service, J. Speegle, C. Macfarlane, E. Huber, D. Goodman, K. Erly, and R. Cook. 2024. Interagency Ecological Program: Over four decades of juvenile fish monitoring data from the San Francisco Estuary, collected by the Delta Juvenile Fish Monitoring Program, 1976-2024 ver 13. Environmental Data Initiative. [doi:10.6073/pasta/33aaab795387fd067a10108bacd88e53](https://portal.edirepository.org/nis/metadataviewer?packageid=edi.244.13)
 
-U.S. Geological Survey. 2022. USGS water data for the Nation: U.S. Geological Survey National Water Information System database, accessed October 21, 2022, at
-[doi:10.5066/F7P55KJN](https://doi.org/10.5066/F7P55KJN)
+U.S. Geological Survey. 2025. National Water Information System data available on the World Wide Web (USGS Water Data for the Nation), accessed July 14, 2025, at [doi:10.5066/F7P55KJN](https://doi.org/10.5066/F7P55KJN)
 
 USBR, R. Dahlgren, L. Loken, and E. Van Nieuwenhuyse. 2020. Monthly vertical profiles of water quality in the Sacramento Deep Water Ship Channel 2012-2019. [https://www.usbr.gov/mp/bdo/index.html](https://www.usbr.gov/mp/bdo/index.html)

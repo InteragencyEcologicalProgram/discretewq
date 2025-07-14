@@ -523,7 +523,7 @@
 #' Discrete water quality data from the USGS California Water Science Center
 #'
 #' @encoding UTF-8
-#' @format a tibble with 16,751 rows and 19 variables
+#' @format a tibble with 17,662 rows and 20 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
@@ -531,19 +531,20 @@
 #'   \item{Longitude}{Longitude in decimal degrees.}
 #'   \item{Date}{Date sample was collected.}
 #'   \item{Datetime}{Date and time sample was collected.}
+#'   \item{Temperature}{Temperature (°C) at surface.}
+#'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
+#'   \item{DissolvedOxygen}{Dissolved oxygen (mg/L) at surface.}
+#'   \item{pH}{pH (dimensionless) at surface.}
 #'   \item{Chlorophyll_Sign}{Whether the Chlorophyll value is estimated (extrapolated at low end) or reported as measured.}
 #'   \item{Chlorophyll}{Chlorophyll concentration (\eqn{\mu}g \ifelse{html}{\out{L<sup>-1</sup>}}{\eqn{L^{-1}}}).}
 #'   \item{DissAmmonia_Sign}{Whether the Dissolved Ammonia value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), estimated "~", or reported as the measured value "=".}
 #'   \item{DissAmmonia}{Dissolved Ammonia (mg/L). If DissAmmonia_Sign is <, this is equal to the reporting limit, NA = RL unknown.}
 #'   \item{DissNitrateNitrite_Sign}{Whether the Dissolved Nitrate Nitrite value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), estimated "~", or reported as the measured value "=".}
 #'   \item{DissNitrateNitrite}{Dissolved Nitrate and Nitrite (mg/L)}
-#'   \item{DOC}{Dissolved Organic Carbon (mg/L)}
 #'   \item{DissOrthophos_Sign}{Whether the Dissolved Orthophosphate value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), estimated "~", or reported as the measured value "=".}
 #'   \item{DissOrthophos}{Dissolved Ortho-phosphate (mg/L)}
-#'   \item{DissolvedOxygen}{Dissolved oxygen (mg/L) at surface.}
-#'   \item{pH}{pH (dimensionless) at surface.}
-#'   \item{Temperature}{Temperature (°C) at surface.}
-#'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
+#'   \item{DOC_Sign}{Whether the Dissolved Organic Carbon value is lower than reported ("<" because it is below the reporting limit and the reporting limit is used as the value), estimated "~", or reported as the measured value "=".}
+#'   \item{DOC}{Dissolved Organic Carbon (mg/L)}
 #'   }
 #' @details More metadata and information on methods are available \href{https://doi.org/10.5066/F7P55KJN}{here for data} and \href{https://help.waterdata.usgs.gov/codes-and-parameters}{here for metadata}.
 #' @seealso \code{\link{wq}}; for more information on _Sign variables: [sign_variables]

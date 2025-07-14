@@ -1,4 +1,4 @@
-Survey,Type,Analyte_exp,Analyte_std,Units_exp
+Survey,Type,Parameter_exp,Parameter_std,Units_exp
 NCRO,Field,DissolvedOxygen,DissolvedOxygen,mg/L
 NCRO,Field,SpecificConductance,Conductivity,uS/cm@25 °C
 NCRO,Field,Turbidity,TurbidityFNU,N.T.U.
@@ -22,3 +22,17 @@ NCRO,Lab,Total Organic Carbon,TOC,mg/L as C
 NCRO,Lab,Total Phosphorus,TotPhos,mg/L as P
 NCRO,Lab,Total Suspended Solids,TSS,mg/L
 NCRO,Lab,Volatile Suspended Solids,VSS,mg/L
+USGS_CAWSC,Both,Ammonia and ammonium,DissAmmonia,mg/L
+USGS_CAWSC,Both,Ammonia and ammonium,DissAmmonia,
+USGS_CAWSC,Both,Chlorophyll a,Chlorophyll,ug/L
+USGS_CAWSC,Both,Chlorophyll a,Chlorophyll,
+USGS_CAWSC,Both,Dissolved oxygen (DO),DissolvedOxygen,mg/L
+USGS_CAWSC,Both,Dissolved oxygen (DO),DissolvedOxygen,
+USGS_CAWSC,Both,Inorganic nitrogen (nitrate and nitrite),DissNitrateNitrite,mg/L
+USGS_CAWSC,Both,Inorganic nitrogen (nitrate and nitrite),DissNitrateNitrite,
+USGS_CAWSC,Both,Organic carbon,DOC,mg/L
+USGS_CAWSC,Both,Orthophosphate,DissOrthophos,mg/L
+USGS_CAWSC,Both,Orthophosphate,DissOrthophos,
+USGS_CAWSC,Both,pH,pH,standard units
+USGS_CAWSC,Both,Specific conductance,Conductivity,uS/cm
+USGS_CAWSC,Both,"Temperature, water",Temperature,deg C

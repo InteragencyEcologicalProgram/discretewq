@@ -24,6 +24,12 @@ if (!requireNamespace("sbtools", quietly = TRUE)) {
   install.packages("sbtools")
 }
 
+# Install dataRetrieval (at least version 2.7.19) if its not installed already
+if (!requireNamespace("dataRetrieval", quietly = TRUE) &
+    packageVersion("dataRetrieval") >= "2.7.19") {
+  install.packages("dataRetrieval")
+}
+
 # Data download -----------------------------------------------------------
 
 # Get ID for most current revision of EDI publication and check if it differs from the revision used
@@ -170,7 +176,7 @@ get_scibase_data_entities <- function(item_id) {
 # Download specified data entities from a Science Base item and save files to a temporary
   # directory
 get_scibase_data <- function(item_id, entity_names) {
-  ls_data_raw <- map(
+  map(
     entity_names,
     \(x) sbtools::item_file_download(
       sb_id = item_id,
@@ -178,6 +184,21 @@ get_scibase_data <- function(item_id, entity_names) {
       destinations = file.path(tempdir(), x),
       overwrite_file = TRUE
     )
+  )
+}
+
+# Download discrete water quality data from USGS samples API and save files to a temporary directory
+get_usgs_samples_data <- function(site_id, param) {
+  df_data <- dataRetrieval::read_waterdata_samples(
+    monitoringLocationIdentifier = site_id,
+    characteristicUserSupplied = param,
+    dataProfile = "narrow",
+    convertType = FALSE
+  )
+
+  # Save data to temporary directory
+  df_data %>% write_csv(
+    file = file.path(tempdir(), paste0(site_id, "_usgs_samples_data.csv"))
   )
 }
 
@@ -274,64 +295,64 @@ import_raw_data <- function(file, survey, entity, import_fun, ...) {
   return(df_data_c)
 }
 
-# Standardize analyte names for data structured in long format
-standardize_analytes <- function(df, survey, type = c("Field", "Lab")) {
+# Standardize parameter names for data structured in long format
+standardize_param <- function(df, survey, type = c("Field", "Lab", "Both")) {
   type <- arg_match(type)
 
-  # Import analytes table and filter to survey and type
-  df_analytes <-
-    read_csv("data-raw/01_Global/Analytes_metadata.csv", show_col_types = FALSE) %>%
+  # Import parameter table and filter to survey and type
+  df_param <-
+    read_csv("data-raw/01_Global/Parameters_metadata.csv", show_col_types = FALSE) %>%
     dplyr::filter(Survey == survey, Type == type) %>%
-    select(Analyte_exp, Analyte_std, Units_exp)
+    select(Parameter_exp, Parameter_std, Units_exp)
 
-  # Specify join spec for df >> df_analytes
-  analytes_join <- join_by(Analyte == Analyte_exp, Units == Units_exp)
+  # Specify join spec for df >> df_param
+  param_join <- join_by(Parameter == Parameter_exp, Units == Units_exp)
 
-  # Check if expected analytes in df_analytes exist in df
-  df_analytes_check <- df %>%
-    distinct(Analyte, Units) %>%
-    arrange(Analyte, Units) %>%
-    full_join(df_analytes, by = analytes_join, keep = TRUE)
+  # Check if expected parameters in df_param exist in df
+  df_param_check <- df %>%
+    distinct(Parameter, Units) %>%
+    arrange(Parameter, Units) %>%
+    full_join(df_param, by = param_join, keep = TRUE)
 
-  # Generate message for results of check - expected analytes
-  if (any(is.na(df_analytes_check$Analyte))) {
-    df_analytes_miss <- df_analytes_check %>%
-      dplyr::filter(is.na(Analyte)) %>%
-      mutate(Analyte_exp = paste0(Analyte_exp, " (", Units_exp, ")"))
+  # Generate message for results of check - expected parameters
+  if (any(is.na(df_param_check$Parameter))) {
+    df_param_miss <- df_param_check %>%
+      dplyr::filter(is.na(Parameter)) %>%
+      mutate(Parameter_exp = paste0(Parameter_exp, " (", Units_exp, ")"))
 
-    print(df_analytes_check, n = 100)
+    print(df_param_check, n = 100)
     abort(c(
       "x" = paste(
-        "The following expected analytes are NOT present in the dataset:",
-        paste(df_analytes_miss$Analyte_exp, collapse = ", ")
+        "The following expected parameters are NOT present in the dataset:",
+        paste(df_param_miss$Parameter_exp, collapse = ", ")
       ),
-      "i" = "Update expected analyte names and units in Analytes_metadata.csv before proceeding"
+      "i" = "Update expected parameter names and units in Parameters_metadata.csv before proceeding"
     ))
   } else {
-    inform(c("v" = "All analyte names are correct. Proceeding with standardizing names."))
+    inform(c("v" = "All parameter names are correct. Proceeding with standardizing names."))
   }
 
-  # Generate message for results of check - removal of unwanted analytes
-  if (any(is.na(df_analytes_check$Analyte_exp))) {
-    df_analytes_rm <- df_analytes_check %>%
-      dplyr::filter(is.na(Analyte_exp)) %>%
-      mutate(Analyte = if_else(is.na(Units), Analyte, paste0(Analyte, " (", Units, ")")))
+  # Generate message for results of check - removal of unwanted parameters
+  if (any(is.na(df_param_check$Parameter_exp))) {
+    df_param_rm <- df_param_check %>%
+      dplyr::filter(is.na(Parameter_exp)) %>%
+      mutate(Parameter = if_else(is.na(Units), Parameter, paste0(Parameter, " (", Units, ")")))
 
     inform(c(
       "i" = paste0(
-        "The following analytes were removed from the dataset:\n",
-        paste(df_analytes_rm$Analyte, collapse = "\n")
+        "The following parameters were removed from the dataset:\n",
+        paste(df_param_rm$Parameter, collapse = "\n")
       )
     ))
   } else {
-    inform(c("i" = "No analytes removed from dataset"))
+    inform(c("i" = "No parameters removed from dataset"))
   }
 
-  # Proceed with standardizing analyte names in df
+  # Proceed with standardizing parameter names in df
   df %>%
-    left_join(df_analytes, by = analytes_join) %>%
-    drop_na(Analyte_std) %>%
-    select(-c(Analyte, Units))
+    left_join(df_param, by = param_join) %>%
+    drop_na(Parameter_std) %>%
+    select(-c(Parameter, Units))
 }
 
 # Parse Datetime columns
