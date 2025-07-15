@@ -111,7 +111,7 @@ df_secchi_mvi_c <- df_secchi_mvi %>%
   mutate(
     # Dates and times are converted to numeric values when importing Excel files with text column
       # type - Use just the Date since the DateTimes don't completely match with the field/lab data
-    Date = as_date(as.numeric(Datetime), origin = "1899-12-30"),
+    Date = as_date(floor(as.numeric(Datetime)), origin = "1899-12-30"),
     # Use the numeric codes for Microcystis
     Microcystis = case_match(
       Microcystis,
