@@ -10,10 +10,8 @@ conflicts_prefer(dplyr::filter())
 # Source helper functions
 source("data-raw/01_Global/data_raw_helpers.R")
 
-# Define settings for datasets
+# Define settings for dataset
 survey <- "USGS_CAWSC"
-date_fmt <- "Ymd"
-time_fmt <- "HMS"
 tzone <- "America/Los_Angeles"
 
 # Identify stations and parameters of interest
@@ -79,31 +77,14 @@ site_ids <- c(
   "USGS-381944121405201"
 )
 
-parameters <- c(
-  "Total ammonia (NH4+ and NH3) as nitrogen, water, filtered",
-  "Nitrate plus nitrite as nitrogen, water, filtered",
-  "Orthophosphate as phosphorus, water, filtered",
-  "Dissolved organic carbon (DOC), water, filtered",
-  "Chlorophyll a (Chl-a), phytoplankton in water, chromatographic-fluorometric method",
-  "Dissolved oxygen (DO), water, unfiltered",
-  "pH, water, unfiltered, field",
-  "Temperature, water",
-  "Specific conductance, water, unfiltered, normalized to 25 degrees Celsius"
-)
-
 # Download data to temporary directory
-walk(site_ids, \(x) get_usgs_samples_data(x, parameters))
+walk(site_ids, get_usgs_samples_data)
 
-# Determine file paths for data on temporary directory
-temp_files <- list.files(tempdir(), full.names = TRUE, pattern = "_usgs_samples_data\\.csv")
-
-# Import data and perform checks and minor processing
-df_data <-
-  map(temp_files, \(x) import_raw_data(x, survey, "df_data")) %>%
-  list_rbind()
+# Run standardized workflow to import data and process it
+ls_USGS_CAWSC <- import_proc_data(survey)
 
 # Finish preparing the data
-USGS_CAWSC <- df_data %>%
+USGS_CAWSC <- ls_USGS_CAWSC$df_data %>%
   # Correct a few mislabeled units for water temperature
   mutate(
     Units = if_else(Parameter == "Temperature, water" & Units == "deg F", "deg C", Units)
@@ -122,10 +103,11 @@ USGS_CAWSC <- df_data %>%
       Result_Type == "Estimated" ~ "~",
       .default = "="
     ),
-    # Convert Result to numeric making <RL values equal to their RL
+    # Make <RL values equal to their RL
     Result = as.numeric(if_else(Sign == "<", RL, Result))
   ) %>%
-  convert_datetime(date_fmt, time_fmt, tzone) %>%
+  # Create Datetime column from Date and Time columns
+  combine_datetime(timezone = tzone) %>%
   # Remove three Results equal to zero
   filter(Result != 0) %>%
   # Restructure data to wide format
@@ -141,12 +123,14 @@ USGS_CAWSC <- df_data %>%
   rename_with(\(x) str_remove(x, "_Result$")) %>%
   # Remove rows where all measurements are NA, if they exist
   rm_rows_all_miss_data() %>%
+  # Add Source column
   add_source_col(survey) %>%
+  # Standardize column order
   standardize_col_order() %>%
   # Fill in "=" for the NA values in the _Sign variables
   mutate(across(ends_with("_Sign"), ~ if_else(is.na(.x), "=", .x))) %>%
-  arrange(Date, Station)
+  arrange(Date, Station) %>%
+  add_update_info()
 
 usethis::use_data(USGS_CAWSC, overwrite = TRUE)
-
 document_helper_other(USGS_CAWSC)

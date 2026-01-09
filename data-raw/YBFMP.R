@@ -11,41 +11,31 @@ conflicts_prefer(dplyr::filter())
 # Source helper functions
 source("data-raw/01_Global/data_raw_helpers.R")
 
-# Define settings for datasets
+# Define settings for dataset
 survey <- "YBFMP"
 
-date_fmt_fish <- "mdY"
-time_fmt_fish <- "HM"
-tzone_fish <- "America/Los_Angeles"
-secchi_unit_fish <- "meters"
-
-date_fmt_zoop <- "Ymd"
-time_fmt_zoop <- "HMS"
-tzone_zoop <- "America/Los_Angeles"
-secchi_unit_zoop <- "meters"
-
-# Run standardized workflow to import data from EDI and process it
+# Run standardized workflow to import data and process it
 # Fish and zooplankton data sets are in separate EDI publications
-# Using static = TRUE for the zooplankton data because this data package hasn't been updated with
+# Using defined edi_id for the zooplankton data because this data package hasn't been updated with
   # additional data since Dec 2021
-ls_YBFMP_fish <- import_proc_edi_data("YBFMP_fish")
-ls_YBFMP_zoop <- import_proc_edi_data("YBFMP_zoop", static = TRUE)
+edi_metadata_fish <- get_edi_data(survey, data_type = "fish")
+ls_YBFMP_fish <- import_proc_data(
+  survey, data_type = "fish", df_files = edi_metadata_fish$df_edi_files
+)
+
+edi_metadata_zoop <- get_edi_data(survey, data_type = "zoop", edi_id = "edi.494.2")
+ls_YBFMP_zoop <- import_proc_data(
+  survey, data_type = "zoop", df_files = edi_metadata_zoop$df_edi_files
+)
 
 # Prepare tables before binding them together
 # Use a nested dataframe for shared operations
 ls_YBFMP <- lst(ls_YBFMP_fish, ls_YBFMP_zoop) %>%
   enframe(name = "Source") %>%
   unnest_wider(value) %>%
-  add_column(
-    date_fmt = c(date_fmt_fish, date_fmt_zoop),
-    time_fmt = c(time_fmt_fish, time_fmt_zoop),
-    tzone = c(tzone_fish, tzone_zoop),
-    secchi_unit = c(secchi_unit_fish, secchi_unit_zoop)
-  ) %>%
   mutate(
-    df_data_c = pmap(list(df_data, date_fmt, time_fmt, tzone), convert_datetime),
     df_data_c = map(
-      df_data_c,
+      df_data,
       \(x) mutate(x,
         # Standardize tide codes
         Tide = case_match(
@@ -65,7 +55,7 @@ ls_YBFMP <- lst(ls_YBFMP_fish, ls_YBFMP_zoop) %>%
       ) %>%
         select(-ElecConductivity)
     ),
-    df_data_c = map2(df_data_c, secchi_unit, convert_secchi),
+    # Add station coordinates
     df_data_c = map2(df_data_c, df_stations, \(x, y) left_join(x, y, by = join_by(Station))),
     df_data_c = map2(df_data_c, Source, add_source_col),
     # Remove rows where all measurements are NA, if they exist
@@ -170,13 +160,15 @@ df_data_all <- bind_rows(df_data_fish_c, df_data_zoop) %>%
 
 # Finalize YBFMP data set
 YBFMP <- df_data_all %>%
+  # Add Source column
   add_source_col(survey) %>%
+  # Standardize column order
   standardize_col_order() %>%
-  arrange(Datetime)
+  arrange(Datetime) %>%
+  add_update_info(
+    edi_id = c("fish" = edi_metadata_fish$edi_id, "zoop" = edi_metadata_zoop$edi_id)
+  )
 
 usethis::use_data(YBFMP, overwrite = TRUE)
-
-document_helper_edi(ls_YBFMP_fish$edi_id, YBFMP)
-document_helper_edi(ls_YBFMP_zoop$edi_id, YBFMP)
-update_edi_metadata("YBFMP_fish", ls_YBFMP_fish$edi_id)
-update_edi_metadata("YBFMP_zoop", ls_YBFMP_zoop$edi_id)
+document_helper_edi(edi_metadata_fish$edi_id, YBFMP)
+document_helper_edi(edi_metadata_zoop$edi_id, YBFMP)

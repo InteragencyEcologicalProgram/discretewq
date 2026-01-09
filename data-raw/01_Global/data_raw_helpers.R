@@ -2,10 +2,12 @@
 
 library(dplyr)
 library(readr)
+library(readxl)
 library(tidyr)
 library(purrr)
 library(lubridate)
 library(stringr)
+library(tibble)
 library(rlang)
 
 # Install EDIutils if its not installed already
@@ -25,91 +27,206 @@ if (!requireNamespace("sbtools", quietly = TRUE)) {
 }
 
 # Install dataRetrieval (at least version 2.7.19) if its not installed already
-if (!requireNamespace("dataRetrieval", quietly = TRUE) &
-    packageVersion("dataRetrieval") >= "2.7.19") {
+if (!requireNamespace("dataRetrieval", quietly = TRUE)) {
+  install.packages("dataRetrieval")
+} else if (packageVersion("dataRetrieval") < "2.7.19") {
   install.packages("dataRetrieval")
 }
 
 # Data download -----------------------------------------------------------
 
-# Get ID for most current revision of EDI publication and check if it differs from the revision used
-  # in the last discretewq update
-# Set static argument to TRUE if you want to proceed with data import from EDI even if its the same
-  # revision that was used in the last discretewq update
-get_latest_edi_id <- function(survey, static) {
-  # Import EDI data package metadata table and filter to survey
-  df_edi_meta <-
-    read_csv("data-raw/01_Global/EDI_data_package_metadata.csv", show_col_types = FALSE) %>%
-    dplyr::filter(Survey == survey)
+# Get update information for a dataset including the ID of EDI publication used in last discretewq
+  # update and date the dataset was last updated
+# Use the optional data_type argument if there is more than one EDI publication used for the survey
+  # such as "fish" or "zoop"
+get_update_info <- function(survey, data_type = NULL) {
+  # Obtain file name of .rda file for the specified survey
+  filename <- case_match(
+    survey,
+    "20mm" ~ "twentymm.rda",
+    "Baystudy" ~ "baystudy.rda",
+    "DJFMP" ~ "DJFMP.rda",
+    "DOP" ~ "DOP.rda",
+    "EDSM" ~ "EDSM.rda",
+    "EMP" ~ "EMP.rda",
+    "FMWT" ~ "FMWT.rda",
+    "NCRO" ~ "NCRO.rda",
+    "SDO" ~ "SDO.rda",
+    "SKT" ~ "SKT.rda",
+    "SLS" ~ "SLS.rda",
+    "STN" ~ "STN.rda",
+    "Suisun" ~ "suisun.rda",
+    "USBR" ~ "USBR.rda",
+    "USGS_CAWSC" ~ "USGS_CAWSC.rda",
+    "USGS_SFBS" ~ "USGS_SFBS.rda",
+    "YBFMP" ~ "YBFMP.rda"
+  )
 
+  # Temporarily load survey dataset from data folder
+  df_data <- load(file.path("data", filename))
+
+  # Create attribute getter functions
+  edi_id_name <- if (!is.null(data_type)) paste0("edi_id_", data_type) else "edi_id"
+  get_edi_id <- attr_getter(edi_id_name)
+  get_last_update <- attr_getter("last_update")
+
+  # Extract attributes
+  edi_id <- get_edi_id(get(df_data))
+  last_update <- get_last_update(get(df_data))
+
+  lst(edi_id, last_update)
+}
+
+# Get ID for most current revision of EDI publication and check if it differs from the revision
+  # used in the last discretewq update
+get_latest_edi_id <- function(survey, data_type = NULL) {
+  # Get ID of EDI publication used in last discretewq update
+  ls_update_info <- get_update_info(survey, data_type)
+
+  # If edi_id of dataset is NULL, return NULL
+  if (is.null(ls_update_info$edi_id)) return(NULL)
+
+  # Otherwise, get EDI ID for latest revision of EDI publication
   edi_scope <- "edi"
-  edi_package_id <- df_edi_meta$Data_pack_id
+  edi_package_id <- as.numeric(str_extract(ls_update_info$edi_id, "(?<=edi\\.)\\d+(?=\\.)"))
   latest_rev <- list_data_package_revisions(
     scope = edi_scope,
     identifier = edi_package_id,
     filter = "newest"
   )
 
-  latest_id <- paste(edi_scope, edi_package_id, latest_rev, sep = ".")
-  inform(c("i" = paste("The latest revision for data package", edi_package_id, "is", latest_id)))
+  # Check if EDI ID for latest revision differs from the revision used in the last
+    # discretewq update
+  update_rev <- as.numeric(str_extract(ls_update_info$edi_id, "(?<=edi\\.\\d{2,5}\\.)\\d+"))
+  edi_id_diff <- if (latest_rev > update_rev) TRUE else FALSE
 
-  if (static == TRUE) {
-    return(latest_id)
-  } else if (latest_rev == df_edi_meta$Revision_last) {
-    withr::with_options(
-      list(show.error.messages = FALSE),
-      {
-        inform(c(
-          "i" = paste0(
-            "The EDI data package hasn't been updated since the last discretewq update (",
-            df_edi_meta$Data_pack_id_full_last, ")"
-          ),
-          "*" = "There is no need to update this data set"
-        ))
-        stop()
-      }
-    )
-  } else {
+  # Return EDI ID's for last update, latest revision, and difference status
+  list(
+    "edi_id_update" = paste(edi_scope, edi_package_id, update_rev, sep = "."),
+    "edi_id_latest" = paste(edi_scope, edi_package_id, latest_rev, sep = "."),
+    "edi_id_diff" = edi_id_diff
+  )
+}
+
+# Download specified data entities from most current revision of EDI publication and save raw bytes
+  # files to a temporary directory - stops if its the same as the last discretewq update
+# Provide an EDI ID in the optional edi_id argument to download data from a specific package
+  # revision.
+get_edi_data <- function(survey, data_type = NULL, edi_id = NULL) {
+  # Obtain EDI data package ID for most recent revision if edi_id is NULL
+  edi_id <- edi_id %||% get_latest_edi_id(survey, data_type)
+
+  # If edi_id is still NULL, survey data isn't available on EDI - abort with message
+  if (is.null(edi_id)) {
+    abort(paste(
+      "Survey data isn't available on EDI. If this is the first time using data from EDI to",
+      "update this dataset,\nuse optional 'edi_id' argument to specify ID."
+    ))
+  }
+
+  # If the data on EDI is the same version that was used during the last discretewq update,
+    # stop and provide message
+  if (is.list(edi_id) && isFALSE(edi_id$edi_id_diff)) {
+    inform(c(
+      "i" = paste0(
+        "The EDI data package hasn't been updated since the last discretewq update (",
+        edi_id$edi_id_update, ")"
+      ),
+      "*" = "There is no need to update this data set"
+    ))
+    return(NULL)
+  }
+
+  # Otherwise, proceed with downloading data from EDI data package
+  if (is.list(edi_id)) {
     inform(c(
       "i" = paste0(
         "The EDI data package has been updated since the last discretewq update (",
-        df_edi_meta$Data_pack_id_full_last, ")"
+        edi_id$edi_id_update, ")"
       ),
-      "*" = "Proceeding with updating this data set\n"
+      "*" = paste0("Proceeding with downloading data from ", edi_id$edi_id_latest, "\n")
     ))
-    return(latest_id)
+    edi_id <- edi_id$edi_id_latest
   }
-}
 
-# Get data entity names for specified EDI ID
-get_edi_data_entities <- function(edi_id) {
-  df_data_ent <- read_data_entity_names(edi_id)
+  # Get data entity names for specified EDI ID
+  df_edi_data_ent_all <- read_data_entity_names(edi_id)
   inform(c(
     "i" = paste0(
       "Data entities for ", edi_id, " include:\n",
-      paste(df_data_ent$entityName, collapse = "\n"), "\n"
+      paste(df_edi_data_ent_all$entityName, collapse = "\n"), "\n"
     ))
   )
-  return(df_data_ent$entityName)
-}
 
-# Download specified data entities from an EDI package and save raw bytes files to a temporary
-  # directory
-get_edi_data <- function(edi_id, entity_names) {
-  df_data_ent <- read_data_entity_names(edi_id)
-  df_data_ent_filt <- df_data_ent %>% dplyr::filter(entityName %in% entity_names)
+  # Rename survey if data_type isn't NULL
+  survey <- if (!is.null(data_type)) paste(survey, data_type, sep = "_") else survey
 
-  ls_data_raw <-
-    map(df_data_ent_filt$entityId, \(x) read_data_entity(edi_id, entityId = x)) %>%
-    set_names(df_data_ent_filt$entityName)
+  # Import data entities metadata table and filter to survey
+  df_edi_data_ent <-
+    read_csv("data-raw/01_Global/Data_entity_metadata.csv", show_col_types = FALSE) %>%
+    dplyr::filter(Survey == survey, Source == "EDI")
 
+  # Subset to desired data entities
+  df_edi_data_ent_sub <- df_edi_data_ent %>%
+    mutate(
+      Data_entity,
+      Data_entity_edi_name = map_chr(
+        Data_entity_regex,
+        \(x) str_subset(df_edi_data_ent_all$entityName, x)
+      ),
+      Data_entity_empty = map_lgl(Data_entity_edi_name, is_empty),
+      .keep = "used"
+    )
+
+  # Check if regex patterns for desired data entities return expected results
+  if (any(df_edi_data_ent_sub$Data_entity_empty)) {
+    df_edi_data_ent_fail <- df_edi_data_ent_sub %>% dplyr::filter(Data_entity_empty)
+    abort(c(
+      "x" = paste(
+        "The following data entity regex patterns did not find a data entity:",
+        paste(df_edi_data_ent_fail$Data_entity_regex, collapse = ", ")
+      ),
+      "i" = "Update data entity regex patterns in EDI_data_entity_metadata.csv before proceeding"
+    ))
+  } else {
+    inform(c(
+      "i" = paste0(
+        "Downloading data entities:\n",
+        paste(df_edi_data_ent_sub$Data_entity_edi_name, collapse = "\n"), "\n"
+      )
+    ))
+  }
+
+  # Proceed with downloading desired data entities from EDI data package
   temp_dir <- tempdir()
-  for (i in 1:length(ls_data_raw)) {
-    file_raw <- file.path(temp_dir, glue::glue("{names(ls_data_raw)[i]}.bin"))
+  df_edi_data_ent_final <- df_edi_data_ent_sub %>%
+    left_join(df_edi_data_ent_all, by = join_by(Data_entity_edi_name == entityName)) %>%
+    # Clean up data entity names to be used as file names
+    mutate(
+      # Remove .csv file extensions from entity names if they exist
+      Data_entity_edi_name = str_remove(Data_entity_edi_name, "\\.csv$"),
+      # Add survey suffix and .bin file extension
+      Data_entity_edi_name = paste0(Data_entity_edi_name, "_", survey, ".bin"),
+      # Add file path to file name
+      Data_entity_fp = file.path(temp_dir, Data_entity_edi_name)
+    )
+
+  ls_edi_data_raw <-
+    map(df_edi_data_ent_final$entityId, \(x) read_data_entity(edi_id, entityId = x)) %>%
+    set_names(df_edi_data_ent_final$Data_entity_edi_name)
+
+  for (i in 1:length(ls_edi_data_raw)) {
+    file_raw <- file.path(temp_dir, glue::glue("{names(ls_edi_data_raw)[i]}"))
     con <- file(file_raw, "wb")
-    writeBin(ls_data_raw[[i]], con)
+    writeBin(ls_edi_data_raw[[i]], con)
     close(con)
   }
+
+  inform(c("v" = "All files successfully downloaded to temporary directory"))
+  return(list(
+    "edi_id" = edi_id,
+    "df_edi_files" = df_edi_data_ent_final %>% select(Data_entity, Data_entity_fp)
+  ))
 }
 
 # Download discrete lab data from CNRA data portal and save csv file to a temporary directory
@@ -134,6 +251,8 @@ get_cnra_data_lab <- function(station_num, start_date, end_date = today()) {
   df_data_lab %>% write_csv(
     file = file.path(tempdir(), paste0(station_num, "_cnra_lab_data.csv"))
   )
+
+  inform(c("v" = paste(station_num, "successfully downloaded to temporary directory")))
 }
 
 # Download discrete field measurement data from CNRA data portal and save csv file to a temporary
@@ -159,10 +278,14 @@ get_cnra_data_field <- function(station_num, start_date, end_date = today()) {
   df_data_field %>% write_csv(
     file = file.path(tempdir(), paste0(station_num, "_cnra_field_data.csv"))
   )
+
+  inform(c("v" = paste(station_num, "successfully downloaded to temporary directory")))
 }
 
-# Get data entity names for specified Science Base item ID
-get_scibase_data_entities <- function(item_id) {
+# Download specified data entities from a Science Base item and save files to a temporary
+  # directory
+get_scibase_data <- function(item_id, entity_regex) {
+  # Compile all data entities for specified Science Base item ID
   df_sb_files <- sbtools::item_list_files(item_id)
   inform(c(
     "i" = paste0(
@@ -170,14 +293,16 @@ get_scibase_data_entities <- function(item_id) {
       paste(df_sb_files$fname, collapse = "\n"), "\n"
     ))
   )
-  return(df_sb_files$fname)
-}
 
-# Download specified data entities from a Science Base item and save files to a temporary
-  # directory
-get_scibase_data <- function(item_id, entity_names) {
+  # Subset to desired data entities
+  sb_ent_sub <- map_chr(entity_regex, \(x) str_subset(df_sb_files$fname, x))
+  inform(c(
+    "i" = paste0("Downloading data entities:\n", paste(sb_ent_sub, collapse = "\n"), "\n")
+  ))
+
+  # Proceed with downloading desired data entities from Science Base item
   map(
-    entity_names,
+    sb_ent_sub,
     \(x) sbtools::item_file_download(
       sb_id = item_id,
       names = x,
@@ -185,13 +310,29 @@ get_scibase_data <- function(item_id, entity_names) {
       overwrite_file = TRUE
     )
   )
+
+  inform(c("v" = "All files successfully downloaded to temporary directory"))
 }
 
 # Download discrete water quality data from USGS samples API and save files to a temporary directory
-get_usgs_samples_data <- function(site_id, param) {
+get_usgs_samples_data <- function(site_id) {
+  # Define parameters of interest
+  parameters <- c(
+    "Total ammonia (NH4+ and NH3) as nitrogen, water, filtered",
+    "Nitrate plus nitrite as nitrogen, water, filtered",
+    "Orthophosphate as phosphorus, water, filtered",
+    "Dissolved organic carbon (DOC), water, filtered",
+    "Chlorophyll a (Chl-a), phytoplankton in water, chromatographic-fluorometric method",
+    "Dissolved oxygen (DO), water, unfiltered",
+    "pH, water, unfiltered, field",
+    "Temperature, water",
+    "Specific conductance, water, unfiltered, normalized to 25 degrees Celsius"
+  )
+
+  # Download data
   df_data <- dataRetrieval::read_waterdata_samples(
     monitoringLocationIdentifier = site_id,
-    characteristicUserSupplied = param,
+    characteristicUserSupplied = parameters,
     dataProfile = "narrow",
     convertType = FALSE
   )
@@ -200,39 +341,72 @@ get_usgs_samples_data <- function(site_id, param) {
   df_data %>% write_csv(
     file = file.path(tempdir(), paste0(site_id, "_usgs_samples_data.csv"))
   )
+
+  inform(c("v" = paste(site_id, "successfully downloaded to temporary directory")))
 }
 
 
 # Import and clean data ---------------------------------------------------
 
-# Import raw data while running checks for column names and types, then apply standardized
-  # formatting
-import_raw_data <- function(file, survey, entity, import_fun, ...) {
-  inform(c("i" = paste("Attempting to import:", basename(file))))
+# Import raw data using specified read function. Imports all columns as text.
+# >>> used internally in import_proc_data
+import_raw_data <- function(filepath, import_fun = c("read_csv", "read_excel")) {
+  import_fun <- arg_match(import_fun)
 
-  # Check import function and import data - default import function is readr::read_csv()
-  if (missing(import_fun)) {
-    if (!requireNamespace("readr")) {
-      abort("No import function provided, package \"readr\" is not available")
-    } else {
-      inform(c("i" = "Using \"readr::read_csv()\" to import file"))
-      # Import data with all columns as character
-      df_data_raw <- readr::read_csv(file, col_types = list(.default = "c"))
-    }
-  } else if (!is.function(import_fun)) {
-    abort("Argument \"import_fun\" must be a function")
+  inform(c("i" = paste("Attempting to import:", basename(filepath))))
+
+  # Check import function and import data
+  df_data_raw <- switch(import_fun,
+    read_csv = read_csv(filepath, col_types = list(.default = "c"), na = c("", "NA", "NA:NA")),
+    read_excel = read_excel(filepath, col_types = "text")
+  )
+
+  inform(c("v" = "Data import complete\n"))
+  return(df_data_raw)
+}
+
+# Check for parsing errors when converting columns from text to numeric or POSIXct
+# >>> used internally in standardize_col_meta and date and time conversion functions
+check_parsing <- function(df_data_orig, df_data_parsed, filepath) {
+  # Check if the number of NA values are the same in each column between the original and parsed
+    # dataframes
+  df_parse_check <- list(df_data_orig, df_data_parsed) %>%
+    map(
+      \(df) summarize(df, across(everything(), \(x) sum(is.na(x)))) %>%
+        pivot_longer(everything(), names_to = "col_name", values_to = "num_NA")
+    ) %>%
+    reduce(\(x, y) left_join(x, y, by = join_by(col_name), suffix = c("_orig", "_parsed"))) %>%
+    mutate(parse_check = num_NA_orig == num_NA_parsed)
+
+  # Generate message for results of parsing check
+  if (all(df_parse_check$parse_check)) {
+    inform(c("v" = "All columns parsed correctly"))
   } else {
-    df_data_raw <- import_fun(file, ...)
+    df_parse_check_F <- df_parse_check %>% dplyr::filter(!parse_check)
+    inform(c(
+      "x" = paste(
+        "The following columns did NOT parse correctly:",
+        paste(df_parse_check_F$col_name, collapse = ", ")
+      ),
+      "i" = "Results of parsing check:"
+    ))
+    print(df_parse_check, n = 100)
+    abort(c(
+      "x" = "Data NOT imported",
+      "i" = "Fix problem underlying parsing error before proceeding",
+      "i" = paste0("Raw data can be found at the following path:\n", filepath)
+    ))
   }
+}
 
-  # Import data column metadata table and filter to survey and entity
-  df_col_meta <-
-    read_csv("data-raw/01_Global/Data_column_metadata.csv", show_col_types = FALSE) %>%
-    dplyr::filter(Survey == survey, Data_entity == entity)
+# Perform checks on column names and types, then apply standardized formatting
+# >>> used internally in import_proc_data
+standardize_col_meta <- function(df_data, df_col_meta, filepath) {
+  inform(c("i" = paste("Checking column names and types in", basename(filepath))))
 
-  # Check if expected columns in df_col_meta exist in df_data_raw
+  # Check if expected columns in df_col_meta exist in df_data
   df_col_check <- df_col_meta %>%
-    mutate(col_name_check = map_lgl(Col_name_exp, \(x) any(names(df_data_raw) == x)))
+    mutate(col_name_check = map_lgl(Col_name_exp, \(x) any(names(df_data) == x)))
 
   # Generate message for results of check
   if (all(df_col_check$col_name_check)) {
@@ -249,7 +423,7 @@ import_raw_data <- function(file, survey, entity, import_fun, ...) {
   }
 
   # Select columns specified in data column metadata table
-  df_data_c <- df_data_raw %>% select(all_of(df_col_meta$Col_name_exp))
+  df_data_c <- df_data %>% select(all_of(df_col_meta$Col_name_exp))
 
   # Convert specified columns to numeric if there are any
   if (any(df_col_meta$Col_type == "numeric")) {
@@ -259,44 +433,288 @@ import_raw_data <- function(file, survey, entity, import_fun, ...) {
 
     df_data_c <- df_data_c %>% mutate(across(all_of(col_numeric), as.numeric))
 
-    # Check for parsing errors when converting columns to numeric
-    df_parse_check <-
-      map(
-        list(df_data_raw, df_data_c),
-        \(df) summarize(df, across(all_of(col_numeric), \(x) sum(is.na(x)))) %>%
-          pivot_longer(everything(), names_to = "col_name", values_to = "num_NA")
-      ) %>%
-      reduce(\(x, y) left_join(x, y, by = join_by(col_name), suffix = c("_raw", "_clean"))) %>%
-      mutate(parse_check = num_NA_raw == num_NA_clean)
+    inform(c(
+      "i" = paste(
+        "Converting the following columns to numeric:",
+        paste(col_numeric, collapse = ", ")
+      ),
+      "i" = "Checking for data parsing errors"
+    ))
 
-    # Generate message for results of parsing check
-    if (all(df_parse_check$parse_check)) {
-      inform(c("v" = "All numeric columns parsed correctly"))
-    } else {
-      df_parse_check_F <- df_parse_check %>% dplyr::filter(!parse_check)
-      inform(c(
-        "x" = paste(
-          "The following columns did NOT parse as numeric correctly:",
-          paste(df_parse_check_F$col_name, collapse = ", ")
-        ),
-        "i" = "Results of parsing check:"
-      ))
-      print(df_parse_check_F, n = 100)
-      abort(c(
-        "x" = "Data NOT imported",
-        "i" = "Fix problem underlying parsing error before proceeding"
-      ))
-    }
+    # Check for parsing errors when converting columns to numeric
+    list(df_data, df_data_c) %>%
+      map(\(x) select(x, all_of(col_numeric))) %>%
+      reduce(\(x, y) check_parsing(x, y, filepath))
   }
 
   # Rename columns according to new names in data column metadata table
   names(df_data_c) <- df_col_meta$Col_name_new
-  inform(c("v" = "Data import complete\n"))
+  inform(c("v" = "Column names standardized\n"))
   return(df_data_c)
 }
 
+# Parse Date column if the date format is specified
+# >>> used internally in import_proc_data
+convert_date <- function(df_data, date_fmt, filepath) {
+  # Skip if date_fmt isn't specified
+  if (is.na(date_fmt)) return(df_data)
+
+  inform(c("i" = paste("Converting Date column in", basename(filepath))))
+  df_data_c <- df_data %>% mutate(Date = date(parse_date_time(Date, date_fmt)))
+
+  # Run parsing check
+  list(df_data, df_data_c) %>%
+    map(\(x) select(x, Date)) %>%
+    reduce(\(x, y) check_parsing(x, y, filepath))
+
+  cat("\n")
+  return(df_data_c)
+}
+
+# Parse Time column and format as HH:MM:SS if the time format is specified
+# >>> used internally in import_proc_data
+convert_time <- function(df_data, time_fmt, filepath) {
+  # Skip if time_fmt isn't specified
+  if (is.na(time_fmt)) return(df_data)
+
+  inform(c("i" = paste("Converting Time column in", basename(filepath))))
+  df_data_c <- df_data %>% mutate(Time = format(parse_date_time(Time, time_fmt), "%H:%M:%S"))
+
+  # Run parsing check
+  list(df_data, df_data_c) %>%
+    map(\(x) select(x, Time)) %>%
+    reduce(\(x, y) check_parsing(x, y, filepath))
+
+  cat("\n")
+  return(df_data_c)
+}
+
+# Parse Datetime column if the datetime format is specified. Also create a Date column from the
+  # parsed Datetime column.
+# >>> used internally in import_proc_data
+convert_datetime <- function(df_data, datetime_fmt, timezone, filepath) {
+  # Skip if datetime_fmt isn't specified
+  if (is.na(datetime_fmt)) return(df_data)
+
+  inform(c("i" = paste("Converting Datetime column in", basename(filepath))))
+  df_data_c <- df_data %>%
+    mutate(
+      Datetime = parse_date_time(Datetime, datetime_fmt, tz = timezone),
+      # Make sure Datetime is in local time (America/Los_Angeles) for all surveys
+      Datetime = with_tz(Datetime, tzone = "America/Los_Angeles"),
+      Date = date(Datetime),
+      .before = Datetime
+    )
+
+  # Run parsing check
+  list(df_data, df_data_c) %>%
+    map(\(x) select(x, Datetime)) %>%
+    reduce(\(x, y) check_parsing(x, y, filepath))
+
+  inform(c("i" = "Creating Date column from parsed Datetime column\n"))
+  return(df_data_c)
+}
+
+# Convert depth from feet to meters
+# >>> used internally in import_proc_data
+convert_depth <- function(df_data, depth_unit = c("meters", "feet"), filepath) {
+  # Skip if depth_unit isn't specified
+  if (is.na(depth_unit)) return(df_data)
+
+  inform(c("i" = paste("Checking Depth column in", basename(filepath))))
+
+  # Argument checking
+  depth_unit <- arg_match(depth_unit)
+
+  # Skip if depth_unit is meters
+  if (depth_unit == "meters") {
+    inform(c("v" = "Depth column is in meters. No conversion necessary.\n"))
+    return(df_data)
+    # Otherwise, if depth_unit is feet, convert to meters
+  } else if (depth_unit == "feet") {
+    inform(c("v" = "Depth column converted from feet to meters.\n"))
+    df_data %>% mutate(Depth = Depth * 0.3048)
+  }
+}
+
+# Convert Secchi depth from meters to centimeters
+# >>> used internally in import_proc_data
+convert_secchi <- function(df_data, secchi_unit = c("centimeters", "meters"), filepath) {
+  # Skip if secchi_unit isn't specified
+  if (is.na(secchi_unit)) return(df_data)
+
+  inform(c("i" = paste("Checking Secchi column in", basename(filepath))))
+
+  # Argument checking
+  secchi_unit <- arg_match(secchi_unit)
+
+  # Skip if secchi_unit is centimeters
+  if (secchi_unit == "centimeters") {
+    inform(c("v" = "Secchi column is in centimeters. No conversion necessary.\n"))
+    return(df_data)
+    # Otherwise, if secchi_unit is meters, convert to centimeters
+  } else if (secchi_unit == "meters") {
+    inform(c("v" = "Secchi column converted from meters to centimeters.\n"))
+    df_data %>% mutate(Secchi = Secchi * 100)
+  }
+}
+
+# Standardize CDFW tide codes
+# >>> used internally in import_proc_data
+standardize_tide_code <- function(df_data, tide_lgl, filepath) {
+  # Skip if tide_lgl is FALSE
+  if (isFALSE(tide_lgl)) return(df_data)
+
+  inform(c("i" = paste("Standardizing Tide column in", basename(filepath))))
+  df_data %>%
+    mutate(Tide = case_match(Tide, 4 ~ "Flood", 3 ~ "Low Slack", 2 ~ "Ebb", 1 ~ "High Slack"))
+}
+
+# Convert coordinates from DMS to decimal degrees
+# >>> used internally in import_proc_data, can also be used independently
+convert_lat_long <- function(
+  df_data,
+  coord_comp = c("DM", "DMS"),
+  filepath = NULL
+) {
+  # Skip if coord_comp isn't specified
+  if (is.na(coord_comp)) return(df_data)
+
+  # Generate message if filepath is provided
+  if (!is.null(filepath)) {
+    inform(
+      c(
+        "i" = paste(
+          "Converting Latitude and Longitude columns to decimal degrees in",
+          basename(filepath)
+        )
+      )
+    )
+  }
+
+  # Argument checking
+  coord_comp <- arg_match(coord_comp)
+
+  # Convert coordinates based on coord_comp argument
+  switch(
+    coord_comp,
+    DM = mutate(
+      df_data,
+      Latitude = Lat_Deg + Lat_Min / 60,
+      Longitude = Long_Deg - Long_Min / 60,
+      .keep = "unused"
+    ),
+    DMS = mutate(
+      df_data,
+      Latitude = Lat_Deg + Lat_Min / 60 + Lat_Sec / 3600,
+      Longitude = (Long_Deg + Long_Min / 60 + Long_Sec / 3600) * -1,
+      .keep = "unused"
+    )
+  )
+}
+
+# Import raw data while running checks for column names and types, then apply standardized
+  # formatting
+# df_files argument is only for data downloaded from EDI, keep it as NULL if data isn't from EDI
+import_proc_data <- function(survey, data_type = NULL, df_files = NULL) {
+  # Rename survey if data_type isn't NULL
+  survey <- if (!is.null(data_type)) paste(survey, data_type, sep = "_") else survey
+
+  # Import data entities and data column metadata tables and filter to survey
+  ndf_data_ent <-
+    c(
+      "data-raw/01_Global/Data_entity_metadata.csv",
+      "data-raw/01_Global/Data_column_metadata.csv"
+    ) %>%
+    map(\(x) read_csv(x, show_col_types = FALSE) %>% dplyr::filter(Survey == survey)) %>%
+    # Nest data column metadata table under entities table
+    reduce(\(x, y) nest_join(x, y, by = join_by(Survey, Data_entity), name = "df_col_meta"))
+
+  # Determine file paths for importing data
+  # Create empty list to contain metadata
+  ls_data <- list()
+
+  # Files from EDI
+  if (any(ndf_data_ent$Source == "EDI")) {
+    ndf_data_ent_edi <- ndf_data_ent %>%
+      dplyr::filter(Source == "EDI") %>%
+      # Add file paths to EDI data downloaded to temporary directory
+      left_join(df_files, by = join_by(Data_entity))
+
+    ls_data <- append(ls_data, list(ndf_data_ent_edi))
+  }
+
+  # Other files saved in temporary directory but not from EDI
+  if (any(!str_detect(ndf_data_ent$Source, "^data-raw|EDI"))) {
+    ndf_data_ent_tempdir <- ndf_data_ent %>%
+      dplyr::filter(!str_detect(Source, "^data-raw|EDI")) %>%
+      # Determine file paths for data entities on temporary directory
+      mutate(
+        Data_entity_fp = map(
+          Data_entity_regex,
+          \(x) list.files(tempdir(), pattern = x, full.names = TRUE)
+        )
+      ) %>%
+      # Unnest Data_entity_fp in case it contains more than one file path
+      unnest(Data_entity_fp)
+
+    ls_data <- append(ls_data, list(ndf_data_ent_tempdir))
+  }
+
+  # Files saved locally in data-raw
+  if (any(str_detect(ndf_data_ent$Source, "^data-raw"))) {
+    ndf_data_ent_dataraw <- ndf_data_ent %>%
+      dplyr::filter(str_detect(Source, "^data-raw")) %>%
+      # Determine file paths for data entities
+      mutate(
+        Data_entity_fp = map2(
+          Source, Data_entity_regex,
+          \(x, y) list.files(x, pattern = y, full.names = TRUE)
+        )
+      ) %>%
+      # Unnest Data_entity_fp in case it contains more than one file path
+      unnest(Data_entity_fp)
+
+    ls_data <- append(ls_data, list(ndf_data_ent_dataraw))
+  }
+
+  # Combine metadata, import files and process each one
+  ndf_data_ent_c <- list_rbind(ls_data) %>%
+    mutate(
+      # Import data
+      df_data = map2(Data_entity_fp, Read_function, import_raw_data),
+      # Perform checks and minor processing on column names and types
+      df_data_c = pmap(list(df_data, df_col_meta, Data_entity_fp), standardize_col_meta),
+      # Convert Date columns where specified
+      df_data_c = pmap(list(df_data_c, Date_format, Data_entity_fp), convert_date),
+      # Convert Time columns where specified
+      df_data_c = pmap(list(df_data_c, Time_format, Data_entity_fp), convert_time),
+      # Convert Datetime columns where specified
+      df_data_c = pmap(
+        list(df_data_c, Datetime_format, Time_zone, Data_entity_fp),
+        convert_datetime
+      ),
+      # Convert Depth from feet to meters if necessary
+      df_data_c = pmap(list(df_data_c, Depth_unit, Data_entity_fp), convert_depth),
+      # Convert Secchi depth from meters to centimeters if necessary
+      df_data_c = pmap(list(df_data_c, Secchi_unit, Data_entity_fp), convert_secchi),
+      # Standardize CDFW tide code if necessary
+      df_data_c = pmap(list(df_data_c, Standardize_tide, Data_entity_fp), standardize_tide_code),
+      # Convert coordinates from DMS to decimal degrees if necessary
+      df_data_c = pmap(list(df_data_c, Convert_coordinates, Data_entity_fp), convert_lat_long)
+    )
+
+  # Combine any data frames that share a common Data_entity and return a list of processed
+    # data entities
+  ndf_data_ent_c %>%
+    select(Data_entity, df_data_c) %>%
+    nest(data = df_data_c) %>%
+    mutate(data = map(data, \(x) unnest(x, df_data_c))) %>%
+    deframe()
+}
+
 # Standardize parameter names for data structured in long format
-standardize_param <- function(df, survey, type = c("Field", "Lab", "Both")) {
+standardize_param <- function(df_data, survey, type = c("Field", "Lab", "Both")) {
   type <- arg_match(type)
 
   # Import parameter table and filter to survey and type
@@ -305,11 +723,11 @@ standardize_param <- function(df, survey, type = c("Field", "Lab", "Both")) {
     dplyr::filter(Survey == survey, Type == type) %>%
     select(Parameter_exp, Parameter_std, Units_exp)
 
-  # Specify join spec for df >> df_param
+  # Specify join spec for df_data >> df_param
   param_join <- join_by(Parameter == Parameter_exp, Units == Units_exp)
 
-  # Check if expected parameters in df_param exist in df
-  df_param_check <- df %>%
+  # Check if expected parameters in df_param exist in df_data
+  df_param_check <- df_data %>%
     distinct(Parameter, Units) %>%
     arrange(Parameter, Units) %>%
     full_join(df_param, by = param_join, keep = TRUE)
@@ -348,151 +766,82 @@ standardize_param <- function(df, survey, type = c("Field", "Lab", "Both")) {
     inform(c("i" = "No parameters removed from dataset"))
   }
 
-  # Proceed with standardizing parameter names in df
-  df %>%
+  # Proceed with standardizing parameter names in data frame
+  df_data %>%
     left_join(df_param, by = param_join) %>%
     drop_na(Parameter_std) %>%
     select(-c(Parameter, Units))
 }
 
-# Parse Datetime columns
-# If the data has separate Date and Time columns, combine them into a Datetime column and parse the
-  # Date column
-# If the data has a Datetime column, parse it, and create a Date column
-convert_datetime <- function(df_data,
-                             date_format,
-                             time_format,
-                             timezone,
-                             entity_name = NULL) {
-  # Skip if data doesn't have a Date format specified - for EDI automated workflow
-  if (is.na(date_format)) return(df_data)
-
-  # Skip if data doesn't have a Datetime column or Date and Time columns
-  if (!(any(names(df_data) == "Datetime") | (any(names(df_data) == "Date") & any(names(df_data) == "Time")))) {
-    warn(c(
-      "Data does NOT have either a Datetime column or Date and Time columns",
-      "i" = "Returning data without changes"
-    ))
-    return(df_data)
-  }
-
-  # Proceed with parsing depending on which date/time columns df_data contains
-  if (any(names(df_data) == "Datetime")) {
-    df_data_c <- df_data %>%
-      mutate(
-        Datetime = parse_date_time(Datetime, paste(date_format, time_format), tz = timezone),
-        # Make sure Datetime is in local time (America/Los_Angeles) for all surveys
-        Datetime = with_tz(Datetime, tzone = "America/Los_Angeles"),
-        Date = date(Datetime),
-        .before = Datetime
-      )
-
-    # Define Datetime columns before and after conversion for parsing check
-    col_datetime_orig <- "Datetime"
-    col_datetime_conv <- "Datetime"
-  } else if (any(names(df_data) == "Date") & any(names(df_data) == "Time")) {
-    df_data_c <- df_data %>%
-      mutate(
-        Date = date(parse_date_time(Date, date_format, tz = timezone)),
-        Datetime = parse_date_time(
-          if_else(is.na(Time), NA_character_, paste(Date, Time)),
-          paste("Ymd", time_format),
-          tz = timezone
-        ),
-        # Make sure Datetime is in local time (America/Los_Angeles) for all surveys
-        Datetime = with_tz(Datetime, tzone = "America/Los_Angeles"),
-        .keep = "unused", .after = Date
-      )
-
-    # Define Datetime columns before and after conversion for parsing check
-    col_datetime_orig <- c("Date", "Time")
-    col_datetime_conv <- c("Date", "Datetime")
-  }
-
-  # Check for parsing errors when converting columns to datetime
-  df_parse_check <-
-    map2(
-      list(df_data, df_data_c),
-      list(col_datetime_orig, col_datetime_conv),
-      \(df, col_check) summarize(df, across(all_of(col_check), \(x) sum(is.na(x)))) %>%
-        pivot_longer(everything(), names_to = "col_name", values_to = "num_NA")
+# Create Datetime column from Date and Time columns making sure Datetime is in local time
+  # (America/Los_Angeles)
+combine_datetime <- function(df_data, dt_fmt = "Ymd HMS", timezone) {
+  df_data %>%
+    mutate(
+      Datetime = parse_date_time(
+        if_else(is.na(Time), NA_character_, paste(Date, Time)),
+        orders = dt_fmt, tz = timezone
+      ),
+      # Make sure Datetime is in local time (America/Los_Angeles) for all surveys
+      Datetime = with_tz(Datetime, tzone = "America/Los_Angeles"),
+      .after = Date
     ) %>%
-    map2(c("_raw", "_clean"), \(df, suff) rename_with(df, \(x) paste0(x, suff))) %>%
-    reduce(bind_cols) %>%
-    mutate(parse_check = num_NA_raw == num_NA_clean)
-
-  # Generate message for results of parsing check
-  if (all(df_parse_check$parse_check)) {
-    if (is.null(entity_name)) {
-      parse_msg <- "All datetime columns parsed correctly"
-    } else {
-      parse_msg <- paste("All datetime columns parsed correctly in", entity_name)
-    }
-    inform(c("v" = parse_msg))
-  } else {
-    if (is.null(entity_name)) {
-      parse_msg <- "Datetime columns did NOT parse correctly"
-    } else {
-      parse_msg <- paste("Datetime columns did NOT parse correctly in", entity_name)
-    }
-    inform(c(
-      "x" = parse_msg,
-      "i" = "Results of parsing check:"
-    ))
-    print(df_parse_check, n = 100)
-    inform(c("i" = "Date and Time columns from dataset:"))
-    print(df_data %>% select(all_of(col_datetime_orig)) %>% slice_head(n = 5))
-    abort(c("i" = "Fix problem underlying parsing error before proceeding"))
-  }
-
-  return(df_data_c)
-}
-
-# Convert depth from feet to meters
-convert_depth <- function(df_data, depth_unit, entity_name = NULL) {
-  # Skip if data doesn't have Depth unit specified
-  if (is.na(depth_unit)) {
-    return(df_data)
-  # Skip if Depth unit is meters
-  } else if (depth_unit == "meters") {
-    return(df_data)
-  # Otherwise, if Depth unit is feet, convert to meters
-  } else if (depth_unit == "feet"){
-    if (is.null(entity_name)) {
-      depth_msg <- "Depth column converted from feet to meters"
-    } else {
-      depth_msg <- paste("Depth column in", entity_name, "converted from feet to meters")
-    }
-    inform(c("v" = depth_msg))
-    df_data %>% mutate(Depth = Depth * 0.3048)
-  }
-}
-
-# Convert Secchi depth from meters to centimeters
-convert_secchi <- function(df_data, secchi_unit, entity_name = NULL) {
-  # Skip if data doesn't have Secchi unit specified
-  if (is.na(secchi_unit)) {
-    return(df_data)
-    # Skip if Secchi unit is centimeters
-  } else if (secchi_unit == "centimeters") {
-    return(df_data)
-    # Otherwise, if Secchi unit is meters, convert to centimeters
-  } else if (secchi_unit == "meters"){
-    if (is.null(entity_name)) {
-      secchi_msg <- "Secchi depth column converted from meters to centimeters"
-    } else {
-      secchi_msg <- paste(
-        "Secchi depth column in", entity_name, "converted from meters to centimeters"
-      )
-    }
-    inform(c("v" = secchi_msg))
-    df_data %>% mutate(Secchi = Secchi * 100)
-  }
+    select(-Time)
 }
 
 # Add Source column
 add_source_col <- function(df_data, survey) {
   df_data %>% mutate(Source = survey, .before = 1)
+}
+
+# Separate coordinate strings to Degrees-Minutes (DM) or Degrees-Minutes-Seconds (DMS)
+# in separate columns
+separate_lat_long <- function(df_data, delim_chr, coord_comp = c("DM", "DMS")) {
+  # Define coordinate components to produce (DM vs DMS)
+  coord_comp <- arg_match(coord_comp)
+  if (coord_comp == "DM") {
+    coord_comp_lat <- c("Lat_Deg", "Lat_Min")
+    coord_comp_long <- c("Long_Deg", "Long_Min")
+  } else if (coord_comp == "DMS") {
+    coord_comp_lat <- c("Lat_Deg", "Lat_Min", "Lat_Sec")
+    coord_comp_long <- c("Long_Deg", "Long_Min", "Long_Sec")
+  }
+
+  df_data %>%
+    separate_wider_delim(
+      Latitude,
+      delim = delim_chr,
+      names = coord_comp_lat
+    ) %>%
+    separate_wider_delim(
+      Longitude,
+      delim = delim_chr,
+      names = coord_comp_long
+    ) %>%
+    mutate(across(starts_with(c("Lat_", "Long_")), as.numeric))
+}
+
+# Resolve field vs. fixed sampling coordinates. Prefers fixed coordinates over field. Adds a
+  # Field_coords column to indicate with coordinates were collected in the field if necessary.
+resolve_lat_long <- function(df_data) {
+  df_data_c <- df_data %>%
+    mutate(
+      Field_coords = case_when(
+        is.na(Latitude) & !is.na(Latitude_field) ~ TRUE,
+        is.na(Longitude) & !is.na(Longitude_field) ~ TRUE,
+        .default = FALSE
+      ),
+      Latitude = if_else(is.na(Latitude), Latitude_field, Latitude),
+      Longitude = if_else(is.na(Longitude), Longitude_field, Longitude),
+      .keep = "unused"
+    )
+
+  # Remove Field_coords column if all values are FALSE
+  if (all(df_data_c$Field_coords == FALSE)) {
+    df_data_c <- df_data_c %>% select(-Field_coords)
+  }
+
+  return(df_data_c)
 }
 
 # Delete rows where all measurements are NA
@@ -533,135 +882,24 @@ standardize_col_order <- function(df_data) {
   df_data %>% select(any_of(all_cols_order))
 }
 
-# Import and process data derived from an EDI package
-# This is a generalized workflow to be used across all EDI data packages
-# Returns a list of processed data entities and the EDI ID
-import_proc_edi_data <- function(survey, static = FALSE) {
-  # Obtain EDI data package ID for most recent revision
-  # Stops if its the same as the last discretewq update and if static = FALSE
-  edi_id_curr <- get_latest_edi_id(survey, static)
-
-  # Compile all data entities for EDI data package
-  edi_data_ent_all <- get_edi_data_entities(edi_id_curr)
-
-  # Import EDI data entities metadata table and filter to survey
-  df_edi_ent <-
-    read_csv("data-raw/01_Global/EDI_data_entity_metadata.csv", show_col_types = FALSE) %>%
-    dplyr::filter(Survey == survey)
-
-  # Subset to desired data entities
-  df_edi_ent_sub <- df_edi_ent %>%
-    mutate(
-      Data_entity_edi_name = map(Data_entity_regex, \(x) str_subset(edi_data_ent_all, x)),
-      Data_entity_empty = map_lgl(Data_entity_edi_name, is_empty),
-      .keep = "used"
-    )
-
-  # Check if regex patterns for desired data entities return expected results
-  if (any(df_edi_ent_sub$Data_entity_empty)) {
-    df_edi_ent_fail <- df_edi_ent_sub %>% dplyr::filter(Data_entity_empty)
-    abort(c(
-      "x" = paste(
-        "The following data entity regex patterns did not find a data entity:",
-        paste(df_edi_ent_fail$Data_entity_regex, collapse = ", ")
-      ),
-      "i" = "Update data entity regex patterns in EDI_data_entity_metadata.csv before proceeding"
-    ))
-  } else {
-    inform(c(
-      "i" = paste0(
-        "Downloading data entities:\n",
-        paste(df_edi_ent_sub$Data_entity_edi_name, collapse = "\n"), "\n"
-      )
-    ))
-  }
-
-  # Download data entities to temporary directory
-  get_edi_data(edi_id_curr, df_edi_ent_sub$Data_entity_edi_name)
-  temp_files <- list.files(tempdir(), full.names = TRUE)
-
-  # Import data and perform checks and minor processing
-  ndf_edi_ent <- df_edi_ent %>%
-    mutate(
-      # Determine file paths for data entities on temporary directory
-      Data_entity_fp = map_chr(Data_entity_regex, \(x) str_subset(temp_files, x)),
-      # Add data entity name
-      Data_entity_name = map_chr(Data_entity_regex, \(x) str_subset(edi_data_ent_all, x)),
-      # Import data
-      df_data = map2(Data_entity_fp, Data_entity, \(x, y) import_raw_data(x, survey, y)),
-      # Parse Datetime columns
-      df_data = pmap(
-        list(df_data, Date_format, Time_format, Time_zone, Data_entity_name),
-        convert_datetime
-      ),
-      # Convert Depth from feet to meters if necessary
-      df_data = pmap(list(df_data, Depth_unit, Data_entity_name), convert_depth),
-      # Convert Secchi depth from meters to centimeters if necessary
-      df_data = pmap(list(df_data, Secchi_unit, Data_entity_name), convert_secchi)
-    )
-
-  # Return a list of processed data entities and the EDI ID
-  ndf_edi_ent$df_data %>%
-    set_names(ndf_edi_ent$Data_entity) %>%
-    append(list("edi_id" = edi_id_curr), after = 0)
-}
-
-# Import and process data derived from a specified Science Base item ID
-# This is a generalized workflow to be used across all Science Base items
-# Returns a list of processed data entities
-import_proc_scibase_data <- function(survey, item_id, entity_regex) {
-  # Compile all data entities for specified Science Base item ID
-  sb_data_ent_all <- get_scibase_data_entities(item_id)
-
-  # Subset to desired data entities
-  df_sb_ent_sub <-
-    tibble(
-      Data_entity = names(entity_regex),
-      Data_entity_regex = unname(entity_regex)
-    ) %>%
-    mutate(
-      Data_entity_sb_name = map(Data_entity_regex, \(x) str_subset(sb_data_ent_all, x)),
-      Data_entity_empty = map_lgl(Data_entity_sb_name, is_empty)
-    )
-
-  # Check if regex patterns for desired data entities return expected results
-  if (any(df_sb_ent_sub$Data_entity_empty)) {
-    df_sb_ent_fail <- df_sb_ent_sub %>% dplyr::filter(Data_entity_empty)
-    abort(c(
-      "x" = paste(
-        "The following data entity regex patterns did not find a data entity:",
-        paste(df_sb_ent_fail$Data_entity_regex, collapse = ", ")
-      ),
-      "i" = "Update data entity regex patterns in EDI_data_entity_metadata.csv before proceeding"
-    ))
-  } else {
-    inform(c(
-      "i" = paste0(
-        "Downloading data entities:\n",
-        paste(df_sb_ent_sub$Data_entity_sb_name, collapse = "\n"), "\n"
-      )
-    ))
-  }
-
-  # Download data entities to temporary directory
-  get_scibase_data(item_id, df_sb_ent_sub$Data_entity_sb_name)
-  temp_files <- list.files(tempdir(), full.names = TRUE)
-
-  # Import data and perform checks and minor processing
-  ndf_sb_ent_sub <- df_sb_ent_sub %>%
-    mutate(
-      # Determine file paths for data entities on temporary directory
-      Data_entity_fp = map_chr(Data_entity_regex, \(x) str_subset(temp_files, x)),
-      # Import data
-      df_data = map2(Data_entity_fp, Data_entity, \(x, y) import_raw_data(x, survey, y))
-    )
-
-  # Return a list of processed data entities
-  ndf_sb_ent_sub$df_data %>% set_names(ndf_sb_ent_sub$Data_entity)
-}
-
 
 # Data documentation ------------------------------------------------------
+
+# Update attribute information for a dataset including the ID of EDI publication used in the
+  # current update and date the dataset was updated
+# Provide a named vector to edi_id if there is more than one EDI publication used for the survey.
+  # The names should reflect the data type such as "fish" or "zoop"
+add_update_info <- function(df_data, edi_id = NULL) {
+  # If edi_id is NULL, just update last_update date, otherwise update both
+  if (is.null(edi_id)) {
+    structure(df_data, last_update = Sys.Date())
+  } else if (length(edi_id) == 1) {
+    structure(df_data, edi_id = edi_id, last_update = Sys.Date())
+  } else {
+    ls_edi_id <- as.list(set_names(edi_id, \(x) paste0("edi_id_", x)))
+    exec(structure, df_data, !!!ls_edi_id, last_update = Sys.Date())
+  }
+}
 
 # Generate information for updating data dimensions for data documentation
 # >>> used internally in documentation helpers
@@ -673,9 +911,9 @@ get_data_dims <- function(data_clean) {
   ))
 }
 
-# Generate information from EDI that's needed to update documentation
-# >>> used internally in document_helper_edi and update_edi_metadata
-get_edi_doc_info <- function(edi_id) {
+# Documentation helper for datasets derived from EDI data packages
+document_helper_edi <- function(edi_id, data_clean) {
+  # Generate EDI info
   # Citation for EDI data package
   edi_cit_raw <- read_data_package_citation(edi_id, access = FALSE)
 
@@ -685,18 +923,10 @@ get_edi_doc_info <- function(edi_id) {
   # URL for EDI data package
   edi_url <- paste0("https://portal.edirepository.org/nis/metadataviewer?packageid=", edi_id)
 
-  lst(edi_cit_raw, edi_doi, edi_url)
-}
-
-# Documentation helper for datasets derived from EDI data packages
-document_helper_edi <- function(edi_id, data_clean) {
-  # Generate EDI info
-  ls_edi_info <- get_edi_doc_info(edi_id)
-
   # Citation for README:
   edi_cit_README <- paste0(
-    str_remove(ls_edi_info$edi_cit_raw, '(?<=Environmental Data Initiative\\.\\s)https.+'),
-    "[", ls_edi_info$edi_doi, "](", ls_edi_info$edi_url, ")"
+    str_remove(edi_cit_raw, '(?<=Environmental Data Initiative\\.\\s)https.+'),
+    "[", edi_doi, "](", edi_url, ")"
   )
   inform(c(
     "i" = "Update citation in 'README.Rmd':",
@@ -705,19 +935,19 @@ document_helper_edi <- function(edi_id, data_clean) {
 
   # Data documentation:
   get_data_dims(data_clean)
-  inform(c("*" = paste("URL:", ls_edi_info$edi_url, "\n")))
+  inform(c("*" = paste("URL:", edi_url, "\n")))
 
   # Publication Files:
   # data_objects/Delta_Integrated_WQ_metadata.csv
   inform(c(
     "i" = "Update 'Data_source' in 'publication/data_objects/Delta_Integrated_WQ_metadata.csv':",
-    "*" = paste(ls_edi_info$edi_url, "\n")
+    "*" = paste(edi_url, "\n")
   ))
 
   # metadata_templates/methods.docx
   inform(c(
     "i" = "Update '5. Data Sources' in 'publication/metadata_templates/methods.docx':",
-    "*" = paste(ls_edi_info$edi_cit_raw, "\n")
+    "*" = paste(edi_cit_raw, "\n")
   ))
 
   # metadata_templates/provenance.txt
@@ -727,8 +957,7 @@ document_helper_edi <- function(edi_id, data_clean) {
   ))
 }
 
-# Documentation helper for datasets derived from sources other than EDI data
-  # packages
+# Documentation helper for datasets derived from sources other than EDI data packages
 document_helper_other <- function(data_clean) {
   dataset_yr <- max(year(data_clean$Date))
 
@@ -770,30 +999,3 @@ document_helper_other <- function(data_clean) {
     )
   ))
 }
-
-# Update EDI data package metadata table with latest revision
-update_edi_metadata <- function(survey, edi_id) {
-  # Generate EDI info
-  ls_edi_info <- get_edi_doc_info(edi_id)
-
-  # Update EDI data package metadata table
-  fp_edi_meta <- "data-raw/01_Global/EDI_data_package_metadata.csv"
-  df_edi_meta <- read_csv(fp_edi_meta, col_types = "cddcccc")
-
-  df_edi_meta_surv <- df_edi_meta %>% dplyr::filter(Survey == survey)
-
-  df_edi_meta_surv$Revision_last <- as.numeric(str_extract(edi_id, "(?<=\\.)\\d+$"))
-  df_edi_meta_surv$Data_pack_id_full_last <- edi_id
-  df_edi_meta_surv$Citation <- ls_edi_info$edi_cit_raw
-  df_edi_meta_surv$DOI <- ls_edi_info$edi_doi
-  df_edi_meta_surv$URL <- ls_edi_info$edi_url
-
-  inform(c("i" = paste0("Updated record for ", survey, " in '", fp_edi_meta, "'")))
-
-  df_edi_meta %>%
-    anti_join(df_edi_meta_surv, by = "Survey") %>%
-    bind_rows(df_edi_meta_surv) %>%
-    arrange(Survey) %>%
-    write_csv(fp_edi_meta)
-}
-

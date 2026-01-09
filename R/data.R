@@ -6,13 +6,12 @@
 #' Water quality data from the California Department of Fish and Wildlife 20mm survey.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 11,533 rows and 16 variables
+#' @format a tibble with 11,533 rows and 15 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
 #'   \item{Latitude}{Latitude in decimal degrees.}
 #'   \item{Longitude}{Longitude in decimal degrees.}
-#'   \item{Field_coords}{Were lat/long coordinates collected in the field (TRUE), or do they represent the location of a fixed station (FALSE)?}
 #'   \item{Date}{Date sample was collected.}
 #'   \item{Datetime}{Date and time of sample collection.}
 #'   \item{Depth}{Bottom depth (m).}
@@ -127,7 +126,7 @@
 #' Monitoring Program.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 41,582 rows and 20 variables
+#' @format a tibble with 47,502 rows and 20 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected. This represents an identifier for the unique EDSM target location. Multiple tows (and water quality samples) were often collected at each target location on a day.}
@@ -150,7 +149,7 @@
 #'   \item{TurbidityFNU}{Turbidity (FNU) at surface measured with a water quality sonde.}
 #'   \item{Notes}{Comments.}
 #'   }
-#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.415.11}{here}.
+#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.415.12}{here}.
 #' @seealso \code{\link{wq}}
 "EDSM"
 
@@ -455,7 +454,7 @@
 #' Water quality data from the California Department of Fish and Wildlife Smelt Larva Survey.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 4,139 rows and 15 variables
+#' @format a tibble with 4,611 rows and 15 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
@@ -473,7 +472,7 @@
 #'   \item{TurbidityFNU}{Turbidity (FNU) at surface measured with a water quality sonde.}
 #'   \item{Notes}{Comments.}
 #'   }
-#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.534.9}{here}.
+#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.534.11}{here}.
 #' @seealso \code{\link{wq}}
 "SLS"
 
@@ -485,7 +484,7 @@
 #' Water quality data from the California Department of Fish and Wildlife Summer Townet Survey.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 8,554 rows and 16 variables
+#' @format a tibble with 8,554 rows and 15 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
@@ -502,9 +501,8 @@
 #'   \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
 #'   \item{Conductivity_bottom}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at bottom.}
 #'   \item{TurbidityNTU}{Turbidity (NTU) at surface measured with a turbidimeter.}
-#'   \item{Notes}{Comments.}
 #'   }
-#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.1413.1}{here}.
+#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.1413.2}{here}.
 #' @seealso \code{\link{wq}}
 "STN"
 
@@ -572,7 +570,7 @@
 #' Discrete water quality data from the USGS California Water Science Center
 #'
 #' @encoding UTF-8
-#' @format a tibble with 17,662 rows and 20 variables
+#' @format a tibble with 17,728 rows and 20 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}

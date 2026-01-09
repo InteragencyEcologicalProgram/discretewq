@@ -2,14 +2,14 @@ dataPackageID	systemID	title	givenName	middleInitial	surName	role	organizationNa
 edi.458.9	EDI									
 edi.527.4	EDI									
 edi.244.13	EDI									
-edi.415.11	EDI									
+edi.415.12	EDI									
 edi.276.2	EDI									
 edi.494.2	EDI									
 edi.233.5	EDI									
 edi.535.5	EDI									
-edi.534.10	EDI									
+edi.534.11	EDI									
 edi.1187.4	EDI									
-edi.1413.1	EDI
+edi.1413.2	EDI
 edi.1947.1	EDI
 edi.1951.1	EDI
 		"USGS Measurements of Water Quality in San Francisco Bay (CA), 1969-2015 (ver. 4.0 March 2023)"	Cloern	E	J	creator	United States Geological Survey		This online link references a USGS data publication	https://doi.org/10.5066/F7TQ5ZPR

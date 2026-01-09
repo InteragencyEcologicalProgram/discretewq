@@ -11,60 +11,56 @@
 
 library(readr)
 library(dplyr)
+library(lubridate)
 library(tidyr)
 library(stringr)
+library(conflicted)
+
+# Declare package conflict preferences
+conflicts_prefer(dplyr::filter())
 
 # Source helper functions
 source("data-raw/01_Global//data_raw_helpers.R")
 
 # Define settings for dataset
 survey <- "EMP"
-date_fmt <- "Ymd"
-time_fmt <- "HMS"
 tzone <- "Etc/GMT+8"
-secchi_unit <- "centimeters"
-depth_unit <- "feet"
 
-# Import data from EDI to temp dir
-# Compile all data entities for EDI data package 458.9
-edi_data_ent_all <- get_edi_data_entities("edi.458.9")
-
-# Subset to desired data entities
-edi_data_ent_sub <- str_subset(edi_data_ent_all, "2022$")
-
-# Download data entities to temporary directory
-get_edi_data("edi.458.9", edi_data_ent_sub)
+# Download data entities from EDI to temporary directory
+edi_metadata <- get_edi_data(survey, edi_id = "edi.458.9")
 
 # List files in temporary directory
 temp_files <- list.files(tempdir(), full.names = TRUE)
 
 # Read in station data
-EMP_stations <-
-  read_csv(
-    str_subset(temp_files, "Stations"),
-    col_types = cols_only(Station = "c", Latitude = "d", Longitude = "d")
-  ) %>%
+EMP_stations <- edi_metadata$df_edi_files %>%
+  filter(Data_entity == "df_stations") %>%
+  pull(Data_entity_fp) %>%
+  read_csv(col_types = cols_only(Station = "c", Latitude = "d", Longitude = "d")) %>%
   drop_na()
 
 # Read in EMP data (two turbidity units)
-EMP_raw <- read_csv(
-  str_subset(temp_files, "EMP_DWQ_1975_2022\\.bin$"),
-  col_types = cols_only(
-    Station = "c", Date = "c", Time = "c", FieldNotes = "c", Chla_Sign = "c", Chla = "d",
-    Depth = "d", Secchi = "d", Microcystis = "d", SpCndSurface = "d", SpCndBottom = "d",
-    DOSurface = "d", DOBottom = "d", DOpercentSurface = "d", DOpercentBottom = "d", WTSurface = "d",
-    WTBottom = "d", pHSurface = "d", pHBottom = "d", TurbiditySurface_NTU = "d",
-    TurbidityBottom_NTU = "d", TurbiditySurface_FNU = "d", TurbidityBottom_FNU = "d",
-    NorthLat = "d", WestLong = "d", Pheophytin_Sign = "c", Pheophytin = "d",
-    TotAlkalinity_Sign = "c", TotAlkalinity = "d", TotAmmonia_Sign = "c", TotAmmonia = "d",
-    DissAmmonia_Sign = "c", DissAmmonia = "d", DissBromide_Sign = "c", DissBromide = "d",
-    DissCalcium_Sign = "c", DissCalcium = "d", TotChloride_Sign = "c", TotChloride = "d",
-    DissChloride_Sign = "c", DissChloride = "d", DissNitrateNitrite_Sign = "c",
-    DissNitrateNitrite = "d", DOC_Sign = "c", DOC = "d", TOC_Sign = "c", TOC = "d", DON_Sign = "c",
-    DON = "d", TON_Sign = "c", TON = "d", DissOrthophos_Sign = "c", DissOrthophos = "d",
-    TotPhos_Sign = "c", TotPhos = "d", DissSilica_Sign = "c", DissSilica = "d", TDS_Sign = "c",
-    TDS = "d", TSS_Sign = "c", TSS = "d", VSS_Sign = "c", VSS = "d", TKN_Sign = "c", TKN = "d"
-  )
+EMP_raw <- edi_metadata$df_edi_files %>%
+  filter(Data_entity == "df_data") %>%
+  pull(Data_entity_fp) %>%
+  read_csv(
+    col_types = cols_only(
+      Station = "c", Date = "c", Time = "c", FieldNotes = "c", Chla_Sign = "c", Chla = "d",
+      Depth = "d", Secchi = "d", Microcystis = "d", SpCndSurface = "d", SpCndBottom = "d",
+      DOSurface = "d", DOBottom = "d", DOpercentSurface = "d", DOpercentBottom = "d",
+      WTSurface = "d", WTBottom = "d", pHSurface = "d", pHBottom = "d", TurbiditySurface_NTU = "d",
+      TurbidityBottom_NTU = "d", TurbiditySurface_FNU = "d", TurbidityBottom_FNU = "d",
+      NorthLat = "d", WestLong = "d", Pheophytin_Sign = "c", Pheophytin = "d",
+      TotAlkalinity_Sign = "c", TotAlkalinity = "d", TotAmmonia_Sign = "c", TotAmmonia = "d",
+      DissAmmonia_Sign = "c", DissAmmonia = "d", DissBromide_Sign = "c", DissBromide = "d",
+      DissCalcium_Sign = "c", DissCalcium = "d", TotChloride_Sign = "c", TotChloride = "d",
+      DissChloride_Sign = "c", DissChloride = "d", DissNitrateNitrite_Sign = "c",
+      DissNitrateNitrite = "d", DOC_Sign = "c", DOC = "d", TOC_Sign = "c", TOC = "d",
+      DON_Sign = "c", DON = "d", TON_Sign = "c", TON = "d", DissOrthophos_Sign = "c",
+      DissOrthophos = "d", TotPhos_Sign = "c", TotPhos = "d", DissSilica_Sign = "c",
+      DissSilica = "d", TDS_Sign = "c", TDS = "d", TSS_Sign = "c", TSS = "d", VSS_Sign = "c",
+      VSS = "d", TKN_Sign = "c", TKN = "d"
+    )
 )
 
 # clean data
@@ -78,31 +74,26 @@ EMP <- EMP_raw %>%
     TurbidityNTU = TurbiditySurface_NTU, TurbidityNTU_bottom = TurbidityBottom_NTU, pH = pHSurface,
     pH_bottom = pHBottom, Latitude = NorthLat, Longitude = WestLong
   ) %>%
-  convert_datetime(date_fmt, time_fmt, tzone) %>%
+  mutate(Date = date(parse_date_time(Date, "Ymd"))) %>%
+  combine_datetime(timezone = tzone) %>%
   mutate(
     # EMP has some 1.5, 2.5 and 3.5 values
     Microcystis = round(Microcystis),
     # EMP always collects samples at High Slack
     Tide = "High Slack"
   ) %>%
-  # Convert feet to meters
-  convert_depth(depth_unit) %>%
   # Add coordinates
   left_join(EMP_stations, by = join_by(Station), suffix = c("_field", "")) %>%
-  mutate(
-    Field_coords = case_when(
-      is.na(Latitude) & !is.na(Latitude_field) ~ TRUE,
-      is.na(Longitude) & !is.na(Longitude_field) ~ TRUE,
-      .default = FALSE
-    ),
-    Latitude = if_else(is.na(Latitude), Latitude_field, Latitude),
-    Longitude = if_else(is.na(Longitude), Longitude_field, Longitude),
-    .keep = "unused"
-  ) %>%
+  resolve_lat_long() %>%
+  # Convert depth from feet to meters
+  mutate(Depth = Depth * 0.3048) %>%
+  # Add Source column
+  add_source_col(survey) %>%
   # Remove rows where all measurements are NA, if they exist
   rm_rows_all_miss_data() %>%
-  # Add source variable
-  add_source_col(survey) %>%
-  standardize_col_order()
+  # Standardize column order
+  standardize_col_order() %>%
+  add_update_info(edi_metadata$edi_id)
 
 usethis::use_data(EMP, overwrite = TRUE)
+document_helper_edi(edi_metadata$edi_id, EMP)

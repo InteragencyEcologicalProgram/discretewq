@@ -6,7 +6,7 @@
 \alias{EDSM}
 \title{EDSM water quality data}
 \format{
-a tibble with 41,582 rows and 20 variables
+a tibble with 47,502 rows and 20 variables
 \describe{
 \item{Source}{Name of the source dataset.}
 \item{Station}{Station where sample was collected. This represents an identifier for the unique EDSM target location. Multiple tows (and water quality samples) were often collected at each target location on a day.}
@@ -38,7 +38,7 @@ Water quality data from the United States Fish and Wildlife Service Enhanced Del
 Monitoring Program.
 }
 \details{
-More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.415.11}{here}.
+More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.415.12}{here}.
 }
 \seealso{
 \code{\link{wq}}

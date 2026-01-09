@@ -1,7 +1,5 @@
 # Code to prepare `suisun` dataset
 library(dplyr)
-library(tidyr)
-library(stringr)
 
 # Function to calculate mode of Tide values
 # Modified from https://stackoverflow.com/questions/2547402/how-to-find-the-statistical-mode to
@@ -12,32 +10,30 @@ Mode <- function(x) {
   ux[which.max(tabulate(match(x, ux)))]
 }
 
+# Source helper functions
 source("data-raw/01_Global/data_raw_helpers.R")
 
+# Define settings for dataset
 survey <- "Suisun"
+tzone <- "America/Los_Angeles"
 
-# Run standardized workflow to import data from EDI and process it
-ls_suisun <- import_proc_edi_data(survey)
+# Run standardized workflow to import data and process it
+edi_metadata <- get_edi_data(survey)
+ls_suisun <- import_proc_data(survey, df_files = edi_metadata$df_edi_files)
 
 # Prepare tables before joining them together
-df_stations <- ls_suisun$df_stations %>% drop_na()
-
 df_depth <- ls_suisun$df_depth %>%
   # Use the average depth for each sample
   summarize(Depth = mean(Depth, na.rm = TRUE), .by = SampleRowID)
 
-# Join tables together and finish cleaning data
+# Join data entities and finish cleaning data
 # Notes:
   # 1) Not including salinity because data do not correspond well with conductivity
-  # 2) Some water quality measurements may be copied and pasted if 2 fish samples were close in time
-    # and space
+  # 2) Some water quality measurements may be copied and pasted if 2 fish samples were close in
+    # time and space
 suisun <- ls_suisun$df_sample %>%
-  # Parse Date and Time columns
-  mutate(
-    Date = str_extract(Date, ".+(?=\\s)"),
-    Time = str_extract(Time, "(?<=\\s).+")
-  ) %>%
-  convert_datetime(date_format = "mdY", time_format = "HMS", timezone = "America/Los_Angeles") %>%
+  # Create Datetime column from Date and Time columns
+  combine_datetime(timezone = tzone) %>%
   # Specific conductivity calculated from electrical conductivity using formula from
     # https://pubs.usgs.gov/tm/09/a6.3/tm9-a6_3.pdf and alpha constant from
     # https://www.mt.com/dam/MT-NA/pHCareCenter/Conductivity_Linear_Temp_Comensation_APN.pdf
@@ -82,12 +78,14 @@ suisun <- ls_suisun$df_sample %>%
     # with Depth and Tide values
   arrange(Depth) %>%
   distinct(Station, Datetime, .keep_all = TRUE) %>%
-  left_join(df_stations, by = join_by(Station)) %>%
+  # Add station coordinates
+  left_join(ls_suisun$df_stations, by = join_by(Station)) %>%
+  # Add Source column
   add_source_col(survey) %>%
+  # Standardize column order
   standardize_col_order() %>%
-  arrange(Datetime)
+  arrange(Datetime) %>%
+  add_update_info(edi_metadata$edi_id)
 
 usethis::use_data(suisun, overwrite = TRUE)
-
-document_helper_edi(ls_suisun$edi_id, suisun)
-update_edi_metadata(survey, ls_suisun$edi_id)
+document_helper_edi(edi_metadata$edi_id, suisun)

@@ -1,32 +1,21 @@
 # Code to prepare `SKT` dataset
 library(dplyr)
-library(readr)
+library(lubridate)
 library(stringr)
 library(tidyr)
-library(conflicted)
-
-# Declare package conflict preferences
-conflicts_prefer(dplyr::filter())
 
 # Source helper functions
 source("data-raw/01_Global/data_raw_helpers.R")
 
+# Define settings for dataset
 survey <- "SKT"
+tzone <- "America/Los_Angeles"
 
-df_stations <- import_raw_data("data-raw/SKT/StationsSKT.csv", survey, "df_stations")
-df_data <- import_raw_data("data-raw/SKT/tblSample.csv", survey, "df_data")
+# Run standardized workflow to import data and process it
+ls_SKT <- import_proc_data(survey)
 
-# Prepare station table before joining it to data table
-df_stations_c <- df_stations %>%
-  mutate(
-    Latitude = LatDeg + LatMin / 60 + LatSec / 3600,
-    Longitude = (LongDec + LongMin / 60 + LongSec / 3600) * -1,
-    .keep = "unused"
-  ) %>%
-  drop_na()
-
-# Finish cleaning data
-SKT <- df_data %>%
+# Join data entities and finish cleaning data
+SKT <- ls_SKT$df_data %>%
   # Remove Temperature and Conductivity records acquired from CDEC
   mutate(
     across(
@@ -42,20 +31,10 @@ SKT <- df_data %>%
     across(c(Latitude, Longitude), \(x) str_remove(x, "'.*")),
     across(c(Latitude, Longitude), \(x) str_remove(x, "[:alpha:]"))
   ) %>%
-  separate_wider_delim(Latitude, delim = "-", names = c("Lat_Deg", "Lat_Min", "Lat_Sec")) %>%
-  separate_wider_delim(Longitude, delim = "-", names = c("Long_Deg", "Long_Min", "Long_Sec")) %>%
-  mutate(across(starts_with(c("Lat_", "Long_")), as.numeric)) %>%
-  mutate(
-    Latitude = Lat_Deg + Lat_Min / 60 + Lat_Sec / 3600,
-    Longitude = (Long_Deg + Long_Min / 60 + Long_Sec / 3600) * -1,
-    .keep = "unused"
-  ) %>%
-  # Parse Date and Time columns
-  mutate(
-    Date = str_extract(Date, ".+(?=\\s)"),
-    Time = str_extract(Time, "(?<=\\s).+")
-  ) %>%
-  convert_datetime(date_format = "mdY", time_format = "HMS", timezone = "America/Los_Angeles") %>%
+  separate_lat_long(delim_chr = "-", coord_comp = "DMS") %>%
+  convert_lat_long(coord_comp = "DMS") %>%
+  # Create Datetime column from Date and Time columns
+  combine_datetime(timezone = tzone) %>%
   # Convert one time stamp from midnight to noon
   mutate(
     Datetime = if_else(
@@ -64,21 +43,11 @@ SKT <- df_data %>%
       Datetime
     )
   ) %>%
-  # Standardize tide codes
-  mutate(Tide = case_match(Tide, 4 ~ "Flood", 3 ~ "Low Slack", 2 ~ "Ebb", 1 ~ "High Slack")) %>%
-  # Convert Depth from feet to meters
-  convert_depth(depth_unit = "feet") %>%
-  left_join(df_stations_c, by = join_by(Station), suffix = c("_field", "")) %>%
-  mutate(
-    Field_coords = case_when(
-      is.na(Latitude) & !is.na(Latitude_field) ~ TRUE,
-      is.na(Longitude) & !is.na(Longitude_field) ~ TRUE,
-      TRUE ~ FALSE
-    ),
-    Latitude = if_else(is.na(Latitude), Latitude_field, Latitude),
-    Longitude = if_else(is.na(Longitude), Longitude_field, Longitude),
-    .keep = "unused"
-  ) %>%
+  # Add station coordinates
+  left_join(ls_SKT$df_stations, by = join_by(Station), suffix = c("_field", "")) %>%
+  resolve_lat_long() %>%
+  # Add Source column
+  add_source_col(survey) %>%
   # Remove rows where all measurements are NA, if they exist
   rm_rows_all_miss_data() %>%
   # Remove replicate tows with identical WQ values - select earliest Datetime
@@ -87,9 +56,9 @@ SKT <- df_data %>%
     Date, Station, Secchi, Conductivity, Temperature, TurbidityNTU, TurbidityFNU,
     .keep_all = TRUE
   ) %>%
-  add_source_col(survey) %>%
-  standardize_col_order()
+  # Standardize column order
+  standardize_col_order() %>%
+  add_update_info()
 
 usethis::use_data(SKT, overwrite = TRUE)
-
 document_helper_other(SKT)

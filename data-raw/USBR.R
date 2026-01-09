@@ -6,33 +6,29 @@ library(tidyr)
 # Source helper functions
 source("data-raw/01_Global/data_raw_helpers.R")
 
+# Define settings for dataset
 survey <- "USBR"
 
-# Import data tables
-fp_usbr <- "data-raw/USBR"
-
-df_stations <- import_raw_data(file.path(fp_usbr, "USBRSiteLocations.csv"), survey, "df_stations")
-df_data <- import_raw_data(file.path(fp_usbr, "YSILongTermSites_AllDepths.csv"), survey, "df_data")
+# Run standardized workflow to import data and process it
+ls_USBR <- import_proc_data(survey)
 
 # Prepare station table before joining it to data table
-df_stations_c <- df_stations %>%
+df_stations <- ls_USBR$df_stations %>%
   mutate(
     Station = str_remove(Station, "NL "),
     Station = if_else(Station == "PS", "Pro", Station)
   )
 
 # Join data entities and finish cleaning data
-USBR <- df_data %>%
-  convert_datetime(date_format = "Ymd", time_format = "HMS", timezone = "America/Los_Angeles") %>%
+USBR <- ls_USBR$df_data %>%
   group_by(Station, Date) %>%
+  # Categorize sample depths and average sample time across all depths
   mutate(
-    # Categorize sample depths
     Depth_bin = case_when(
       Sample_depth == min(Sample_depth) & Sample_depth < 3 ~ "surface",
       Sample_depth == max(Sample_depth) & Sample_depth > 3 ~ "bottom",
-      TRUE ~ NA_character_
+      .default = NA_character_
     ),
-    # Keep average sample time across all depths
     Datetime = mean(Datetime)
   ) %>%
   ungroup() %>%
@@ -48,13 +44,16 @@ USBR <- df_data %>%
   rename_with(\(x) str_remove(x, "_surface$"), ends_with("_surface") & !starts_with("Sample")) %>%
   # Convert sample depths to meters
   mutate(across(starts_with("Sample_depth"), \(x) x * 0.3048)) %>%
-  left_join(df_stations_c, by = join_by(Station)) %>%
+  # Add station coordinates
+  left_join(df_stations, by = join_by(Station)) %>%
   # Remove rows where all measurements are NA, if they exist
   rm_rows_all_miss_data() %>%
+  # Add Source column
   add_source_col(survey) %>%
+  # Standardize column order
   standardize_col_order() %>%
-  arrange(Datetime)
+  arrange(Datetime) %>%
+  add_update_info()
 
 usethis::use_data(USBR, overwrite = TRUE)
-
 document_helper_other(USBR)

@@ -6,7 +6,7 @@
 \alias{SLS}
 \title{SLS water quality data}
 \format{
-a tibble with 4,139 rows and 15 variables
+a tibble with 4,611 rows and 15 variables
 \describe{
 \item{Source}{Name of the source dataset.}
 \item{Station}{Station where sample was collected.}
@@ -32,7 +32,7 @@ SLS
 Water quality data from the California Department of Fish and Wildlife Smelt Larva Survey.
 }
 \details{
-More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.534.9}{here}.
+More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.534.11}{here}.
 }
 \seealso{
 \code{\link{wq}}
