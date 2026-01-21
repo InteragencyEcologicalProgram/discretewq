@@ -12,6 +12,7 @@ edi.1187.4	EDI
 edi.1413.2	EDI
 edi.1947.1	EDI
 edi.1951.1	EDI
+edi.2143.2	EDI
 		"USGS Measurements of Water Quality in San Francisco Bay (CA), 1969-2015 (ver. 4.0 March 2023)"	Cloern	E	J	creator	United States Geological Survey		This online link references a USGS data publication	https://doi.org/10.5066/F7TQ5ZPR
 		"USGS Measurements of Water Quality in San Francisco Bay (CA), 1969-2015 (ver. 4.0 March 2023)"	Schraga	S	T	creator	United States Geological Survey	tschraga@usgs.gov	This online link references a USGS data publication	https://doi.org/10.5066/F7TQ5ZPR
 		"USGS Measurements of Water Quality in San Francisco Bay (CA), 1969-2015 (ver. 4.0 March 2023)"	Schraga	S	T	contact	United States Geological Survey	tschraga@usgs.gov	This online link references a USGS data publication	https://doi.org/10.5066/F7TQ5ZPR
@@ -20,8 +21,6 @@ edi.1951.1	EDI
 		"USGS measurements of water quality in San Francisco Bay (CA), 2016-2021 (ver. 4.0, March 2023)"	Nejad	S	E	creator	United States Geological Survey		This online link references a USGS data publication	https://doi.org/10.5066/F7D21WGF
 		"USGS measurements of water quality in San Francisco Bay (CA), 2016-2021 (ver. 4.0, March 2023)"	Martin	A	C	creator	United States Geological Survey		This online link references a USGS data publication	https://doi.org/10.5066/F7D21WGF
 		"USGS measurements of water quality in San Francisco Bay (CA), 2016-2021 (ver. 4.0, March 2023)"	Cloern	E	J	creator	United States Geological Survey		This online link references a USGS data publication	https://doi.org/10.5066/F7D21WGF
-		Bay Study data	CDFW			creator	California Department of Fish and Wildlife		This online link references the location of the metadata and original data from this survey	https://filelib.wildlife.ca.gov/Public/BayStudy/Access_Database/
-		Bay Study data	Hieb		Kathy	contact	California Department of Fish and Wildlife	Kathy.Hieb@wildlife.ca.gov	This online link references the location of the metadata and original data from this survey	https://filelib.wildlife.ca.gov/Public/BayStudy/Access_Database/
 		Monthly vertical profiles of water quality in the Sacramento Deep Water Ship Channel 2012-2019	USBR			creator	United States Bureau of Reclamation		This online link references the USBR regional office leading this project	https://www.usbr.gov/mp/bdo/index.html
 		Monthly vertical profiles of water quality in the Sacramento Deep Water Ship Channel 2012-2019	Dahlgren		R	creator	"University of California, Davis"		This online link references the USBR regional office leading this project	https://www.usbr.gov/mp/bdo/index.html
 		Monthly vertical profiles of water quality in the Sacramento Deep Water Ship Channel 2012-2019	Loken		L	creator	United States Geological Survey	lloken@usgs.gov	This online link references the USBR regional office leading this project	https://www.usbr.gov/mp/bdo/index.html

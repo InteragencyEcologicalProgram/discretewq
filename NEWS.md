@@ -5,13 +5,14 @@
 * Added bottom conductivity to `EDSM`, `SLS`, and `USBR`
 * Added turbidity to `DJFMP`, `EDSM`, `SDO`, `SKT`, `SLS`, `twentymm`, and `YBFMP`
 * Added depth to `SDO`
+* Added salinity (top and bottom) to `baystudy`
 * Improved backend of data processing to add automation and data checks
 
 # discretewq 2.4.0
 
 * Added temperature and conductivity to `USGS_CAWSC`
-* Added DO and pH data to all surveys that collect this data. `USGS_SFBS` collects both calculated (from a sensor) and discrete DO, so we used discrete DO up to 2016 and calculated DO afterwards to mirror the methodological change that occurred in the `EMP` survey in 2016. 
-* Updated to newest EMP data with some historical data issues fixed. 
+* Added DO and pH data to all surveys that collect this data. `USGS_SFBS` collects both calculated (from a sensor) and discrete DO, so we used discrete DO up to 2016 and calculated DO afterwards to mirror the methodological change that occurred in the `EMP` survey in 2016.
+* Updated to newest EMP data with some historical data issues fixed.
 * Added NCRO laboratory and water quality data
 * Added bottom conductivity to `twentymm`, `baystudy`, `SDO`, `FMWT`, and `STN`
 * Added turbidity to `EMP`, `FMWT`, and `STN`
@@ -21,7 +22,7 @@
 
 # discretewq 2.3.2
 
-* Fixing error where `YBFMP` Secchi data was in meters. Converted it to cm for consistency with other surveys. 
+* Fixing error where `YBFMP` Secchi data was in meters. Converted it to cm for consistency with other surveys.
 * Adding `Secchi_estimated` variable to `FMWT` data
 
 # discretewq 2.3.1
@@ -61,7 +62,7 @@
 
 # discretewq 0.2.0
 
-* Fixing one tide value of 0 from SKT by converting it to NA. 
+* Fixing one tide value of 0 from SKT by converting it to NA.
 
 # discretewq 0.1.0
 
