@@ -17,8 +17,11 @@ source("data-raw/01_Global/data_raw_helpers.R")
 # Define settings for dataset
 survey <- "NCRO"
 
+# Obtain current dataset information
+current_info <- get_update_info(survey)
+
 # Define start date for data update - starting earlier than 2023 to get some data not in the
-  # original 1999-2022 dataset
+# original 1999-2022 dataset
 start_date <- "2021-09-28"
 
 # Define file path to data-raw/NCRO folder
@@ -39,18 +42,28 @@ stations_active <- df_stations %>%
 walk(stations_active, \(x) get_cnra_data_field(x, start_date))
 walk(stations_active, \(x) get_cnra_data_lab(x, start_date))
 
-# Run standardized workflow to import data and process it
-ls_NCRO <- import_proc_data(survey)
-
-# Prepare individual data entities before joining them together
-df_data_field <- ls_NCRO$df_data_field %>%
-  standardize_param(survey, "Field") %>%
+# Run standardized workflow to import field and lab data and process it
+# Prepare field and lab data separately before joining them together
+df_data_field <-
+  list.files(tempdir(), pattern = "cnra_field_data", full.names = TRUE) %>%
+  map(import_raw_data) %>%
+  map(\(x) {
+    standardize_col_meta(x, import_col_meta(survey, "df_data_field"))
+  }) %>%
+  map(\(x) convert_datetime(x, "Ymd HMS", timezone = "Etc/GMT+8")) %>%
+  list_rbind() %>%
+  standardize_param(import_param_meta(survey, "Field")) %>%
   pivot_wider(names_from = Parameter_std, values_from = Result)
 
-df_data_lab_c1 <- ls_NCRO$df_data_lab %>%
-  standardize_param(survey, "Lab") %>%
+df_data_lab <-
+  list.files(tempdir(), pattern = "cnra_lab_data", full.names = TRUE) %>%
+  map(import_raw_data) %>%
+  map(\(x) standardize_col_meta(x, import_col_meta(survey, "df_data_lab"))) %>%
+  map(\(x) convert_datetime(x, "Ymd HMS", timezone = "Etc/GMT+8")) %>%
+  list_rbind() %>%
+  standardize_param(import_param_meta(survey, "Lab")) %>%
   # Add Sign variable which indicates <RL values, and convert Result to numeric making <RL values
-    # equal to their RL
+  # equal to their RL
   mutate(
     Sign = if_else(str_detect(Result, "^<"), "<", "="),
     Result = as.numeric(if_else(Sign == "<", RL, Result)),
@@ -58,17 +71,17 @@ df_data_lab_c1 <- ls_NCRO$df_data_lab %>%
   )
 
 # Before restructuring lab data to wide format, remove laboratory duplicates by removing one at
-  # random
+# random
 # Define grouping variables for each unique duplicate pair
 grp_lab_dups <- c("StationNumber", "SampleCode", "Datetime", "Parameter_std")
 
-df_data_lab_dups <- df_data_lab_c1 %>%
+df_data_lab_dups <- df_data_lab %>%
   add_count(pick(all_of(grp_lab_dups))) %>%
   filter(n > 1) %>%
   select(-n) %>%
   slice_sample(n = 1, by = all_of(grp_lab_dups))
 
-df_data_lab_c2 <- df_data_lab_c1 %>%
+df_data_lab_c <- df_data_lab %>%
   anti_join(
     df_data_lab_dups %>% select(all_of(grp_lab_dups)),
     by = grp_lab_dups
@@ -83,10 +96,17 @@ df_data_lab_c2 <- df_data_lab_c1 %>%
   rename_with(\(x) str_remove(x, "_Result$"))
 
 # Prepare Secchi depth and Microcystis data to be joined with field and laboratory data
-df_data_MVI_Secchi_c <- ls_NCRO$df_data_MVI_Secchi %>%
+df_data_MVI_Secchi <-
+  list.files("data-raw/NCRO", pattern = "^qry_HabObs", full.names = TRUE) %>%
+  map(\(x) import_raw_data(x, "read_excel")) %>%
+  map(\(x) {
+    standardize_col_meta(x, import_col_meta(survey, "df_data_MVI_Secchi"))
+  }) %>%
+  list_rbind() %>%
+  convert_secchi("meters") %>%
   mutate(
     # Dates and times are converted to numeric values when importing Excel files with text column
-      # type - Use just the Date since the DateTimes don't completely match with the field/lab data
+    # type - Use just the Date since the DateTimes don't completely match with the field/lab data
     Date = as_date(floor(Datetime), origin = "1899-12-30"),
     # Use the numeric codes for Microcystis
     Microcystis = case_match(
@@ -116,14 +136,15 @@ df_data_MVI_Secchi_c <- ls_NCRO$df_data_MVI_Secchi %>%
 # Combine field and laboratory data
 df_data_curr <-
   full_join(
-    df_data_field, df_data_lab_c2,
+    df_data_field,
+    df_data_lab_c,
     by = join_by(StationNumber, SampleCode, Date, Datetime)
   ) %>%
   # Remove samples not collected by NCRO at YB below Lisbon station (Sample Code prefix 'ES')
   filter(!str_detect(SampleCode, "^ES")) %>%
   # Add Secchi depth and Microcystis data - there a few records without matches in the field/lab
-    # data, but we'll use a left join for now
-  left_join(df_data_MVI_Secchi_c, by = join_by(StationNumber, Date)) %>%
+  # data, but we'll use a left join for now
+  left_join(df_data_MVI_Secchi, by = join_by(StationNumber, Date)) %>%
   # Add standardized station names and lat-long coordinates
   left_join(
     df_stations %>% select(StationNumber, Station, Latitude, Longitude),

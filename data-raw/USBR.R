@@ -2,6 +2,7 @@
 library(dplyr)
 library(stringr)
 library(tidyr)
+library(purrr)
 
 # Source helper functions
 source("data-raw/01_Global/data_raw_helpers.R")
@@ -9,11 +10,30 @@ source("data-raw/01_Global/data_raw_helpers.R")
 # Define settings for dataset
 survey <- "USBR"
 
+# Obtain current dataset information
+current_info <- get_update_info(survey)
+
+# Define data entities for import and their regex patterns
+ent_regex <- c(
+  "df_stations" = "USBRSiteLocations",
+  "df_data" = "YSILongTermSites"
+)
+
+# List files in data-raw/USBR folder
+usbr_data_files <- list.files("data-raw/USBR", full.names = TRUE)
+
 # Run standardized workflow to import data and process it
-ls_USBR <- import_proc_data(survey)
+ls_USBR <-
+  map(ent_regex, \(x) subset_data_entity(usbr_data_files, x)) %>%
+  map(import_raw_data) %>%
+  map2(
+    map(names(.), \(x) import_col_meta(survey, x)),
+    standardize_col_meta
+  )
 
 # Prepare station table before joining it to data table
 df_stations <- ls_USBR$df_stations %>%
+  convert_depth("meters") %>%
   mutate(
     Station = str_remove(Station, "NL "),
     Station = if_else(Station == "PS", "Pro", Station)
@@ -21,6 +41,7 @@ df_stations <- ls_USBR$df_stations %>%
 
 # Join data entities and finish cleaning data
 USBR <- ls_USBR$df_data %>%
+  convert_datetime("Ymd HMS", timezone = "America/Los_Angeles") %>%
   group_by(Station, Date) %>%
   # Categorize sample depths and average sample time across all depths
   mutate(

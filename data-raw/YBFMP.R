@@ -13,26 +13,64 @@ source("data-raw/01_Global/data_raw_helpers.R")
 
 # Define settings for dataset
 survey <- "YBFMP"
+edi_pack_id_fish <- 233
+edi_pack_id_zoop <- 494
+
+# Obtain current dataset information
+# Fish and zooplankton data sets are in separate EDI publications
+current_info_fish <- get_update_info(survey, data_type = "fish")
+current_info_zoop <- get_update_info(survey, data_type = "zoop")
+
+# Check for revisions to the EDI data sets
+edi_id_latest_fish <- get_latest_edi_id(edi_pack_id_fish, current_info_fish$edi_id)
+edi_id_latest_zoop <- get_latest_edi_id(edi_pack_id_zoop, current_info_zoop$edi_id)
+
+# Define data entities for download from EDI and their regex patterns
+ent_regex_fish <- c(
+  "df_stations" = "^Stations",
+  "df_data" = "^Water Quality and Environmental Data"
+)
+
+ent_regex_zoop <- c(
+  "df_stations" = "^Stations",
+  "df_data" = "^Zooplankton Data"
+)
+
+# Download EDI data to temporary directory if necessary, while saving the file paths
+# to the data entities
+# Note: zooplankton data package hasn't been updated with additional data since Dec 2021
+edi_fp_fish <- get_edi_data(edi_id_latest_fish, ent_regex_fish)
+edi_fp_zoop <- get_edi_data(edi_id_latest_zoop, ent_regex_zoop)
 
 # Run standardized workflow to import data and process it
-# Fish and zooplankton data sets are in separate EDI publications
-# Using defined edi_id for the zooplankton data because this data package hasn't been updated with
-  # additional data since Dec 2021
-edi_metadata_fish <- get_edi_data(survey, data_type = "fish")
-ls_YBFMP_fish <- import_proc_data(
-  survey, data_type = "fish", df_files = edi_metadata_fish$df_edi_files
-)
+ls_YBFMP_fish <- edi_fp_fish %>%
+  map(import_raw_data) %>%
+  map2(
+    map(names(.), \(x) import_col_meta(survey, x, "fish")),
+    standardize_col_meta
+  )
 
-edi_metadata_zoop <- get_edi_data(survey, data_type = "zoop", edi_id = "edi.494.2")
-ls_YBFMP_zoop <- import_proc_data(
-  survey, data_type = "zoop", df_files = edi_metadata_zoop$df_edi_files
-)
+ls_YBFMP_zoop <- edi_fp_zoop %>%
+  map(import_raw_data) %>%
+  map2(
+    map(names(.), \(x) import_col_meta(survey, x, "zoop")),
+    standardize_col_meta
+  )
 
 # Prepare tables before binding them together
+df_data_fish <- ls_YBFMP_fish$df_data %>%
+  convert_datetime("mdY HM", timezone = "America/Los_Angeles") %>%
+  convert_secchi("meters") %>%
+  left_join(ls_YBFMP_fish$df_stations, by = join_by(Station))
+
+df_data_zoop <- ls_YBFMP_zoop$df_data %>%
+  convert_datetime("Ymd HMS", timezone = "America/Los_Angeles") %>%
+  convert_secchi("meters") %>%
+  left_join(ls_YBFMP_zoop$df_stations, by = join_by(Station))
+
 # Use a nested dataframe for shared operations
-ls_YBFMP <- lst(ls_YBFMP_fish, ls_YBFMP_zoop) %>%
-  enframe(name = "Source") %>%
-  unnest_wider(value) %>%
+ls_YBFMP <- lst(df_data_fish, df_data_zoop) %>%
+  enframe(name = "Source", value = "df_data") %>%
   mutate(
     df_data_c = map(
       df_data,
@@ -55,8 +93,6 @@ ls_YBFMP <- lst(ls_YBFMP_fish, ls_YBFMP_zoop) %>%
       ) %>%
         select(-ElecConductivity)
     ),
-    # Add station coordinates
-    df_data_c = map2(df_data_c, df_stations, \(x, y) left_join(x, y, by = join_by(Station))),
     df_data_c = map2(df_data_c, Source, add_source_col),
     # Remove rows where all measurements are NA, if they exist
     df_data_c = map(df_data_c, rm_rows_all_miss_data)
@@ -65,7 +101,7 @@ ls_YBFMP <- lst(ls_YBFMP_fish, ls_YBFMP_zoop) %>%
   deframe()
 
 # Resolve additional cleaning steps separately for each dataset
-df_data_fish <- ls_YBFMP$ls_YBFMP_fish %>%
+df_data_fish_c1 <- ls_YBFMP$df_data_fish %>%
   mutate(
     # Resolve Turbidity measurements - after talking with AEU staff, NTU before 10/31/2016,
       # uncertain from 10/31/2016 through Nov 2016 (we will make these NA for now), FNU starting in
@@ -77,7 +113,7 @@ df_data_fish <- ls_YBFMP$ls_YBFMP_fish %>%
   ) %>%
   select(-Turbidity)
 
-df_data_zoop <- ls_YBFMP$ls_YBFMP_zoop %>%
+df_data_zoop_c1 <- ls_YBFMP$df_data_zoop %>%
   # Resolve Turbidity measurements - NTU before late Oct 2016, FNU afterwards (after talking with
     # AEU staff, we'll use Oct 31st as the cutoff)
   mutate(
@@ -90,10 +126,10 @@ df_data_zoop <- ls_YBFMP$ls_YBFMP_zoop %>%
 
 # Clean up the duplicated records in the fish dataset
 # Define grouping columns for eliminating duplicates
-grp_dupl_all <- names(df_data_fish)[!(names(df_data_fish) %in% c("Source", "Notes"))]
+grp_dupl_all <- names(df_data_fish_c1)[!(names(df_data_fish_c1) %in% c("Source", "Notes"))]
 grp_dupl_same_day <- grp_dupl_all[grp_dupl_all != "Datetime"]
 
-df_data_fish_c <- df_data_fish %>%
+df_data_fish_c2 <- df_data_fish_c1 %>%
   # Remove duplicated records across all columns
   distinct() %>%
   # Remove duplicated records due to different values in the Notes column
@@ -127,7 +163,7 @@ df_data_fish_c <- df_data_fish %>%
   distinct(pick(all_of(grp_dupl_same_day) & !all_of("DissolvedOxygen")), .keep_all = TRUE)
 
 # Combine data and finish cleaning up duplicates between two datasets
-df_data_all <- bind_rows(df_data_fish_c, df_data_zoop) %>%
+df_data_all <- bind_rows(df_data_fish_c2, df_data_zoop_c1) %>%
   # Remove the duplicated records shared between the two data sets (STTD)
   distinct(pick(everything() & !all_of("Source")), .keep_all = TRUE) %>%
   # Remove duplicated records due to different values in the Notes column
@@ -154,7 +190,7 @@ df_data_all <- bind_rows(df_data_fish_c, df_data_zoop) %>%
     # Datetime (one is from the zoop and the other is from the fish data set) - Remove the record
     # from the fish data set collected on 2010-02-10 11:13:00, otherwise keep the records from the
     # fish data set
-  filter(!(Source == "ls_YBFMP_fish" & Station == "STTD" & Datetime == "2010-02-10 11:13:00")) %>%
+  filter(!(Source == "df_data_fish" & Station == "STTD" & Datetime == "2010-02-10 11:13:00")) %>%
   arrange(Source) %>%
   distinct(Station, Datetime, .keep_all = TRUE)
 
@@ -166,9 +202,9 @@ YBFMP <- df_data_all %>%
   standardize_col_order() %>%
   arrange(Datetime) %>%
   add_update_info(
-    edi_id = c("fish" = edi_metadata_fish$edi_id, "zoop" = edi_metadata_zoop$edi_id)
+    edi_id = c("fish" = edi_id_latest_fish, "zoop" = edi_id_latest_zoop)
   )
 
 usethis::use_data(YBFMP, overwrite = TRUE)
-document_helper_edi(edi_metadata_fish$edi_id, YBFMP)
-document_helper_edi(edi_metadata_zoop$edi_id, YBFMP)
+document_helper_edi(edi_id_latest_fish, YBFMP)
+document_helper_edi(edi_id_latest_zoop, YBFMP)

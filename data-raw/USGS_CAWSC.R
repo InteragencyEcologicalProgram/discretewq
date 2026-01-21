@@ -12,7 +12,6 @@ source("data-raw/01_Global/data_raw_helpers.R")
 
 # Define settings for dataset
 survey <- "USGS_CAWSC"
-tzone <- "America/Los_Angeles"
 
 # Identify stations and parameters of interest
 site_ids <- c(
@@ -81,20 +80,31 @@ site_ids <- c(
 walk(site_ids, get_usgs_samples_data)
 
 # Run standardized workflow to import data and process it
-ls_USGS_CAWSC <- import_proc_data(survey)
+df_USGS_CAWSC <-
+  list.files(tempdir(), pattern = "usgs_samples_data", full.names = TRUE) %>%
+  map(import_raw_data) %>%
+  map(\(x) standardize_col_meta(x, import_col_meta(survey, "df_data"))) %>%
+  map(\(x) convert_date(x, "Ymd")) %>%
+  map(\(x) convert_time(x, "HMS")) %>%
+  list_rbind()
 
 # Finish preparing the data
-USGS_CAWSC <- ls_USGS_CAWSC$df_data %>%
+USGS_CAWSC <- df_USGS_CAWSC %>%
   # Correct a few mislabeled units for water temperature
   mutate(
-    Units = if_else(Parameter == "Temperature, water" & Units == "deg F", "deg C", Units)
+    Units = if_else(
+      Parameter == "Temperature, water" & Units == "deg F",
+      "deg C",
+      Units
+    )
   ) %>%
   # Standardize parameter names
-  standardize_param(survey, "Both") %>%
+  standardize_param(import_param_meta(survey, "Both")) %>%
   # Remove the one DO record that is "Present Above Quantification Limit" since this is the only
-    # instance of this
+  # instance of this
   filter(
-    Detection_Condition != "Present Above Quantification Limit" | is.na(Detection_Condition)
+    Detection_Condition != "Present Above Quantification Limit" |
+      is.na(Detection_Condition)
   ) %>%
   mutate(
     # Create sign column for 'estimated' and 'less than' reporting limit values
@@ -107,7 +117,7 @@ USGS_CAWSC <- ls_USGS_CAWSC$df_data %>%
     Result = as.numeric(if_else(Sign == "<", RL, Result))
   ) %>%
   # Create Datetime column from Date and Time columns
-  combine_datetime(timezone = tzone) %>%
+  combine_datetime(timezone = "America/Los_Angeles") %>%
   # Remove three Results equal to zero
   filter(Result != 0) %>%
   # Restructure data to wide format

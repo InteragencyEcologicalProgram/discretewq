@@ -3,19 +3,55 @@ library(dplyr)
 library(lubridate)
 library(stringr)
 library(tidyr)
+library(purrr)
 
 # Source helper functions
 source("data-raw/01_Global/data_raw_helpers.R")
 
 # Define settings for dataset
 survey <- "SKT"
-tzone <- "America/Los_Angeles"
+
+# Obtain current dataset information
+current_info <- get_update_info(survey)
+
+# Define data entities for import and their regex patterns
+ent_regex <- c(
+  "df_stations" = "StationsSKT",
+  "df_data" = "tblSample"
+)
+
+# List files in data-raw/SKT folder
+skt_data_files <- list.files("data-raw/SKT", full.names = TRUE)
 
 # Run standardized workflow to import data and process it
-ls_SKT <- import_proc_data(survey)
+ls_SKT <-
+  map(ent_regex, \(x) subset_data_entity(skt_data_files, x)) %>%
+  map(import_raw_data) %>%
+  map2(
+    map(names(.), \(x) import_col_meta(survey, x)),
+    standardize_col_meta
+  )
+
+# Prepare stations table to join to data table
+df_stations <- convert_lat_long(ls_SKT$df_stations, coord_comp = "DMS")
 
 # Join data entities and finish cleaning data
 SKT <- ls_SKT$df_data %>%
+  convert_date("mdY HMS") %>%
+  convert_time("mdY HMS") %>%
+  # Create Datetime column from Date and Time columns
+  combine_datetime(timezone = "America/Los_Angeles") %>%
+  # Convert one time stamp from midnight to noon
+  mutate(
+    Datetime = if_else(
+      Date == "2018-03-06" & Station == "519",
+      ymd_hms("2018-03-06 12:00:00", tz = "America/Los_Angeles"),
+      Datetime
+    )
+  ) %>%
+  convert_depth("feet") %>%
+  convert_secchi("cm") %>%
+  standardize_tide_code() %>%
   # Remove Temperature and Conductivity records acquired from CDEC
   mutate(
     across(
@@ -33,18 +69,8 @@ SKT <- ls_SKT$df_data %>%
   ) %>%
   separate_lat_long(delim_chr = "-", coord_comp = "DMS") %>%
   convert_lat_long(coord_comp = "DMS") %>%
-  # Create Datetime column from Date and Time columns
-  combine_datetime(timezone = tzone) %>%
-  # Convert one time stamp from midnight to noon
-  mutate(
-    Datetime = if_else(
-      Date == "2018-03-06" & Station == "519",
-      ymd_hms("2018-03-06 12:00:00", tz = "America/Los_Angeles"),
-      Datetime
-    )
-  ) %>%
   # Add station coordinates
-  left_join(ls_SKT$df_stations, by = join_by(Station), suffix = c("_field", "")) %>%
+  left_join(df_stations, by = join_by(Station), suffix = c("_field", "")) %>%
   resolve_lat_long() %>%
   # Add Source column
   add_source_col(survey) %>%
@@ -53,7 +79,13 @@ SKT <- ls_SKT$df_data %>%
   # Remove replicate tows with identical WQ values - select earliest Datetime
   arrange(Datetime) %>%
   distinct(
-    Date, Station, Secchi, Conductivity, Temperature, TurbidityNTU, TurbidityFNU,
+    Date,
+    Station,
+    Secchi,
+    Conductivity,
+    Temperature,
+    TurbidityNTU,
+    TurbidityFNU,
     .keep_all = TRUE
   ) %>%
   # Standardize column order
