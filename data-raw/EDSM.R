@@ -8,7 +8,7 @@ library(dplyr)
 library(purrr)
 
 # Source helper functions
-source("data-raw/01_Global/data_raw_helpers.R")
+source("R/data_raw_helpers.R")
 
 # Define settings for dataset
 survey <- "EDSM"

@@ -18,38 +18,35 @@ Description: Produce an integrated dataset of discrete water quality
     measurements using any combination of the 17 source datasets included.
 License: GPL-3
 Depends:
-    R (>= 3.5)
+    R (>= 4.1.0)
 Imports:
-    dplyr,
-    lubridate,
-    magrittr,
-    stringr,
-    tidyr,
-    wql
-Suggests:
-    conflicted,
-    covr,
     dataRetrieval (>= 2.7.19),
+    dplyr,
     EDIutils,
     glue,
-    here,
-    hms,
     jsonlite,
+    lubridate,
+    magrittr,
     purrr,
     readr,
     readxl,
     rlang,
     sbtools,
-    spelling,
-    testthat (>= 3.0.0),
+    stringr,
     tibble,
-    tidyselect
-Remotes:
-    InteragencyEcologicalProgram/deltamapr
+    tidyr,
+    tidyselect,
+    wql
+Suggests:
+    conflicted,
+    covr,
+    hms,
+    spelling,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
 LazyData: true
 LazyDataCompression: xz
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
-Config/testthat/edition: 3

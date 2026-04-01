@@ -1,35 +1,5 @@
 # Global helper functions to help with data import and structure checking
 
-# Package checking
-if (!requireNamespace("rlang", quietly = TRUE)) {
-  stop(
-    "'rlang' is required for the sourced helper functions",
-    "\nTo install it, run: install.packages('rlang')",
-    call. = FALSE
-  )
-}
-
-rlang::check_installed(
-  c(
-    "dataRetrieval (>= 2.7.19)",
-    "dplyr",
-    "EDIutils",
-    "glue",
-    "jsonlite",
-    "lubridate",
-    "purrr",
-    "readr",
-    "readxl",
-    "sbtools",
-    "stringr",
-    "tibble",
-    "tidyr",
-    "tidyselect"
-  ),
-  reason = "for the sourced helper functions"
-)
-
-
 # Internal helper functions ----------------------------------------------
 
 # Attribute getter functions used globally in helper functions
@@ -83,17 +53,17 @@ int_check_parsing <- function(df_data_orig, df_data_parsed) {
       dplyr::left_join(
         x,
         y,
-        by = dplyr::join_by(col_name),
+        by = dplyr::join_by("col_name"),
         suffix = c("_orig", "_parsed")
       )
     }) |>
-    dplyr::mutate(parse_check = num_NA_orig == num_NA_parsed)
+    dplyr::mutate(parse_check = .data$num_NA_orig == .data$num_NA_parsed)
 
   # Generate message for results of parsing check
   if (all(df_parse_check$parse_check)) {
     rlang::inform(c("v" = "All columns parsed correctly"))
   } else {
-    df_parse_check_F <- df_parse_check |> dplyr::filter(!parse_check)
+    df_parse_check_F <- df_parse_check |> dplyr::filter(!.data$parse_check)
     rlang::inform(c(
       "x" = paste(
         "The following columns did NOT parse correctly:",
@@ -291,7 +261,7 @@ get_edi_data <- function(edi_id_latest, entity_regex) {
     tibble::enframe(name = "data_entity", value = "data_entity_regex") |>
     dplyr::mutate(
       data_entity_name = purrr::map_chr(
-        data_entity_regex,
+        .data$data_entity_regex,
         \(x) subset_data_entity(df_edi_data_ent_all$entityName, x)
       )
     )
@@ -309,21 +279,21 @@ get_edi_data <- function(edi_id_latest, entity_regex) {
   df_edi_data_ent_final <- df_edi_data_ent_sub |>
     dplyr::left_join(
       df_edi_data_ent_all,
-      by = dplyr::join_by(data_entity_name == entityName)
+      by = dplyr::join_by("data_entity_name" == "entityName")
     ) |>
     # Clean up data entity names to be used as file names
     dplyr::mutate(
       # Remove .csv file extensions from entity names if they exist
-      data_entity_name = stringr::str_remove(data_entity_name, "\\.csv$"),
+      data_entity_name = stringr::str_remove(.data$data_entity_name, "\\.csv$"),
       # Add edi_id suffix and .bin file extension
       data_entity_name = paste0(
-        data_entity_name,
+        .data$data_entity_name,
         "_",
         stringr::str_replace_all(edi_id_latest, "\\.", "_"),
         ".bin"
       ),
       # Add file path to file name
-      data_entity_fp = file.path(temp_dir, data_entity_name)
+      data_entity_fp = file.path(temp_dir, .data$data_entity_name)
     )
 
   ls_edi_data_raw <-
@@ -345,13 +315,13 @@ get_edi_data <- function(edi_id_latest, entity_regex) {
   ))
 
   df_edi_data_ent_final |>
-    dplyr::select(data_entity, data_entity_fp) |>
+    dplyr::select(tidyselect::all_of(c("data_entity", "data_entity_fp"))) |>
     tibble::deframe()
 }
 
 # Download discrete lab data from CNRA data portal and save csv file to a temporary
 # directory
-get_cnra_data_lab <- function(station_num, start_date, end_date = today()) {
+get_cnra_data_lab <- function(station_num, start_date, end_date = Sys.Date()) {
   # Generate HTTP request URL
   base_url <- "https://data.cnra.ca.gov/api/3/action/datastore_search_sql?sql="
   sql_query_lab <- paste0(
@@ -366,7 +336,7 @@ get_cnra_data_lab <- function(station_num, start_date, end_date = today()) {
 
   # Call API, transform JSON data into data frame
   df_data_lab <-
-    jsonlite::read_json(URLencode(paste0(base_url, sql_query_lab))) |>
+    jsonlite::read_json(utils::URLencode(paste0(base_url, sql_query_lab))) |>
     purrr::pluck("result", "records") |>
     tibble::tibble() |>
     tidyr::unnest_wider(1) |>
@@ -386,7 +356,11 @@ get_cnra_data_lab <- function(station_num, start_date, end_date = today()) {
 
 # Download discrete field measurement data from CNRA data portal and save csv file to
 # a temporary directory
-get_cnra_data_field <- function(station_num, start_date, end_date = today()) {
+get_cnra_data_field <- function(
+  station_num,
+  start_date,
+  end_date = Sys.Date()
+) {
   # Generate HTTP request URL
   base_url <- "https://data.cnra.ca.gov/api/3/action/datastore_search_sql?sql="
   sql_query_field <- paste0(
@@ -401,7 +375,7 @@ get_cnra_data_field <- function(station_num, start_date, end_date = today()) {
 
   # Call API, transform JSON data into data frame
   df_data_field <-
-    jsonlite::read_json(URLencode(paste0(base_url, sql_query_field))) |>
+    jsonlite::read_json(utils::URLencode(paste0(base_url, sql_query_field))) |>
     purrr::pluck("result", "records") |>
     tibble::tibble() |>
     tidyr::unnest_wider(1) |>
@@ -440,13 +414,17 @@ get_scibase_data <- function(item_id, entity_regex) {
     tibble::enframe(name = "data_entity", value = "data_entity_regex") |>
     dplyr::mutate(
       data_entity_name = purrr::map_chr(
-        data_entity_regex,
+        .data$data_entity_regex,
         \(x) subset_data_entity(df_sb_files$fname, x)
       ),
       # Add file path and item_id prefix to file name
       data_entity_fp = file.path(
         tempdir(),
-        paste(stringr::str_sub(item_id, end = 6), data_entity_name, sep = "_")
+        paste(
+          stringr::str_sub(item_id, end = 6),
+          .data$data_entity_name,
+          sep = "_"
+        )
       )
     )
 
@@ -477,7 +455,7 @@ get_scibase_data <- function(item_id, entity_regex) {
   ))
 
   df_sb_data_ent_sub |>
-    dplyr::select(data_entity, data_entity_fp) |>
+    dplyr::select(tidyselect::all_of(c("data_entity", "data_entity_fp"))) |>
     tibble::deframe()
 }
 
@@ -568,7 +546,7 @@ import_col_meta <- function(survey, entity_name, data_type = NULL) {
     "data-raw/01_Global/Data_column_metadata.csv",
     show_col_types = FALSE
   ) |>
-    dplyr::filter(Survey == survey, Data_entity == entity_name)
+    dplyr::filter(.data$Survey == survey, .data$Data_entity == entity_name)
 }
 
 # Perform checks on column names and types, then apply standardized column formatting
@@ -585,16 +563,17 @@ standardize_col_meta <- function(df_data, df_col_meta) {
   # Check if expected columns in df_col_meta exist in df_data
   df_col_check <- df_col_meta |>
     dplyr::mutate(
-      col_name_check = purrr::map_lgl(Col_name_exp, \(x) {
-        any(names(df_data) == x)
-      })
+      col_name_check = purrr::map_lgl(
+        .data$Col_name_exp,
+        \(x) any(names(df_data) == x)
+      )
     )
 
   # Generate message for results of check
   if (all(df_col_check$col_name_check)) {
     rlang::inform(c("v" = "All column names are correct"))
   } else {
-    df_col_check_F <- df_col_check |> dplyr::filter(!col_name_check)
+    df_col_check_F <- df_col_check |> dplyr::filter(!.data$col_name_check)
     rlang::abort(c(
       "x" = paste(
         "The following expected columns are NOT present in the data frame:",
@@ -606,13 +585,14 @@ standardize_col_meta <- function(df_data, df_col_meta) {
   }
 
   # Select columns specified in data column metadata table
-  df_data_c <- df_data |> dplyr::select(all_of(df_col_meta$Col_name_exp))
+  df_data_c <- df_data |>
+    dplyr::select(tidyselect::all_of(df_col_meta$Col_name_exp))
 
   # Convert specified columns to numeric if there are any
   if (any(df_col_meta$Col_type == "numeric")) {
     col_numeric <- df_col_meta |>
-      dplyr::filter(Col_type == "numeric") |>
-      dplyr::pull(Col_name_exp)
+      dplyr::filter(.data$Col_type == "numeric") |>
+      dplyr::pull(.data$Col_name_exp)
 
     df_data_c <- df_data_c |>
       dplyr::mutate(dplyr::across(tidyselect::all_of(col_numeric), as.numeric))
@@ -647,7 +627,7 @@ convert_date <- function(df_data, date_fmt) {
 
   df_data_c <- df_data |>
     dplyr::mutate(
-      Date = lubridate::date(lubridate::parse_date_time(Date, date_fmt))
+      Date = lubridate::date(lubridate::parse_date_time(.data$Date, date_fmt))
     )
 
   rlang::inform(c(
@@ -658,7 +638,7 @@ convert_date <- function(df_data, date_fmt) {
   ))
   # Run parsing check
   list(df_data, df_data_c) |>
-    purrr::map(\(x) dplyr::select(x, Date)) |>
+    purrr::map(\(x) dplyr::select(x, "Date")) |>
     purrr::reduce(int_check_parsing)
 
   cat("\n")
@@ -675,13 +655,16 @@ convert_time <- function(df_data, time_fmt) {
 
   df_data_c <- df_data |>
     dplyr::mutate(
-      Time = format(lubridate::parse_date_time(Time, time_fmt), "%H:%M:%S")
+      Time = format(
+        lubridate::parse_date_time(.data$Time, time_fmt),
+        "%H:%M:%S"
+      )
     )
 
   rlang::inform(c("i" = paste("Standardizing Time column in", file_name)))
   # Run parsing check
   list(df_data, df_data_c) |>
-    purrr::map(\(x) dplyr::select(x, Time)) |>
+    purrr::map(\(x) dplyr::select(x, "Time")) |>
     purrr::reduce(int_check_parsing)
 
   cat("\n")
@@ -700,14 +683,17 @@ convert_datetime <- function(df_data, datetime_fmt, timezone) {
   df_data_c <- df_data |>
     dplyr::mutate(
       Datetime = lubridate::parse_date_time(
-        Datetime,
+        .data$Datetime,
         datetime_fmt,
         tz = timezone
       ),
       # Make sure Datetime is in local time (America/Los_Angeles) for all surveys
-      Datetime = lubridate::with_tz(Datetime, tzone = "America/Los_Angeles"),
-      Date = lubridate::date(Datetime),
-      .before = Datetime
+      Datetime = lubridate::with_tz(
+        .data$Datetime,
+        tzone = "America/Los_Angeles"
+      ),
+      Date = lubridate::date(.data$Datetime),
+      .before = "Datetime"
     )
 
   rlang::inform(c(
@@ -718,7 +704,7 @@ convert_datetime <- function(df_data, datetime_fmt, timezone) {
   ))
   # Run parsing check
   list(df_data, df_data_c) |>
-    purrr::map(\(x) dplyr::select(x, Datetime)) |>
+    purrr::map(\(x) dplyr::select(x, "Datetime")) |>
     purrr::reduce(int_check_parsing)
 
   rlang::inform(c("i" = "Creating Date column from parsed Datetime column\n"))
@@ -734,15 +720,22 @@ combine_datetime <- function(df_data, dt_fmt = "Ymd HMS", timezone) {
   df_data |>
     dplyr::mutate(
       Datetime = lubridate::parse_date_time(
-        dplyr::if_else(is.na(Time), NA_character_, paste(Date, Time)),
+        dplyr::if_else(
+          is.na(.data$Time),
+          NA_character_,
+          paste(.data$Date, .data$Time)
+        ),
         orders = dt_fmt,
         tz = timezone
       ),
       # Make sure Datetime is in local time (America/Los_Angeles) for all surveys
-      Datetime = lubridate::with_tz(Datetime, tzone = "America/Los_Angeles"),
-      .after = Date
+      Datetime = lubridate::with_tz(
+        .data$Datetime,
+        tzone = "America/Los_Angeles"
+      ),
+      .after = "Date"
     ) |>
-    dplyr::select(-Time)
+    dplyr::select(-"Time")
 }
 
 # Convert depth from feet to meters
@@ -761,7 +754,7 @@ convert_depth <- function(df_data, depth_unit = c("meters", "feet")) {
     ))
     # Otherwise, if depth_unit is feet, convert to meters
   } else if (depth_unit == "feet") {
-    df_data <- df_data |> dplyr::mutate(Depth = Depth * 0.3048)
+    df_data <- df_data |> dplyr::mutate(Depth = .data$Depth * 0.3048)
     rlang::inform(c("v" = "Depth column converted from feet to meters.\n"))
   }
 
@@ -784,7 +777,7 @@ convert_secchi <- function(df_data, secchi_unit = c("cm", "meters")) {
     ))
     # Otherwise, if secchi_unit is meters, convert to centimeters
   } else if (secchi_unit == "meters") {
-    df_data <- df_data |> dplyr::mutate(Secchi = Secchi * 100)
+    df_data <- df_data |> dplyr::mutate(Secchi = .data$Secchi * 100)
     rlang::inform(c(
       "v" = "Secchi column converted from meters to centimeters.\n"
     ))
@@ -801,7 +794,7 @@ standardize_tide_code <- function(df_data) {
   df_data |>
     dplyr::mutate(
       Tide = dplyr::case_match(
-        Tide,
+        .data$Tide,
         1 ~ "High Slack",
         2 ~ "Ebb",
         3 ~ "Low Slack",
@@ -831,19 +824,21 @@ separate_lat_long <- function(df_data, delim_chr, coord_comp = c("DM", "DMS")) {
 
   df_data |>
     tidyr::separate_wider_delim(
-      Latitude,
+      "Latitude",
       delim = delim_chr,
       names = coord_comp_lat
     ) |>
     tidyr::separate_wider_delim(
-      Longitude,
+      "Longitude",
       delim = delim_chr,
       names = coord_comp_long
     ) |>
-    dplyr::mutate(dplyr::across(
-      tidyselect::starts_with(c("Lat_", "Long_")),
-      as.numeric
-    ))
+    dplyr::mutate(
+      dplyr::across(
+        tidyselect::starts_with(c("Lat_", "Long_")),
+        as.numeric
+      )
+    )
 }
 
 # Convert coordinates from DMS to decimal degrees
@@ -859,14 +854,17 @@ convert_lat_long <- function(df_data, coord_comp = c("DM", "DMS")) {
     coord_comp,
     DM = dplyr::mutate(
       df_data,
-      Latitude = Lat_Deg + Lat_Min / 60,
-      Longitude = (Long_Deg + Long_Min / 60) * -1,
+      Latitude = .data$Lat_Deg + .data$Lat_Min / 60,
+      Longitude = (.data$Long_Deg + .data$Long_Min / 60) * -1,
       .keep = "unused"
     ),
     DMS = dplyr::mutate(
       df_data,
-      Latitude = Lat_Deg + Lat_Min / 60 + Lat_Sec / 3600,
-      Longitude = (Long_Deg + Long_Min / 60 + Long_Sec / 3600) * -1,
+      Latitude = .data$Lat_Deg + .data$Lat_Min / 60 + .data$Lat_Sec / 3600,
+      Longitude = (.data$Long_Deg +
+        .data$Long_Min / 60 +
+        .data$Long_Sec / 3600) *
+        -1,
       .keep = "unused"
     )
   )
@@ -882,18 +880,26 @@ resolve_lat_long <- function(df_data) {
   df_data_c <- df_data |>
     dplyr::mutate(
       Field_coords = dplyr::case_when(
-        is.na(Latitude) & !is.na(Latitude_field) ~ TRUE,
-        is.na(Longitude) & !is.na(Longitude_field) ~ TRUE,
+        is.na(.data$Latitude) & !is.na(.data$Latitude_field) ~ TRUE,
+        is.na(.data$Longitude) & !is.na(.data$Longitude_field) ~ TRUE,
         .default = FALSE
       ),
-      Latitude = dplyr::if_else(is.na(Latitude), Latitude_field, Latitude),
-      Longitude = dplyr::if_else(is.na(Longitude), Longitude_field, Longitude),
+      Latitude = dplyr::if_else(
+        is.na(.data$Latitude),
+        .data$Latitude_field,
+        .data$Latitude
+      ),
+      Longitude = dplyr::if_else(
+        is.na(.data$Longitude),
+        .data$Longitude_field,
+        .data$Longitude
+      ),
       .keep = "unused"
     )
 
   # Remove Field_coords column if all values are FALSE
   if (all(df_data_c$Field_coords == FALSE)) {
-    df_data_c <- df_data_c |> dplyr::select(-Field_coords)
+    df_data_c <- df_data_c |> dplyr::select(-"Field_coords")
   }
 
   return(df_data_c)
@@ -909,8 +915,10 @@ import_param_meta <- function(survey, type = c("Field", "Lab", "Both")) {
     "data-raw/01_Global/Parameters_metadata.csv",
     show_col_types = FALSE
   ) |>
-    dplyr::filter(Survey == survey, Type == type) |>
-    dplyr::select(Parameter_exp, Parameter_std, Units_exp)
+    dplyr::filter(.data$Survey == survey, .data$Type == type) |>
+    dplyr::select(
+      tidyselect::all_of(c("Parameter_exp", "Parameter_std", "Units_exp"))
+    )
 }
 
 # Standardize parameter names for data structured in long format
@@ -927,19 +935,24 @@ standardize_param <- function(df_data, df_param_meta) {
   ))
 
   # Specify join spec for df_data >> df_param_meta
-  param_join <- dplyr::join_by(Parameter == Parameter_exp, Units == Units_exp)
+  param_join <- dplyr::join_by(
+    "Parameter" == "Parameter_exp",
+    "Units" == "Units_exp"
+  )
 
   # Check if expected parameters in df_param_meta exist in df_data
   df_param_check <- df_data |>
-    dplyr::distinct(Parameter, Units) |>
-    dplyr::arrange(Parameter, Units) |>
+    dplyr::distinct(.data$Parameter, .data$Units) |>
+    dplyr::arrange(.data$Parameter, .data$Units) |>
     dplyr::full_join(df_param_meta, by = param_join, keep = TRUE)
 
   # Generate message for results of check - expected parameters
   if (any(is.na(df_param_check$Parameter))) {
     df_param_miss <- df_param_check |>
-      dplyr::filter(is.na(Parameter)) |>
-      dplyr::mutate(Parameter_exp = paste0(Parameter_exp, " (", Units_exp, ")"))
+      dplyr::filter(is.na(.data$Parameter)) |>
+      dplyr::mutate(
+        Parameter_exp = paste0(.data$Parameter_exp, " (", .data$Units_exp, ")")
+      )
 
     print(df_param_check, n = 100)
     rlang::abort(c(
@@ -959,12 +972,12 @@ standardize_param <- function(df_data, df_param_meta) {
   # Generate message for results of check - removal of unwanted parameters
   if (any(is.na(df_param_check$Parameter_exp))) {
     df_param_rm <- df_param_check |>
-      dplyr::filter(is.na(Parameter_exp)) |>
+      dplyr::filter(is.na(.data$Parameter_exp)) |>
       dplyr::mutate(
         Parameter = dplyr::if_else(
-          is.na(Units),
-          Parameter,
-          paste0(Parameter, " (", Units, ")")
+          is.na(.data$Units),
+          .data$Parameter,
+          paste0(.data$Parameter, " (", .data$Units, ")")
         )
       )
 
@@ -981,8 +994,8 @@ standardize_param <- function(df_data, df_param_meta) {
   # Proceed with standardizing parameter names in data frame
   df_data |>
     dplyr::left_join(df_param_meta, by = param_join) |>
-    tidyr::drop_na(Parameter_std) |>
-    dplyr::select(-c(Parameter, Units))
+    tidyr::drop_na("Parameter_std") |>
+    dplyr::select(!tidyselect::all_of(c("Parameter", "Units")))
 }
 
 # Add Source column
