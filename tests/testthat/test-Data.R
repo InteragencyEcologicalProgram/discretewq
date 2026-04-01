@@ -1,7 +1,5 @@
-library(discretewq)
 require(purrr)
 require(dplyr)
-require(stringr)
 require(lubridate)
 
 All_surveys_ls <- list(
@@ -60,8 +58,12 @@ test_that("No samples are duplicated", {
 })
 
 test_that("All Lats are between 37 and 39 and all Longs are between -123 and -121", {
-  expect_true(all((Data$Latitude < 39 & Data$Latitude > 37) | is.na(Data$Latitude)))
-  expect_true(all((Data$Longitude < (-121) & Data$Longitude > (-123)) | is.na(Data$Longitude)))
+  expect_true(all(
+    (Data$Latitude < 39 & Data$Latitude > 37) | is.na(Data$Latitude)
+  ))
+  expect_true(all(
+    (Data$Longitude < (-121) & Data$Longitude > (-123)) | is.na(Data$Longitude)
+  ))
 })
 
 test_that("All timezones are in local California time", {
@@ -81,8 +83,10 @@ test_that("Errors work correctly", {
   )
   expect_error(
     wq(Sources = "SFBS"),
-    paste0("You must specify the data sources you wish to include. Choices include:\n ", str_c(All_surveys_chr, collapse = ", ")),
+    paste0(
+      "You must specify the data sources you wish to include. Choices include:\n ",
+      paste(All_surveys_chr, collapse = ", ")
+    ),
     fixed = TRUE
   )
 })
-
