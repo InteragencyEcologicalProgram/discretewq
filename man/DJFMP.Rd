@@ -6,7 +6,7 @@
 \alias{DJFMP}
 \title{DJFMP water quality data}
 \format{
-a tibble with 161,753 rows and 11 variables
+A tibble with 166,493 rows and 12 variables
 \describe{
 \item{Source}{Name of the source dataset.}
 \item{Station}{Station where sample was collected.}
@@ -19,6 +19,7 @@ a tibble with 161,753 rows and 11 variables
 \item{Conductivity}{Specific conductance (\eqn{\mu}S \ifelse{html}{\out{cm<sup>-1</sup>}}{\eqn{cm^{-1}}}) at surface.}
 \item{DissolvedOxygen}{Dissolved oxygen (mg/L) at surface.}
 \item{TurbidityNTU}{Turbidity (NTU) at surface measured with a turbidimeter.}
+\item{TurbidityFNU}{Turbidity (FNU) at surface measured with an optical sensor.}
 }
 }
 \usage{
@@ -28,7 +29,7 @@ DJFMP
 Water quality data from the United States Fish and Wildlife Service Delta Juvenile Fish Monitoring Program.
 }
 \details{
-More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.244.13}{here}.
+More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.244.14}{here}.
 }
 \seealso{
 \code{\link{wq}}

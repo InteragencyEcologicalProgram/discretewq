@@ -1,0 +1,100 @@
+source_metadata:
+  name: Delta Juvenile Fish Monitoring Program
+  acronym: DJFMP
+
+update_status:
+  last_update: '2026-06-26'
+  edi_package:
+    - package_id: 244
+      last_revision: 14
+      static: false
+
+inputs:
+  - input_id: stations
+    input_type: API-EDI
+    input_package_id: 244
+    input_regex: Site_Locations
+    columns:
+      - raw_name: StationCode
+        target_name: Station
+        col_type: character
+      - raw_name: Latitude
+        target_name: Latitude
+        col_type: numeric
+      - raw_name: Longitude
+        target_name: Longitude
+        col_type: numeric
+
+  - input_id: data_trawl_1976_2001
+    input_type: API-EDI
+    input_package_id: 244
+    input_regex: 1976.+DJFMP_trawl
+    timezone: America/Los_Angeles
+    columns:
+      - raw_name: StationCode
+        target_name: Station
+        col_type: character
+      - raw_name: SampleDate
+        target_name: Date
+        col_type: date
+        col_format: mdY
+      - raw_name: SampleTime
+        target_name: Time
+        col_type: character_time
+        col_format: HMS
+      - raw_name: DO
+        target_name: DissolvedOxygen
+        col_type: numeric
+      - raw_name: WaterTemp
+        target_name: Temperature
+        col_type: numeric
+      - raw_name: Turbidity
+        target_name: TurbidityNTU
+        col_type: numeric
+      - raw_name: TurbidityFnu
+        target_name: TurbidityFNU
+        col_type: numeric
+      - raw_name: Secchi
+        target_name: Secchi
+        col_type: numeric
+        col_units: meters
+      - raw_name: SpecificConductance
+        target_name: Conductivity
+        col_type: numeric
+
+  - input_id: data_trawl_2002_curr
+    input_type: API-EDI
+    input_package_id: 244
+    input_regex: 2002.+DJFMP_trawl
+    timezone: America/Los_Angeles
+    columns:
+      - raw_name: StationCode
+        target_name: Station
+        col_type: character
+      - raw_name: SampleDate
+        target_name: Date
+        col_type: date
+        col_format: mdY
+      - raw_name: SampleTime
+        target_name: Time
+        col_type: character_time
+        col_format: HMS
+      - raw_name: DO
+        target_name: DissolvedOxygen
+        col_type: numeric
+      - raw_name: WaterTemp
+        target_name: Temperature
+        col_type: numeric
+      - raw_name: Turbidity
+        target_name: TurbidityNTU
+        col_type: numeric
+      - raw_name: TurbidityFnu
+        target_name: TurbidityFNU
+        col_type: numeric
+      - raw_name: Secchi
+        target_name: Secchi
+        col_type: numeric
+        col_units: meters
+      - raw_name: SpecificConductance
+        target_name: Conductivity
+        col_type: numeric

@@ -40,3 +40,4 @@ vignettes/*.pdf
 .Rproj.user
 
 publication/data_objects/Delta_Integrated_WQ.csv
+data-raw/.cache/

@@ -1,7 +1,9 @@
 #' Process and combine water quality data
 #'
 #' Imports, filters, and processes water quality datasets and outputs an integrated dataset
-#' @param Sources Character vector of data sources for the water quality variables. No default, this must be specified.
+#'
+#' @param Sources Character vector of data sources for the water quality variables.
+#'   No default, this must be specified.
 #'   Choices include "20mm" (20mm Survey, \code{\link{twentymm}}),
 #'   "Baystudy" (Bay Study, \code{\link{baystudy}}),
 #'   "DJFMP" (Delta Juvenile Fish Monitoring Program, \code{\link{DJFMP}}),
@@ -19,10 +21,14 @@
 #'   "USGS_CAWSC" (USGS California Water Science Center monitoring data, \code{\link{USGS_CAWSC}}),
 #'   "USGS_SFBS" (USGS San Francisco Bay Surveys, \code{\link{USGS_SFBS}}), and
 #'   "YBFMP" (Yolo Bypass Fish Monitoring Program, \code{\link{YBFMP}}).
-#' @param Start_year Earliest year you would like included in the dataset. Must be an integer. Defaults to year \code{0}.
-#' @param End_year Latest year you would like included in the dataset. Must be an integer. Defaults to the current year.
+#' @param Start_year Earliest year you would like included in the dataset. Must be an integer.
+#'   Defaults to year \code{0}.
+#' @param End_year Latest year you would like included in the dataset. Must be an integer.
+#'   Defaults to the current year.
+#'
 #' @importFrom magrittr %>%
 #' @importFrom dplyr .data
+#'
 #' @return An integrated dataset
 #' @examples
 #' Data <- wq(
@@ -99,23 +105,23 @@ wq <- function(Sources = NULL, Start_year = NULL, End_year = NULL) {
   if ("USGS_SFBS" %in% Sources) WQ_list[["USGS_SFBS"]] <- discretewq::USGS_SFBS
   if ("YBFMP" %in% Sources) WQ_list[["YBFMP"]] <- discretewq::YBFMP
 
-  # Define standardized column order for all possible columns
-  all_cols_order <- c(
-    "Source", "Station", "Latitude", "Longitude", "Field_coords", "StationID", "Date", "Datetime",
-    "Year", "Month", "MonthYear", "Season", "Depth", "Sample_depth_surface",
-    "Sample_depth_nutr_surface", "Sample_depth_bottom", "Tide", "Microcystis", "Secchi",
-    "Secchi_estimated", "Temperature", "Temperature_bottom", "Conductivity", "Conductivity_bottom",
-    "Salinity", "Salinity_bottom", "DissolvedOxygen", "DissolvedOxygen_bottom",
-    "DissolvedOxygenPercent", "DissolvedOxygenPercent_bottom", "pH", "pH_bottom", "TurbidityNTU",
-    "TurbidityNTU_bottom", "TurbidityFNU", "TurbidityFNU_bottom", "Chlorophyll_Sign", "Chlorophyll",
-    "Pheophytin_Sign", "Pheophytin", "TotAmmonia_Sign", "TotAmmonia", "DissAmmonia_Sign",
-    "DissAmmonia", "DissNitrateNitrite_Sign", "DissNitrateNitrite", "TotPhos_Sign", "TotPhos",
-    "DissOrthophos_Sign", "DissOrthophos", "TON_Sign", "TON", "DON_Sign", "DON", "TKN_Sign", "TKN",
-    "DissSilica_Sign", "DissSilica", "TDS_Sign", "TDS", "DissBromide_Sign", "DissBromide",
-    "DissCalcium_Sign", "DissCalcium", "TotChloride_Sign", "TotChloride", "DissChloride_Sign",
-    "DissChloride", "TotAlkalinity_Sign", "TotAlkalinity", "DOC_Sign", "DOC", "TOC_Sign", "TOC",
-    "TSS_Sign", "TSS", "VSS_Sign", "VSS", "Notes"
-  )
+  # # Define standardized column order for all possible columns
+  # all_cols_order <- c(
+  #   "Source", "Station", "Latitude", "Longitude", "Field_coords", "StationID", "Date", "Datetime",
+  #   "Year", "Month", "MonthYear", "Season", "Depth", "Sample_depth_surface",
+  #   "Sample_depth_nutr_surface", "Sample_depth_bottom", "Tide", "Microcystis", "Secchi",
+  #   "Secchi_estimated", "Temperature", "Temperature_bottom", "Conductivity", "Conductivity_bottom",
+  #   "Salinity", "Salinity_bottom", "DissolvedOxygen", "DissolvedOxygen_bottom",
+  #   "DissolvedOxygenPercent", "DissolvedOxygenPercent_bottom", "pH", "pH_bottom", "TurbidityNTU",
+  #   "TurbidityNTU_bottom", "TurbidityFNU", "TurbidityFNU_bottom", "Chlorophyll_Sign", "Chlorophyll",
+  #   "Pheophytin_Sign", "Pheophytin", "TotAmmonia_Sign", "TotAmmonia", "DissAmmonia_Sign",
+  #   "DissAmmonia", "DissNitrateNitrite_Sign", "DissNitrateNitrite", "TotPhos_Sign", "TotPhos",
+  #   "DissOrthophos_Sign", "DissOrthophos", "TON_Sign", "TON", "DON_Sign", "DON", "TKN_Sign", "TKN",
+  #   "DissSilica_Sign", "DissSilica", "TDS_Sign", "TDS", "DissBromide_Sign", "DissBromide",
+  #   "DissCalcium_Sign", "DissCalcium", "TotChloride_Sign", "TotChloride", "DissChloride_Sign",
+  #   "DissChloride", "TotAlkalinity_Sign", "TotAlkalinity", "DOC_Sign", "DOC", "TOC_Sign", "TOC",
+  #   "TSS_Sign", "TSS", "VSS_Sign", "VSS", "Notes"
+  # )
 
   out <- dplyr::bind_rows(WQ_list) %>%
     dplyr::mutate(
@@ -182,7 +188,8 @@ wq <- function(Sources = NULL, Start_year = NULL, End_year = NULL) {
         }
       }
     } %>%
-    dplyr::select(dplyr::any_of(all_cols_order))
+    # ALL_COLS_ORDER defined in data-raw/internal_metadata.R
+    dplyr::select(dplyr::any_of(ALL_COLS_ORDER))
 
   # Return ------------------------------------------------------------------
 

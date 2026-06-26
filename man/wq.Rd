@@ -7,7 +7,8 @@
 wq(Sources = NULL, Start_year = NULL, End_year = NULL)
 }
 \arguments{
-\item{Sources}{Character vector of data sources for the water quality variables. No default, this must be specified.
+\item{Sources}{Character vector of data sources for the water quality variables.
+No default, this must be specified.
 Choices include "20mm" (20mm Survey, \code{\link{twentymm}}),
 "Baystudy" (Bay Study, \code{\link{baystudy}}),
 "DJFMP" (Delta Juvenile Fish Monitoring Program, \code{\link{DJFMP}}),
@@ -26,9 +27,11 @@ Choices include "20mm" (20mm Survey, \code{\link{twentymm}}),
 "USGS_SFBS" (USGS San Francisco Bay Surveys, \code{\link{USGS_SFBS}}), and
 "YBFMP" (Yolo Bypass Fish Monitoring Program, \code{\link{YBFMP}}).}
 
-\item{Start_year}{Earliest year you would like included in the dataset. Must be an integer. Defaults to year \code{0}.}
+\item{Start_year}{Earliest year you would like included in the dataset. Must be an integer.
+Defaults to year \code{0}.}
 
-\item{End_year}{Latest year you would like included in the dataset. Must be an integer. Defaults to the current year.}
+\item{End_year}{Latest year you would like included in the dataset. Must be an integer.
+Defaults to the current year.}
 }
 \value{
 An integrated dataset

@@ -106,7 +106,7 @@ Schultz, A. A. and A. J. Kalmbach. 2023. Directed Outflow Project Lower Trophic 
 
 United States Fish and Wildlife Service, C. Macfarlane, D. Goodman, K. Erly, E. Huber, J. Cook, G. Bigham, V. Peck, S. Valdez, E. Louwerens, J. Speegle, T. Hope, G. Garcia, A. Arrambide, P. Higginson, and J. Falcon. 2025. Interagency Ecological Program and US Fish and Wildlife Service: San Francisco Estuary Enhanced Delta Smelt Monitoring Program Data, 2016-2024 ver 12. Environmental Data Initiative. [doi:10.6073/pasta/ae279e24eef334ee43040e9e4e71941d](https://portal.edirepository.org/nis/metadataviewer?packageid=edi.415.12)
 
-United States Fish and Wildlife Service, J. Speegle, C. Macfarlane, E. Huber, D. Goodman, K. Erly, and R. Cook. 2024. Interagency Ecological Program: Over four decades of juvenile fish monitoring data from the San Francisco Estuary, collected by the Delta Juvenile Fish Monitoring Program, 1976-2024 ver 13. Environmental Data Initiative. [doi:10.6073/pasta/33aaab795387fd067a10108bacd88e53](https://portal.edirepository.org/nis/metadataviewer?packageid=edi.244.13)
+United States Fish and Wildlife Service, J. Speegle, C. Macfarlane, E. Huber, D. Goodman, K. Erly, and R. Cook. 2026. Interagency Ecological Program: Over four decades of juvenile fish monitoring data from the San Francisco Estuary, collected by the Delta Juvenile Fish Monitoring Program, 1976-2025 ver 14. Environmental Data Initiative. [doi:10.6073/pasta/ad35c80cafd87ba928d3f37fa124ccaf](https://portal.edirepository.org/nis/metadataviewer?packageid=edi.244.14)
 
 U.S. Geological Survey. 2025. National Water Information System data available on the World Wide Web (USGS Water Data for the Nation), accessed July 14, 2025, at [doi:10.5066/F7P55KJN](https://doi.org/10.5066/F7P55KJN)
 

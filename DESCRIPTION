@@ -20,11 +20,15 @@ License: GPL-3
 Depends:
     R (>= 4.1.0)
 Imports:
+    cli,
+    DBI,
+    digest,
     dataRetrieval (>= 2.7.19),
     dplyr,
     EDIutils,
     glue,
-    jsonlite,
+    hms,
+    httr2,
     lubridate,
     magrittr,
     purrr,
@@ -36,11 +40,14 @@ Imports:
     tibble,
     tidyr,
     tidyselect,
-    wql
+    tools,
+    usethis,
+    utils,
+    wql,
+    yaml
 Suggests:
     conflicted,
     covr,
-    hms,
     spelling,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
@@ -49,4 +56,4 @@ Language: en-US
 LazyData: true
 LazyDataCompression: xz
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3

@@ -1,6 +1,6 @@
 # Global helper functions to help with data import and structure checking
 
-# Internal helper functions ----------------------------------------------
+# Internal helper functions ------------------------------------------------------------------
 
 # Attribute getter functions used globally in helper functions
 get_attr_file_name <- purrr::attr_getter("src_file")
@@ -93,7 +93,52 @@ int_get_data_dims <- function(data_clean) {
 }
 
 
-# Data download ----------------------------------------------------------
+# Data download ------------------------------------------------------------------------------
+
+# Import info from the yml configuration file for survey as a list
+get_config_file <- function(survey) {
+  # Obtain file name of configuration file for the specified survey
+  filename <- paste0(
+    dplyr::replace_values(
+      survey,
+      "20mm" ~ "twentymm",
+      "Baystudy" ~ "baystudy",
+      "Suisun" ~ "suisun"
+    ),
+    ".yml"
+  )
+
+  yaml::read_yaml(file.path("data-raw", filename))
+}
+
+# Get update information for a dataset including the ID of EDI publication used in
+# last discretewq update and date the dataset was last updated
+# Use the optional data_type argument if there is more than one EDI publication used
+# for the survey such as "fish" or "zoop"
+provide_update_info <- function(config_file) {
+  # Extract information from configuration file for messaging
+  survey_name <- config_file$survey_name
+  source_data <- names(config_file$source_data)
+
+  # Provide message with date of last update
+  rlang::inform(c(
+    "i" = paste(
+      survey_name,
+      "was last updated on",
+      config_file$last_update
+    )
+  ))
+
+  # Provide message for source data for survey
+  source_data_c <- ifelse(
+    length(source_data) > 1,
+    paste(source_data, collapse = ", "),
+    source_data
+  )
+  rlang::inform(c(
+    "i" = paste("Source data for", survey_name, "is", source_data_c)
+  ))
+}
 
 # Generic function to subset a vector of data entity files from a regex pattern
 # Returns a string of a data entity file of length 1, generates error if returns
@@ -124,187 +169,158 @@ subset_data_entity <- function(data_entities, regex_pattern) {
   }
 }
 
-# Get update information for a dataset including the ID of EDI publication used in
-# last discretewq update and date the dataset was last updated
-# Use the optional data_type argument if there is more than one EDI publication used
-# for the survey such as "fish" or "zoop"
-get_update_info <- function(survey, data_type = NULL) {
-  # Obtain file name of .rda file for the specified survey
-  filename <- dplyr::case_match(
-    survey,
-    "20mm" ~ "twentymm.rda",
-    "Baystudy" ~ "baystudy.rda",
-    "DJFMP" ~ "DJFMP.rda",
-    "DOP" ~ "DOP.rda",
-    "EDSM" ~ "EDSM.rda",
-    "EMP" ~ "EMP.rda",
-    "FMWT" ~ "FMWT.rda",
-    "NCRO" ~ "NCRO.rda",
-    "SDO" ~ "SDO.rda",
-    "SKT" ~ "SKT.rda",
-    "SLS" ~ "SLS.rda",
-    "STN" ~ "STN.rda",
-    "Suisun" ~ "suisun.rda",
-    "USBR" ~ "USBR.rda",
-    "USGS_CAWSC" ~ "USGS_CAWSC.rda",
-    "USGS_SFBS" ~ "USGS_SFBS.rda",
-    "YBFMP" ~ "YBFMP.rda"
-  )
+extract_data_entity <- function(config_object) {
+  purrr::chuck(config_object, "data_ent")
+}
 
-  # Temporarily load survey dataset from data folder
-  df_data <- load(file.path("data", filename))
+extract_entity_regex <- function(config_object) {
+  data_entity <- extract_data_entity(config_object)
+  data_entity_name <- purrr::map_chr(data_entity, "ent_name")
+  data_entity_regex <- purrr::map(data_entity, "ent_regex")
+  names(data_entity_regex) <- data_entity_name
+  return(data_entity_regex)
+}
 
-  # Change edi_id name and survey if data_type isn't NULL
-  if (!is.null(data_type)) {
-    edi_id_name <- paste0("edi_id_", data_type)
-    survey <- paste(survey, data_type, sep = "-")
-  } else {
-    edi_id_name <- "edi_id"
-  }
+extract_data_str <- function(config_object) {
+  data_entity <- extract_data_entity(config_object)
+  data_entity_name <- unlist(purrr::map_depth(data_entity, 1, "ent_name"))
+  data_str <- purrr::map_depth(data_entity, 1, "data_str")
+  names(data_str) <- data_entity_name
+  return(data_str)
+}
 
-  # Create attribute getter functions
-  get_edi_id <- purrr::attr_getter(edi_id_name)
-  get_last_update <- purrr::attr_getter("last_update")
+# Add functions for standard messaging
 
-  # Extract attributes
-  edi_id <- get_edi_id(get(df_data))
-  last_update <- get_last_update(get(df_data))
+# Add function to save file to tempdir
 
-  # Provide message on current update status for survey
-  if (is.null(edi_id)) {
-    rlang::inform(c(
-      "i" = paste(
-        "Data from EDI wasn't used for",
-        survey,
-        "during the last discretewq update"
-      ),
-      "i" = paste(survey, "was last updated on", last_update)
-    ))
-  } else {
-    rlang::inform(c(
-      "i" = paste(
-        "EDI revision",
-        edi_id,
-        "was used for",
-        survey,
-        "during the last discretewq update"
-      ),
-      "i" = paste(survey, "was last updated on", last_update)
-    ))
-  }
+## EDI ---------------------------------------------------------------------------------------
 
-  tibble::lst(edi_id, last_update)
+extract_edi_package_info <- function(edi_object) {
+  pack_id <- purrr::chuck(edi_object, "pack_id")
+  last_rev <- purrr::chuck(edi_object, "last_rev")
+  static <- purrr::chuck(edi_object, "static")
+  tibble::lst(pack_id, last_rev, static)
 }
 
 # Get ID for most current revision of EDI publication and check if it differs from
 # the revision used in the last discretewq update
-get_latest_edi_id <- function(edi_pack_id, last_rev = NULL) {
-  # Get EDI ID for latest revision of EDI publication
+get_current_edi_id <- function(edi_object) {
+  # Get EDI ID for current revision of EDI publication
   edi_scope <- "edi"
-  latest_rev <- EDIutils::list_data_package_revisions(
+  edi_pack_id <- edi_object$pack_id
+  last_rev <- edi_object$last_rev
+  curr_rev <- EDIutils::list_data_package_revisions(
     scope = edi_scope,
     identifier = edi_pack_id,
     filter = "newest"
   )
 
-  # Create full EDI ID for latest revision
-  edi_id_latest <- paste(edi_scope, edi_pack_id, latest_rev, sep = ".")
+  # Create full EDI ID for current revision
+  edi_id_curr <- paste(edi_scope, edi_pack_id, curr_rev, sep = ".")
 
   # Provide message on EDI revision status
   rlang::inform(c(
-    "i" = paste("The latest revision of EDI publication is", edi_id_latest)
+    "i" = paste(
+      paste("edi", edi_pack_id, last_rev, sep = "."),
+      "was used during the last discretewq update"
+    ),
+    "i" = paste("The current revision of EDI publication is", edi_id_curr)
   ))
 
-  # Provide further messaging on whether it differs from the revision
-  # used in the last discretewq update. Only do so if last_rev is provided.
-  if (!is.null(last_rev)) {
-    last_rev_match <- stringr::str_match(
-      last_rev,
-      "^edi\\.\\d+\\.(?<rev>\\d+)$"
-    )
-    last_rev <- as.numeric(last_rev_match[, "rev"])
-    if (latest_rev > last_rev) {
-      rlang::inform(c(
-        "i" = "The EDI data package has been updated since the last discretewq update",
-        "!" = "Proceed with running remainder of R script to update this data set"
-      ))
-    } else {
-      rlang::inform(c(
-        "i" = "The EDI data package hasn't been updated since the last discretewq update",
-        "x" = "There is no need to update this data set"
-      ))
-    }
+  # Provide further messaging on whether it differs from the revision used in the last
+  # discretewq update
+  if (curr_rev > last_rev) {
+    rlang::inform(c(
+      "i" = "The EDI data package has been updated since the last discretewq update",
+      "!" = "Proceeding with updates to this data set"
+    ))
+    return(edi_id_curr)
+  } else if (isTRUE(edi_object$static)) {
+    # If static is set to TRUE, proceed even if the data package hasn't been updated
+    rlang::inform(c(
+      "i" = "The EDI data package hasn't been updated since the last discretewq update",
+      "!" = "Proceeding with updates to this data set, because static = TRUE in configuration file"
+    ))
+    return(edi_id_curr)
+  } else {
+    # Stop execution if current revision isn't greater than revision used in the last
+    # discretewq update, and if static is set to FALSE
+    rlang::abort(c(
+      "i" = "The EDI data package hasn't been updated since the last discretewq update",
+      "x" = "Stopping updates to this data set"
+    ))
   }
-
-  # Return EDI ID for latest revision
-  return(edi_id_latest)
 }
 
 # Download specified data entities from most current revision of EDI publication and
 # save raw bytes files to a temporary directory
 # Returns a named vector of filepaths of the downloaded data
-get_edi_data <- function(edi_id_latest, entity_regex) {
-  # Get data entity names for specified EDI ID
-  df_edi_data_ent_all <- EDIutils::read_data_entity_names(edi_id_latest)
+get_edi_data <- function(edi_object) {
+  # Extract EDI package info
+  edi_pack_info <- extract_edi_package_info(edi_object)
+
+  # Determine most current revision of EDI publication and check if it differs from the revision
+  # used in the last discretewq update
+  edi_curr_rev <- get_current_edi_id(edi_pack_info)
+
+  # Obtain all data entities for EDI data package
+  df_edi_data_ent_all <- EDIutils::read_data_entity_names(edi_curr_rev)
   rlang::inform(c(
     "i" = paste0(
       "Data entities for ",
-      edi_id_latest,
+      edi_curr_rev,
       " include:\n",
       paste(df_edi_data_ent_all$entityName, collapse = "\n"),
       "\n"
     )
   ))
 
-  # Subset to desired data entities
-  df_edi_data_ent_sub <- entity_regex |>
-    tibble::enframe(name = "data_entity", value = "data_entity_regex") |>
-    dplyr::mutate(
-      data_entity_name = purrr::map_chr(
-        .data$data_entity_regex,
-        \(x) subset_data_entity(df_edi_data_ent_all$entityName, x)
-      )
-    )
+  # Extract data entity regex information and use to subset entities specified by their
+  # regex patterns
+  data_entity_regex <- extract_entity_regex(edi_object)
+  edi_entity_names <- purrr::map(
+    data_entity_regex,
+    \(x) subset_data_entity(df_edi_data_ent_all$entityName, x)
+  )
 
+  # Provide message on which data entities will be downloaded
   rlang::inform(c(
     "i" = paste0(
       "Downloading data entities:\n",
-      paste(df_edi_data_ent_sub$data_entity_name, collapse = "\n"),
+      paste(edi_entity_names, collapse = "\n"),
       "\n"
     )
   ))
 
-  # Proceed with downloading desired data entities from EDI data package
-  temp_dir <- tempdir()
-  df_edi_data_ent_final <- df_edi_data_ent_sub |>
-    dplyr::left_join(
-      df_edi_data_ent_all,
-      by = dplyr::join_by("data_entity_name" == "entityName")
-    ) |>
-    # Clean up data entity names to be used as file names
-    dplyr::mutate(
-      # Remove .csv file extensions from entity names if they exist
-      data_entity_name = stringr::str_remove(.data$data_entity_name, "\\.csv$"),
-      # Add edi_id suffix and .bin file extension
-      data_entity_name = paste0(
-        .data$data_entity_name,
-        "_",
-        stringr::str_replace_all(edi_id_latest, "\\.", "_"),
-        ".bin"
-      ),
-      # Add file path to file name
-      data_entity_fp = file.path(temp_dir, .data$data_entity_name)
-    )
+  # Define EDI entityIds to download
+  edi_entity_names_idx <- match(
+    edi_entity_names,
+    df_edi_data_ent_all$entityName
+  )
+  edi_entity_ids <- df_edi_data_ent_all$entityId[edi_entity_names_idx]
 
-  ls_edi_data_raw <-
-    purrr::map(
-      df_edi_data_ent_final$entityId,
-      \(x) EDIutils::read_data_entity(edi_id_latest, entityId = x)
-    ) |>
-    rlang::set_names(df_edi_data_ent_final$data_entity_name)
+  # Clean up edi_entity_names to be used as file names
+  # Remove .csv file extensions from entity names if they exist, add edi_id suffix and
+  # .bin file extension, and add file path to file name
+  edi_id_suffix <- paste0(
+    stringr::str_replace_all(edi_curr_rev, "\\.", "_"),
+    ".bin"
+  )
+  edi_entity_names_c <- edi_entity_names |>
+    purrr::map(tools::file_path_sans_ext) |>
+    purrr::map(\(x) file.path(tempdir(), paste(x, edi_id_suffix, sep = "_")))
+
+  # Add file names to EDI entityIds
+  names(edi_entity_ids) <- edi_entity_names_c
+
+  # Download each specified entity to a temporary directory
+  ls_edi_data_raw <- purrr::map(
+    edi_entity_ids,
+    \(x) EDIutils::read_data_entity(edi_curr_rev, entityId = x)
+  )
 
   for (i in 1:length(ls_edi_data_raw)) {
-    file_raw <- file.path(temp_dir, glue::glue("{names(ls_edi_data_raw)[i]}"))
+    file_raw <- names(ls_edi_data_raw)[i]
     con <- file(file_raw, "wb")
     writeBin(ls_edi_data_raw[[i]], con)
     close(con)
@@ -314,9 +330,53 @@ get_edi_data <- function(edi_id_latest, entity_regex) {
     "v" = "All files successfully downloaded to temporary directory"
   ))
 
-  df_edi_data_ent_final |>
-    dplyr::select(tidyselect::all_of(c("data_entity", "data_entity_fp"))) |>
-    tibble::deframe()
+  return(edi_entity_names_c)
+}
+
+run_standard_workflow <- function(survey) {
+  # Import configuration file for survey
+  ls_config <- get_config_file(survey)
+
+  # Provide update messaging for survey
+  provide_update_info(ls_config)
+
+  # Extract source data information from configuration file
+  ls_source_data <- ls_config$source_data
+  source_data_names <- names(ls_source_data)
+  ls_source_data_str <-
+    purrr::map(ls_source_data, extract_data_str) |>
+    purrr::list_flatten()
+
+  # Create an empty list to place combined data paths for all data entities
+  ls_data_path_all <- list()
+
+  # Download data to temporary directory if necessary
+  # EDI
+  if (any(grepl("^EDI", source_data_names))) {
+    # Extract info for EDI package(s)
+    ls_edi_info <- purrr::keep_at(ls_source_data, \(x) grep("^EDI", x))
+    # Download EDI data
+    ls_edi_info <- purrr::map(ls_edi_info, get_edi_data)
+    ls_data_path_all <- ls_edi_info
+  }
+
+  # Import data
+  ls_data_all <-
+    purrr::list_flatten(ls_data_path_all) |>
+    purrr::map(import_raw_data)
+
+  return(tibble::lst(ls_data_all, ls_source_data_str))
+
+  # After combining all info into ls_data_path_all, and importing data into ls_data_all
+  # Check for expected column names
+  # Convert to numeric, date, and time formats
+  # Rename columns to standardized names
+  # Combine Date and Time columns if necessary
+  # Convert Secchi and Depth columns if necessary
+  # Convert tide codes if necessary
+  # Convert lat-long coordinates if necessary
+  # If data is in long format, check parameter names and units,
+  # and then rename to standardized names
 }
 
 # Download discrete lab data from CNRA data portal and save csv file to a temporary
@@ -325,13 +385,13 @@ get_cnra_data_lab <- function(station_num, start_date, end_date = Sys.Date()) {
   # Generate HTTP request URL
   base_url <- "https://data.cnra.ca.gov/api/3/action/datastore_search_sql?sql="
   sql_query_lab <- paste0(
-    r"(SELECT * from "a9e7ef50-54c3-4031-8e44-aa46f3c660fe" WHERE "station_number" = ')",
-    station_num,
-    r"(' AND "sample_date" BETWEEN ')",
-    start_date,
-    "' AND '",
-    end_date,
-    "'"
+    r"(SELECT * from "a9e7ef50-54c3-4031-8e44-aa46f3c660fe" WHERE "station_number" = ')"#,
+    # station_num,
+    # r"(' AND "sample_date" BETWEEN ')",
+    # start_date,
+    # "' AND '",
+    # end_date,
+    # "'"
   )
 
   # Call API, transform JSON data into data frame
@@ -497,26 +557,34 @@ get_usgs_samples_data <- function(site_id) {
 
 # Import and clean data --------------------------------------------------
 
-# Import raw data using specified read function. Imports all columns as text.
-# Defaults to read_csv
-import_raw_data <- function(
-  filepath,
-  import_fun = c("read_csv", "read_excel")
-) {
-  import_fun <- rlang::arg_match(import_fun)
-
+# Import raw data using read function determined by the file extension.
+# Imports all columns as text.
+import_raw_data <- function(filepath) {
+  # Extract file name and provide message
   file_name <- basename(filepath)
   rlang::inform(c("i" = paste("Attempting to import:", file_name)))
 
-  # Check import function and import data
-  df_data_raw <- switch(
-    import_fun,
-    read_csv = readr::read_csv(
+  # Define import functions
+  read_csv_text <- function() {
+    readr::read_csv(
       filepath,
       col_types = list(.default = "c"),
       na = c("", "NA", "NA:NA")
-    ),
-    read_excel = readxl::read_excel(filepath, col_types = "text")
+    )
+  }
+
+  read_excel_text <- function() {
+    readxl::read_excel(filepath, col_types = "text")
+  }
+
+  # Import data based on file extension
+  file_ext <- tools::file_ext(filepath)
+  df_data_raw <- switch(
+    file_ext,
+    csv = read_csv_text(),
+    bin = read_csv_text(),
+    xls = read_excel_text(),
+    xlsx = read_excel_text()
   )
 
   rlang::inform(c("v" = "Data import complete\n"))
