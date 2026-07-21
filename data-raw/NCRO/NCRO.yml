@@ -1,0 +1,263 @@
+source_metadata:
+  name: Water Quality Evaluation Section, North Central Region Office
+  acronym: NCRO
+
+update_status:
+  last_update: '2025-10-13'
+
+inputs:
+  - input_id: data_1999_2022
+    input_type: local_file
+    input_path: data-raw/NCRO/ncro_data_1999-2022.rds
+    columns_required: false
+
+  - input_id: stations
+    input_type: local_file
+    input_path: data-raw/NCRO/ncro_stations.csv
+    columns:
+      - raw_name: StationNumber
+        target_name: station_number
+        col_type: character
+      - raw_name: WQES_StationCode
+        target_name: wqes_station_code
+        col_type: character
+      - raw_name: Station
+        target_name: Station
+        col_type: character
+      - raw_name: Latitude
+        target_name: Latitude
+        col_type: numeric
+      - raw_name: Longitude
+        target_name: Longitude
+        col_type: numeric
+
+  - input_id: data_mvi_secchi
+    input_type: local_file
+    input_path: data-raw/NCRO
+    input_regex: ^qry_HabObs
+    columns:
+      - raw_name: StationCode
+        target_name: station_code
+        col_type: character
+      - raw_name: DeploymentEnd
+        target_name: Date
+        col_type: numeric
+      - raw_name: FldObsWaterHabs
+        target_name: Microcystis
+        col_type: character
+      - raw_name: FldObsSecchi
+        target_name: Secchi
+        col_type: numeric
+        col_units: meters
+
+  - input_id: data_lab
+    input_type: API-CNRA-lab
+    input_start_date: '2021-01-01'
+    timezone: "Etc/GMT+8"
+    input_stations:
+      - B9D80251385
+      - B9542300
+      - B9D80331400
+      - B9D80411389
+      - B9D74921261
+      - B9D72921327
+      - B9D75841349
+      - B9D80101349
+      - B9D75261230
+      - B9D75011230
+      - B9D80021306
+      - B9D75291280
+      - B9S81421400
+      - B9204500
+      - B9D74971332
+      - B9536500
+      - B9537000
+      - B9D80161339
+      - B9D74821274
+      - B9D74851200
+      - B9D75821343A
+      - B9D74871232
+      - B9D80431347
+      - B9D74811247
+      - B9D74811224
+      - B9522200
+      - B9D75861372
+      - B9D81051394
+      - B9D80201431
+      - B9S81131386
+      - B9D74761253
+      - B9D80621412
+      - B9542100
+      - B9542500
+      - B9542400
+      - B9D75961273
+      - B9D75231318
+      - B9D75781357
+      - B9D74991332
+      - B9D82851352
+    columns:
+      - raw_name: station_number
+        target_name: station_number
+        col_type: character
+      - raw_name: sample_code
+        target_name: sample_code
+        col_type: character
+      - raw_name: sample_date
+        target_name: Datetime
+        col_type: datetime
+        col_format: mdY HM
+      - raw_name: parameter
+        target_name: parameter
+        col_type: character
+      - raw_name: result
+        target_name: result
+        col_type: character
+      - raw_name: reporting_limit
+        target_name: reporting_limit
+        col_type: character
+      - raw_name: units
+        target_name: units
+        col_type: character
+    parameters:
+      parameter_col: parameter
+      units_col: units
+      definitions:
+        - raw_name: Chlorophyll a
+          target_name: Chlorophyll
+          raw_units: ug/L
+        - raw_name: Dissolved Ammonia
+          target_name: DissAmmonia
+          raw_units: mg/L as N
+        - raw_name: Dissolved Bromide
+          target_name: DissBromide
+          raw_units: mg/L
+        - raw_name: Dissolved Calcium
+          target_name: DissCalcium
+          raw_units: mg/L
+        - raw_name: Dissolved Chloride
+          target_name: DissChloride
+          raw_units: mg/L
+        - raw_name: Dissolved Nitrate + Nitrite
+          target_name: DissNitrateNitrite
+          raw_units: mg/L as N
+        - raw_name: Dissolved Organic Carbon
+          target_name: DOC
+          raw_units: mg/L as C
+        - raw_name: Dissolved Organic Nitrogen
+          target_name: DON
+          raw_units: mg/L as N
+        - raw_name: Dissolved ortho-Phosphate
+          target_name: DissOrthophos
+          raw_units: mg/L as P
+        - raw_name: Pheophytin a
+          target_name: Pheophytin
+          raw_units: ug/L
+        - raw_name: Total Alkalinity
+          target_name: TotAlkalinity
+          raw_units: mg/L as CaCO3
+        - raw_name: Total Dissolved Solids
+          target_name: TDS
+          raw_units: mg/L
+        - raw_name: Total Kjeldahl Nitrogen
+          target_name: TKN
+          raw_units: mg/L as N
+        - raw_name: Total Organic Carbon
+          target_name: TOC
+          raw_units: mg/L as C
+        - raw_name: Total Phosphorus
+          target_name: TotPhos
+          raw_units: mg/L as P
+        - raw_name: Total Suspended Solids
+          target_name: TSS
+          raw_units: mg/L
+        - raw_name: Volatile Suspended Solids
+          target_name: VSS
+          raw_units: mg/L
+
+  - input_id: data_field
+    input_type: API-CNRA-field
+    input_start_date: '2021-01-01'
+    timezone: "Etc/GMT+8"
+    input_stations:
+      - B9D80251385
+      - B9542300
+      - B9D80331400
+      - B9D80411389
+      - B9D74921261
+      - B9D72921327
+      - B9D75841349
+      - B9D80101349
+      - B9D75261230
+      - B9D75011230
+      - B9D80021306
+      - B9D75291280
+      - B9S81421400
+      - B9204500
+      - B9D74971332
+      - B9536500
+      - B9537000
+      - B9D80161339
+      - B9D74821274
+      - B9D74851200
+      - B9D75821343A
+      - B9D74871232
+      - B9D80431347
+      - B9D74811247
+      - B9D74811224
+      - B9522200
+      - B9D75861372
+      - B9D81051394
+      - B9D80201431
+      - B9S81131386
+      - B9D74761253
+      - B9D80621412
+      - B9542100
+      - B9542500
+      - B9542400
+      - B9D75961273
+      - B9D75231318
+      - B9D75781357
+      - B9D74991332
+      - B9D82851352
+    columns:
+      - raw_name: station_number
+        target_name: station_number
+        col_type: character
+      - raw_name: sample_code
+        target_name: sample_code
+        col_type: character
+      - raw_name: sample_date
+        target_name: Datetime
+        col_type: datetime
+        col_format: Ymd HMS
+      - raw_name: parameter
+        target_name: parameter
+        col_type: character
+      - raw_name: fdr_result
+        target_name: result
+        col_type: numeric
+      - raw_name: uns_name
+        target_name: units
+        col_type: character
+    parameters:
+      parameter_col: parameter
+      units_col: units
+      definitions:
+      - raw_name: DissolvedOxygen
+        target_name: DissolvedOxygen
+        raw_units: mg/L
+      - raw_name: SpecificConductance
+        target_name: Conductivity
+        raw_units: uS/cm@25 °C
+      - raw_name: Turbidity
+        target_name: TurbidityFNU
+        raw_units: N.T.U.
+      - raw_name: Turbidity
+        target_name: TurbidityFNU
+        raw_units: F.N.U.
+      - raw_name: WaterTemperature
+        target_name: Temperature
+        raw_units: °C
+      - raw_name: pH
+        target_name: pH
+        raw_units: pH Units
