@@ -52,7 +52,7 @@ check_output_df <- function(object) {
     )
   }
 
-  invisible(TRUE)
+  invisible(NULL)
 }
 
 #' Validate Essential Input Structure and Schema Definitions
@@ -129,7 +129,8 @@ check_expected_cols <- function(df_data, columns_cfg, config_path) {
     cli::cli_abort(c(
       "x" = "Missing expected raw columns in input",
       "!" = "Missing columns: {.val {missing_cols}}",
-      "!" = "Check column names in raw data ({.var workflow_data}) to make sure they match {.field raw_name} for input in {.path {config_path}}"
+      "!" = "Check column names in raw data ({.path {FP_FAILED_RAW_DATA}}) to make sure they match {.field raw_name} for input in:",
+      " " = "   {.path {config_path}}"
     ))
   }
 
@@ -158,7 +159,8 @@ check_expected_params <- function(df_data, parameters_cfg, config_path) {
     cli::cli_abort(c(
       "x" = "Validation configuration error for input",
       "!" = "The defined parameter column {.var {parameter_col}} or units column {.var {units_col}} could not be located in the raw data",
-      "!" = "Check column names in raw data ({.var workflow_data}) to make sure they match {.field parameter_col} and {.field units_col} for input in {.path {config_path}}"
+      "!" = "Check column names in raw data ({.path {FP_FAILED_RAW_DATA}}) to make sure they match {.field parameter_col} and {.field units_col} for input in:",
+      " " = "   {.path {config_path}}"
     ))
   }
 

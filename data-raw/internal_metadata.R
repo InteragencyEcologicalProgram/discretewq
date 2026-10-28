@@ -126,9 +126,13 @@ ALL_MEAS_COLS <- c(
   "VSS"
 )
 
+# Define filepath for failed raw data before standardization
+FP_FAILED_RAW_DATA <- "failed_workflow_data.qdata"
+
 usethis::use_data(
   ALL_COLS_ORDER,
   ALL_MEAS_COLS,
+  FP_FAILED_RAW_DATA,
   internal = TRUE,
   overwrite = TRUE
 )

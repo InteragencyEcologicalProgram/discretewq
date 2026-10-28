@@ -176,7 +176,7 @@ pipeline_import <- function(
 #' structures before executing schema standardization under an isolated error boundary loop. If
 #' schema validation fails, parsing drops, or column mismatches occur, the processing loop compiles
 #' a master error tracking report and binds the upstream raw matrices directly to
-#' `.GlobalEnv$workflow_data` for live debugging before execution halts.
+#' "failed_workflow_data.qdata" for live debugging before execution halts.
 #'
 #' @param raw_list A named list of raw data frame objects returned by `pipeline_import()`.
 #' @param cfg_inputs A list representing a parsed `inputs` block from the YAML configuration file.
@@ -215,11 +215,12 @@ pipeline_standardize <- function(raw_list, cfg_inputs, config_path) {
         cli::format_inline("Failed to standardize input {.val {x$input_id}}")
       }
     )
-    # Save the raw data before standardization to the global environment for inspection
-    workflow_data <<- raw_list
-    cli::cli_alert_info(
-      "Raw data before standardization saved to global variable {.var workflow_data} for reference."
-    )
+    # Save the raw data before standardization as a local binary file for inspection
+    qs2::qd_save(raw_list, file = FP_FAILED_RAW_DATA)
+    cli::cli_bullets(c(
+      "i" = "Raw data before standardization saved to {.path {FP_FAILED_RAW_DATA}} for reference.",
+      "i" = "Run {.code failed_workflow_data <- qs2::qd_read('{FP_FAILED_RAW_DATA}')} to load and inspect it."
+    ))
     # Halt execution completely after reporting everything
     cli::cli_abort(
       message = "Data pipeline halted. One or more inputs failed to standardize properly.",

@@ -41,3 +41,4 @@ vignettes/*.pdf
 
 publication/data_objects/Delta_Integrated_WQ.csv
 data-raw/.cache/
+failed_workflow_data.qdata

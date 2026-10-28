@@ -142,7 +142,8 @@ standardize_columns <- function(df_data, columns_cfg, config_path) {
     cli::cli_abort(c(
       "x" = "Parsing failed for input with {length(error_log)} conversion error{?s}:",
       error_log,
-      "!" = "Check values in raw data ({.var workflow_data}) and specify an appropriate {.field col_type} for columns in {.path {config_path}}"
+      "!" = "Check values in raw data ({.path {FP_FAILED_RAW_DATA}}) and specify an appropriate {.field col_type} or {.field col_format} for columns in:",
+      " " = "   {.path {config_path}}"
     ))
   }
 
