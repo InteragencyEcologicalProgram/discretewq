@@ -13,6 +13,7 @@ This package contains the source datasets and a function to combine any combinat
 
 Authors:
 \itemize{
+  \item Samuel M Bashevkin \email{sam.bashevkin@waterboards.ca.gov} (\href{https://orcid.org/0000-0001-7406-7089}{ORCID})
   \item Dave Bosworth \email{David.Bosworth@water.ca.gov} (\href{https://orcid.org/0000-0003-0740-3390}{ORCID})
   \item Sarah Perry \email{Sarah.Perry@water.ca.gov} (\href{https://orcid.org/0000-0002-2561-8195}{ORCID})
   \item Elizabeth B Stumpner \email{Elizabeth.Stumpner@water.ca.gov} (\href{https://orcid.org/0000-0003-2356-2244}{ORCID})

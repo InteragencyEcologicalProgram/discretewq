@@ -66,7 +66,7 @@
 #' Water quality data from the United States Fish and Wildlife Service Delta Juvenile Fish Monitoring Program.
 #'
 #' @encoding UTF-8
-#' @format A tibble with 166,493 rows and 12 variables
+#' @format A tibble with 171,412 rows and 12 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}
@@ -81,7 +81,7 @@
 #'   \item{TurbidityNTU}{Turbidity (NTU) at surface measured with a turbidimeter.}
 #'   \item{TurbidityFNU}{Turbidity (FNU) at surface measured with an optical sensor.}
 #'   }
-#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.244.14}{here}.
+#' @details More metadata and information on methods are available \href{https://portal.edirepository.org/nis/metadataviewer?packageid=edi.244.17}{here}.
 #' @seealso \code{\link{wq}}
 "DJFMP"
 
