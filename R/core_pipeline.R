@@ -9,7 +9,7 @@
 #' custom cleaner functions, and applies final structural tasks.
 #'
 #' @param config_path Character string path to the survey's YAML configuration file.
-#' @param force_refresh Logical flag indicating whether to bypass existing local `.rds` cache
+#' @param force_refresh Logical flag indicating whether to bypass existing local `.qdata` cache
 #'   assets and force fresh API transactions and re-processing. Defaults to `FALSE`.
 #' @param max_age_days Numeric ceiling indicating the maximum lifespan (in days) of local cached
 #'   objects before expiration triggers an automatic update. Defaults to 7.
