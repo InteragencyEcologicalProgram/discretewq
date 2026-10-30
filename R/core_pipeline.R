@@ -6,7 +6,8 @@
 #' tiered caching system. The pipeline checks remote repository (EDI) statuses, tracks
 #' cryptographic configuration states to determine caching layers (`STD` vs. `RAW`), safely
 #' iterates through batch downloads, standardizes database structures, maps dynamic acronym-based
-#' custom cleaner functions, and applies final structural tasks.
+#' custom cleaner functions, and applies final structural tasks. Supports an interactive execution
+#' mode to pause execution early and return intermediate data structures.
 #'
 #' @param config_path Character string path to the survey's YAML configuration file.
 #' @param force_refresh Logical flag indicating whether to bypass existing local `.qdata` cache
@@ -17,21 +18,28 @@
 #'   wrappers. Defaults to 5.
 #' @param initial_delay Numeric value specifying the baseline wait duration (seconds) before
 #'   executing the first retry step. Defaults to 2.
+#' @param interactive_until Character string defining the target execution stop boundary.
+#'   Must be one of `"full"` (default), `"raw"`, `"standardize"`, or `"custom"`.
+#'   If anything other than `"full"` is selected, execution halts at that stage and returns
+#'   the intermediate dataset for interactive debugging/development.
 #'
-#' @return A named list of three elements:
-#'   * `final_data`: A unified, cleaned, and structurally synchronized tibble.
-#'   * `ls_standardized`: A named list of the intermediate standardized data frames used during
-#'     compilation.
-#'   * `ls_edi_info`: A nested list of metadata descriptions regarding active EDI tracking
-#'     revisions, if applicable.
+#' @return Depending on `interactive_until`:
+#'   * `"full"`: A named list of two elements (`final_data`, `ls_edi_info`).
+#'   * `"raw"`: A named list of the raw imported datasets (`ls_raw`).
+#'   * `"standardize"`: A named list of the standardized datasets (`ls_standardized`).
+#'   * `"custom"`: The data frame returned directly by the dynamic `cleaner_fn` before final
+#'     cleaning (`df_custom_data`).
 #' @noRd
 run_survey_pipeline <- function(
   config_path,
   force_refresh = FALSE,
   max_age_days = 7,
   max_attempts = 5,
-  initial_delay = 2
+  initial_delay = 2,
+  interactive_until = c("full", "raw", "standardize", "custom")
 ) {
+  interactive_until <- rlang::arg_match(interactive_until)
+
   # Import configuration file for survey
   config <- yaml::read_yaml(config_path)
 
@@ -62,29 +70,45 @@ run_survey_pipeline <- function(
   # Extract input configuration block for repeated function inputs
   cfg_inputs <- config$inputs
 
-  # Run with tiered caching, preferring cache from the standardized data first, then falling
-  # back to the raw data
+  # --- PHASE 1: RAW DATA IMPORT ---
+  ls_raw <- run_with_cache(
+    cache_id = cache_ids$raw,
+    force_refresh = force_refresh,
+    max_age_days = max_age_days,
+    expr = {
+      cli::cli_h2("Importing Data")
+      pipeline_import(cfg_inputs, config_path, max_attempts, initial_delay)
+    }
+  )
+
+  # Early exit if user only requested raw data
+  if (interactive_until == "raw") {
+    cli::cli_alert_info(
+      "Pipeline execution paused after raw data import (`interactive_until = 'raw'`)."
+    )
+    return(ls_raw)
+  }
+
+  # --- PHASE 2: STANDARDIZATION ---
   ls_standardized <- run_with_cache(
     cache_id = cache_ids$std,
     force_refresh = force_refresh,
     max_age_days = max_age_days,
     expr = {
-      ls_raw <- run_with_cache(
-        cache_id = cache_ids$raw,
-        force_refresh = force_refresh,
-        max_age_days = max_age_days,
-        expr = {
-          # Import all data inputs listed in config
-          cli::cli_h2("Importing Data")
-          pipeline_import(cfg_inputs, config_path, max_attempts, initial_delay)
-        }
-      )
       cli::cli_h2("Standardizing Data")
       pipeline_standardize(ls_raw, cfg_inputs, config_path)
     }
   )
 
-  # Custom cleaning and synthesis
+  # Early exit if user only requested standardized data
+  if (interactive_until == "standardize") {
+    cli::cli_alert_info(
+      "Pipeline execution paused after standardization (`interactive_until = 'standardize'`)."
+    )
+    return(ls_standardized)
+  }
+
+  # --- PHASE 3: CUSTOM CLEANING AND SYNTHESIS ---
   cli::cli_h2("Running custom cleaning script for {.val {acronym}}")
 
   # Safely pull the custom cleaning function
@@ -93,7 +117,15 @@ run_survey_pipeline <- function(
   # Run the custom cleaning script across the standardized inputs
   df_custom_data <- cleaner_fn(ls_standardized)
 
-  # Final general cleaning steps
+  # Early exit if user only requested custom cleaner output
+  if (interactive_until == "custom") {
+    cli::cli_alert_success(
+      "Pipeline execution paused after custom `cleaner_fn` (`interactive_until = 'custom'`)."
+    )
+    return(df_custom_data)
+  }
+
+  # --- PHASE 4: FINAL GENERAL CLEANING STEPS ---
   cli::cli_h2("Performing final cleaning steps")
   final_data <- df_custom_data |>
     # Remove rows where all measurements are NA, if they exist
@@ -103,7 +135,7 @@ run_survey_pipeline <- function(
     # Standardize column order
     standardize_col_order()
 
-  tibble::lst(final_data, ls_standardized, ls_edi_info)
+  tibble::lst(final_data, ls_edi_info)
 }
 
 #' Safe Batch Ingestion of Configured Survey Data Inputs

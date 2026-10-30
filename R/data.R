@@ -326,7 +326,7 @@
 #' Water quality data from the California Department of Water Resources North Central Region Office.
 #'
 #' @encoding UTF-8
-#' @format a tibble with 11,290 rows and 49 variables
+#' @format a tibble with 11,917 rows and 49 variables
 #' \describe{
 #'   \item{Source}{Name of the source dataset.}
 #'   \item{Station}{Station where sample was collected.}

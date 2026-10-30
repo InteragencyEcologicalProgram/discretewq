@@ -164,12 +164,14 @@ import_edi_data <- function(
 
 #' Import Water Quality Lab or Field Data from the CNRA Data Portal
 #'
+#' Queries the California Natural Resources Agency (CNRA) CKAN Datastore API using SQL-filtered
+#' endpoints for field or lab records corresponding to a target monitoring station and date window.
+#'
 #' @param station_num Character string or numeric value identifying the target monitoring station.
 #' @param start_date Character string or Date object representing the lower date bound (inclusive).
 #' @param end_date Character string or Date object representing the upper date bound (inclusive).
 #'   Defaults to the current system date (`Sys.Date()`).
-#' @param type Character string indicating data source context; must be either "lab"
-#'   or "field".
+#' @param type Character string indicating data source context; must be either "lab" or "field".
 #' @param max_attempts Integer defining the ceiling for total execution attempts assigned to
 #'   `httr2::req_retry`. Defaults to 5.
 #'
@@ -191,9 +193,10 @@ import_cnra_data <- function(
   )
   target_resource_id <- resource_ids[type]
 
-  # Ensure dates are treated strictly as standard ISO character strings
+  # Ensure dates and station numbers are treated strictly as standard character strings
   start_date_str <- as.character(start_date)
   end_date_str <- as.character(end_date)
+  station_num_str <- as.character(station_num)
 
   # Set up progress message
   status <- new.env()
@@ -205,29 +208,12 @@ import_cnra_data <- function(
     msg_done = "Querying CNRA {type_label} Data Portal: Station {.val {station_num}}{status$msg}"
   )
 
-  # Build SQL Query based on type (lab vs. field data)
-  if (type == "lab") {
-    # Parses the "MM/DD/YYYY HH:MM" text format on the server
-    date_filter_clause <- glue::glue_sql(
-      'to_date("SAMPLE_DATE", \'MM/DD/YYYY\') >= {start_date_str}::date ',
-      'AND to_date("SAMPLE_DATE", \'MM/DD/YYYY\') <= {end_date_str}::date',
-      .con = DBI::ANSI()
-    )
-  } else {
-    # Parses the standard "YYYY-MM-DD HH:MM:SS" timestamp natively
-    date_filter_clause <- glue::glue_sql(
-      '"SAMPLE_DATE"::date >= {start_date_str}::date ',
-      'AND "SAMPLE_DATE"::date <= {end_date_str}::date',
-      .con = DBI::ANSI()
-    )
-  }
-
-  # Combine elements into a definitive SQL string
+  # Create SQL query string
   sql_query_cnra <- glue::glue_sql(
     'SELECT * FROM {`target_resource_id`} ',
-    'WHERE "STATION_NUMBER"::text = {station_num} ',
-    'AND ',
-    date_filter_clause,
+    'WHERE station_number::text = {station_num_str} ',
+    'AND sample_date::date >= {start_date_str}::date ',
+    'AND sample_date::date <= {end_date_str}::date',
     .con = DBI::ANSI()
   )
 
@@ -248,7 +234,7 @@ import_cnra_data <- function(
       status$msg <- cli::format_inline("... {.emph CRITICAL SYSTEM ERROR}")
       cli::cli_progress_done(id = step_id)
       cli::cli_abort(
-        "CNRA Datastore API request execution failed",
+        "CNRA Datastore API request execution failed for station {.val {station_num_str}}.",
         parent = cnd
       )
     }
@@ -271,7 +257,7 @@ import_cnra_data <- function(
     tidyr::unnest_wider(1)
 
   # Standardize case of data frame column names
-  names(df_data) <- tolower(names(df_data))
+  names(df_data) <- stringr::str_to_lower(names(df_data))
 
   df_data <- df_data |>
     dplyr::select(!tidyselect::any_of("_full_text"))

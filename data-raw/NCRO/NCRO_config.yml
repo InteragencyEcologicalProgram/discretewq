@@ -3,7 +3,7 @@ source_metadata:
   acronym: NCRO
 
 update_status:
-  last_update: '2025-10-13'
+  last_update: '2026-10-30'
 
 inputs:
   - input_id: data_1999_2022
@@ -34,7 +34,7 @@ inputs:
   - input_id: data_mvi_secchi
     input_type: local_file
     input_path: data-raw/NCRO
-    input_regex: ^qry_HabObs
+    input_regex: ^qry_HabObs|HABSecchi
     columns:
       - raw_name: StationCode
         target_name: station_code
@@ -53,7 +53,7 @@ inputs:
   - input_id: data_lab
     input_type: API-CNRA-lab
     input_start_date: '2021-01-01'
-    timezone: "Etc/GMT+8"
+    timezone: Etc/GMT+8
     input_stations:
       - B9D80251385
       - B9542300
@@ -95,6 +95,7 @@ inputs:
       - B9D75781357
       - B9D74991332
       - B9D82851352
+      - A084501381
     columns:
       - raw_name: station_number
         target_name: station_number
@@ -105,7 +106,7 @@ inputs:
       - raw_name: sample_date
         target_name: Datetime
         col_type: datetime
-        col_format: mdY HM
+        col_format: Ymd HMS
       - raw_name: parameter
         target_name: parameter
         col_type: character
@@ -177,7 +178,7 @@ inputs:
   - input_id: data_field
     input_type: API-CNRA-field
     input_start_date: '2021-01-01'
-    timezone: "Etc/GMT+8"
+    timezone: Etc/GMT+8
     input_stations:
       - B9D80251385
       - B9542300
@@ -219,6 +220,7 @@ inputs:
       - B9D75781357
       - B9D74991332
       - B9D82851352
+      - A084501381
     columns:
       - raw_name: station_number
         target_name: station_number
@@ -243,21 +245,21 @@ inputs:
       parameter_col: parameter
       units_col: units
       definitions:
-      - raw_name: DissolvedOxygen
-        target_name: DissolvedOxygen
-        raw_units: mg/L
-      - raw_name: SpecificConductance
-        target_name: Conductivity
-        raw_units: uS/cm@25 °C
-      - raw_name: Turbidity
-        target_name: TurbidityFNU
-        raw_units: N.T.U.
-      - raw_name: Turbidity
-        target_name: TurbidityFNU
-        raw_units: F.N.U.
-      - raw_name: WaterTemperature
-        target_name: Temperature
-        raw_units: °C
-      - raw_name: pH
-        target_name: pH
-        raw_units: pH Units
+        - raw_name: DissolvedOxygen
+          target_name: DissolvedOxygen
+          raw_units: mg/L
+        - raw_name: SpecificConductance
+          target_name: Conductivity
+          raw_units: uS/cm@25 °C
+        - raw_name: Turbidity
+          target_name: TurbidityFNU
+          raw_units: N.T.U.
+        - raw_name: Turbidity
+          target_name: TurbidityFNU
+          raw_units: F.N.U.
+        - raw_name: WaterTemperature
+          target_name: Temperature
+          raw_units: °C
+        - raw_name: pH
+          target_name: pH
+          raw_units: pH Units

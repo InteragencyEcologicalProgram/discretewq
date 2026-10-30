@@ -67,7 +67,7 @@ check_output_df <- function(object) {
 check_config_structure <- function(input_cfg, config_path) {
   input_id <- input_cfg$input_id
   input_type <- input_cfg$input_type
-  columns <- input_cfg$columns
+  columns <- purrr::pluck(input_cfg, "columns", .default = NULL)
 
   # Verify input_id exists and is not blank
   if (is.null(input_id) || !nzchar(input_id)) {

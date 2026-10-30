@@ -142,7 +142,7 @@ run_with_cache <- function(
     } else if (cache_type == "std") {
       cli::cli_bullets(c(
         "v" = "Using cached standardized data: {.path {cache_path}}",
-        "i" = "Skipping data imports and standardization"
+        "i" = "Skipping data standardization"
       ))
     }
     return(qs2::qd_read(cache_path))
@@ -156,7 +156,7 @@ run_with_cache <- function(
     )
   } else if (cache_type == "std") {
     cli::cli_alert_info(
-      "No valid standardized data cache found. Looking for raw data cache..."
+      "No valid standardized data cache found. Commencing data standardization..."
     )
   }
   result <- force(expr)
