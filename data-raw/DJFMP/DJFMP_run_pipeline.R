@@ -5,12 +5,8 @@
 devtools::load_all()
 
 # 1. Establish Environment Context Path
-SURVEY_NAME <- "DJFMP"
-CONFIG_PATH <- file.path(
-  "data-raw",
-  SURVEY_NAME,
-  paste0(SURVEY_NAME, "_config.yml")
-)
+SURVEY <- "DJFMP"
+CONFIG_PATH <- file.path("data-raw", SURVEY, paste0(SURVEY, "_config.yml"))
 
 # ----------------------------------------------------------------------------
 # STEP 1: Pre-Flight Metadata Summary (Review)
@@ -24,31 +20,46 @@ run_pipeline_preflight(CONFIG_PATH)
 # this folder, and re-run Step 1.
 
 # ----------------------------------------------------------------------------
-# STEP 2: Import, Standardize, & Clean (Execute)
+# STEP 2: Import, Standardize, & Clean (Execute / Debug)
 # ----------------------------------------------------------------------------
-# Run this only when you are certain the configuration rules are correct.
-workbench <- run_survey_pipeline(CONFIG_PATH)
+# Choose your pipeline execution stop boundary via `interactive_until`:
+#  * "raw"         -> Halts post-import and returns `ls_raw` (list of raw datasets)
+#  * "standardize" -> Halts post-standardization and returns `ls_standardized` (list of standardized datasets)
+#  * "custom"      -> Halts after running `cleaner_fn` and returns `df_custom_data` (single tibble)
+#  * "full"        -> Executes completely and returns list(final_data, ls_edi_info)
+
+# --- WORKFLOW A: INTERACTIVE CLEANER DEVELOPMENT / DEBUGGING ---
+# Step 2a: Pull standardized data inputs to step through `DJFMP_custom_cleaning.R` line-by-line
+ls_std <- run_survey_pipeline(CONFIG_PATH, interactive_until = "standardize")
+
+# View individual standardized data tables in the console / viewer:
+# View(ls_std[[1]])
+
+# Step 2b: Test the output of your custom cleaner function directly before final general cleaning
+# steps:
+df_custom <- run_survey_pipeline(CONFIG_PATH, interactive_until = "custom")
+# View(df_custom)
+
+# --- WORKFLOW B: FULL PIPELINE COMPILATION ---
+# Execute the full pipeline once configuration and custom cleaner logic are finalized:
+workbench <- run_survey_pipeline(CONFIG_PATH, interactive_until = "full")
 
 # 📊 DATA QUALITY AUDIT PAUSE:
-# Open and review the final data set:
+# Open and review the compiled dataset:
 View(workbench$final_data)
 
-# If anything looks incorrect or suspicious:
-# 1. Start by looking at the custom cleaning script 'DJFMP_custom_cleaning.R' in this folder
-# 2. Step through it using 'workbench$ls_standardized' to locate the what's causing the issue
-# 3. Fix the the custom cleaning script and re-run Step 2.
-
-# NOTE: workbench$ls_standardized contains the standardized data inputs before combining and
-# custom cleaning. Run this to view them:
-workbench$ls_standardized
+# If anything in `workbench$final_data` looks incorrect or suspicious:
+# 1. Re-run `interactive_until = "standardize"` to inspect raw standardized inputs (`ls_std`)
+# 2. Fix 'DJFMP_custom_cleaning.R' or 'DJFMP_config.yml'
+# 3. Re-run Step 2
 
 # ----------------------------------------------------------------------------
 # STEP 3: Publish, Document, & Update (Publish)
 # ----------------------------------------------------------------------------
-# Run this final step manually when the final_data within the workbench is ready to be published.
+# Run this final step manually when `workbench$final_data` is validated and ready for publication:
 publish_survey_data(
   data_final = workbench$final_data,
-  dataset_name = SURVEY_NAME,
+  dataset_name = SURVEY,
   config_path = CONFIG_PATH,
   edi_info = workbench$ls_edi_info
 )

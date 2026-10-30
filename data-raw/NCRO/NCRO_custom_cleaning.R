@@ -1,4 +1,4 @@
-# Code to prepare `NCRO` dataset
+# Custom code to prepare `NCRO` dataset
 
 # Function to clean the NCRO field data
 clean_ncro_field_data <- function(df_data) {
@@ -79,18 +79,67 @@ clean_ncro_mvi_secchi_data <- function(df_data, df_stations) {
     dplyr::distinct()
 }
 
-# Main custom cleaning function
-transform_NCRO_data <- function(ls_data) {
-  # Explicitly pull out each data frame from the standardized list and apply specific cleaning
-  # function if necessary
-  df_data_1999_2022 <- ls_data$data_1999_2022
-  df_stations <- ls_data$stations
+#' Main Custom Cleaning Engine: NCRO
+#'
+#' Processes standardized input tables for NCRO, performing survey-specific transformations,
+#' parameter harmonization, quality control filtering, and dataset joining prior to final
+#' pipeline compilation.
+#'
+#' @param ls_std_data A named list of standardized tibbles returned by `pipeline_standardize()`.
+#'
+#' @return A consolidated, cleaned tibble ready for final pipeline steps.
+#' @noRd
+transform_NCRO_data <- function(ls_std_data) {
+  # ---------------------------------------------------------------------------
+  # 1. INPUT VALIDATION & EXTRACTION
+  # ---------------------------------------------------------------------------
+
+  # Validate input structure
+  if (!is.list(ls_std_data) || length(ls_std_data) == 0) {
+    cli::cli_abort("`ls_std_data` must be a non-empty list of data frames.")
+  }
+
+  # Define all required tables for this survey
+  req_tables <- c(
+    "data_1999_2022",
+    "stations",
+    "data_mvi_secchi",
+    "data_lab",
+    "data_field"
+  )
+
+  # Identify any missing tables
+  missing_tables <- purrr::keep(
+    req_tables,
+    \(x) is.null(purrr::pluck(ls_std_data, x))
+  )
+
+  # Abort with a formatted list if any are missing
+  if (length(missing_tables) > 0) {
+    cli::cli_abort(c(
+      "Required input table{?s} missing from standardized input list:",
+      "x" = "Missing: {.val {missing_tables}}"
+    ))
+  }
+
+  # Extract individual standardized tables safely using exact string indexing
+  df_data_1999_2022 <- ls_std_data[["data_1999_2022"]]
+  df_stations <- ls_std_data[["stations"]]
+  df_data_mvi_secchi <- ls_std_data[["data_mvi_secchi"]]
+  df_data_lab <- ls_std_data[["data_lab"]]
+  df_data_field <- ls_std_data[["data_field"]]
+
+  # ---------------------------------------------------------------------------
+  # 2. SURVEY-SPECIFIC TRANSFORMATIONS & MERGING
+  # ---------------------------------------------------------------------------
+
+  # Apply specific cleaning functions
   df_data_mvi_secchi <- clean_ncro_mvi_secchi_data(
-    ls_data$data_mvi_secchi,
+    df_data_mvi_secchi,
     df_stations
   )
-  df_data_lab <- clean_ncro_lab_data(ls_data$data_lab)
-  df_data_field <- clean_ncro_field_data(ls_data$data_field)
+  df_data_lab <- clean_ncro_lab_data(df_data_lab)
+  df_data_field <- clean_ncro_field_data(df_data_field)
 
   # Combine field and laboratory data
   df_data_curr <-
